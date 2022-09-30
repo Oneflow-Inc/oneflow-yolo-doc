@@ -828,10 +828,10 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 </p>
 
 <p>在模拟实验中, 我们试图通过距离(distances), 尺度 (scales)和长宽比(aspect ratios)来覆盖边界框之间的大部分关系，如图3(a).所示。特别是, 我们选择7个单位框 (即每个框的面积为 1) ，具有不同的长宽比 (即 <span class="arithmatex">\(1: 4、1: 3、1: 2、1:1、2: 1、3:1 和  4: 1\)</span>)  作为目 标框。在不失一般性的情况下，7个目标框的中心点被固定在<span class="arithmatex">\((10,10)\)</span>。锚框均匀地分散在5000个点上。 </p>
-<p><span class="arithmatex">\((\boldsymbol{i})\)</span>  距离: 在以半径为 3 的 <span class="arithmatex">\((10、10)\)</span> 为中心的圆形区域内, 均匀选择5000个点, 放置7个尺度、7个长宽比的锚 框。在这些情况下，重叠和不重叠的方框都被包括。</p>
-<p><span class="arithmatex">\((\boldsymbol{ii})\)</span> 尺度:对于每个点, 锚框的面积分别设置为
+<p><span class="arithmatex">\(({i})\)</span>  距离: 在以半径为 3 的 <span class="arithmatex">\((10、10)\)</span> 为中心的圆形区域内, 均匀选择5000个点, 放置7个尺度、7个长宽比的锚 框。在这些情况下，重叠和不重叠的方框都被包括。</p>
+<p><span class="arithmatex">\(({ii})\)</span> 尺度:对于每个点, 锚框的面积分别设置为
 <span class="arithmatex">\(0.5 、 0.67 、 0.75 、 1 、 1.33 、 1.5  和 2\)</span>。</p>
-<p><span class="arithmatex">\((\boldsymbol{iii})\)</span> 长宽比: 对于给定的点和尺度, 采用 7 个长宽比, 即与目标框遵循相同的设置 (即 <span class="arithmatex">\(1: 4 、 1: 3 、 1: 2 、 1: 1 、 2: 1 、 3: 1  和 4: 1\)</span>) 。所有 <span class="arithmatex">\(5000 \times 7 \times 7\)</span>  锚箱都对应在每个目标框。综 上所述，总共有  <span class="arithmatex">\(1,715,000  =7 \times 7 \times 7 \times 5,000\)</span>  个回归案例。</p>
+<p><span class="arithmatex">\(({iii})\)</span> 长宽比: 对于给定的点和尺度, 采用 7 个长宽比, 即与目标框遵循相同的设置 (即 <span class="arithmatex">\(1: 4 、 1: 3 、 1: 2 、 1: 1 、 2: 1 、 3: 1  和 4: 1\)</span>) 。所有 <span class="arithmatex">\(5000 \times 7 \times 7\)</span>  锚箱都对应在每个目标框。综 上所述，总共有  <span class="arithmatex">\(1,715,000  =7 \times 7 \times 7 \times 5,000\)</span>  个回归案例。</p>
 <p><center></p>
 <p><img src="./iou_in-depth_analysis_imgs//图片03.png"></p>
 <p>图3: 仿真实验: (a) 通过考虑不同的距离、尺度和长宽比, 采用了171.5万个回归案例。(b)回归误差和（即:  <span class="arithmatex">\(\sum_{n} \mathbf{E}(t, n)\)</span>  ) 迭代次数为  <span class="arithmatex">\(\mathrm{t}\)</span>  时不同损失函数的曲线。</p>
