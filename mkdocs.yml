@@ -33,7 +33,6 @@ theme:
 
 nav:
     - 首页: index.md
-    
     - 教程:
         -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         -  如何准备yolov5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
