@@ -1,9 +1,9 @@
-# 三 如何准备yolov5模型训练数据(以coco数据集和自定义数据集为例)
 ## 引言
 本文主要从介绍yolo数据集的格式，再到如何进行数据集制作从而能获得更好的训练结果进行概述。
 
 # 在自定义数据集上训练
 ## 1.创建dataset.yaml
+
 COCO128是官方给的一个小的数据集 由[COCO](https://cocodataset.org/#home)数据集前128张图片组成。
 这128幅图像用于训练和验证，以验证我们的训练是否能够过正常进行。[coco128.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml) 。
 [数据集配置文件 coco128.yaml](https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml)定义了如下的配置选项： 
@@ -32,7 +32,7 @@ names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 't
 
 # Download script/URL (optional) 用于自动下载的可选下载命令/URL 。 
 download: https://ultralytics.com/assets/coco128.zip
- ```
+```
  
  注意：如果是自定义数据集的话按自己需求修改这个yaml文件。主要修改以下两点。
  1. 修改训练和验证图像的路径为自定义数据集路径
@@ -92,6 +92,7 @@ labelimg
 
 
 ## 一个好的数据集
+
 - 每个类的图像。 >= 1500 张图片。
 - 每个类的实例。≥ 建议每个类10000个实例（标记对象）
 - 图片形象多样。必须代表已部署的环境。对于现实世界的使用案例，我们推荐来自一天中不同时间、不同季节、不同天气、不同照明、不同角度、不同来源（在线采集、本地采集、不同摄像机）等的图像。
@@ -107,8 +108,9 @@ labelimg
 <p align="center">
   <a href= "https://arxiv.org/abs/1405.0312">
   <img src="https://user-images.githubusercontent.com/26833433/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
-  </a>
-        
+  </a>  
+</p>
+
 - lnstances per category 每个类别的情况
 - Categories per image 每幅图像类别
 - (a) lnstances per image 每幅图像的内容
@@ -116,10 +118,6 @@ labelimg
 - (c) lnstance size 干扰大小
 - (d) Number of categories 类别数
 - (e) Percent of image size 图像大小百分比
-
-
-        
-</p>
 
 
 ## 参考文章
