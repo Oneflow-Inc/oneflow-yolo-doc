@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#yolov5coco" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -282,8 +282,6 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           如何准备yolov5模型训练数据
@@ -299,8 +297,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -312,6 +308,74 @@
   <a href="#_1" class="md-nav__link">
     引言
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    在自定义数据集上训练
+  </a>
+  
+    <nav class="md-nav" aria-label="在自定义数据集上训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1datasetyaml" class="md-nav__link">
+    1.创建dataset.yaml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-labels" class="md-nav__link">
+    2.创建 Labels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.目录结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制作数据集
+  </a>
+  
+    <nav class="md-nav" aria-label="制作数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据集标注工具
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    一个好的数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -369,8 +433,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -382,6 +444,74 @@
   <a href="#_1" class="md-nav__link">
     引言
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    在自定义数据集上训练
+  </a>
+  
+    <nav class="md-nav" aria-label="在自定义数据集上训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1datasetyaml" class="md-nav__link">
+    1.创建dataset.yaml
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-labels" class="md-nav__link">
+    2.创建 Labels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3.目录结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    制作数据集
+  </a>
+  
+    <nav class="md-nav" aria-label="制作数据集">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据集标注工具
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    一个好的数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -398,76 +528,66 @@
               
                 
                 
-                <h1 id="yolov5coco">三 如何准备yolov5模型训练数据(以coco数据集和自定义数据集为例)</h1>
-<h2 id="_1">引言</h2>
+                <h2 id="_1">引言</h2>
 <p>本文主要从介绍yolo数据集的格式，再到如何进行数据集制作从而能获得更好的训练结果进行概述。</p>
 <h1 id="_2">在自定义数据集上训练</h1>
 <h2 id="1datasetyaml">1.创建dataset.yaml</h2>
 <p>COCO128是官方给的一个小的数据集 由<a href="https://cocodataset.org/#home">COCO</a>数据集前128张图片组成。
 这128幅图像用于训练和验证，以验证我们的训练是否能够过正常进行。<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml">coco128.yaml</a> 。
 <a href="https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml">数据集配置文件 coco128.yaml</a>定义了如下的配置选项： </p>
-<pre><code class="language-coco128.yaml"># train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
-
-# 训练和验证图像的路径相同
-train: ../coco128/images/train2017/ 
-val: ../coco128/images/train2017/
-
-# number of classes
-nc: 80 # 类别数
-
-# class names 类名列表
-names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
-        'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
-        'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
-        'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'skateboard', 'surfboard',
-        'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl', 'banana', 'apple',
-        'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake', 'chair', 'couch',
-        'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 
-        'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 
-        'teddy bear', 'hair drier', 'toothbrush']
-
-
-# Download script/URL (optional) 用于自动下载的可选下载命令/URL 。 
-download: https://ultralytics.com/assets/coco128.zip
- ```
-
- 注意：如果是自定义数据集的话按自己需求修改这个yaml文件。主要修改以下两点。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># 训练和验证图像的路径相同
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>train: ../coco128/images/train2017/ 
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>val: ../coco128/images/train2017/
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a># number of classes
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>nc: 80 # 类别数
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a># class names 类名列表
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>names: [&#39;person&#39;, &#39;bicycle&#39;, &#39;car&#39;, &#39;motorcycle&#39;, &#39;airplane&#39;, &#39;bus&#39;, &#39;train&#39;, &#39;truck&#39;, &#39;boat&#39;, &#39;traffic light&#39;,
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        &#39;fire hydrant&#39;, &#39;stop sign&#39;, &#39;parking meter&#39;, &#39;bench&#39;, &#39;bird&#39;, &#39;cat&#39;, &#39;dog&#39;, &#39;horse&#39;, &#39;sheep&#39;, &#39;cow&#39;,
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        &#39;elephant&#39;, &#39;bear&#39;, &#39;zebra&#39;, &#39;giraffe&#39;, &#39;backpack&#39;, &#39;umbrella&#39;, &#39;handbag&#39;, &#39;tie&#39;, &#39;suitcase&#39;, &#39;frisbee&#39;,
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        &#39;skis&#39;, &#39;snowboard&#39;, &#39;sports ball&#39;, &#39;kite&#39;, &#39;baseball bat&#39;, &#39;baseball glove&#39;, &#39;skateboard&#39;, &#39;surfboard&#39;,
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        &#39;tennis racket&#39;, &#39;bottle&#39;, &#39;wine glass&#39;, &#39;cup&#39;, &#39;fork&#39;, &#39;knife&#39;, &#39;spoon&#39;, &#39;bowl&#39;, &#39;banana&#39;, &#39;apple&#39;,
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        &#39;sandwich&#39;, &#39;orange&#39;, &#39;broccoli&#39;, &#39;carrot&#39;, &#39;hot dog&#39;, &#39;pizza&#39;, &#39;donut&#39;, &#39;cake&#39;, &#39;chair&#39;, &#39;couch&#39;,
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        &#39;potted plant&#39;, &#39;bed&#39;, &#39;dining table&#39;, &#39;toilet&#39;, &#39;tv&#39;, &#39;laptop&#39;, &#39;mouse&#39;, &#39;remote&#39;, &#39;keyboard&#39;, 
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        &#39;cell phone&#39;, &#39;microwave&#39;, &#39;oven&#39;, &#39;toaster&#39;, &#39;sink&#39;, &#39;refrigerator&#39;, &#39;book&#39;, &#39;clock&#39;, &#39;vase&#39;, &#39;scissors&#39;, 
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        &#39;teddy bear&#39;, &#39;hair drier&#39;, &#39;toothbrush&#39;]
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a># Download script/URL (optional) 用于自动下载的可选下载命令/URL 。 
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>download: https://ultralytics.com/assets/coco128.zip
+</code></pre></div>
+<p>注意：如果是自定义数据集的话按自己需求修改这个yaml文件。主要修改以下两点。
  1. 修改训练和验证图像的路径为自定义数据集路径
- 2. 修改类别数和类名列表
-## 2.创建 Labels
-使用工具例如 [CVAT](https://github.com/opencv/cvat) , [makesense.ai](https://www.makesense.ai/), [Labelbox](https://labelbox.com/) ，labelimg(在本章如何制作数据集中介绍labelimg工具使用) 等，在你自己的数据集提供的图片上做目标框的标注，将标注信息导出为一个txt后缀结尾的文件。（如果图像中没有对象，则不需要*.txt文件）。
-
-*.txt文件规范如下所示:
+ 2. 修改类别数和类名列表</p>
+<h2 id="2-labels">2.创建 Labels</h2>
+<p>使用工具例如 <a href="https://github.com/opencv/cvat">CVAT</a> , <a href="https://www.makesense.ai/">makesense.ai</a>, <a href="https://labelbox.com/">Labelbox</a> ，labelimg(在本章如何制作数据集中介绍labelimg工具使用) 等，在你自己的数据集提供的图片上做目标框的标注，将标注信息导出为一个txt后缀结尾的文件。（如果图像中没有对象，则不需要*.txt文件）。</p>
+<p>*.txt文件规范如下所示:
 - 每一行 一个对象。
 - 每一行是 class x_center y_center width height 格式。
 - 框坐标必须采用标准化xywh格式（从0到1）。如果框以像素为单位，则将x_center和width除以图像宽度，将y_centre和height除以图像高度。
-- 类号为零索引的编号（从0开始计数）。
-
-
-&lt;p align=&quot;center&quot;&gt;
-  &lt;img src=&quot;https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg&quot;&gt;
+- 类号为零索引的编号（从0开始计数）。</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
   这里假设以coco数据集的目标类别约定来标注
-&lt;/p&gt;
-与上述图像相对应的标签文件包含2个人（class 0）和 一个领带（class 27）：
-
-
-![imgs](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.image)
-
-## 3.目录结构
-
-根据下面的示例组织训练集合验证集的图片和标签 。在本例中，我们的**/coco128**是位于 **/yolov5** 目录附近。YOLOv5通过将每个图像路径 **xx/images/xx.jpg** 替换为 **xx/labels/xx.txt** 来自动定位每个图像的标签。例如：
-```Python
-dataset/images/im0.jpg  # image
-dataset/labels/im0.txt  # label
-</code></pre>
-<p><img alt="imgs" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.image" /></p>
+</p>
+<p>与上述图像相对应的标签文件包含2个人（class 0）和 一个领带（class 27）：</p>
+<p><img alt="imgs" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.image" /></p>
+<h2 id="3">3.目录结构</h2>
+<p>根据下面的示例组织训练集合验证集的图片和标签 。在本例中，我们的<strong>/coco128</strong>是位于 <strong>/yolov5</strong> 目录附近。YOLOv5通过将每个图像路径 <strong>xx/images/xx.jpg</strong> 替换为 <strong>xx/labels/xx.txt</strong> 来自动定位每个图像的标签。例如：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dataset</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">im0</span><span class="o">.</span><span class="n">jpg</span>  <span class="c1"># image</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">dataset</span><span class="o">/</span><span class="n">labels</span><span class="o">/</span><span class="n">im0</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># label</span>
+</code></pre></div>
+<img alt="imgs" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.image" /></p>
 <h1 id="_3">制作数据集</h1>
 <h2 id="_4">数据集标注工具</h2>
 <p>这里主要介绍 labelimg: 是一种矩形标注工具，常用于目标识别和目标检测,可直接生成yolo读取的txt标签格式，但其只能进行矩形框标注。(当然也可以选用其它的工具进行标注并且网上都有大量关于标注工具的教程。)</p>
-<p>首先labelimg的安装十分简单，直接使用cmd中的pip进行安装，在cmd中输入命令行：</p>
-<pre><code class="language-python3">pip install labelimg
-</code></pre>
-<p>安装后直接输入命令：</p>
+<p>首先labelimg的安装十分简单，直接使用cmd中的pip进行安装，在cmd中输入命令行：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">labelimg</span>
+</code></pre></div>
+安装后直接输入命令：</p>
 <p>labelimg</p>
 <p>即可打开运行：</p>
 <p align="center">
@@ -490,20 +610,18 @@ dataset/labels/im0.txt  # label
 <p align="center">
   <a href= "https://arxiv.org/abs/1405.0312">
   <img src="https://user-images.githubusercontent.com/26833433/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
-  </a>
-
-- lnstances per category 每个类别的情况
-- Categories per image 每幅图像类别
-- (a) lnstances per image 每幅图像的内容
-- (b) Number of categories vs. number of instances 类别数目 vs 实例数目
-- (c) lnstance size 干扰大小
-- (d) Number of categories 类别数
-- (e) Percent of image size 图像大小百分比
-
-
-
+  </a>  
 </p>
 
+<ul>
+<li>lnstances per category 每个类别的情况</li>
+<li>Categories per image 每幅图像类别</li>
+<li>(a) lnstances per image 每幅图像的内容</li>
+<li>(b) Number of categories vs. number of instances 类别数目 vs 实例数目</li>
+<li>(c) lnstance size 干扰大小</li>
+<li>(d) Number of categories 类别数</li>
+<li>(e) Percent of image size 图像大小百分比</li>
+</ul>
 <h2 id="_6">参考文章</h2>
 <ul>
 <li>https://github.com/ultralytics/yolov5/wiki/Tips-for-Best-Training-Results</li>
@@ -588,6 +706,12 @@ dataset/labels/im0.txt  # label
     
     
       <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
