@@ -1,0 +1,42 @@
+site_name: oneflow-yolo-doc
+use_directory_urls: false
+
+# Configuration
+theme:
+  name: material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: zh
+  features:
+    - navigation.tabs
+    - navigation.top
+    - instant
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: logo
+  favicon: assets/favicon.png
+
+
+nav:
+    - 首页: index.md
+    
+    - 教程:
+        -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
+        -  如何准备yolov5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
+        -  矩形推理: tutorials/04_chapter/rectangular_reasoning.md
+        -  IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
+
