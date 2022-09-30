@@ -13,7 +13,7 @@ YOLOv5针对不同大小（n, s, m, l, x）的网络整体架构都是一样的�
 
 ## [yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)文件内容:
 
-```
+```yaml
 nc: 80  # number of classes 数据集中的类别数
 depth_multiple: 0.33  # model depth multiple  模型层数因子(用来调整网络的深度)
 width_multiple: 0.50  # layer channel multiple 模型通道数因子(用来调整网络的宽度)
@@ -64,6 +64,7 @@ head:
    [[17, 20, 23], 1, Detect, [nc, anchors]],  # Detect(P3, P4, P5)
   ]
 ```
+
 ## anchors 解读
 yolov5 初始化了 9 个 anchors，分别在三个特征图	（feature map）中使用，每个 feature map 的每个 grid cell 都有三个 anchor 进行预测。
 分配规则：
@@ -111,6 +112,7 @@ class Conv(nn.Module):
     def forward_fuse(self, x):
         return self.act(self.conv(x))
 ```
+
 比如上面把width_multiple设置为了0.5，那么第一个 [64, 6, 2, 2] 就会被解析为 [3,64*0.5=32,6,2,2]，其中第一个 3 为输入channel(因为输入)，32 为输出channel。 
 
 
@@ -119,17 +121,20 @@ class Conv(nn.Module):
 ### 关于调整网络大小的详解说明
 
 在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的256行 有对yaml 文件的nc,depth_multiple等参数读取，具体代码如下:
-```yaml
+
+```
 anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multiple']
 ```
 
 "width_multiple"参数的作用前面介绍args参数中已经介绍过了，那么"depth_multiple"又是什么作用呢？
 
 在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的257行有对参数的具体定义：
+
 ```python
  n = n_ = max(round(n * gd), 1) if n > 1 else n  # depth gain 暂且将这段代码当作公式(1)
- ```
- 其中gd就是depth_multiple的值，n的值就是backbone中列表的第二个参数：
+```
+
+其中 gd 就是depth_multiple的值，n的值就是backbone中列表的第二个参数：
 
 根据公示(1)  很容易看出 gd 影响 n 的大小，从而影响网络的结构大小。
 
@@ -529,8 +534,9 @@ class Detect(nn.Module):
 ```
 ## 附件
 
-<p align="center">
-  <caption> <u>表2.1 </u>: [yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)解析表 </caption>
+
+表2.1  [yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)解析表 
+
 
 |层数|form |moudule| arguments |  input   |  output  |
 |--- | ---| ---|---| ---|---|
@@ -561,10 +567,15 @@ class Detect(nn.Module):
 |   24 |[17, 20, 23] | Detect | [80, [[10, 13, 16, 30, 33, 23], [30, 61, 62, 45, 59, 119], [116, 90, 156, 198, 373, 326]], [128, 256, 512]] | [1, 128, 80, 80],[1, 256, 40, 40],[1, 512, 20, 20] | [1, 3, 80, 80, 85],[1, 3, 40, 40, 85],[1, 3, 20, 20, 85] |
 
 
-</p>
+
 
 
 ## 参考文章:
 - https://zhuanlan.zhihu.com/p/436891962?ivk_sa=1025922q
 - https://zhuanlan.zhihu.com/p/110204563
 - https://www.it610.com/article/1550621248474648576.htm
+
+
+
+
+
