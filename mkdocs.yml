@@ -61,5 +61,3 @@ nav:
         -  矩形推理: tutorials/04_chapter/rectangular_reasoning.md
         -  IOU深入解析: tutorials/04_chapter/iou_in-depth_analysis.md
 
-    - 论文解读:
-        - YOLO_v3: thesis_interpretation/03_yolo.md
