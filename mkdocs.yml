@@ -63,3 +63,5 @@ nav:
     - 论文解读:
         - YOLO_v2: thesis_interpretation/02_yolo.md
 
+    - 论文解读:
+        - yolov6 : thesis_interpretation/06_yolo.md
