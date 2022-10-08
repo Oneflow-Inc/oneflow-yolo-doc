@@ -1,0 +1,620 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>03 yolo - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              03 yolo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../tutorials/01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link">
+        教程
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        教程
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="教程" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/03_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        如何准备yolov5模型训练数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/04_chapter/rectangular_reasoning.html" class="md-nav__link">
+        矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/04_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        IOU深入解析
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1.引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2.方案
+  </a>
+  
+    <nav class="md-nav" aria-label="2.方案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 边界框预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 分类预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 跨尺度预测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 特征提取器
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 训练
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3 我们是如何做的
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4 失败的尝试
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5 这一切意味着什么
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>03 yolo</h1>
+                
+                <p>原文地址 : https://arxiv.org/pdf/1804.02767v1.pdf</p>
+<p><span class="arithmatex">\(YOLOv3\)</span> : An Incremental Improvement</p>
+<p><span class="arithmatex">\(YOLOv3\)</span> ：增量式的改进</p>
+<p>Joseph Redmon Ali Farhadi</p>
+<p>University of Washington</p>
+<h2 id="_1">摘要</h2>
+<p>我们对YOLO进行了一系列更新！它包含一堆小设计，可以使系统的性能得到更新。我们也训练了一个新的、比较大的神经网络。虽然比上一版更大一些，但是精度也提高了。不用担心，它的速度依然很快。 <span class="arithmatex">\(YOLOv3\)</span> 在 <span class="arithmatex">\(320×320\)</span> 输入图像上运行时只需 <span class="arithmatex">\(22ms\)</span> ，并能达到 <span class="arithmatex">\(28.2mAP\)</span> ，其精度和 <span class="arithmatex">\(SSD\)</span> 相当，但速度要快上 <span class="arithmatex">\(3\)</span> 倍。使用之前 <span class="arithmatex">\(0.5 \ IOU \ mAP\)</span> 的检测指标， <span class="arithmatex">\(YOLOv3\)</span> 的效果是相当不错。 <span class="arithmatex">\(YOLOv3\)</span> 使用Titan X GPU，它在 <span class="arithmatex">\(51ms\)</span> 检测精度达到 <span class="arithmatex">\(57.9 \ AP50\)</span> ，然而与 <span class="arithmatex">\(RetinaNet\)</span> 相比 ，其精度只有 <span class="arithmatex">\(57.5 \ AP50\)</span> ，但却耗时 <span class="arithmatex">\(198ms\)</span> ，相同性能的情况下 <span class="arithmatex">\(YOLOv3\)</span> 速度比 <span class="arithmatex">\(RetinaNet\)</span> 快 <span class="arithmatex">\(3.8\)</span> 倍。与之前一样，所有代码在网址：https://pjreddie.com/yolo/。</p>
+<h2 id="1">1.引言</h2>
+<p>&emsp;有时候，一年内你主要都在玩手机，你知道吗？今年我没有做很多研究。我在 <span class="arithmatex">\(Twitter\)</span> 上花了很多时间,在GANs上玩了点小游戏。去年我留下了一点点的精力 [12] [1]；我设法对 <span class="arithmatex">\(YOLO\)</span> 进行了一些改进。但是，实话实说，仅仅一些小的改变使得它变得更好，没有什么超级有趣的事情。我也稍微帮助了其他人的一些研究。</p>
+<p>&emsp;事实上，这就是我们今天来这里的原因。我们有一篇论文快截稿了，并且我们还缺一篇关于 <span class="arithmatex">\(YOLO\)</span> 更新内容的文章作为引用，但是我们没有引用来源。所以，准备好迎接科技报道吧!</p>
+<p>&emsp;技术报告最棒的一点就是他们不需要介绍，你们都知道我们为什么在这里。因此，这篇介绍的结尾将为本文的其余部分指明方向。首先我们会告诉你 <span class="arithmatex">\(YOLOv3\)</span> 的方案。其次我们会告诉你我们是如何实现的。我们也会告诉你我们尝试过但并不奏效的一些事情。最后我们将探讨这些的意义。</p>
+<h2 id="2">2.方案</h2>
+<p>&emsp;这节主要介绍 <span class="arithmatex">\(YOLOv3\)</span> 的更新方案：我们主要从其他人的研究工作里获得了一些好思路、好想法。我们还训练了一个新的、比其他网络更好的分类网络。为了方便理解，让我们从头开始慢慢介绍整个模型系统。</p>
+<p><img src = "03_yolo_imgs/图片01.png"></p>
+<p>图1. 源自 <span class="arithmatex">\(Focal \ Loss\)</span> 论文[9]。 <span class="arithmatex">\(YOLOv3\)</span> 的运行速度明显快于其他性能相当的检测方法。检测时间基于 <span class="arithmatex">\(M40\)</span> 或 
+<span class="arithmatex">\(Titan \ X\)</span>（<em>其中 <span class="arithmatex">\(M40,Titan X\)</span> 是相似的两种 <span class="arithmatex">\(GPU\)</span></em>）。</p>
+<h3 id="21">2.1 边界框预测</h3>
+<p>&emsp;和 <span class="arithmatex">\(YOLO9000\)</span> 一样，我们的系统也使用维度聚类算法生成的锚框（<em>anchor boxes</em>）[15] 来预测边界框。网络预测每个边界框的4个坐标：<span class="arithmatex">\(t_x、t_y、t_w、t_h\)</span>。假设格子距离图像的左上角偏移量为 <span class="arithmatex">\((c_x，c_y)\)</span>，且之前的边界框的宽度和高度为 <span class="arithmatex">\(p_w, p_h\)</span> ，则预测结果:</p>
+<div class="arithmatex">\[
+{\large \begin{align}
+b_{x} &amp; = \sigma\left(t_{x}\right)+c_{x} \\
+b_{y} &amp; = \sigma\left(t_{y}\right)+c_{y} \\
+b_{w} &amp; = p_{w} e^{t_{w}} \\
+b_{h} &amp; = p_{h} e^{t_{h}}
+\end{align}} 
+\]</div>
+<p>&emsp;在训练中我们使用误差平方和损失计算。如果某个预测坐标的 <span class="arithmatex">\(ground \ truth\)</span> 是 <span class="arithmatex">\(\hat{t}_*\)</span> ，那么对应的梯度就是 <span class="arithmatex">\(ground \ truth \ value\)</span>（由 <span class="arithmatex">\(ground  \ truth  \ box\)</span> 计算而得）和预测值之差：<span class="arithmatex">\(\hat{t}_* - t_*\)</span>。通过变换上述公式计算,可以很容易地得到<span class="arithmatex">\(ground \ truth \ value\)</span>。</p>
+<p><img src = "03_yolo_imgs/图片02.png"></p>
+<p>图2： 维度先验和位置预测的边界框。<span class="arithmatex">\(\large{\sigma(t_x)}\)</span> , <span class="arithmatex">\(\large{\sigma(t_y)}\)</span>  是基于矩形框中心点左上角格点坐标的偏移量，<span class="arithmatex">\(\large{\sigma}\)</span>  是激活函数，论文中作者使用<strong>sigmoid</strong> [15]。 <span class="arithmatex">\(\large{P_w,P_h}\)</span> 是先验框的宽、高，通过上述公式，计算出实际预测框的宽高  。</p>
+<p>&emsp; <span class="arithmatex">\(YOLOv3\)</span> 使用逻辑回归预测每个边界框是目标的分数。如果真实标签框与某个边界框重叠的面积比与其他任何边界框都大，那么这个先验边界框得分为1。按照[17]的做法，如果先验边界框不是最好的，但是确实与目标的真实标签框重叠的面积大于阈值，我们也会忽略这个预测。我们使用阈值为0.5。与[17]不同的是，我们的系统只为每个真实目标分配一个边界框。如果先验边界框未分配到真实目标，则不会产生坐标或类别预测的损失，只会产生是否是目标的损失。</p>
+<h3 id="22">2.2 分类预测</h3>
+<p>&emsp;每个边界框都会使用多标签分类来预测框中可能包含的类。我们不用 <span class="arithmatex">\(softmax\)</span> ，而是用单独的逻辑分类器，因为我们发现前者对于提升网络性能没什么作用。在训练过程中，我们用binary cross-entropy（二元交叉熵）损失来预测类别。</p>
+<p>&emsp;当我们转向更复杂的领域，例如 <span class="arithmatex">\(Open  \ Images \ Dataset\)</span> [7]，上面的这种改变将变得很有用。这个数据集中有许多重叠的标签（例如女性和人）。使用 <span class="arithmatex">\(softmax\)</span> 会假定每个框只包含一个类，但通常情况并非如此。多标签的方式可以更好地对数据进行建模。</p>
+<h3 id="23">2.3 跨尺度预测</h3>
+<p>&emsp;<span class="arithmatex">\(YOLOv3\)</span> 在  3 种不同尺度上预测框。我们的系统使用类似特征金字塔网络的相似概念(<em>详细可见论文：https://arxiv.org/pdf/1612.03144.pdf</em>)，并从这些尺度中提取特征[8]。我们在基础特征提取器上添加了几个卷积层。其中最后一个卷积层 预测了一个编码边界框、是否是目标和类别预测结果 的三维张量。在 <span class="arithmatex">\(COCO\)</span> 数据集上实验[8]中，我们为每个尺度预测3个框，对于每个边界框有 4个偏移量、1个目标预测和80个类别预测，最终的张量大小为 <span class="arithmatex">\(N×N×[3×(4+1+80)]\)</span>。</p>
+<p>&emsp;接下来，我们从前面的2个层中提取特征图，并将其上采样2倍。我们还从网络中的较前的层中获取一个特征图，并将其与我们的上采样特征图进行拼接。这种方法使我们能够从上采样的特征图中获得更有意义的语义信息，同时可以从更前的层中获取更细粒度的信息。然后，我们添加几个卷积层来处理这个特征映射组合，并最终预测出一个相似的、大小是原先两倍的张量。</p>
+<p>&emsp;我们再次使用相同的设计来预测最终尺寸的边界框。因此，第三个尺寸的预测将既能从所有先前的计算，又能从网络前面的层中的细粒度的特征中获益。</p>
+<p>&emsp;我们仍然使用k-means聚类算法来确定我们的先验边界框。我们只是选择了9个聚类(<em>clusters</em>)和3个任意的尺度(<em>scales arbitrarily</em>)，
+然后在尺度上将聚类均匀地划分聚类。
+在 <span class="arithmatex">\(COCO\)</span> 数据集上，9个聚类分别 为 <span class="arithmatex">\((10×13)、(16×30)、(33×23)、(30×61)、(62×45)、(59×119)、(116 × 90)、(156 × 198)、(373 × 326)\)</span> 。</p>
+<h3 id="24">2.4 特征提取器</h3>
+<p>&emsp;我们使用一个新的网络来进行特征提取。我们的新网络融合了 <span class="arithmatex">\(YOLOv2、Darknet-19\)</span> 和新发明的残差网络的思想。我们的网络使用连续的 <span class="arithmatex">\(3×3\)</span> 和 <span class="arithmatex">\(1×1\)</span> 卷积层和添加了一些快捷连接（shortcut connetction），从而规模更大，目前它有53个卷积层，所以我们称之为... <span class="arithmatex">\(Darknet-53!\)</span></p>
+<p><img src = "03_yolo_imgs/table01.png"></p>
+<p>表1. Darknet-53.</p>
+<p>我们的网络在性能上远超Darknet-19，在效率上也优于ResNet-101和ResNet-152。这里是一些网络在ImageNet上的实验结果：</p>
+<div class="arithmatex">\[
+\begin{eqnarray}
+\text { Backbone } &amp; \text { Top-1 } &amp; \text { Top-5 } &amp; \text { Bn Ops } &amp; \text { BFLOP/s } &amp; \text { FPS } \\
+\hline \text { Darknet-19[15] } &amp; 74.1 &amp; 91.8 &amp; 7.29 &amp; 1246 &amp; \mathbf{1 7 1} \\
+\text { ResNet-101[5] } &amp; 77.1 &amp; 93.7 &amp; 19.7 &amp; 1039 &amp; 53 \\
+\text { ResNet-152[5] } &amp; \mathbf{7 7 . 6} &amp; \mathbf{9 3 . 8} &amp; 29.4 &amp; 1090 &amp; 37 \\
+\text { Darknet-53 } &amp; 77.2 &amp; \mathbf{9 3 . 8} &amp; 18.7 &amp; \mathbf{1 4 5 7} &amp; 78
+\end{eqnarray}
+\]</div>
+<p>表2.网络的比较。不同backbones的各种网络在准确度、Bn Ops（十亿操作数）、BFLOP/s（每秒十亿浮点操作）和FPS上的比较。</p>
+<p>&emsp;每个网络都在相同的配置下进行训练，均用 <span class="arithmatex">\(256 ×256\)</span> 的图片上进行单精度测试。运行时间通过在 <span class="arithmatex">\(Titan \ X\)</span> 上处理 <span class="arithmatex">\(256 × 256\)</span> 图片测出。从表2可以看出，<span class="arithmatex">\(Darknet-53\)</span> 不仅精度可以媲美最先进的分类器，而且它有较少浮点运算操作，更快的速度。<span class="arithmatex">\(Darknet-53\)</span> 比 <span class="arithmatex">\(ResNet-101\)</span> 性能更好而且要快1.5倍。<span class="arithmatex">\(Darknet-53\)</span> 性能与 <span class="arithmatex">\(ResNet-152\)</span> 相近，但是要比它快2倍。</p>
+<p>&emsp; <span class="arithmatex">\(Darknet-53\)</span> 也实现了最高的每秒浮点运算测量。这意味着网络结构可以更好地利用GPU，使其预测效率更高，速度更快。ResNets更慢，大抵是因为其层数太多，所以不是那么有效率。</p>
+<h3 id="25">2.5 训练</h3>
+<p>&emsp;我们依旧只是训练完整的图像，没有将难以正确分类的样本反复训练，也没有进行其他任何操作。我们使用多尺度训练，使用大量的数据增强、批量标准化等标准的操作。我们使用 <span class="arithmatex">\(Darknet\)</span> 神经网络框架进行训练和测试[12]。</p>
+<p><span class="arithmatex">\(YOLOv3\)</span>  is pretty good! See table 3. In terms of COCOs weird average mean AP metric it is on par with the SSD variants but is 3× faster. It is still quite a bit behind other models like RetinaNet in this metric though.</p>
+<p>Table 3. I’m seriously just stealing all these tables from [9] they take soooo long to make from scratch. Ok,  <span class="arithmatex">\(YOLOv3\)</span>  is doing alright. Keep in mind that RetinaNet has like 3.8× longer to process an image.  <span class="arithmatex">\(YOLOv3\)</span>  is much better than SSD variants and comparable to state-of-the-art models on the AP50 metric.</p>
+<h2 id="3">3 我们是如何做的</h2>
+<p><span class="arithmatex">\(YOLOv3\)</span> 表现非常好！请看表3。就COCO的平均AP指标而言，它与SSD类的模型相当，但速度提高了3倍。尽管如此，它仍然在这个指标上比像RetinaNet这样的其他模型差些。</p>
+<p><img src = "03_yolo_imgs/table03.png"></p>
+<p>表3.我很认真地从[9]中 <span class="arithmatex">\(“窃取”\)</span>了他们花了很长时间才从头开始制作这些表格。好的， <span class="arithmatex">\(YOLOv3\)</span> 没问题。请记住，<span class="arithmatex">\(RetinaNet\)</span> 处理一张图像的时间是 <span class="arithmatex">\(YOLOv3\)</span> 的 <span class="arithmatex">\(3.8\)</span> 倍。 <span class="arithmatex">\(YOLOv3\)</span> 比 <span class="arithmatex">\(SSD\)</span> 要好得多，并且在 <span class="arithmatex">\(AP50\)</span> 标准下可以与最先进的模型媲美！</p>
+<p>&emsp;然而，当我们使用 <span class="arithmatex">\(“旧的”\)</span> 检测指标——在 <span class="arithmatex">\(IOU=0.5的mAP\)</span> （或图表中的<span class="arithmatex">\(AP50\)</span>）时， <span class="arithmatex">\(YOLOv3\)</span> 非常强大。其性能几乎与RetinaNet相当，并且远强于 <span class="arithmatex">\(SSD\)</span> 。这表明 <span class="arithmatex">\(YOLOv3\)</span> 是一个非常强大的检测器，擅长为目标生成恰当的框。然而，随着 <span class="arithmatex">\(IOU\)</span> 阈值增加，性能显著下降，这表明 <span class="arithmatex">\(YOLOv3\)</span> 预测的边界框与目标不能完美对齐。</p>
+<p><img src = "03_yolo_imgs/图片03.png"></p>
+<p>Figure 3. Again adapted from the [9], this time displaying speed/accuracy tradeoff on the mAP at .5 IOU metric. You can tell  <span class="arithmatex">\(YOLOv3\)</span>  is good because it’s very high and far to the left. Can you cite your own paper? Guess who’s going to try, this guy ! [16]. Oh, I forgot, we also fix a data loading bug in YOLOv2, that helped by like 2 mAP. Just sneaking this in here to not throw off layout.</p>
+<p>图3. 再次改编自[9]，这次显示的是在 <span class="arithmatex">\(0.5 \ IOU\)</span> 指标上速度/准确度的权衡。你可以说 <span class="arithmatex">\(YOLOv3\)</span> 是好的，因为它非常高并且在左边很远。 你能引用你自己的论文吗？猜猜谁会去尝试，这个人→[16]。哦，我忘了，我们还修复了YOLOv2中的数据加载bug，该bug的修复提升了2 mAP, 只是在这里偷偷提一下，这不是重点。</p>
+<p>&emsp;在之前的 <span class="arithmatex">\(YOLO\)</span> 不擅长检测小物体。但是，现在我们看到了这种趋势的逆转。随着新的多尺度预测，我们看到 <span class="arithmatex">\(YOLOv3\)</span> 具有相对较高的 <span class="arithmatex">\(APS\)</span> 性能。但是，它在中型和大型物体检测上的性能还相对较差。这可能需要更多的调研和实验才能知道如何去改进这一点。</p>
+<p>&emsp;当我们在 <span class="arithmatex">\(AP50\)</span> 指标上绘制准确度和速度关系图时（请见图3），我们看到 <span class="arithmatex">\(YOLOv3\)</span> 与其他检测系统相比具有显着的优势。也就是说 <span class="arithmatex">\(YOLOv3\)</span> ，速度更快、性能更好。</p>
+<h2 id="4">4 失败的尝试</h2>
+<p>&emsp;我们在实现 <span class="arithmatex">\(YOLOv3\)</span> 的过程中尝试了很多东西，但是很多都失败了，以下是我们还记得的一些失败的尝试。</p>
+<p>&emsp; <strong>Anchor框的x、y偏移预测</strong>。我们尝试使用常规的Anchor框预测机制，比如利用线性激活将坐标x、y的偏移程度预测为边界框宽度或高度的倍数。但我们发现这种方法降低了模型的稳定性，并且效果不佳。</p>
+<p>&emsp;<strong>用线性激活代替逻辑激活函数进行x、y预测</strong>。我们尝试使用线性激活代替逻辑激活来直接预测x、y偏移。这个改变导致mAP下降了几个点。</p>
+<p>&emsp; <strong>focal loss</strong>。我们尝试使用focal loss。它使得mAP下降2个点。 <span class="arithmatex">\(YOLOv3\)</span> 可能已经对focal loss 试图解决的问题具有相当的鲁棒性，因为它具有单独的目标预测和条件类别预测。因此，对于大多数样本来说，类别预测没有损失？或者有一些？我们并不完全确定。</p>
+<p>&emsp;<strong>双IOU阈值和真值分配</strong>。 <span class="arithmatex">\(Faster \ R-CNN\)</span> 在训练期间使用两个 <span class="arithmatex">\(IOU\)</span> 阈值。如果一个预测与真实标签框重叠超过 <span class="arithmatex">\(0.7\)</span> ，它就是一个正样本，若重叠在 <span class="arithmatex">\([0.3，0.7]\)</span> 之间，那么它会被忽略，若它与所有的真实标签框的 <span class="arithmatex">\(IOU\)</span> 小于0.3，那么就会被判定为一个负样本。我们尝试了类似的策略，但最终的效果并不好。</p>
+<p>&emsp;我们非常喜欢目前的模型，它至少在局部达到了最佳。上述的有些技术可能会使我们的模型更好，但我们可能还需要对他们做一些调整。</p>
+<h2 id="5">5 这一切意味着什么</h2>
+<p>&emsp; <span class="arithmatex">\(YOLOv3\)</span> 是一个很棒的检测器，它由准又快。虽然它在 <span class="arithmatex">\(COCO\)</span> 数据集上，0.3和0.95 IOU 下的平均AP并不好，但在旧的 0.5 IOU的检测指标下，它还是非常不错的。</p>
+<p>&emsp; 为什么我们要改变指标？ <span class="arithmatex">\(COCO\)</span> 的原论文有这样一句含糊不清的句子：<span class="arithmatex">\(“A \ full \ discussion \ of \ evaluation  \ metrics \ will \ be \ added \ once \ the \ evaluation \ server \ is \ complete”\)</span> 。Russakovsky等人的报告中说，人们很难区分0.3和0.5的IOU。“训练人类用视觉检查0.3 IOU的边界框，并且与0.5 IOU的框区别开来是非常困难的。“[16]如果人类很难说出差异，那么它也没有多重要吧？</p>
+<p>&emsp;也许有个更好的问题值得我们探讨“我们用它来干什么”许多从事这项研究的人都在Google和Facebook，我想至少我们知道这个技术是掌握在好人手里，绝对不会把它用来收集你的个人信息然后卖给……等等，你究竟想用它来干嘛！！噢。</p>
+<p>&emsp;其他花大钱资助视觉研究的人还有军方，他们从来没有做过任何可怕的事情，例如用新技术杀死很多人，等等.....</p>
+<p>我强烈地希望，大多数使用计算机视觉的人都用它来做一些快乐且有益的事情，比如计算一个国家公园里斑马的数量[13]，或者追踪在附近徘徊的猫[19]。但计算机视觉已经被用于值得怀疑的用途，作为研究人员，我们有责任考虑我们的工作可能造成的损害，并思考如何减轻它的影响。我们欠这个世界太多。</p>
+<p>最后，不要再@我了。（因为我已经退出Twitter这个是非之地了）。</p>
+<p>In closing, do not@me. (Because I finally quit Twitter).</p>
+<h2 id="references">References</h2>
+<ul>
+<li>[1] Analogy. Wikipedia, Mar 2018. 1 </li>
+<li>[2] M. Everingham, L. V an Gool, C. K. Williams, J. Winn, and A. Zisserman. The pascal visual object classes (voc) challenge. International journal of computer vision, 88(2):303– 338, 2010. 6 </li>
+<li>[3] C.-Y . Fu, W. Liu, A. Ranga, A. Tyagi, and A. C. Berg.
+Dssd: Deconvolutional single shot detector. arXiv preprint arXiv:1701.06659, 2017. 3 </li>
+<li>[4] D. Gordon, A. Kembhavi, M. Rastegari, J. Redmon, D. Fox, and A. Farhadi. Iqa: Visual question answering in interactive environments. arXiv preprint arXiv:1712.03316, 2017. 1 </li>
+<li>[5] K. He, X. Zhang, S. Ren, and J. Sun. Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, pages 770–778, 2016. 3 </li>
+<li>[6] J. Huang, V . Rathod, C. Sun, M. Zhu, A. Korattikara, A. Fathi, I. Fischer, Z. Wojna, Y . Song, S. Guadarrama, et al
+Speed/accuracy trade-offs for modern convolutional object detectors. 3 </li>
+<li>[7] I. Krasin, T. Duerig, N. Alldrin, V . Ferrari, S. Abu-El-Haija, A. Kuznetsova, H. Rom, J. Uijlings, S. Popov, A. V eit, S. Belongie, V . Gomes, A. Gupta, C. Sun, G. Chechik, D. Cai, Z. Feng, D. Narayanan, and K. Murphy. Openimages: A public dataset for large-scale multi-label and multi-class image classification. Dataset available from https://github.com/openimages, 2017. 2 </li>
+<li>[8] T.-Y . Lin, P . Dollar, R. Girshick, K. He, B. Hariharan, and S. Belongie. Feature pyramid networks for object detection.
+In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages 2117–2125, 2017. 2, 3 </li>
+<li>[9] T.-Y . Lin, P . Goyal, R. Girshick, K. He, and P . Dollár.
+Focal loss for dense object detection. arXiv preprint arXiv:1708.02002, 2017. 1, 3, 4 </li>
+<li>[10] T.-Y . Lin, M. Maire, S. Belongie, J. Hays, P . Perona, D. Ramanan, P . Dollár, and C. L. Zitnick. Microsoft coco: Common objects in context. In European conference on computer vision, pages 740–755. Springer, 2014. 2 </li>
+<li>[11] W. Liu, D. Anguelov, D. Erhan, C. Szegedy, S. Reed, C.Y . Fu, and A. C. Berg. Ssd: Single shot multibox detector.
+In European conference on computer vision, pages 21–37.
+Springer, 2016. 3 </li>
+<li>[12] I. Newton. Philosophiae naturalis principia mathematica.
+William Dawson &amp; Sons Ltd., London, 1687. 1 </li>
+<li>[13] J. Parham, J. Crall, C. Stewart, T. Berger-Wolf, and D. Rubenstein. Animal population censusing at scale with citizen science and photographic identification. 2017. 4 </li>
+<li>[14] J. Redmon. Darknet: Open source neural networks in c.
+http://pjreddie.com/darknet/, 2013–2016. 3 </li>
+<li>[15] J. Redmon and A. Farhadi. Y olo9000: Better, faster, stronger.
+In Computer Vision and Pattern Recognition (CVPR), 2017 IEEE Conference on, pages 6517–6525. IEEE, 2017. 1, 2, 3 </li>
+<li>[16] J. Redmon and A. Farhadi. Y olov3: An incremental improvement. arXiv, 2018. 4 </li>
+<li>[17] S. Ren, K. He, R. Girshick, and J. Sun. Faster r-cnn: Towards real-time object detection with region proposal networks. arXiv preprint arXiv:1506.01497, 2015. 2</li>
+<li>[18] O. Russakovsky, L.-J. Li, and L. Fei-Fei. Best of both
+worlds: human-machine collaboration for object annotation.
+In Proceedings of the IEEE Conference on Computer Vision
+and Pattern Recognition, pages 2121–2131, 2015. 4</li>
+<li>[19] M. Scott. Smart camera gimbal bot scanlime:027, Dec 2017.
+4</li>
+<li>[20] A. Shrivastava, R. Sukthankar, J. Malik, and A. Gupta. Be-
+yond skip connections: Top-down modulation for object de-
+tection. arXiv preprint arXiv:1612.06851, 2016. 3</li>
+<li>[21] C. Szegedy, S. Ioffe, V . V anhoucke, and A. A. Alemi.
+Inception-v4, inception-resnet and the impact of residual
+connections on learning. 2017. 3</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
