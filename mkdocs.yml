@@ -60,8 +60,9 @@ nav:
         -  如何准备yolov5模型训练数据: tutorials/03_chapter/how_to_prepare_yolov5_training_data.md
         -  矩形推理: tutorials/04_chapter/rectangular_reasoning.md
         -  IOU深入解析: tutorials/04_chapter/iou_in-depth_analysis.md
+    
     - 论文解读:
-        - YOLO_v2: thesis_interpretation/02_yolo.md
+        - yolov4: thesis_interpretation/04_yolo.md
 
     - 论文解读:
         - yolov6 : thesis_interpretation/06_yolo.md
