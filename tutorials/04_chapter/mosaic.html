@@ -1,0 +1,1052 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>数据增强 - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数据增强
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link md-tabs__link--active">
+        教程
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        教程
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="教程" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        如何准备yolov5模型训练数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          数据增强
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="mosaic.html" class="md-nav__link md-nav__link--active">
+        数据增强
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    超参数文件
+  </a>
+  
+    <nav class="md-nav" aria-label="超参数文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mosaic" class="md-nav__link">
+    Mosaic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-paste" class="md-nav__link">
+    Copy paste
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-affine" class="md-nav__link">
+    Random affine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixup" class="md-nav__link">
+    MixUp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#albumentations" class="md-nav__link">
+    Albumentations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#augment-hsv" class="md-nav__link">
+    Augment HSV
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-horizontal-flip" class="md-nav__link">
+    Random horizontal flip
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mosaic_1" class="md-nav__link">
+    Mosaic 数据增强算法
+  </a>
+  
+    <nav class="md-nav" aria-label="Mosaic 数据增强算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_2" class="md-nav__link">
+    Mosaic方法步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_3" class="md-nav__link">
+    Mosaic方法优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_4" class="md-nav__link">
+    Mosaic源码解读
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/rectangular_reasoning.html" class="md-nav__link">
+        矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        IOU深入解析
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        yolov1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        yolov2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        yolov3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        yolov4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        yolov6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    超参数文件
+  </a>
+  
+    <nav class="md-nav" aria-label="超参数文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mosaic" class="md-nav__link">
+    Mosaic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-paste" class="md-nav__link">
+    Copy paste
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-affine" class="md-nav__link">
+    Random affine
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mixup" class="md-nav__link">
+    MixUp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#albumentations" class="md-nav__link">
+    Albumentations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#augment-hsv" class="md-nav__link">
+    Augment HSV
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-horizontal-flip" class="md-nav__link">
+    Random horizontal flip
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mosaic_1" class="md-nav__link">
+    Mosaic 数据增强算法
+  </a>
+  
+    <nav class="md-nav" aria-label="Mosaic 数据增强算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_2" class="md-nav__link">
+    Mosaic方法步骤
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_3" class="md-nav__link">
+    Mosaic方法优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mosaic_4" class="md-nav__link">
+    Mosaic源码解读
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>数据增强</h1>
+                
+                <h2 id="_1">引言</h2>
+<p><span class="arithmatex">\(YOLOv5\)</span> 在训练模型的时候使用🚀图像空间和色彩空间的数据增强(<em>在验证模型的时候没有使用</em>)，通过训练时采用数据增强 从而使得每次加载都是新的和唯一的图像（<em>即原始图像+3个随机图像</em>）如下图所示。</p>
+<p><img src="https://user-images.githubusercontent.com/26833433/120995721-f3cfed00-c785-11eb-8ee2-b6ef2fa205e8.jpg" ></p>
+<p><u>图4.1</u> 数据增强。经过数据增强后图像不会以相同的方式呈现两次。<br> 图片来源：https://docs.ultralytics.com/FAQ/augmentation/ </br></p>
+<h2 id="_2">超参数文件</h2>
+<p>数据增强默认使用配置超参数文件hyp.scratch.yaml，
+下面以<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/data/hyps/hyp.scratch-low.yaml#L22-L34">hyp.scratch-low.yaml</a>文件部分参数为例，具体参数解析可见附件 表2.1</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ python train.py --hyp hyp.scratch-low.yaml
+</code></pre></div>
+<h3 id="mosaic">Mosaic</h3>
+<p><img src="https://user-images.githubusercontent.com/31005897/159109235-c7aad8f2-1d4f-41f9-8d5f-b2fde6f2885e.png#pic_center" ></p>
+<p><u>图4.2</u> Mosaic数据增强。把4张图片，通过随机缩放、随机裁减、随机排布的方式进行拼接。</p>
+<h3 id="copy-paste">Copy paste</h3>
+<p><img src="https://user-images.githubusercontent.com/31005897/159116277-91b45033-6bec-4f82-afc4-41138866628e.png#pic_center" >
+  <u>图4.3</u> 分割填补 </p>
+<h3 id="random-affine">Random affine</h3>
+<p>(Rotation, Scale, Translation and Shear)（旋转、缩放、平移和剪切）</p>
+<p><img src="https://user-images.githubusercontent.com/31005897/159109326-45cd5acb-14fa-43e7-9235-0f21b0021c7d.png#pic_center" ></p>
+<p><u>图4.4</u>旋转、缩放、平移和剪切 图像</p>
+<h3 id="mixup">MixUp</h3>
+<p><img src="https://user-images.githubusercontent.com/31005897/159109361-3b24333b-f481-478b-ae00-df7838f0b5cd.png#pic_center" ></p>
+<p><u>图4.5</u> 图像融合 </p>
+<h3 id="albumentations">Albumentations</h3>
+<p>YOLOv5 🚀 集成了Albumentations(一个流行的开源图像增强包)。</p>
+<p>可以通过自定义数据集更好地训练，世界上最棒的视觉AI模型😃!</p>
+<p><img src="https://user-images.githubusercontent.com/26833433/124400879-ff331b80-dd25-11eb-9b67-fe85ac4ca104.jpg" >
+  <u>图4.6</u> Albumentations</p>
+<h3 id="augment-hsv">Augment HSV</h3>
+<p>(Hue, Saturation, Value) 
+色调、饱和度、曝光度
+<img src="https://user-images.githubusercontent.com/31005897/159109407-83d100ba-1aba-4f4b-aa03-4f048f815981.png#pic_center" ></p>
+<p><u>图4.5</u> 色调、饱和度、曝光度</p>
+<h3 id="random-horizontal-flip">Random horizontal flip</h3>
+<p>(随机水平或翻转)</p>
+<p><img src="https://user-images.githubusercontent.com/31005897/159109429-0d44619a-a76a-49eb-bfc0-6709860c043e.png#pic_center" >
+ <u>图4.6</u> 随机水平或翻转 </p>
+<h2 id="mosaic_1">Mosaic 数据增强算法</h2>
+<p>Mosaic 数据增强算法将多张图片按照一定比例组合成一张图片，使模型在更小的范围内识别目标。Mosaic 数据增强算法参考 CutMix数据增强算法。CutMix数据增强算法使用两张图片进行拼接，而 Mosaic 数据增强算法一般使用四张进行拼接，如下图所示。
+<img src ="mosaic_imgs/mosaic.png"></p>
+<h3 id="mosaic_2">Mosaic方法步骤</h3>
+<ol>
+<li>随机选取图片拼接基准点坐标 <span class="arithmatex">\((x_c，y_c)\)</span>，另随机选取四张图片。</li>
+<li>四张图片根据基准点，分别经过 尺寸调整 和 比例缩放 后，放置在指定尺寸的大图的左上，右上，左下，右下位置。</li>
+<li>根据每张图片的尺寸变换方式，将映射关系对应到图片标签上。</li>
+<li>依据指定的横纵坐标，对大图进行拼接。处理超过边界的检测框坐标。</li>
+</ol>
+<h3 id="mosaic_3">Mosaic方法优点</h3>
+<ol>
+<li>增加数据多样性，随机选取四张图像进行组合，组合得到图像个数比原图个数要多。</li>
+<li>增强模型鲁棒性，混合四张具有不同语义信息的图片，可以让模型检测超出常规语境的目标。</li>
+<li>
+<p>加强批归一化层（<span class="arithmatex">\(Batch \ Normalization\)</span>）的效果。当模型设置 <span class="arithmatex">\(BN\)</span> 操作后，训练时会尽可能增大批样本总量（<span class="arithmatex">\(BatchSize\)</span>），因为 <span class="arithmatex">\(BN\)</span> 原理为计算每一个特征层的均值和方差，如果批样本总量越大，那么 <span class="arithmatex">\(BN\)</span> 计算的均值和方差就越接近于整个数据集的均值和方差，效果越好。</p>
+</li>
+<li>
+<p>Mosaic 数据增强算法有利于提升小目标检测性能。Mosaic 数据增强图像由四张原始图像拼接而成，这样每张图像会有更大概率包含小目标。</p>
+</li>
+</ol>
+<h3 id="mosaic_4">Mosaic源码解读</h3>
+<p>思路概括：将一张选定的图片和随机的3张图片进行随机裁剪，再拼接到一张图上作为训练数据 ,可见本文 <em>图4.2</em>。</p>
+<p>这样可以丰富图片的背景，而且四张图片拼接在一起变相的提高了 <span class="arithmatex">\(batch-size\)</span> 大小，同时在进行 <span class="arithmatex">\(batch \ normalization\)</span>（批量归一化）的时候也会计算四张图片。</p>
+<p>这中方式能使得 <span class="arithmatex">\(YOLOv5\)</span> 对于 <span class="arithmatex">\(batch-size\)</span> 大小对模型训练精度的影响。</p>
+<p>下面对于<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/ef218b95d4f6780b3a1d092f7fdc64fd447c9674/utils/dataloaders.py#L764-L832">utils/dataloaders.py中Mosaic</a>的实现进行解读。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>    <span class="k">def</span> <span class="nf">load_mosaic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        <span class="c1"># YOLOv5 4-mosaic loader. Loads 1 image + 3 random images into a 4-image mosaic </span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">        @param index:  需要获取的图像索引</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">        @return: img4: mosaic和仿射增强后的一张图片</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">              labels4: img4对应的target</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">labels4</span><span class="p">,</span> <span class="n">segments4</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="c1"># 获取图像尺寸</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">img_size</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="c1"># 这里是随机生成mosaic中心点</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">yc</span><span class="p">,</span> <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mosaic_border</span><span class="p">)</span>  <span class="c1"># mosaic center x, y</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="c1"># 随机生成另外3张图片的索引</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># 3 additional image indices</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="c1"># 对这些索引值随机排序</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="c1"># 遍历这4张图片</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>            <span class="c1"># Load image</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>            <span class="c1"># 加载图片并返回高宽</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            <span class="n">img</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>            <span class="c1"># place img in img4 放置图片</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># top left(左上角)</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>                <span class="c1"># 生成背景图 np.full()函数填充初始化大图，尺寸是4张图那么大</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>                <span class="n">img4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="mi">114</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>  <span class="c1"># base image with 4 tiles</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>                <span class="c1"># 设置大图上的位置（要么原图大小，要么放大）（w，h）或（xc，yc）（新生成的那张大图）</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>                <span class="n">x1a</span><span class="p">,</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">x2a</span><span class="p">,</span> <span class="n">y2a</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">xc</span> <span class="o">-</span> <span class="n">w</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">yc</span> <span class="o">-</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">xc</span><span class="p">,</span> <span class="n">yc</span>  <span class="c1"># xmin, ymin, xmax, ymax (large image)</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>                <span class="c1"># 选取小图上的位置（原图）</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>                <span class="n">x1b</span><span class="p">,</span> <span class="n">y1b</span><span class="p">,</span> <span class="n">x2b</span><span class="p">,</span> <span class="n">y2b</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="p">(</span><span class="n">x2a</span> <span class="o">-</span> <span class="n">x1a</span><span class="p">),</span> <span class="n">h</span> <span class="o">-</span> <span class="p">(</span><span class="n">y2a</span> <span class="o">-</span> <span class="n">y1a</span><span class="p">),</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span>  <span class="c1"># xmin, ymin, xmax, ymax (small image)</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># top right(右上角)</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>                <span class="n">x1a</span><span class="p">,</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">x2a</span><span class="p">,</span> <span class="n">y2a</span> <span class="o">=</span> <span class="n">xc</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">yc</span> <span class="o">-</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">xc</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="n">yc</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>                <span class="n">x1b</span><span class="p">,</span> <span class="n">y1b</span><span class="p">,</span> <span class="n">x2b</span><span class="p">,</span> <span class="n">y2b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span> <span class="o">-</span> <span class="p">(</span><span class="n">y2a</span> <span class="o">-</span> <span class="n">y1a</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x2a</span> <span class="o">-</span> <span class="n">x1a</span><span class="p">),</span> <span class="n">h</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># bottom left(左下角)</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>                <span class="n">x1a</span><span class="p">,</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">x2a</span><span class="p">,</span> <span class="n">y2a</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">xc</span> <span class="o">-</span> <span class="n">w</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">yc</span><span class="p">,</span> <span class="n">xc</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">yc</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>                <span class="n">x1b</span><span class="p">,</span> <span class="n">y1b</span><span class="p">,</span> <span class="n">x2b</span><span class="p">,</span> <span class="n">y2b</span> <span class="o">=</span> <span class="n">w</span> <span class="o">-</span> <span class="p">(</span><span class="n">x2a</span> <span class="o">-</span> <span class="n">x1a</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">y2a</span> <span class="o">-</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>            <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># bottom right(右下角)</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                <span class="n">x1a</span><span class="p">,</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">x2a</span><span class="p">,</span> <span class="n">y2a</span> <span class="o">=</span> <span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">xc</span> <span class="o">+</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">yc</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>                <span class="n">x1b</span><span class="p">,</span> <span class="n">y1b</span><span class="p">,</span> <span class="n">x2b</span><span class="p">,</span> <span class="n">y2b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">x2a</span> <span class="o">-</span> <span class="n">x1a</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">y2a</span> <span class="o">-</span> <span class="n">y1a</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>            <span class="c1">#   大图上贴上对应的小图</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>            <span class="n">img4</span><span class="p">[</span><span class="n">y1a</span><span class="p">:</span><span class="n">y2a</span><span class="p">,</span> <span class="n">x1a</span><span class="p">:</span><span class="n">x2a</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">y1b</span><span class="p">:</span><span class="n">y2b</span><span class="p">,</span> <span class="n">x1b</span><span class="p">:</span><span class="n">x2b</span><span class="p">]</span>  <span class="c1"># img4[ymin:ymax, xmin:xmax]</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>            <span class="n">padw</span> <span class="o">=</span> <span class="n">x1a</span> <span class="o">-</span> <span class="n">x1b</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>            <span class="n">padh</span> <span class="o">=</span> <span class="n">y1a</span> <span class="o">-</span> <span class="n">y1b</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>            <span class="c1"># 计算小图到大图上时所产生的偏移，用来计算mosaic增强后的标签的位置</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>            <span class="c1"># Labels  获取标签</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>            <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="sd">            对label标注进行初始化操作：</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="sd">            先读取对应图片的label，然后将xywh格式的label标准化为像素xy格式的。</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="sd">            segments4转为像素段格式</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="sd">            然后统统填进之前准备的标注列表</span>
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="sd">            &quot;&quot;&quot;</span>
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>            <span class="n">labels</span><span class="p">,</span> <span class="n">segments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">segments</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>            <span class="k">if</span> <span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>                <span class="c1"># 将xywh（百分比那些值）标准化为像素xy格式</span>
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>                <span class="n">labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">xywhn2xyxy</span><span class="p">(</span><span class="n">labels</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">padw</span><span class="p">,</span> <span class="n">padh</span><span class="p">)</span>  <span class="c1"># normalized xywh to pixel xyxy format</span>
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>                <span class="c1"># 转为像素段</span>
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>                <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="n">xyn2xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">padw</span><span class="p">,</span> <span class="n">padh</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">segments</span><span class="p">]</span>
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>            <span class="n">labels4</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>            <span class="n">segments4</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>        <span class="c1"># Concat/clip labels 拼接</span>
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>        <span class="n">labels4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">labels4</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">labels4</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="o">*</span><span class="n">segments4</span><span class="p">):</span>
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>            <span class="c1"># np.clip截取函数，固定值在0到2s内</span>
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>            <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># clip when using random_perspective()  </span>
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>        <span class="c1"># img4, labels4 = replicate(img4, labels4)  # replicate</span>
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        <span class="c1"># Augment</span>
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>        <span class="c1"># 进行mosaic的时候将四张图片整合到一起之后shape为[2*img_size,2*img_size]</span>
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>        <span class="c1"># 对mosaic整合的图片进行随机旋转、平移、缩放、裁剪，并resize为输入大小img_size</span>
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>        <span class="n">img4</span><span class="p">,</span> <span class="n">labels4</span><span class="p">,</span> <span class="n">segments4</span> <span class="o">=</span> <span class="n">copy_paste</span><span class="p">(</span><span class="n">img4</span><span class="p">,</span> <span class="n">labels4</span><span class="p">,</span> <span class="n">segments4</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;copy_paste&#39;</span><span class="p">])</span>
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>        <span class="n">img4</span><span class="p">,</span> <span class="n">labels4</span> <span class="o">=</span> <span class="n">random_perspective</span><span class="p">(</span><span class="n">img4</span><span class="p">,</span>
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>                                           <span class="n">labels4</span><span class="p">,</span>
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>                                           <span class="n">segments4</span><span class="p">,</span>
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>                                           <span class="n">degrees</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;degrees&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>                                           <span class="n">translate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;translate&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>                                           <span class="n">scale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>                                           <span class="n">shear</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;shear&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>                                           <span class="n">perspective</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hyp</span><span class="p">[</span><span class="s1">&#39;perspective&#39;</span><span class="p">],</span>
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>                                           <span class="n">border</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mosaic_border</span><span class="p">)</span>  <span class="c1"># border to remove</span>
+</code></pre></div>
+<h2 id="_3">附件</h2>
+<p>表4.1</u>:数据增强参数表 </p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>配置</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hsv_h:</td>
+<td>0.015</td>
+<td># image HSV-Hue augmentation (fraction) 色调</td>
+</tr>
+<tr>
+<td>hsv_s:</td>
+<td>0.7</td>
+<td># image HSV-Saturation augmentation (fraction) 饱和度</td>
+</tr>
+<tr>
+<td>hsv_v:</td>
+<td>0.4</td>
+<td># image HSV-Value augmentation (fraction) 曝光度</td>
+</tr>
+<tr>
+<td>degrees:</td>
+<td>0.0</td>
+<td># image rotation (+/- deg) 旋转</td>
+</tr>
+<tr>
+<td>translate:</td>
+<td>0.1</td>
+<td># image translation (+/- fraction) 平移</td>
+</tr>
+<tr>
+<td>scale:</td>
+<td>0.9</td>
+<td># image scale (+/- gain) 缩放</td>
+</tr>
+<tr>
+<td>shear:</td>
+<td>0.0</td>
+<td># image shear (+/- deg) 错切(非垂直投影)</td>
+</tr>
+<tr>
+<td>perspective:</td>
+<td>0.0</td>
+<td># image perspective (+/- fraction), range 0-0.001 透视变换</td>
+</tr>
+<tr>
+<td>flipud:</td>
+<td>0.0</td>
+<td># image flip up-down (probability) 上下翻转</td>
+</tr>
+<tr>
+<td>fliplr:</td>
+<td>0.5</td>
+<td># image flip left-right (probability)左右翻转</td>
+</tr>
+<tr>
+<td>mosaic:</td>
+<td>1.0</td>
+<td># image mosaic (probability) 图拼接</td>
+</tr>
+<tr>
+<td>mixup:</td>
+<td>0.1</td>
+<td># image mixup (probability) 图像融合</td>
+</tr>
+<tr>
+<td>copy_paste:</td>
+<td>0.0</td>
+<td># segment copy-paste (probability) 分割填补</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_4">参考文章</h2>
+<ul>
+<li>https://docs.ultralytics.com/FAQ/augmentation/</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 如何准备yolov5模型训练数据" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              如何准备yolov5模型训练数据
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../05_chapter/rectangular_reasoning.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 矩形推理" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              矩形推理
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
