@@ -435,7 +435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+      <a href="../03_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
         如何准备yolov5模型训练数据
       </a>
     </li>
@@ -447,19 +447,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_chapter/mosaic.html" class="md-nav__link">
-        数据增强
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_chapter/rectangular_reasoning.html" class="md-nav__link">
+      <a href="../04_chapter/rectangular_reasoning.html" class="md-nav__link">
         矩形推理
       </a>
     </li>
@@ -471,7 +459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+      <a href="../04_chapter/iou_in-depth_analysis.html" class="md-nav__link">
         IOU深入解析
       </a>
     </li>
@@ -728,7 +716,7 @@
 <p>分别应对yaml文件中的depth_multiple和width_multiple参数。</p>
 <p>还需要注意一点，官方除了n, s, m, l, x版本外还有n6, s6, m6, l6, x6，区别在于后者是针对更大分辨率的图片比如1280x1280,</p>
 <p>当然结构上也有些差异，前者只会下采样到32倍且采用3个预测特征层 , 而后者会下采样64倍，采用4个预测特征层。</p>
-<p>本章将以 yolov5s为例 ，从配置文件 modeles/<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml">yolov5s.yaml</a> 到 models/<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py">yolo.py</a> 源码进行解读。</p>
+<p>本章将以 yolov5s为例 ，从配置文件 models/<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml">yolov5s.yaml</a> 到 models/<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py">yolo.py</a> 源码进行解读。</p>
 <h2 id="yolov5syaml"><a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml">yolov5s.yaml</a>文件内容:</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">nc</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">80</span><span class="w">  </span><span class="c1"># number of classes 数据集中的类别数</span><span class="w"></span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">depth_multiple</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.33</span><span class="w">  </span><span class="c1"># model depth multiple  模型层数因子(用来调整网络的深度)</span><span class="w"></span>
@@ -1483,7 +1471,7 @@
       
       
         
-        <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 如何准备yolov5模型训练数据" rel="next">
+        <a href="../03_chapter/how_to_prepare_yolov5_training_data.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 如何准备yolov5模型训练数据" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
