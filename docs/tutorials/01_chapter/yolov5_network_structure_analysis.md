@@ -9,7 +9,7 @@ YOLOv5针对不同大小（n, s, m, l, x）的网络整体架构都是一样的�
 
 当然结构上也有些差异，前者只会下采样到32倍且采用3个预测特征层 , 而后者会下采样64倍，采用4个预测特征层。
 
-本章将以 yolov5s为例 ，从配置文件 modeles/[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml) 到 models/[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 源码进行解读。
+本章将以 yolov5s为例 ，从配置文件 models/[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml) 到 models/[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 源码进行解读。
 
 ## [yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)文件内容:
 
