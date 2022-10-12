@@ -33,12 +33,6 @@ $B_{g t}:真实回归框$
 | True  | TP       | TN       |
 | False | FP       | FN       |
 
-
-
-In the object detection task there are many possible bounding boxes that should not be detected within an image. Thus, TN would be all possible bounding boxes that were corrrectly not detected (so many possible boxes within an image). That's why it is not used by the metrics.
-threshold: depending on the metric, it is usually set to 50%, 75% or 95%.
-
-
 指标的一些基本概念：
 
 - TP（True Postives）： 分类器把正例正确的分类-预测为正例。(IOU >=  _阈值_)
@@ -152,7 +146,7 @@ def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, eps=1e-7
 https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L96-L121
 
 ```python
-# 根据PR曲线计算AP 实习满三个月后面是什么流程
+# 根据PR曲线计算AP 
 def compute_ap(recall, precision):
     """ Compute the average precision, given the recall and precision curves
     # Arguments
@@ -175,7 +169,7 @@ def compute_ap(recall, precision):
 
     # Integrate area under curve
     method = 'interp'  # methods: 'continuous', 'interp'
-    if method == 'interp': # 默认采用interpolated-precision 曲线，
+    if method == 'interp': # 默认采用 interpolated-precision 曲线，
         x = np.linspace(0, 1, 101)  # 101-point interp (COCO)
         ap = np.trapz(np.interp(x, mrec, mpre), x)  # integrate
     else:  # 'continuous'
