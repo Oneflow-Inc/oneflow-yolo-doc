@@ -394,7 +394,7 @@
         
           <li class="md-nav__item">
   <a href="#map" class="md-nav__link">
-    mAP计算与指标评估
+    mAP
   </a>
   
 </li>
@@ -405,11 +405,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    拓展
+  <a href="#map_1" class="md-nav__link">
+    目标检测中的mAP计算
   </a>
   
-    <nav class="md-nav" aria-label="拓展">
+    <nav class="md-nav" aria-label="目标检测中的mAP计算">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -432,7 +432,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     参考文章
   </a>
   
@@ -603,7 +603,7 @@
         
           <li class="md-nav__item">
   <a href="#map" class="md-nav__link">
-    mAP计算与指标评估
+    mAP
   </a>
   
 </li>
@@ -614,11 +614,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    拓展
+  <a href="#map_1" class="md-nav__link">
+    目标检测中的mAP计算
   </a>
   
-    <nav class="md-nav" aria-label="拓展">
+    <nav class="md-nav" aria-label="目标检测中的mAP计算">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -641,7 +641,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     参考文章
   </a>
   
@@ -711,7 +711,7 @@ TN代表的是所有可能的未正确检测到的边界框。然而在yolo在�
 <h3 id="recall">Recall</h3>
 <p>Recall 定义：是模型找到真实回归框(<em>即标签标注的框</em>)的能力。计算公式如下：</p>
 <p><span class="arithmatex">\(Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}\)</span></p>
-<h3 id="map">mAP计算与指标评估</h3>
+<h3 id="map">mAP</h3>
 <p>多标签图像分类任务中图片的标签不止一个，因此评价不能用普通单标签图像分类的标准，即mean accuracy，该任务采用的是和信息检索中类似的方法—mAP，虽然其字面意思和mean average precision看起来差不多，但是计算方法要繁琐得多,mAP 会统计所有 Confidence 值下的 PR值，而实际使用时，<strong>会设定一个 Confidence 阈值，低于该阈值的目标会被丢弃，这部分目标在统计 mAP 时也会有一定的贡献</strong>。 </p>
 <p><img src="map_analysis_imgs/interpolated_precision_v2.png">
 (红色曲线代表,人为的方式将PR曲线变成单调递减，使得计算面积更容易。)</p>
@@ -727,7 +727,7 @@ TN代表的是所有可能的未正确检测到的边界框。然而在yolo在�
 </li>
 </ul>
 <p>方法是：计算每个分类的AP，求和再平均，得到的就是mAP,它是直接把mAP当成AP，然后再把IOU值大于0.5的 <span class="arithmatex">\(AP(mAP)\)</span> ，以0.05的增量,到0.95，也就是以 <span class="arithmatex">\((0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95)\)</span> <span class="arithmatex">\(IOU值\)</span> 的 <span class="arithmatex">\(AP(mAP)\)</span> 的平均值当成 <span class="arithmatex">\(AP(at IoU=.50:.05:.95)\)</span> ，通过<span class="arithmatex">\(IOU增量\)</span> 的方式得到  <span class="arithmatex">\(mAP@0.5:0.95\)</span> 结果。</p>
-<h2 id="_2">拓展</h2>
+<h2 id="map_1">目标检测中的mAP计算</h2>
 <h3 id="yolov5iou">yolov5计算IOU源码解析</h3>
 <p>源代码地址：</p>
 <p>https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L224-L261</p>
@@ -814,7 +814,7 @@ TN代表的是所有可能的未正确检测到的边界框。然而在yolo在�
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="k">return</span> <span class="n">ap</span><span class="p">,</span> <span class="n">mpre</span><span class="p">,</span> <span class="n">mrec</span>
 </code></pre></div>
-<h2 id="_3">参考文章</h2>
+<h2 id="_2">参考文章</h2>
 <ul>
 <li>https://github.com/rafaelpadilla/Object-Detection-Metrics</li>
 </ul>
