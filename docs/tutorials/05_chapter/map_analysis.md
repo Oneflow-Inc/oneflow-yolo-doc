@@ -65,7 +65,7 @@ Recall 定义：是模型找到真实回归框(*即标签标注的框*)的能力
 $Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}$
 
 
-### mAP计算与指标评估
+### mAP
 
  多标签图像分类任务中图片的标签不止一个，因此评价不能用普通单标签图像分类的标准，即mean accuracy，该任务采用的是和信息检索中类似的方法—mAP，虽然其字面意思和mean average precision看起来差不多，但是计算方法要繁琐得多,mAP 会统计所有 Confidence 值下的 PR值，而实际使用时，**会设定一个 Confidence 阈值，低于该阈值的目标会被丢弃，这部分目标在统计 mAP 时也会有一定的贡献**。 
 
@@ -82,7 +82,8 @@ $Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}$
 方法是：计算每个分类的AP，求和再平均，得到的就是mAP,它是直接把mAP当成AP，然后再把IOU值大于0.5的 $AP(mAP)$ ，以0.05的增量,到0.95，也就是以 $(0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95)$ $IOU值$ 的 $AP(mAP)$ 的平均值当成 $AP(at IoU=.50:.05:.95)$ ，通过$IOU增量$ 的方式得到  $mAP@0.5:0.95$ 结果。
 
 
-## 拓展 
+## 目标检测中的mAP计算 
+
 ### yolov5计算IOU源码解析
 源代码地址：
 
