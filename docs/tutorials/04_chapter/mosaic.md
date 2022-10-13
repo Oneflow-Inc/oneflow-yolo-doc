@@ -106,7 +106,7 @@ Mosaic 数据增强算法将多张图片按照一定比例组合成一张图片�
 这中方式能使得 $YOLOv5$ 对于 $batch-size$ 大小对模型训练精度的影响。
 
 
-下面对于[utils/dataloaders.py中Mosaic](https://github.com/Oneflow-Inc/one-yolov5/blob/ef218b95d4f6780b3a1d092f7fdc64fd447c9674/utils/dataloaders.py#L764-L832)的实现进行解读。
+下面对[utils/dataloaders.py中Mosaic](https://github.com/Oneflow-Inc/one-yolov5/blob/ef218b95d4f6780b3a1d092f7fdc64fd447c9674/utils/dataloaders.py#L764-L832)的实现进行解读。
 
 ```python
     def load_mosaic(self, index):
