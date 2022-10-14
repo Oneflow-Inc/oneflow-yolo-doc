@@ -1,0 +1,911 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>模型精确度评估 - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              模型精确度评估
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link md-tabs__link--active">
+        教程
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        教程
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="教程" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/how_to_prepare_yolov5_training_data.md" class="md-nav__link">
+        如何准备yolov5模型训练数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_chapter/rectangular_reasoning.md" class="md-nav__link">
+        矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_chapter/iou_in-depth_analysis.md" class="md-nav__link">
+        IOU深入解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          模型精确度评估
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="map_analysis.html" class="md-nav__link md-nav__link--active">
+        模型精确度评估
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    指标评估(重要的一些定义)
+  </a>
+  
+    <nav class="md-nav" aria-label="指标评估(重要的一些定义)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iou" class="md-nav__link">
+    📚 IOU
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpfpfntn" class="md-nav__link">
+    TP&amp;FP&amp;FN&amp;TN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precision" class="md-nav__link">
+    Precision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recall" class="md-nav__link">
+    Recall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    mAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map_1" class="md-nav__link">
+    目标检测中的mAP计算
+  </a>
+  
+    <nav class="md-nav" aria-label="目标检测中的mAP计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yolov5iou" class="md-nav__link">
+    yolov5计算IOU源码解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yolov5ap" class="md-nav__link">
+    yolov5计算AP源码逐行解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        yolov1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        yolov2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        yolov3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        yolov4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        yolov6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    指标评估(重要的一些定义)
+  </a>
+  
+    <nav class="md-nav" aria-label="指标评估(重要的一些定义)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#iou" class="md-nav__link">
+    📚 IOU
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpfpfntn" class="md-nav__link">
+    TP&amp;FP&amp;FN&amp;TN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precision" class="md-nav__link">
+    Precision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recall" class="md-nav__link">
+    Recall
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map" class="md-nav__link">
+    mAP
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#map_1" class="md-nav__link">
+    目标检测中的mAP计算
+  </a>
+  
+    <nav class="md-nav" aria-label="目标检测中的mAP计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yolov5iou" class="md-nav__link">
+    yolov5计算IOU源码解析
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yolov5ap" class="md-nav__link">
+    yolov5计算AP源码逐行解析
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>模型精确度评估</h1>
+                
+                <h2 id="_1">指标评估(重要的一些定义)</h2>
+<h3 id="iou">📚 IOU</h3>
+<p><span class="arithmatex">\(IOU\)</span> (<em>Intersection Over Union</em>)  基于<em>Jaccard</em>索引，用于评估两个边界框之间的重叠程度。它需要一个真实回归框 (a ground truth bounding box) <span class="arithmatex">\(B_{gt}\)</span> 和一个预测回归框(a predicted bounding box) <span class="arithmatex">\(B_{p}\)</span> 计算得到。通过应用 IOU 我们能够判断出预测结果是有效(True Positive) 或者 无效(False Positive) </p>
+<p><span class="arithmatex">\(IOU\)</span> 也称重叠度 表示计算预测回归框和真实回归框的交并比,计算公式如下:</p>
+<p><span class="arithmatex">\(\large{IOU=\dfrac{area\left( B_p\cap B_{g t}\right) }{area\left( B_p\cup B_{g t}\right) }
+}\)</span></p>
+<p>其中: <span class="arithmatex">\(B_p:预测回归框\)</span>，
+<span class="arithmatex">\(B_{g t}:真实回归框\)</span></p>
+<p>下图可视化了真实回归框（绿色）和 预测回归框（红色）之间的IOU。</p>
+<p><center> <img src="./map_analysis_imgs/iou.png"> </center></p>
+<p>图1.1 ; <span class="arithmatex">\(IOU\)</span> 的计算。绿色: <span class="arithmatex">\(B_{g t}\)</span> ， 红色:<span class="arithmatex">\(B_{p}\)</span></p>
+<h3 id="tpfpfntn">TP&amp;FP&amp;FN&amp;TN</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Positive</th>
+<th>Negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>True</td>
+<td>TP</td>
+<td>TN</td>
+</tr>
+<tr>
+<td>False</td>
+<td>FP</td>
+<td>FN</td>
+</tr>
+</tbody>
+</table>
+<p>指标的一些基本概念：</p>
+<ul>
+<li>TP（True Postives）： 分类器把正例正确的分类-预测为正例。(IOU &gt;=  <em>阈值</em>)</li>
+<li>FN（False Negatives）：分类器把正例错误的分类-预测为负例。(IOU &lt;  <em>阈值</em>)</li>
+<li>FP（False Postives）：分类器把负例错误的分类-预测为正例</li>
+<li>TN（True Negatives）：分类器把负例正确的分类-预测为负例（<em>yolov5中没有应用到</em>）</li>
+</ul>
+<p>yolov5中没有应用TN的原因:
+TN代表的是所有可能的未正确检测到的边界框。然而在yolo在目标检测任务中，每个网格会生成很多的预测边界框，有许多的预测边界框是没有相应的真实标签框，导致未正确检测到的边界框数量远远大于正确检测到的边界框，这就是为什么不使用TN的原因。</p>
+<p>threshold:  depending on the metric, it is usually set to 50%, 75% or 95%.</p>
+<h3 id="precision">Precision</h3>
+<p>Precision 定义：模型识别相关目标的能力。分类正确的样本在所有样本中的数量比例，公式如下:</p>
+<p><span class="arithmatex">\(Precision =\dfrac{TP}{TP+FP}=\dfrac{TP}{all \ detections}\)</span></p>
+<h3 id="recall">Recall</h3>
+<p>Recall 定义：是模型找到真实回归框(<em>即标签标注的框</em>)的能力。计算公式如下：</p>
+<p><span class="arithmatex">\(Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}\)</span></p>
+<h3 id="map">mAP</h3>
+<p>多标签图像分类任务中图片的标签不止一个，因此评价不能用普通单标签图像分类的标准，即mean accuracy，该任务采用的是和信息检索中类似的方法—mAP，虽然其字面意思和mean average precision看起来差不多，但是计算方法要繁琐得多,mAP 会统计所有 Confidence 值下的 PR值，而实际使用时，<strong>会设定一个 Confidence 阈值，低于该阈值的目标会被丢弃，这部分目标在统计 mAP 时也会有一定的贡献</strong>。 </p>
+<p><a href="https://baike.baidu.com/item/%E7%BD%AE%E4%BF%A1%E5%BA%A6/7908802?fr=aladdin">Confidence</a>
+(置信度):在统计学中，一个概率样本的置信区间（Confidence interval）是对这个样本的某个总体参数的区间估计。置信区间展现的是这个参数的真实值有一定概率落在测量结果的周围的程度。置信区间给出的是被测量参数测量值的可信程度范围，即前面所要求的“一定概率”。这个概率也被称为置信水平。 </p>
+<p><img src="map_analysis_imgs/interpolated_precision_v2.png">
+(红色曲线代表,人为的方式将PR曲线变成单调递减，使得计算面积更容易。)</p>
+<ul>
+<li>AP（Average Percision）：AP为平均精度，指的是所有图片内的具体某一类的PR曲线下的面积(横轴为Recall，纵轴为Precision)。</li>
+<li>AP衡量的是对一个类检测好坏，mAP就是对多个类的检测好坏。在多类多目标检测中，计算出每个类别的AP后，再除于类别总数，即所有类别AP的平均值，比如有两类，类A的AP值是0.5，类B的AP值是0.2，那么 <span class="arithmatex">\(mAP\)</span>=（0.5+0.2）/2=0.35。</li>
+<li>MAP: <strong>是指所有图片内的所有类别的AP的平均值</strong>,map越高代表模型预测精度值越高。</li>
+<li>
+<p><span class="arithmatex">\(mAP@0.5\)</span> ：<span class="arithmatex">\(mAP\)</span>是用<span class="arithmatex">\(Precision\)</span>和<span class="arithmatex">\(Recall\)</span>作为两轴作图后围成的面积，<span class="arithmatex">\(m\)</span>表示平均，@后面的数表示判定正负样本的 <span class="arithmatex">\(IOU\)</span> 阈值，其中 @0.5表示IOU阈值取0.5。</p>
+</li>
+<li>
+<p><span class="arithmatex">\(mAP@0.5:0.95\)</span>：只以 <span class="arithmatex">\(IOU=0.5\)</span> 的阀值的时候不一定就是好的模型，可能仅仅在0.5阀值表现的很好，在0.6,0.7...阀值表现的很差，为了更好地评估整体模型的准确度，因此计算一个模型在各个IOU值的AP(mAP)取平均值。</p>
+</li>
+</ul>
+<p>方法是：计算每个分类的AP，求和再平均，得到的就是mAP,它是直接把mAP当成AP，然后再把IOU值大于0.5的 <span class="arithmatex">\(AP(mAP)\)</span> ，以0.05的增量,到0.95，也就是以 <span class="arithmatex">\((0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95)\)</span> <span class="arithmatex">\(IOU值\)</span> 的 <span class="arithmatex">\(AP(mAP)\)</span> 的平均值当成 <span class="arithmatex">\(AP(at IoU=.50:.05:.95)\)</span> ，通过<span class="arithmatex">\(IOU增量\)</span> 的方式得到  <span class="arithmatex">\(mAP@0.5:0.95\)</span> 结果。</p>
+<h2 id="map_1">目标检测中的mAP计算</h2>
+<h3 id="yolov5iou">yolov5计算IOU源码解析</h3>
+<p>源代码地址：</p>
+<p>https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L224-L261</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 计算两框的特定iou (DIou, DIou, CIou) </span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">def</span> <span class="nf">bbox_iou</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="n">box2</span><span class="p">,</span> <span class="n">xywh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">GIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">DIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">CIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">):</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="c1"># Returns Intersection over Union (IoU) of box1(1,4) to box2(n,4)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Get the coordinates of bounding boxes 下面条件语句作用是:进行坐标转换从而获取yolo格式边界框的坐标</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">if</span> <span class="n">xywh</span><span class="p">:</span>  <span class="c1"># transform from xywh to xyxy</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="o">=</span> <span class="n">box1</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">box2</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">w1_</span><span class="p">,</span> <span class="n">h1_</span><span class="p">,</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">h2_</span> <span class="o">=</span> <span class="n">w1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">h1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">h2</span> <span class="o">/</span> <span class="mi">2</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="n">b1_x1</span><span class="p">,</span> <span class="n">b1_x2</span><span class="p">,</span> <span class="n">b1_y1</span><span class="p">,</span> <span class="n">b1_y2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">w1_</span><span class="p">,</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">w1_</span><span class="p">,</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">h1_</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">h1_</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="n">b2_x1</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">,</span> <span class="n">b2_y2</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">h2_</span><span class="p">,</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">h2_</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># x1, y1, x2, y2 = box1</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">b1_x1</span><span class="p">,</span> <span class="n">b1_y1</span><span class="p">,</span> <span class="n">b1_x2</span><span class="p">,</span> <span class="n">b1_y2</span> <span class="o">=</span> <span class="n">box1</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="n">b2_x1</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">,</span> <span class="n">b2_y2</span> <span class="o">=</span> <span class="n">box2</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">w1</span><span class="p">,</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">b1_x2</span> <span class="o">-</span> <span class="n">b1_x1</span><span class="p">,</span> <span class="n">b1_y2</span> <span class="o">-</span> <span class="n">b1_y1</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">w2</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">b2_x2</span> <span class="o">-</span> <span class="n">b2_x1</span><span class="p">,</span> <span class="n">b2_y2</span> <span class="o">-</span> <span class="n">b2_y1</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="c1"># Intersection area 获取两个框相交的面积。</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sd">    left_line = max(b1_x1, b2_x1)</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">    reft_line = min(b1_x2, b2_x2)</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">    top_line = max(b1_y1, b2_y1)</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">    bottom_line = min(b1_y2, b2_y2)</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sd">    intersect = (reight_line - left_line) * (bottom_line - top_line)</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">inter</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b1_x2</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b1_x1</span><span class="p">,</span> <span class="n">b2_x1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> \
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b1_y2</span><span class="p">,</span> <span class="n">b2_y2</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b1_y1</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>    <span class="c1"># Union Area  两个框并到面积</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="n">union</span> <span class="o">=</span> <span class="n">w1</span> <span class="o">*</span> <span class="n">h1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">*</span> <span class="n">h2</span> <span class="o">-</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">eps</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="c1"># IoU </span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="n">iou</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">/</span> <span class="n">union</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="k">if</span> <span class="n">CIoU</span> <span class="ow">or</span> <span class="n">DIoU</span> <span class="ow">or</span> <span class="n">GIoU</span><span class="p">:</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="n">cw</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b1_x2</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b1_x1</span><span class="p">,</span> <span class="n">b2_x1</span><span class="p">)</span>  <span class="c1"># convex (smallest enclosing box) width</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="n">ch</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">b1_y2</span><span class="p">,</span> <span class="n">b2_y2</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">b1_y1</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">)</span>  <span class="c1"># convex height</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="k">if</span> <span class="n">CIoU</span> <span class="ow">or</span> <span class="n">DIoU</span><span class="p">:</span>  <span class="c1"># Distance or Complete IoU https://arxiv.org/abs/1911.08287v1</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>            <span class="n">c2</span> <span class="o">=</span> <span class="n">cw</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">eps</span>  <span class="c1"># convex diagonal squared</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>            <span class="n">rho2</span> <span class="o">=</span> <span class="p">((</span><span class="n">b2_x1</span> <span class="o">+</span> <span class="n">b2_x2</span> <span class="o">-</span> <span class="n">b1_x1</span> <span class="o">-</span> <span class="n">b1_x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">b2_y1</span> <span class="o">+</span> <span class="n">b2_y2</span> <span class="o">-</span> <span class="n">b1_y1</span> <span class="o">-</span> <span class="n">b1_y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>  <span class="c1"># center dist ** 2</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>            <span class="k">if</span> <span class="n">CIoU</span><span class="p">:</span>  <span class="c1"># https://github.com/Zzh-tju/DIoU-SSD-pytorch/blob/master/utils/box/box_utils.py#L47</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>                <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">w2</span> <span class="o">/</span> <span class="p">(</span><span class="n">h2</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">w1</span> <span class="o">/</span> <span class="p">(</span><span class="n">h1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>                <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>                    <span class="n">alpha</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">iou</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>                <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="p">(</span><span class="n">rho2</span> <span class="o">/</span> <span class="n">c2</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">)</span>  <span class="c1"># CIoU</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>            <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="n">rho2</span> <span class="o">/</span> <span class="n">c2</span>  <span class="c1"># DIoU</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="n">c_area</span> <span class="o">=</span> <span class="n">cw</span> <span class="o">*</span> <span class="n">ch</span> <span class="o">+</span> <span class="n">eps</span>  <span class="c1"># convex area</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="p">(</span><span class="n">c_area</span> <span class="o">-</span> <span class="n">union</span><span class="p">)</span> <span class="o">/</span> <span class="n">c_area</span>  <span class="c1"># GIoU https://arxiv.org/pdf/1902.09630.pdf</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="k">return</span> <span class="n">iou</span>  <span class="c1"># IoU</span>
+</code></pre></div>
+<h3 id="yolov5ap">yolov5计算AP源码逐行解析</h3>
+<p>源代码地址：</p>
+<p>https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L96-L121</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 根据PR曲线计算AP </span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">def</span> <span class="nf">compute_ap</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">):</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="sd">&quot;&quot;&quot; Compute the average precision, given the recall and precision curves</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    # Arguments</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">        recall:    The recall curve (list)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">        precision: The precision curve (list)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">    # Returns</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="sd">        Average precision, precision curve, recall curve</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># Append sentinel values to beginning and end 将开区间给补上，补成闭合的区间。</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">mrec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mf">0.0</span><span class="p">],</span> <span class="n">recall</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]))</span> 
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">mpre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mf">1.0</span><span class="p">],</span> <span class="n">precision</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">]))</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># Compute the precision envelope </span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="sd">    人为的把PR曲线变成单调递减的,例如:</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="sd">    np.maximum(accumulate(np.array([21, 23, 18, 19, 20, 13, 12, 11]) ) =&gt; np.array([23, 23, 20, 20, 20, 13, 12, 11])</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="n">mpre</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">mpre</span><span class="p">)))</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="c1"># Integrate area under curve</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;interp&#39;</span>  <span class="c1"># methods: &#39;continuous&#39;, &#39;interp&#39;</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;interp&#39;</span><span class="p">:</span> <span class="c1"># 默认采用 interpolated-precision 曲线，</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>  <span class="c1"># 101-point interp (COCO)</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="n">ap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mrec</span><span class="p">,</span> <span class="n">mpre</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># integrate</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># &#39;continuous&#39;</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mrec</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">!=</span> <span class="n">mrec</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># points where x axis (recall) changes</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="n">ap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">mrec</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">mrec</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">mpre</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># area under curve</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="k">return</span> <span class="n">ap</span><span class="p">,</span> <span class="n">mpre</span><span class="p">,</span> <span class="n">mrec</span>
+</code></pre></div>
+<h2 id="_2">参考文章</h2>
+<ul>
+<li>https://github.com/rafaelpadilla/Object-Detection-Metrics</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: YOLOv5 网络结构解析" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              YOLOv5 网络结构解析
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../thesis_interpretation/01_yolo.html" class="md-footer__link md-footer__link--next" aria-label="下一页: yolov1" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              yolov1
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

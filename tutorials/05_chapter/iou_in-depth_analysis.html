@@ -14,7 +14,7 @@
     
     
       
-        <title>IOU深入解析 - oneflow-yolo-doc</title>
+        <title>Iou in depth analysis - oneflow-yolo-doc</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              IOU深入解析
+              Iou in depth analysis
             
           </span>
         </div>
@@ -167,15 +167,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link md-tabs__link--active">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link">
         教程
       </a>
     </li>
@@ -255,14 +253,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         教程
@@ -292,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+      <a href="../03_chapter/how_to_prepare_yolov5_training_data.md" class="md-nav__link">
         如何准备yolov5模型训练数据
       </a>
     </li>
@@ -304,8 +300,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_chapter/mosaic.html" class="md-nav__link">
-        数据增强
+      <a href="../04_chapter/rectangular_reasoning.md" class="md-nav__link">
+        矩形推理
       </a>
     </li>
   
@@ -316,8 +312,8 @@
   
   
     <li class="md-nav__item">
-      <a href="rectangular_reasoning.html" class="md-nav__link">
-        矩形推理
+      <a href="../04_chapter/iou_in-depth_analysis.md" class="md-nav__link">
+        IOU深入解析
       </a>
     </li>
   
@@ -326,224 +322,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          IOU深入解析
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="iou_in-depth_analysis.html" class="md-nav__link md-nav__link--active">
-        IOU深入解析
+    <li class="md-nav__item">
+      <a href="map_analysis.html" class="md-nav__link">
+        模型精确度评估
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    摘要
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    前言
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iou" class="md-nav__link">
-    IOU
-  </a>
-  
-    <nav class="md-nav" aria-label="IOU">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#iou_1" class="md-nav__link">
-    IOU介绍
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iou-loss" class="md-nav__link">
-    IOU loss
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iou-loss_1" class="md-nav__link">
-    IOU Loss 优缺点分析
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#giou" class="md-nav__link">
-    GIOU
-  </a>
-  
-    <nav class="md-nav" aria-label="GIOU">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#giou_1" class="md-nav__link">
-    GIOU介绍
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#giou-loss" class="md-nav__link">
-    GIOU loss
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#giou_2" class="md-nav__link">
-    GIOU 优缺点分析
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#iou-giou" class="md-nav__link">
-    IOU &amp; GIOU 分析
-  </a>
-  
-    <nav class="md-nav" aria-label="IOU &amp; GIOU 分析">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    模拟实验
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iou-giou_1" class="md-nav__link">
-    IoU 和 GIoU 损失的限制
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#diou-ciou" class="md-nav__link">
-    DIOU &amp; CIOU
-  </a>
-  
-    <nav class="md-nav" aria-label="DIOU &amp; CIOU">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#diou-loss" class="md-nav__link">
-    DIOU loss
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#iougiou" class="md-nav__link">
-    IoU和GIoU损失比较
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#complete-iou-loss" class="md-nav__link">
-    Complete IoU Loss
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#nmsnon-maximum-suppression" class="md-nav__link">
-    NMS(Non-Maximum Suppression)
-  </a>
-  
-    <nav class="md-nav" aria-label="NMS(Non-Maximum Suppression)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    介绍
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#diou-nms" class="md-nav__link">
-    DioU-NMS
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    小结
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    参考文章
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -864,7 +647,7 @@
               
                 
                 
-                  <h1>IOU深入解析</h1>
+                  <h1>Iou in depth analysis</h1>
                 
                 <h2 id="_1">摘要</h2>
 <p>来源:https://github.com/Zzh-tju/DIoU/blob/master/README.md#introduction</p>
@@ -1089,41 +872,6 @@ s_{i}, I o U-\mathcal{R}_{D I o U}\left(\mathcal{M}, B_{i}\right)&lt;\varepsilon
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="rectangular_reasoning.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 矩形推理" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                上一页
-              </span>
-              矩形推理
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../../thesis_interpretation/01_yolo.html" class="md-footer__link md-footer__link--next" aria-label="下一页: yolov1" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              yolov1
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
