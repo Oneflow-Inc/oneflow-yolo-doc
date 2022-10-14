@@ -57,8 +57,9 @@ nav:
     - 教程:
         -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         -  如何准备yolov5模型训练数据: tutorials/03_chapter/how_to_prepare_yolov5_training_data.md
-        -  矩形推理: tutorials/04_chapter/rectangular_reasoning.md
-        -  IOU深入解析: tutorials/04_chapter/iou_in-depth_analysis.md
+        -  数据增强: tutorials/04_chapter/mosaic.md
+        -  矩形推理: tutorials/05_chapter/rectangular_reasoning.md
+        -  IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
         -  模型精确度评估: tutorials/05_chapter/map_analysis.md
      
     
