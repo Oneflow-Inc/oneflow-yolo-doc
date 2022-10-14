@@ -23,7 +23,7 @@ $B_{g t}:真实回归框$
 
 <center> <img src="./map_analysis_imgs/iou.png"> </center>
 
-图1.1 ; $IOU$ 的计算。绿色: $B_{g t}$ ， 红色:$B_p$
+图1.1 ; $IOU$ 的计算。绿色: $B_{g t}$ ， 红色:$B_{p}$
 
 ### TP&FP&FN&TN
 
