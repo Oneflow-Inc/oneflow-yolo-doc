@@ -5,7 +5,7 @@
 
 ### 📚 IOU
 
-$IOU$ (*Intersection Over Union*)  基于*Jaccard*索引，用于评估两个边界框之间的重叠。他需要一个真实回归框 (a ground truth bounding box) $B_{gt}$ 一个预测回归框(a predicted bounding box) $B_{p}$。通过应用 IOU 我们能够判断出预测结果是有效(True Positive) 或者 无效(False Positive) 
+$IOU$ (*Intersection Over Union*)  基于*Jaccard*索引，用于评估两个边界框之间的重叠程度。它需要一个真实回归框 (a ground truth bounding box) $B_{gt}$ 和一个预测回归框(a predicted bounding box) $B_{p}$ 计算得到。通过应用 IOU 我们能够判断出预测结果是有效(True Positive) 或者 无效(False Positive) 
 
 $IOU$ 也称重叠度 表示计算预测回归框和真实回归框的交并比,计算公式如下:
 
