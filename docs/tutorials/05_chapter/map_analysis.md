@@ -45,7 +45,7 @@ yolov5中没有应用TN的原因:
 TN代表的是所有可能的未正确检测到的边界框。然而在yolo在目标检测任务中，每个网格会生成很多的预测边界框，有许多的预测边界框是没有相应的真实标签框，导致未正确检测到的边界框数量远远大于正确检测到的边界框，这就是为什么不使用TN的原因。
 
 
-_阈值_:  depending on the metric, it is usually set to 50%, 75% or 95%.
+threshold:  depending on the metric, it is usually set to 50%, 75% or 95%.
 
 ### Precision
 
@@ -68,6 +68,9 @@ $Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}$
 ### mAP
 
  多标签图像分类任务中图片的标签不止一个，因此评价不能用普通单标签图像分类的标准，即mean accuracy，该任务采用的是和信息检索中类似的方法—mAP，虽然其字面意思和mean average precision看起来差不多，但是计算方法要繁琐得多,mAP 会统计所有 Confidence 值下的 PR值，而实际使用时，**会设定一个 Confidence 阈值，低于该阈值的目标会被丢弃，这部分目标在统计 mAP 时也会有一定的贡献**。 
+
+[Confidence](https://baike.baidu.com/item/%E7%BD%AE%E4%BF%A1%E5%BA%A6/7908802?fr=aladdin)
+(置信度):在统计学中，一个概率样本的置信区间（Confidence interval）是对这个样本的某个总体参数的区间估计。置信区间展现的是这个参数的真实值有一定概率落在测量结果的周围的程度。置信区间给出的是被测量参数测量值的可信程度范围，即前面所要求的“一定概率”。这个概率也被称为置信水平。 
 
 <img src="map_analysis_imgs/interpolated_precision_v2.png">
 (红色曲线代表,人为的方式将PR曲线变成单调递减，使得计算面积更容易。)
