@@ -70,5 +70,7 @@ python path/to/detect.py --weights yolov5s --source 0              # webcam
 
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 快来给我Star呀😊~
+  
 <img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
+  
 </a>
