@@ -52,9 +52,9 @@ extra_javascript:
 
 
 nav:
-    - 首页: index.md
+    - 首页🏠: index.md
 
-    - 教程:
+    - 教程📚:
         -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         -  如何准备yolov5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         -  模型训练: tutorials/03_chapter/model_train.md
@@ -64,7 +64,7 @@ nav:
         -  模型精确度评估: tutorials/05_chapter/map_analysis.md
      
     
-    - 论文解读:
+    - 论文解读📝:
         - yolov1 : thesis_interpretation/01_yolo.md
         - yolov2 : thesis_interpretation/02_yolo.md
         - yolov3 : thesis_interpretation/03_yolo.md

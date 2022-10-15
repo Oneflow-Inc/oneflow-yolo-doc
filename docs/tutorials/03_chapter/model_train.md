@@ -35,19 +35,18 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 ```
 ###  📌使用SyncBatchNorm
 
-[SyncBatchNorm](https://pytorch.org/docs/master/generated/torch.nn.SyncBatchNorm.html)可以提高多个gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
+[SyncBatchNorm](https://pytorch.org/docs/master/generated/torch.nn.SyncBatchNorm.html)可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
 
-最好在每个GPU上的批处理大小较小（<=8）时使用。
+建议最好在每个GPU上的批处理数量较小（*批处理数量<=8*）时使用。
 
-要使用SyncBatchNorm，只需将添加 --sync bn 参数选项，具体命令如下:
+要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项，具体「案例🌰」如下:
 
 ```Python
 $ python -m torch.distributed.run --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights '' --sync-bn
 ```
 
-最好在每个GPU上的批处理大小较小（<=8）时使用。
 
-要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项,更多参数解析详见 **附件表3.1**。
+📢 更多参数解析详见  [附件表3.1](#table_31)。
 
 
 
@@ -62,7 +61,7 @@ $ python -m torch.distributed.run --nproc_per_node 2 train.py --batch 64 --data 
 ![img](https://user-images.githubusercontent.com/26833433/83667642-90fcb200-a583-11ea-8fa3-338bbf7da194.jpeg)
 
 
-val_batch0_labels.jpg 展示测试 batch 为 0 labels:
+val_batch0_labels.jpg 展示测试 batch 为 0 的labels:
 
 ![img](https://user-images.githubusercontent.com/26833433/83667626-8c37fe00-a583-11ea-997b-0923fe59b29b.jpeg)
 
@@ -70,9 +69,9 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 ![img](https://user-images.githubusercontent.com/26833433/83667635-90641b80-a583-11ea-8075-606316cebb9c.jpeg)
 
 
-训练训损失和性能指标也记录到Tensorboard和自定义结果中**results.csv日志文件**，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5
+训练训损失和性能的指标有记录到Tensorboard和自定义结果中**results.csv日志文件**，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5
 - 从零开始训练 (蓝色)。
-- 加载预训练权重 --weights yolov5s.pt (橙色)。
+- 加载预训练权重 --weights yolov5s (橙色)。
 
 ![img](https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png)
 
@@ -83,23 +82,19 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 **yolov5xpt** 是可用的最大和最精确的模型。其它可用的是 **yolov5s.pt**, **yolov5m.pt**  和 **yolov5l.pt**  或者 自己的检查点来自训练自定义数据集。**./weights/best.pt**。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/ultralytics/yolov5#pretrained-checkpoints)
 
 ```python
-$ python val.py --weights yolov5x.pt --data coco.yaml --img 640 
+$ python val.py --weights yolov5x --data coco.yaml --img 640 
 ```
 
 ## 模型预测🔥
 
 ```python
-python detect.py --weights yolov5s.pt --img 832 
+python detect.py --weights yolov5s --img 832 
 ```
 
 ## 训练技巧🔥
 
-大多数情况下，**只要数据集足够大且标记良好**，就可以在不改变模型或训练设置的情况下获得良好的结果。
-
-如果一开始你没有得到好的结果，你可以采取一些步骤来改进，但我们始终建议用户在考虑任何更改之前先使用所有默认设置进行训练。
-
-这有助于建立评测基线和发现需要改进的地方。
-
+📢 声明：大多数情况下，**只要数据集足够大且标记良好**，就可以在不改变模型或训练设置的情况下获得良好的结果。
+如果一开始你没有得到好的结果，你可以采取一些步骤来改进，但我们始终建议用户在考虑任何更改之前先使用所有默认设置进行一次训练。这有助于建立评估基准和发现需要改进的地方 🚀。
 
 ### 📌模型选择
 
@@ -167,7 +162,7 @@ $ python -m torch.distributed.run --nproc_per_node G --nnodes N --node_rank R --
 
 在连接所有N台机器之前，训练不会开始。输出将仅显示在主机上！
 
-#### 注意⚠️：
+#### 注意⚠️
 - Windows支持未经测试，建议使用Linux。
 - --batch 必须是GPU数量的倍数。
 - GPU 0将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
@@ -193,14 +188,18 @@ python -m torch.distributed.run --nproc_per_node 4 train.py --batch-size 64 --da
 python -m torch.distributed.run --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3,4,5,6,7
 ```
 
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
+📢 快来给我Star呀😊~
+<img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
+</a>
 
-<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"> <img src="model_train_imgs/start.gif"></a>
+
 
 
 ## 附件
 
 
-  
+ <span id="table_31"> 表3.1</span> 
  表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
 
 | 参数              | help                                                | 帮助                                                                                              |
