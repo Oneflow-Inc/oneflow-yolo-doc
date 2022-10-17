@@ -42,7 +42,7 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项，具体「案例🌰」如下:
 
 ```Python
-$ python -m torch.distributed.run --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights '' --sync-bn
+$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights '' --sync-bn
 ```
 
 
@@ -148,12 +148,12 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
 要使用它，可以执行以下指令：
 ```python
 # On master machine 0
-$ python -m torch.distributed.run --nproc_per_node G --nnodes N --node_rank 0 --master_addr "192.168.1.1" --master_port 1234 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights ''
+$ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank 0 --master_addr "192.168.1.1" --master_port 1234 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights ''
 ```
 
 ```python
 # On machine R
-$ python -m torch.distributed.run --nproc_per_node G --nnodes N --node_rank R --master_addr "192.168.1.1" --master_port 1234 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights ''
+$ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank R --master_addr "192.168.1.1" --master_port 1234 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights ''
 ```
 
 其中G是每台机器的GPU数量，N是机器数量，R是从0到（N-1）的机器数量。
@@ -163,29 +163,28 @@ $ python -m torch.distributed.run --nproc_per_node G --nnodes N --node_rank R --
 在连接所有N台机器之前，训练不会开始。输出将仅显示在主机上！
 
 #### 注意⚠️
-- Windows支持未经测试，建议使用Linux。
+- oneflow目前不支持windows平台
 - --batch 必须是GPU数量的倍数。
 - GPU 0将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
 - 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
 ```python
-$ python -m torch.distributed.run --master_port 1234 --nproc_per_node 2 ...
+$ python -m oneflow.distributed.launch --master_port 1234 --nproc_per_node 2 ...
 ```
 #### 结果💡
 DDP 分析结果在[AWS EC2 P4d instance](https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
-
 ####  配置代码⚡
 ```python
 # prepare
-t=ultralytics/yolov5:latest && sudo docker pull $t && sudo docker run -it --ipc=host --gpus all -v "$(pwd)"/coco:/usr/src/coco $t
-pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 -f https://download.pytorch.org/whl/torch_stable.html
-cd .. && rm -rf app && git clone https://github.com/ultralytics/yolov5 -b master app && cd app
+t=https://github.com/Oneflow-Inc/one-yolov5:latest && sudo docker pull $t && sudo docker run -it --ipc=host --gpus all -v "$(pwd)"/coco:/usr/src/coco $t
+pip install --pre oneflow -f https://staging.oneflow.info/branch/master/cu112
+cd .. && rm -rf app && git clone https://github.com/Oneflow-Inc/one-yolov5 -b master app && cd app
 cp data/coco.yaml data/coco_profile.yaml
 
 # profile
 python train.py --batch-size 16 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0 
-python -m torch.distributed.run --nproc_per_node 2 train.py --batch-size 32 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1   
-python -m torch.distributed.run --nproc_per_node 4 train.py --batch-size 64 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3  
-python -m torch.distributed.run --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3,4,5,6,7
+python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch-size 32 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1   
+python -m oneflow.distributed.launch --nproc_per_node 4 train.py --batch-size 64 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3  
+python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3,4,5,6,7
 ```
 
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
