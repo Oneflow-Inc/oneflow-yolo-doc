@@ -54,9 +54,9 @@ extra_javascript:
 nav:
     - 首页: index.md
 
-    - 教程:
+    - YOLOv5教程:
         -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
-        -  如何准备yolov5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
+        -  如何准备YOLOv5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         -  快速开始: tutorials/03_chapter/quick_start.md
         -  数据增强: tutorials/04_chapter/mosaic.md
         -  矩形推理: tutorials/05_chapter/rectangular_reasoning.md
@@ -66,8 +66,8 @@ nav:
     
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
-        - yolov1 : thesis_interpretation/01_yolo.md
-        - yolov2 : thesis_interpretation/02_yolo.md
-        - yolov3 : thesis_interpretation/03_yolo.md
-        - yolov4 : thesis_interpretation/04_yolo.md
-        - yolov6 : thesis_interpretation/06_yolo.md
+        - YOLOv1 : thesis_interpretation/01_yolo.md
+        - YOLOv2 : thesis_interpretation/02_yolo.md
+        - YOLOv3 : thesis_interpretation/03_yolo.md
+        - YOLOv4 : thesis_interpretation/04_yolo.md
+        - YOLOv6 : thesis_interpretation/06_yolo.md
