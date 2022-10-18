@@ -1,0 +1,1295 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>模型训练 - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              模型训练
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页🏠
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link md-tabs__link--active">
+        YOLOv5教程📚
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页🏠
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        YOLOv5教程📚
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="YOLOv5教程📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          YOLOv5教程📚
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        如何准备YOLOv5模型训练数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="quick_start.html" class="md-nav__link">
+        快速开始
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          模型训练
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="model_train.html" class="md-nav__link md-nav__link--active">
+        模型训练
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    项目结构预览 🏠
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coco" class="md-nav__link">
+    训练指令(使用coco数据集为🌰)
+  </a>
+  
+    <nav class="md-nav" aria-label="训练指令(使用coco数据集为🌰)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    📌两种训练方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    📌单GPU训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu_1" class="md-nav__link">
+    📌多GPU训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncbatchnorm" class="md-nav__link">
+    📌使用SyncBatchNorm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    训练结果🌟
+  </a>
+  
+    <nav class="md-nav" aria-label="训练结果🌟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    📌本地日志
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valpy" class="md-nav__link">
+    模型测试(val.py) 🔥
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    模型预测🔥
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    训练技巧🔥
+  </a>
+  
+    <nav class="md-nav" aria-label="训练技巧🔥">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    📌模型选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    📌训练配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    拓展 📘
+  </a>
+  
+    <nav class="md-nav" aria-label="拓展 📘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    📌使用多机训练
+  </a>
+  
+    <nav class="md-nav" aria-label="📌使用多机训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    注意⚠️
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    结果💡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    配置代码⚡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_chapter/mosaic.html" class="md-nav__link">
+        数据增强
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/rectangular_reasoning.html" class="md-nav__link">
+        矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        IOU深入解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/map_analysis.html" class="md-nav__link">
+        模型精确度评估
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-nav__link">
+        history
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        YOLOv1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        YOLOv2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        YOLOv3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        YOLOv4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        YOLOv6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    项目结构预览 🏠
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coco" class="md-nav__link">
+    训练指令(使用coco数据集为🌰)
+  </a>
+  
+    <nav class="md-nav" aria-label="训练指令(使用coco数据集为🌰)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    📌两种训练方式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu" class="md-nav__link">
+    📌单GPU训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpu_1" class="md-nav__link">
+    📌多GPU训练
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#syncbatchnorm" class="md-nav__link">
+    📌使用SyncBatchNorm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    训练结果🌟
+  </a>
+  
+    <nav class="md-nav" aria-label="训练结果🌟">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    📌本地日志
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valpy" class="md-nav__link">
+    模型测试(val.py) 🔥
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    模型预测🔥
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    训练技巧🔥
+  </a>
+  
+    <nav class="md-nav" aria-label="训练技巧🔥">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    📌模型选择
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    📌训练配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    拓展 📘
+  </a>
+  
+    <nav class="md-nav" aria-label="拓展 📘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    📌使用多机训练
+  </a>
+  
+    <nav class="md-nav" aria-label="📌使用多机训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    注意⚠️
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    结果💡
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    配置代码⚡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>模型训练</h1>
+                
+                <p>📢 声明:Model Train(以coco数据集为例) </p>
+<h2 id="_1">项目结构预览 🏠</h2>
+<p><img alt="imgs" src="model_train_imgs/one-yolov5.png" /></p>
+<h2 id="coco">训练指令(使用coco数据集为🌰)</h2>
+<h3 id="_2">📌两种训练方式</h3>
+<ol>
+<li>带权重训练 🚀
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$ python path/to/train.py --data coco.yaml --weights yolov5s --img 640
+</code></pre></div></li>
+<li>不带权重训练 🚀
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ python path/to/train.py --data coco.yaml --weights &#39;&#39; --cfg yolov5s.yaml --img 640
+</code></pre></div></li>
+</ol>
+<h3 id="gpu">📌单GPU训练</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ python train.py  --data coco.yaml --weights yolov5s.pt --device 0
+</code></pre></div>
+<h3 id="gpu_1">📌多GPU训练</h3>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --weights yolov5s --device 0,1
+</code></pre></div>
+注意⚠️：</p>
+<ul>
+<li>
+<p>--nproc_per_node  指定要使用多少GPU。举个例子🌰:在上面👆 多GPU训练指令中它是2。</p>
+</li>
+<li>
+<p>--batch 是总批量大小。它将平均分配给每个GPU。在上面的示例中，每GPU是64/2＝32。</p>
+</li>
+<li>
+<p>上面的代码默认使用GPU 0…（N-1）。使用特定的GPU🤔️？
+可以通过简单在 --device 后跟指定GPU来实现。「案例🌰」，在下面的代码中，我们将使用GPU 2,3。
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights &#39;&#39; --device 2,3
+</code></pre></div></p>
+</li>
+</ul>
+<h3 id="syncbatchnorm">📌使用SyncBatchNorm</h3>
+<p><a href="https://pytorch.org/docs/master/generated/torch.nn.SyncBatchNorm.html">SyncBatchNorm</a>可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。</p>
+<p>建议最好在每个GPU上的批处理数量较小（<em>批处理数量&lt;=8</em>）时使用。</p>
+<p>要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项，具体「案例🌰」如下:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">2</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span> <span class="o">--</span><span class="n">sync</span><span class="o">-</span><span class="n">bn</span>
+</code></pre></div>
+<p>📢 更多参数解析详见  <a href="#table_31">附件表3.1</a>。</p>
+<h2 id="_3">训练结果🌟</h2>
+<h3 id="_4">📌本地日志</h3>
+<p>默认情况下，所有结果都记录为runs/train，并为每个新训练创建一个新的训练结果目录，如runs/train/exp2、runs/train/exp3等。查看训练和测试JPG以查看 mosaics, labels, predictions and augmentation 效果。
+注意：Mosaic Dataloader 用于训练（如下所示），这是Ultralytics发表的新概念，首次出现在<a href="https://arxiv.org/abs/2004.10934">YOLOv4</a>中。</p>
+<p><strong>train_batch0.jpg</strong> 显示 batch 为 0 的 (mosaics and labels):</p>
+<p><img alt="img" src="https://user-images.githubusercontent.com/26833433/83667642-90fcb200-a583-11ea-8fa3-338bbf7da194.jpeg" /></p>
+<p>val_batch0_labels.jpg 展示测试 batch 为 0 的labels:</p>
+<p><img alt="img" src="https://user-images.githubusercontent.com/26833433/83667626-8c37fe00-a583-11ea-997b-0923fe59b29b.jpeg" /></p>
+<p>val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
+<img alt="img" src="https://user-images.githubusercontent.com/26833433/83667635-90641b80-a583-11ea-8075-606316cebb9c.jpeg" /></p>
+<p>训练训损失和性能的指标有记录到Tensorboard和自定义结果中<strong>results.csv日志文件</strong>，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5
+- 从零开始训练 (蓝色)。
+- 加载预训练权重 --weights yolov5s (橙色)。</p>
+<p><img alt="img" src="https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png" /></p>
+<p>具体的指标分析详见YOLOv5中Loss部分计算</p>
+<h2 id="valpy">模型测试(val.py) 🔥</h2>
+<p>该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <strong>yolov5xpt</strong> 是可用的最大和最精确的模型。其它可用的是 <strong>yolov5s.pt</strong>, <strong>yolov5m.pt</strong>  和 <strong>yolov5l.pt</strong>  或者 自己的检查点来自训练自定义数据集。<strong>./weights/best.pt</strong>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/ultralytics/yolov5#pretrained-checkpoints">READEME table</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">$</span> <span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5x</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> 
+</code></pre></div>
+<h2 id="_5">模型预测🔥</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">python</span> <span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span> <span class="o">--</span><span class="n">img</span> <span class="mi">832</span> 
+</code></pre></div>
+<h2 id="_6">训练技巧🔥</h2>
+<p>📢 声明：大多数情况下，<strong>只要数据集足够大且标记良好</strong>，就可以在不改变模型或训练设置的情况下获得良好的结果。
+如果一开始你没有得到好的结果，你可以采取一些步骤来改进，但我们始终建议用户在考虑任何更改之前先使用所有默认设置进行一次训练。这有助于建立评估基准和发现需要改进的地方 🚀。</p>
+<h3 id="_7">📌模型选择</h3>
+<p>类似于YOLOv5x和YOLOv5x6的大型模型在几乎所有情况下都会产生更好的结果，但参数更多，需要更多的CUDA内存进行训练，运行速度较慢。</p>
+<p>对于移动部署，我们推荐YOLOv5s/m，对于云部署，我们建议YOLOV5l/x。</p>
+<p>有关所有模型的完整比较，请参阅<a href="https://github.com/ultralytics/yolov5#pretrained-checkpoints">详细表</a></p>
+<p><img alt="imgs" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/model_comparison.png" /></p>
+<ul>
+<li>从预先训练的权重开始训练。建议用于中小型数据集（即<a href="https://github.com/ultralytics/yolov5/blob/master/data/VOC.yaml">VOC</a>、<a href="https://github.com/ultralytics/yolov5/blob/master/data/VisDrone.yaml">VisDrone</a>、<a href="https://github.com/ultralytics/yolov5/blob/master/data/GlobalWheat2020.yaml">GlobalWheat</a>）。将模型的名称传递给--weights参数。模型自动从<a href="https://github.com/ultralytics/yolov5/releases">latest YOLOv5 releasse</a> 。</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="n">custom</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">pt</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>                                             <span class="n">yolov5m</span><span class="o">.</span><span class="n">pt</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                                             <span class="n">yolov5l</span><span class="o">.</span><span class="n">pt</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>                                             <span class="n">yolov5x</span><span class="o">.</span><span class="n">pt</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>                                             <span class="n">custom_pretrained</span><span class="o">.</span><span class="n">pt</span>
+</code></pre></div>
+<ul>
+<li>从头开始训练，推荐用大的数据集(即 COCO、Objects365、OIv6 ) 传递您感兴趣的模型架构 yaml文件 以及空的--weights ' ' 参数：</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="n">custom</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>                                                      <span class="n">yolov5m</span><span class="o">.</span><span class="n">yaml</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>                                                      <span class="n">yolov5l</span><span class="o">.</span><span class="n">yaml</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                                                      <span class="n">yolov5x</span><span class="o">.</span><span class="n">yaml</span>
+</code></pre></div>
+<h3 id="_8">📌训练配置</h3>
+<p>在修改任何内容之前，首先使用默认设置进行训练，以建立性能基线。训练参数的完整列表,能够发现在train.py文件中。
+- Epochs : 从300个epochs开始。如果早期过拟合，则可以减少训练。如果在300个周期后未发生过拟合，则训练更长，即600、1200个epochs。
+- Image size: COCO以 --img 640,的分辨率进行训练，但由于数据集中有大量的小对象，它可以从更高分辨率（如--img 1280）的训练中训练。 如果有许多小对象，则自定义数据集将从更高分辨率的训练中获益。最好的推断结果是在相同的--img 处获得的 ，即如果在-img 1280处进行训练，也应该在--img 1280处进行测试和检测。</p>
+<ul>
+<li>Batch Size: 使用更大的 --batch-size 最大批量。小批量会产生较差的batchnorm统计，应该能避免。</li>
+<li>Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的<a href="https://github.com/ultralytics/yolov5/issues/607">超参数演化教程</a>。</li>
+</ul>
+<h2 id="_9">拓展 📘</h2>
+<h3 id="_10">📌使用多机训练</h3>
+<p>这仅适用于多GPU分布式数据并行训练。</p>
+<p>在训练之前，确保所有机器上的文件都相同，数据集、代码库等。之后，确保机器可以相互通信。</p>
+<p>您必须选择一台主机器（其他机器将与之对话）。记下它的地址（master_addr）并选择一个端口（master-port）。对于下面的示例，将使用master_addr=192.168.1.1和master_ port=1234。</p>
+<p>要使用它，可以执行以下指令：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># On master machine 0</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="n">G</span> <span class="o">--</span><span class="n">nnodes</span> <span class="n">N</span> <span class="o">--</span><span class="n">node_rank</span> <span class="mi">0</span> <span class="o">--</span><span class="n">master_addr</span> <span class="s2">&quot;192.168.1.1&quot;</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># On machine R</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="n">G</span> <span class="o">--</span><span class="n">nnodes</span> <span class="n">N</span> <span class="o">--</span><span class="n">node_rank</span> <span class="n">R</span> <span class="o">--</span><span class="n">master_addr</span> <span class="s2">&quot;192.168.1.1&quot;</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span>
+</code></pre></div>
+<p>其中G是每台机器的GPU数量，N是机器数量，R是从0到（N-1）的机器数量。</p>
+<p>假设我有两台机器，每台机器有两个GPU，对于上面的情况，G=2，N=2，R=1。</p>
+<p>在连接所有N台机器之前，训练不会开始。输出将仅显示在主机上！</p>
+<h4 id="_11">注意⚠️</h4>
+<ul>
+<li>oneflow目前不支持windows平台</li>
+<li>--batch 必须是GPU数量的倍数。</li>
+<li>GPU 0将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。</li>
+<li>如果您得到 <strong>RuntimeError: Address already in use</strong> ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">2</span> <span class="o">...</span>
+</code></pre></div></li>
+</ul>
+<h4 id="_12">结果💡</h4>
+<p>DDP 分析结果在<a href="https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart">AWS EC2 P4d instance</a> with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.</p>
+<h4 id="_13">配置代码⚡</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># prepare</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">t</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Oneflow</span><span class="o">-</span><span class="n">Inc</span><span class="o">/</span><span class="n">one</span><span class="o">-</span><span class="n">yolov5</span><span class="p">:</span><span class="n">latest</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">docker</span> <span class="n">pull</span> <span class="err">$</span><span class="n">t</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">ipc</span><span class="o">=</span><span class="n">host</span> <span class="o">--</span><span class="n">gpus</span> <span class="nb">all</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;$(pwd)&quot;</span><span class="o">/</span><span class="n">coco</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">coco</span> <span class="err">$</span><span class="n">t</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">pre</span> <span class="n">oneflow</span> <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">staging</span><span class="o">.</span><span class="n">oneflow</span><span class="o">.</span><span class="n">info</span><span class="o">/</span><span class="n">branch</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">cu112</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">cd</span> <span class="o">..</span> <span class="o">&amp;&amp;</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">app</span> <span class="o">&amp;&amp;</span> <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Oneflow</span><span class="o">-</span><span class="n">Inc</span><span class="o">/</span><span class="n">one</span><span class="o">-</span><span class="n">yolov5</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span> <span class="n">app</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">app</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="n">cp</span> <span class="n">data</span><span class="o">/</span><span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="n">data</span><span class="o">/</span><span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="c1"># profile</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">16</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span> 
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">2</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">32</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span>   
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">4</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>  
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">8</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">128</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span>
+</code></pre></div>
+<p><a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
+📢 快来给我Star呀😊~
+<img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
+</a></p>
+<h2 id="_14">附件</h2>
+<p><span id="table_31"> 表3.1</span> 
+ 表3.1 : <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566">train.py参数解析表</a></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>help</th>
+<th>帮助</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--weight</td>
+<td>initial weights path</td>
+<td>加载的权重文件路径</td>
+</tr>
+<tr>
+<td>--cfg</td>
+<td>model.yaml path</td>
+<td>模型配置文件，网络结构 路径</td>
+</tr>
+<tr>
+<td>--data</td>
+<td>dataset.yaml path</td>
+<td>数据集配置文件，数据集路径</td>
+</tr>
+<tr>
+<td>--hyp</td>
+<td>hyperparameters path</td>
+<td>超参数文件 路径</td>
+</tr>
+<tr>
+<td>--epochs</td>
+<td>Total training rounds</td>
+<td>训练总轮次</td>
+</tr>
+<tr>
+<td>--batch-size</td>
+<td>total batch size for all GPUs, -1 for autobatch</td>
+<td>批次大小</td>
+</tr>
+<tr>
+<td>--imgsz</td>
+<td>train, val image size (pixels)</td>
+<td>输入图片分辨率大小</td>
+</tr>
+<tr>
+<td>--rect</td>
+<td>rectangular training</td>
+<td>是否采用矩形训练，默认False</td>
+</tr>
+<tr>
+<td>--resume</td>
+<td>resume most recent training</td>
+<td>接着打断训练上次的结果接着训练</td>
+</tr>
+<tr>
+<td>--nosave</td>
+<td>only save final checkpoint</td>
+<td>只保存最终的模型，默认False</td>
+</tr>
+<tr>
+<td>--noautoanchor</td>
+<td>disable AutoAnchor</td>
+<td>不自动调整anchor，默认False</td>
+</tr>
+<tr>
+<td>--noplots</td>
+<td>save no plot files</td>
+<td>不保存打印文件，默认False</td>
+</tr>
+<tr>
+<td>--evolve</td>
+<td>evolve hyperparameters for x generations</td>
+<td>是否进行超参数进化，默认False</td>
+</tr>
+<tr>
+<td>--bucket</td>
+<td>gsutil bucket</td>
+<td>谷歌云盘bucket，一般不会用到</td>
+</tr>
+<tr>
+<td>--cache</td>
+<td>--cache images in "ram" (default) or "disk"</td>
+<td>是否提前缓存图片到内存，以加快训练速度，默认False</td>
+</tr>
+<tr>
+<td>--device</td>
+<td>cuda device, i.e. 0 or 0,1,2,3 or cpu</td>
+<td>训练的设备，cpu；0(表示一个gpu设备cuda:0)；0,1,2,3(多个gpu设备)</td>
+</tr>
+<tr>
+<td>--multi-scale</td>
+<td>vary img-size +/- 50%%</td>
+<td>是否进行多尺度训练，默认False</td>
+</tr>
+<tr>
+<td>--single-cls</td>
+<td>train multi-class data as single-class</td>
+<td>数据集是否只有一个类别，默认False</td>
+</tr>
+<tr>
+<td>--optimizer</td>
+<td>optimizer</td>
+<td>优化器</td>
+</tr>
+<tr>
+<td>--sync-bn</td>
+<td>use SyncBatchNorm, only available in DDP mode</td>
+<td>是否使用跨卡同步BN,在DDP模式使用</td>
+</tr>
+<tr>
+<td>--workers</td>
+<td>max dataloader workers (per RANK in DDP mode)</td>
+<td>dataloader的最大worker数量</td>
+</tr>
+<tr>
+<td>--project</td>
+<td>save to project path</td>
+<td>保存到项目结果地址</td>
+</tr>
+<tr>
+<td>--name</td>
+<td>save to project/name/</td>
+<td>保存到项目结果/名称</td>
+</tr>
+<tr>
+<td>--exist-ok</td>
+<td>existing project/name ok, do not increment</td>
+<td>现有项目/名称确定，不递增，默认False</td>
+</tr>
+<tr>
+<td>--quad</td>
+<td>quad dataloader</td>
+<td>四元数据加载器 开启之后在尺寸大于640的图像上识别效果更好，但是有可能会使在640尺寸的图片上效果更差</td>
+</tr>
+<tr>
+<td>--cos-lr</td>
+<td>cosine LR scheduler</td>
+<td>是否采用退火余弦学习率，默认False</td>
+</tr>
+<tr>
+<td>--label-smoothing</td>
+<td>Label smoothing epsilon</td>
+<td>标签平滑</td>
+</tr>
+<tr>
+<td>--patience</td>
+<td>EarlyStopping patience (epochs without improvement)</td>
+<td>早停机制，默认False</td>
+</tr>
+<tr>
+<td>--freez</td>
+<td>Freeze layers: backbone=10, first3=0 1 2</td>
+<td>冻结层数，默认不冻结</td>
+</tr>
+<tr>
+<td>--save-period</td>
+<td>Save checkpoint every x epochs (disabled if &lt; 1)</td>
+<td>用于记录训练日志信息，int 型，默认 -1</td>
+</tr>
+<tr>
+<td>--seed</td>
+<td>Global training seed</td>
+<td>随机数设置</td>
+</tr>
+<tr>
+<td>--local_rank</td>
+<td>Automatic DDP Multi-GPU argument, do not modify</td>
+<td>自动单机多卡训练 一般不改动</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_15">参考文章</h2>
+<ul>
+<li>https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data</li>
+<li>https://docs.ultralytics.com/quick-start/</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="quick_start.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 快速开始" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              快速开始
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../04_chapter/mosaic.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 数据增强" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              数据增强
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
