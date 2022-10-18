@@ -62,6 +62,7 @@ nav:
         -  矩形推理: tutorials/05_chapter/rectangular_reasoning.md
         -  IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
         -  模型精确度评估: tutorials/05_chapter/map_analysis.md
+        -  模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
      
     
     - 论文解读:
