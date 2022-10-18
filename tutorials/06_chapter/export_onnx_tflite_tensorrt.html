@@ -721,7 +721,7 @@
 </tbody>
 </table>
 <h2 id="yolov5">导出训练好的 YOLOv5 模型</h2>
-<p>下面的命令把预训练的 YOLOV5s 模型导出为 ONNX 格式。<code>yolov5s</code> 是小模型，是可用的模型里面第二小的。其它选项是 <code>yolov5n</code> ，<code>yolov5m</code>，<code>yolov5l</code>，<code>yolov5x</code> ，以及他们的 P6 对应项比如 <code>yolov5s6</code> ，或者你自定义的模型，即 <code>runs/exp/weights/best.pt</code> 。有关可用模型的更多信息，可以参考我们的<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/README.md">README</a></p>
+<p>下面的命令把预训练的 YOLOV5s 模型导出为 ONNX 格式。<code>yolov5s</code> 是小模型，是可用的模型里面第二小的。其它选项是 <code>yolov5n</code> ，<code>yolov5m</code>，<code>yolov5l</code>，<code>yolov5x</code> ，以及他们的 P6 对应项比如 <code>yolov5s6</code> ，或者你自定义的模型，即 <code>runs/exp/weights/best</code> 。有关可用模型的更多信息，可以参考我们的<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/README.md">README</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python export.py --weights ../yolov5s/ --include onnx
 </code></pre></div>
 <p>💡 提示: 添加 --half 以 FP16 半精度导出模型以实现更小的文件大小。</p>
