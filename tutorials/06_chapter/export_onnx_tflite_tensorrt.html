@@ -1,0 +1,750 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Export onnx tflite tensorrt - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Export onnx tflite tensorrt
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-tabs__link">
+        YOLOv5教程
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        YOLOv5教程
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="YOLOv5教程" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          YOLOv5教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        如何准备YOLOv5模型训练数据
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/quick_start.html" class="md-nav__link">
+        快速开始
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_chapter/mosaic.html" class="md-nav__link">
+        数据增强
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/rectangular_reasoning.html" class="md-nav__link">
+        矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        IOU深入解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/map_analysis.html" class="md-nav__link">
+        模型精确度评估
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-nav__link">
+        history
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        YOLOv1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        YOLOv2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        YOLOv3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        YOLOv4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        YOLOv6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    模型导出
+  </a>
+  
+    <nav class="md-nav" aria-label="模型导出">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    开始之前
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    格式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yolov5" class="md-nav__link">
+    导出训练好的 YOLOv5 模型
+  </a>
+  
+    <nav class="md-nav" aria-label="导出训练好的 YOLOv5 模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    导出模型的示例用法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencv-dnn" class="md-nav__link">
+    OpenCV DNN 推理
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Export onnx tflite tensorrt</h1>
+                
+                <h2 id="_1">模型导出</h2>
+<p>📚 这个教程用来解释如何导出一个训练好的 OneFlow YOLOv5 模型 🚀  到 ONNX .</p>
+<h3 id="_2">开始之前</h3>
+<p>克隆工程并在 <a href="https://www.python.org/">Python&gt;3.7.0</a> 的环境中安装 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/requirements.txt">requiresments.txt</a> , OneFlow 请选择 <a href="https://github.com/Oneflow-Inc/oneflow#install-with-pip-package">nightly 版本或者 &gt;0.9 版本</a> 。<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/models">模型</a>和<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/data">数据</a>可以从源码中自动下载。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone https://github.com/Oneflow-Inc/one-yolov5.git
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> one-yolov5
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
+</code></pre></div>
+<h3 id="_3">格式</h3>
+<p>YOLOv5支持多种模型格式的导出，并基于特定模型对应的框架获得推理加速。</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th><code>export.py --include</code></th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OneFlow</td>
+<td>-</td>
+<td>yolov5s_oneflow_model/</td>
+</tr>
+<tr>
+<td>ONNX</td>
+<td><code>onnx</code></td>
+<td>yolov5s.onnx</td>
+</tr>
+<tr>
+<td>OpenVINO</td>
+<td><code>openvino</code></td>
+<td>yolov5s_openvino_model/</td>
+</tr>
+<tr>
+<td>TensorRT</td>
+<td><code>engine</code></td>
+<td>yolov5s.engine</td>
+</tr>
+<tr>
+<td>TensorFlow SavedModel</td>
+<td><code>saved_model</code></td>
+<td>yolov5s_saved_model/</td>
+</tr>
+<tr>
+<td>TensorFlow GraphDef</td>
+<td><code>pb</code></td>
+<td>yolov5s.pb</td>
+</tr>
+<tr>
+<td>TensorFlow Lite</td>
+<td><code>tflite</code></td>
+<td>yolov5s.tflite</td>
+</tr>
+<tr>
+<td>TensorFlow Edge TPU</td>
+<td><code>edgetpu</code></td>
+<td>yolov5s_edgetpu.tflite</td>
+</tr>
+<tr>
+<td>TensorFlow.js</td>
+<td><code>tfjs</code></td>
+<td>yolov5s_web_model/</td>
+</tr>
+</tbody>
+</table>
+<h2 id="yolov5">导出训练好的 YOLOv5 模型</h2>
+<p>下面的命令把预训练的 YOLOV5s 模型导出为 ONNX 格式。<code>yolov5s</code> 是小模型，是可用的模型里面第二小的。其它选项是 <code>yolov5n</code> ，<code>yolov5m</code>，<code>yolov5l</code>，<code>yolov5x</code> ，以及他们的 P6 对应项比如 <code>yolov5s6</code> ，或者你自定义的模型，即 <code>runs/exp/weights/best.pt</code> 。有关可用模型的更多信息，可以参考我们的<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/README.md">README</a></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python export.py --weights ../yolov5s/ --include onnx
+</code></pre></div>
+<p>💡 提示: 添加 --half 以 FP16 半精度导出模型以实现更小的文件大小。</p>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>export: <span class="nv">data</span><span class="o">=</span>data/coco128.yaml, <span class="nv">weights</span><span class="o">=[</span><span class="s1">&#39;../yolov5s/&#39;</span><span class="o">]</span>, <span class="nv">imgsz</span><span class="o">=[</span><span class="m">640</span>, <span class="m">640</span><span class="o">]</span>, <span class="nv">batch_size</span><span class="o">=</span><span class="m">1</span>, <span class="nv">device</span><span class="o">=</span>cpu, <span class="nv">half</span><span class="o">=</span>False, <span class="nv">inplace</span><span class="o">=</span>False, <span class="nv">train</span><span class="o">=</span>False, <span class="nv">keras</span><span class="o">=</span>False, <span class="nv">optimize</span><span class="o">=</span>False, <span class="nv">int8</span><span class="o">=</span>False, <span class="nv">dynamic</span><span class="o">=</span>False, <span class="nv">simplify</span><span class="o">=</span>False, <span class="nv">opset</span><span class="o">=</span><span class="m">12</span>, <span class="nv">verbose</span><span class="o">=</span>False, <span class="nv">workspace</span><span class="o">=</span><span class="m">4</span>, <span class="nv">nms</span><span class="o">=</span>False, <span class="nv">agnostic_nms</span><span class="o">=</span>False, <span class="nv">topk_per_class</span><span class="o">=</span><span class="m">100</span>, <span class="nv">topk_all</span><span class="o">=</span><span class="m">100</span>, <span class="nv">iou_thres</span><span class="o">=</span><span class="m">0</span>.45, <span class="nv">conf_thres</span><span class="o">=</span><span class="m">0</span>.25, <span class="nv">include</span><span class="o">=[</span><span class="s1">&#39;onnx&#39;</span><span class="o">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>YOLOv5 🚀 270ac92 Python-3.8.11 oneflow-0.8.1+cu117.git.0c70a3f6be CPU
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Fusing layers... 
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>YOLOv5s summary: <span class="m">157</span> layers, <span class="m">7225885</span> parameters, <span class="m">229245</span> gradients
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>OneFlow: starting from ../yolov5s with output shape <span class="o">(</span><span class="m">1</span>, <span class="m">25200</span>, <span class="m">85</span><span class="o">)</span> <span class="o">(</span><span class="m">112</span>.9 MB<span class="o">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>ONNX: starting <span class="nb">export</span> with onnx <span class="m">1</span>.12.0...
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>Converting model to onnx....
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>Using opset &lt;onnx, <span class="m">12</span>&gt;
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>Optimizing ONNX model
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>After optimization: Const +17 <span class="o">(</span><span class="m">73</span>-&gt;90<span class="o">)</span>, Identity -1 <span class="o">(</span><span class="m">1</span>-&gt;0<span class="o">)</span>, Unsqueeze -60 <span class="o">(</span><span class="m">60</span>-&gt;0<span class="o">)</span>, output -1 <span class="o">(</span><span class="m">1</span>-&gt;0<span class="o">)</span>, variable -60 <span class="o">(</span><span class="m">127</span>-&gt;67<span class="o">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>Succeed converting model, save model to ../yolov5s.onnx
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>&lt;class <span class="s1">&#39;tuple&#39;</span>&gt;
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>Comparing result between oneflow and onnx....
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Compare succeed!
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>ONNX: <span class="nb">export</span> success, saved as ../yolov5s.onnx <span class="o">(</span><span class="m">28</span>.0 MB<span class="o">)</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>Export <span class="nb">complete</span> <span class="o">(</span><span class="m">24</span>.02s<span class="o">)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>Results saved to /home/zhangxiaoyu
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>Detect:          python detect.py --weights ../yolov5s.onnx 
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>Validate:        python val.py --weights ../yolov5s.onnx 
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>OneFlow Hub:     <span class="nv">model</span> <span class="o">=</span> flow.hub.load<span class="o">(</span><span class="s1">&#39;OneFlow-Inc/one-yolov5&#39;</span>, <span class="s1">&#39;custom&#39;</span>, <span class="s1">&#39;../yolov5s.onnx&#39;</span><span class="o">)</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>Visualize:       https://netron.app
+</code></pre></div>
+<p>导出的 onnx 模型使用 <a href="https://github.com/lutzroeder/netron">Netron Viewer</a> 进行可视化的结果如下：</p>
+<p><img width="1311" alt="图片" src="https://user-images.githubusercontent.com/35585791/196328819-7688631c-f276-444e-a9f4-33079f1d5f98.png"></p>
+<h3 id="_4">导出模型的示例用法</h3>
+<p><code>detect.py</code> 可以对导出的模型进行推理：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span><span class="o">/</span>                  <span class="c1"># OneFlow</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">onnx</span>               <span class="c1"># ONNX Runtime or OpenCV DNN with --dnn</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">xml</span>                <span class="c1"># OpenVINO</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">engine</span>             <span class="c1"># TensorRT</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">mlmodel</span>            <span class="c1"># CoreML (macOS only)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                                   <span class="n">yolov5s_saved_model</span>        <span class="c1"># TensorFlow SavedModel</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">pb</span>                 <span class="c1"># TensorFlow GraphDef</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">tflite</span>             <span class="c1"># TensorFlow Lite</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                                   <span class="n">yolov5s_edgetpu</span><span class="o">.</span><span class="n">tflite</span>     <span class="c1"># TensorFlow Edge TPU</span>
+</code></pre></div>
+<p><code>val.py</code> 可以对导出的模型进行验证：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span>    <span class="n">yolov5s</span><span class="o">/</span>                  <span class="c1"># OneFlow</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">onnx</span>               <span class="c1"># ONNX Runtime or OpenCV DNN with --dnn</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">xml</span>                <span class="c1"># OpenVINO</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">engine</span>             <span class="c1"># TensorRT</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">mlmodel</span>            <span class="c1"># CoreML (macOS only)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>                                   <span class="n">yolov5s_saved_model</span>        <span class="c1"># TensorFlow SavedModel</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">pb</span>                 <span class="c1"># TensorFlow GraphDef</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                                   <span class="n">yolov5s</span><span class="o">.</span><span class="n">tflite</span>             <span class="c1"># TensorFlow Lite</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                                   <span class="n">yolov5s_edgetpu</span><span class="o">.</span><span class="n">tflite</span>     <span class="c1"># TensorFlow Edge TPU</span>
+</code></pre></div>
+<h3 id="opencv-dnn">OpenCV DNN 推理</h3>
+<p>基于 onnx 模型使用 onnxruntime 进行推理：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3 detect.py --weights ../yolov5s/yolov5s.onnx 
+</code></pre></div>
+<p>输出：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>detect: weights=[&#39;../yolov5s/yolov5s.onnx&#39;], source=data/images, data=data/coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>YOLOv5 🚀 270ac92 Python-3.8.11 oneflow-0.8.1+cu117.git.0c70a3f6be 
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Loading ../yolov5s/yolov5s.onnx for ONNX Runtime inference...
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>detect.py:159: DeprecationWarning: In future, it will be an error for &#39;np.bool_&#39; scalars to be interpreted as an index
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  s += f&quot;{n} {names[int(c)]}{&#39;s&#39; * (n &gt; 1)}, &quot;  # add to string
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>image 1/2 /home/zhangxiaoyu/one-yolov5/data/images/bus.jpg: 640x640 4 persons, 1 bus, Done. (0.009s)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>image 2/2 /home/zhangxiaoyu/one-yolov5/data/images/zidane.jpg: 640x640 2 persons, 2 ties, Done. (0.011s)
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>0.5ms pre-process, 10.4ms inference, 4.8ms NMS per image at shape (1, 3, 640, 640)
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>Results saved to runs/detect/exp14
+</code></pre></div>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/196388081-6b6d19c5-c0c5-4c59-9a2b-04f6e37f3c14.png" /></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
