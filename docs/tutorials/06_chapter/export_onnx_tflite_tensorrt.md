@@ -31,7 +31,7 @@ TensorFlow.js               | `tfjs`                        | yolov5s_web_model/
 
 ## 导出训练好的 YOLOv5 模型
 
-下面的命令把预训练的 YOLOV5s 模型导出为 ONNX 格式。`yolov5s` 是小模型，是可用的模型里面第二小的。其它选项是 `yolov5n` ，`yolov5m`，`yolov5l`，`yolov5x` ，以及他们的 P6 对应项比如 `yolov5s6` ，或者你自定义的模型，即 `runs/exp/weights/best.pt` 。有关可用模型的更多信息，可以参考我们的[README](https://github.com/Oneflow-Inc/one-yolov5/blob/main/README.md)
+下面的命令把预训练的 YOLOV5s 模型导出为 ONNX 格式。`yolov5s` 是小模型，是可用的模型里面第二小的。其它选项是 `yolov5n` ，`yolov5m`，`yolov5l`，`yolov5x` ，以及他们的 P6 对应项比如 `yolov5s6` ，或者你自定义的模型，即 `runs/exp/weights/best` 。有关可用模型的更多信息，可以参考我们的[README](https://github.com/Oneflow-Inc/one-yolov5/blob/main/README.md)
 
 ```shell
 python export.py --weights ../yolov5s/ --include onnx
