@@ -103,7 +103,7 @@ python path/to/val.py --weights    yolov5s/                  # OneFlow
                                    yolov5s_edgetpu.tflite     # TensorFlow Edge TPU
 ```
 
-### OpenCV DNN 推理
+### ONNX Runtime 推理
 
 基于 onnx 模型使用 onnxruntime 进行推理：
 
@@ -126,4 +126,8 @@ Results saved to runs/detect/exp14
 ```
 
 ![图片](https://user-images.githubusercontent.com/35585791/196388081-6b6d19c5-c0c5-4c59-9a2b-04f6e37f3c14.png)
+
+### 参考文章
+
+https://github.com/ultralytics/yolov5/issues/251
 
