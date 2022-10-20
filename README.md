@@ -2,7 +2,7 @@
 
 OneFlow-YOLO 文档网站链接: https://start.oneflow.org/oneflow-yolo-doc
 
-本地建立建立OneFlow-YOLO 文档网站:
+本地建立 OneFlow-YOLO 文档网站:
 ```
 git clone https://github.com/Oneflow-Inc/oneflow-yolo-doc.git
 cd oneflow-yolo-doc
