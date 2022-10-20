@@ -60,6 +60,7 @@ nav:
         -  如何准备YOLOv5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         -  快速开始: tutorials/03_chapter/quick_start.md
         -  模型训练: tutorials/03_chapter/model_train.md
+        -  Test-Time Augmentation (TTA): tutorials/03_chapter/TTA.md
         -  数据增强: tutorials/04_chapter/mosaic.md
         -  矩形推理: tutorials/05_chapter/rectangular_reasoning.md
         -  IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
