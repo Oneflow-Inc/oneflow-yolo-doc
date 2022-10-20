@@ -1,9 +1,8 @@
 # OneFlow-YOLOV5-Document
 
 ##  What is one-yolov5🤔️？
-one-yolov5 : 是以 [OneFlow](https://github.com/Oneflow-Inc/oneflow) 为后端的目标检测项目
-相比pytorch后端更有效缩短目标检测模型的训练时间。
-更多请参阅[one-yolov5： 特点解析](https://start.oneflow.org/oneflow-yolo-doc/tutorials/00_chapter/overview.html)
+one-yolov5 : 是以 [OneFlow](https://github.com/Oneflow-Inc/oneflow) 为后端的YOLOv5目标检测项目相比pytorch后端更有效缩短目标检测模型的训练时间。
+更多请参阅[one-yolov5特点解析](https://start.oneflow.org/oneflow-yolo-doc/tutorials/00_chapter/overview.html)
 
 代码地址：<a href="https://github.com/Oneflow-Inc/one-yolov5">https://github.com/Oneflow-Inc/one-yolov5</a>
 
