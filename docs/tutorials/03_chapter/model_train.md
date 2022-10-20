@@ -241,6 +241,6 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
 
 
 ## 参考文章
--  https://github.com/Oneflow-Inc/one-yolov5/wiki/Train-Custom-Data
+- https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
 - https://docs.ultralytics.com/quick-start/
 
