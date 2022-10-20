@@ -16,7 +16,7 @@ $ python path/to/train.py --data coco.yaml --weights '' --cfg yolov5s.yaml --img
 ```
 ### 📌单GPU训练
 ```
-$ python train.py  --data coco.yaml --weights yolov5s.pt --device 0
+$ python train.py  --data coco.yaml --weights yolov5s  --device 0
 ```
 ### 📌多GPU训练
 ```
@@ -26,7 +26,7 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 
 - --nproc_per_node  指定要使用多少GPU。举个例子🌰:在上面👆 多GPU训练指令中它是2。
 
-- --batch 是总批量大小。它将平均分配给每个GPU。在上面的示例中，每GPU是64/2＝32。
+- --batch 批处理数量（*即一次训练所选取的样本数*)。它将平均分配给每个GPU。在上面👆的示例中，每GPU分配 64/2＝32 个样本。
 
 - 上面的代码默认使用GPU 0…（N-1）。使用特定的GPU🤔️？
 可以通过简单在 --device 后跟指定GPU来实现。「案例🌰」，在下面的代码中，我们将使用GPU 2,3。
@@ -79,7 +79,7 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 
 
 ## 模型测试(val.py) 🔥
-该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 **yolov5xpt** 是可用的最大和最精确的模型。其它可用的是 **yolov5s.pt**, **yolov5m.pt**  和 **yolov5l.pt**  或者 自己的检查点来自训练自定义数据集。**./weights/best.pt**。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/ultralytics/yolov5#pretrained-checkpoints)
+该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 **yolov5x** 是可用的最大且最精确的小模型。其它可用的是 **yolov5s **, **yolov5m **  和 **yolov5l **  或者 自己的检查点来自训练自定义数据集。**./weights/best **。有关所有可用模型的详细信息，请参阅我们的 [READEME table]( https://github.com/Oneflow-Inc/one-yolov5#pretrained-checkpoints)
 
 ```python
 $ python val.py --weights yolov5x --data coco.yaml --img 640 
@@ -102,21 +102,23 @@ python detect.py --weights yolov5s --img 832
 
 对于移动部署，我们推荐YOLOv5s/m，对于云部署，我们建议YOLOV5l/x。
 
-有关所有模型的完整比较，请参阅[详细表](https://github.com/ultralytics/yolov5#pretrained-checkpoints)
+有关所有模型的完整比较，请参阅[详细表](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 
-![imgs](https://github.com/ultralytics/yolov5/releases/download/v1.0/model_comparison.png)
+![imgs]( https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0/model_comparison.png)
+
 
 - 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/ultralytics/yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/ultralytics/yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/ultralytics/yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/ultralytics/yolov5/releases) 下载 。
 
 ```python
-python train.py --data custom.yaml --weights yolov5s.pt
-                                             yolov5m.pt
-                                             yolov5l.pt
-                                             yolov5x.pt
-                                             custom_pretrained.pt
+python train.py --data custom.yaml --weights yolov5s 
+                                             yolov5m 
+                                             yolov5l 
+                                             yolov5x 
+                                             custom_pretrained # 自定义的网络结构文件
+                                        
 ```
 
-- 从头开始训练，推荐用大的数据集(即 COCO、Objects365、OIv6 ) 传递您感兴趣的模型架构 yaml文件 以及空的--weights ' ' 参数：
+- 从头开始训练的话，推荐用大的数据集(即 COCO、Objects365、OIv6 ) --cfg 后传递您感兴趣的网络结构文件参数 以及空的--weights ' ' 参数：
   
 ```python
 python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
@@ -131,8 +133,8 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
 - Epochs : 默认训练300个epochs。如果早期过拟合，则可以减少训练。如果在300个周期后未发生过拟合，则可以训练更长，比如600、1200个epochs。
 - Image size: COCO以 --img 640,的分辨率进行训练，但由于数据集中有大量的小对象，它可以从更高分辨率（如--img 1280）的训练中训练。 如果有许多小对象，则自定义数据集将从更高分辨率的训练中获益。最好的推断结果是在相同的--img 处获得的 ，即如果在-img 1280处进行训练，也应该在--img 1280处进行测试和检测。
 
-- Batch Size: 使用更大的 --batch-size 最大批量。小批量会产生较差的batchnorm统计，应该能避免。
-- Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的[超参数演化教程](https://github.com/ultralytics/yolov5/issues/607)。
+- Batch Size: 使用更大的 --batch-size 。能够有效缓解小批量产生的batchnorm统计的错误。
+- Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的[超参数演化教程]( https://github.com/Oneflow-Inc/one-yolov5/issues/607)。
 
 
 
@@ -165,13 +167,13 @@ $ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank
 #### 注意⚠️
 - oneflow目前不支持windows平台
 - --batch 必须是GPU数量的倍数。
-- GPU 0将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
+- GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
 - 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
 ```python
 $ python -m oneflow.distributed.launch --master_port 1234 --nproc_per_node 2 ...
 ```
 #### 结果💡
-DDP 分析结果在[AWS EC2 P4d instance](https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
+DDP 分析结果在[AWS EC2 P4d instance]( https://github.com/Oneflow-Inc/one-yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
 ####  配置代码⚡
 ```python
 # prepare
@@ -181,10 +183,10 @@ cd .. && rm -rf app && git clone https://github.com/Oneflow-Inc/one-yolov5 -b ma
 cp data/coco.yaml data/coco_profile.yaml
 
 # profile
-python train.py --batch-size 16 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0 
-python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch-size 32 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1   
-python -m oneflow.distributed.launch --nproc_per_node 4 train.py --batch-size 64 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3  
-python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l.pt --epochs 1 --device 0,1,2,3,4,5,6,7
+python train.py --batch-size 16 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0 
+python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch-size 32 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0,1   
+python -m oneflow.distributed.launch --nproc_per_node 4 train.py --batch-size 64 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0,1,2,3  
+python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0,1,2,3,4,5,6,7
 ```
 
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
@@ -201,40 +203,40 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
  <span id="table_31"> 表3.1</span> 
  表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
 
-| 参数              | help                                                | 帮助                                                                                              |
-| ----------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| --weight          | initial weights path                                | 加载的权重文件路径                                                                                |
+| 参数              | help                                                | 帮助                                                                                             |
+|-------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------|
+| --weight          | initial weights path                                | 加载的权重文件路径                                                                               |
 | --cfg             | model.yaml path                                     | 模型配置文件，网络结构 路径                                                                       |
 | --data            | dataset.yaml path                                   | 数据集配置文件，数据集路径                                                                        |
-| --hyp             | hyperparameters path                                | 超参数文件 路径                                                                                   |
-| --epochs          | Total training rounds                               | 训练总轮次                                                                                        |
-| --batch-size      | total batch size for all GPUs, -1 for autobatch     | 批次大小                                                                                          |
-| --imgsz           | train, val image size (pixels)                      | 输入图片分辨率大小                                                                                |
+| --hyp             | hyperparameters path                                | 超参数文件 路径                                                                                  |
+| --epochs          | Total training rounds                               | 训练总轮次                                                                                       |
+| --batch-size      | total batch size for all GPUs, -1 for autobatch     | 一次训练所选取的样本数                                                                           |
+| --imgsz           | train, val image size (pixels)                      | 输入图片分辨率大小                                                                               |
 | --rect            | rectangular training                                | 是否采用矩形训练，默认False                                                                       |
-| --resume          | resume most recent training                         | 接着打断训练上次的结果接着训练                                                                    |
+| --resume          | resume most recent training                         | 接着打断训练上次的结果接着训练                                                                   |
 | --nosave          | only save final checkpoint                          | 只保存最终的模型，默认False                                                                       |
 | --noautoanchor    | disable AutoAnchor                                  | 不自动调整anchor，默认False                                                                       |
 | --noplots         | save no plot files                                  | 不保存打印文件，默认False                                                                         |
 | --evolve          | evolve hyperparameters for x generations            | 是否进行超参数进化，默认False                                                                     |
 | --bucket          | gsutil bucket                                       | 谷歌云盘bucket，一般不会用到                                                                      |
-| --cache           | --cache images in "ram" (default) or "disk"         | 是否提前缓存图片到内存，以加快训练速度，默认False                                                 |
-| --device          | cuda device, i.e. 0 or 0,1,2,3 or cpu               | 训练的设备，cpu；0(表示一个gpu设备cuda:0)；0,1,2,3(多个gpu设备)                                   |
+| --cache           | --cache images in "ram" (default) or "disk"         | 是否提前缓存图片到内存，以加快训练速度，默认False                                                  |
+| --device          | cuda device, i.e. 0 or 0,1,2,3 or cpu               | 训练的设备，cpu；0(表示一个gpu设备cuda:0)；0,1,2,3(多个gpu设备)                                     |
 | --multi-scale     | vary img-size +/- 50%%                              | 是否进行多尺度训练，默认False                                                                     |
 | --single-cls      | train multi-class data as single-class              | 数据集是否只有一个类别，默认False                                                                 |
-| --optimizer       | optimizer                                           | 优化器                                                                                            |
-| --sync-bn         | use SyncBatchNorm, only available in DDP mode       | 是否使用跨卡同步BN,在DDP模式使用                                                                  |
-| --workers         | max dataloader workers (per RANK in DDP mode)       | dataloader的最大worker数量                                                                        |
-| --project         | save to project path                                | 保存到项目结果地址                                                                                |
-| --name            | save to project/name/                               | 保存到项目结果/名称                                                                               |
-| --exist-ok        | existing project/name ok, do not increment          | 现有项目/名称确定，不递增，默认False                                                              |
+| --optimizer       | optimizer                                           | 优化器                                                                                           |
+| --sync-bn         | use SyncBatchNorm, only available in DDP mode       | 是否使用跨卡同步BN,在DDP模式使用                                                                 |
+| --workers         | max dataloader workers (per RANK in DDP mode)       | dataloader的最大worker数量                                                                       |
+| --project         | save to project path                                | 保存到项目结果地址                                                                               |
+| --name            | save to project/name/                               | 保存到项目结果/名称                                                                              |
+| --exist-ok        | existing project/name ok, do not increment          | 现有项目/名称确定，不递增，默认False                                                               |
 | --quad            | quad dataloader                                     | 四元数据加载器 开启之后在尺寸大于640的图像上识别效果更好，但是有可能会使在640尺寸的图片上效果更差 |
 | --cos-lr          | cosine LR scheduler                                 | 是否采用退火余弦学习率，默认False                                                                 |
-| --label-smoothing | Label smoothing epsilon                             | 标签平滑                                                                                          |
+| --label-smoothing | Label smoothing epsilon                             | 标签平滑                                                                                         |
 | --patience        | EarlyStopping patience (epochs without improvement) | 早停机制，默认False                                                                               |
 | --freez           | Freeze layers: backbone=10, first3=0 1 2            | 冻结层数，默认不冻结                                                                              |
-| --save-period     | Save checkpoint every x epochs (disabled if < 1)    | 用于记录训练日志信息，int 型，默认 -1                                                             |
-| --seed            | Global training seed                                | 随机数设置                                                                                        |
-| --local_rank      | Automatic DDP Multi-GPU argument, do not modify     | 自动单机多卡训练 一般不改动                                                                       |
+| --save-period     | Save checkpoint every x epochs (disabled if < 1)    | 用于记录训练日志信息，int 型，默认 -1                                                              |
+| --seed            | Global training seed                                | 随机数种子设置                                                                                       |
+| --local_rank      | Automatic DDP Multi-GPU argument, do not modify     | 自动单机多卡训练 一般不改动                                                                      |
 
 
 
