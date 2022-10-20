@@ -55,6 +55,7 @@ nav:
     - 首页🏠: index.md
 
     - YOLOv5教程📚:
+        -  one-yolov5 特点解析: tutorials/00_chapter/overview.md
         -  YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         -  如何准备YOLOv5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         -  快速开始: tutorials/03_chapter/quick_start.md

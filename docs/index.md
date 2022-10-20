@@ -11,7 +11,7 @@
 
 ### 🌟0. one-yolov5 特点解析
 
-文章🎉$0.1$  [one-yolo特点解析](https://start.oneflow.org/oneflow-yolo-doc/tutorials/00_chapter/overview.html)
+文章🎉$0.1$  [one-yolov5特点解析](https://start.oneflow.org/oneflow-yolo-doc/tutorials/00_chapter/overview.html)
 ### 🌟1. YOLOv5 网络结构解析 
 
 文章🎉$1.1$  [YOLOv5 网络结构解析](https://start.oneflow.org/oneflow-yolo-doc/tutorials/01_chapter/yolov5_network_structure_analysis.html)
