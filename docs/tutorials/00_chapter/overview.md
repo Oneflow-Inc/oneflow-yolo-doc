@@ -63,7 +63,7 @@
 
 施工中...
 
-这一系列的文章我们将逐步开发，Review以及发布并且会有相应的视频讲解，我们将这个系列的文章叫作：《YOLOv5全面解析教程》
+这一系列的文章我们将逐步开发，Review以及发布并且会有相应的视频讲解，我们将这个系列的文章叫作：**《YOLOv5全面解析教程》** 🎉🎉🎉
 
 ##### 论文解读 📚
 - [yolov1论文解读](https://start.oneflow.org/oneflow-yolo-doc/thesis_interpretation/01_yolo.html)
