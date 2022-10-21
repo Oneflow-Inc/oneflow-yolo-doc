@@ -49,11 +49,11 @@ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505 #
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.826
 ```
 ### 📌TTA测试
-在val.py后 --augment 选项启用TTA。(`将图像大小增加约30%左右可以获得更好的结果哦`🚀)。
+在val.py 后附加 --augment 选项启用TTA。(`将图像大小增加约30%左右可以获得更好的结果哦`🚀)。
 
 ❗请注意: 启用TTA的推断通常需要正常推断时间的2-3倍，因为图像左右翻转并以3种不同分辨率处理，输出在NMS之前合并。
 
-速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是实际的TTA操作。
+速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是 TTA 操作。
 
 ```python
 $ python val.py --weights yolov5x.pt --data coco.yaml --img 832 --augment --half
@@ -64,9 +64,10 @@ $ python val.py --weights yolov5x.pt --data coco.yaml --img 832 --augment --half
 
 ```
 
-# TTA推理
+### 📌TTA推理
 
-detectpy-TTA 推理的操作与 val.py-TTA相同：只需将其附加 --augment 到任何现有检测。detect.py 指令:
+在 detect.py 中使用 TTA 的操作与 val.py 中使用TTA相同：只需将其附加 --augment 到任何现有检测任务中。
+detect.py 指令「案例🌰」:
 ```python
 $ python detect.py --weights yolov5s --img 832 --source data/images --augment
 ```
@@ -88,16 +89,16 @@ Done. (0.156s)
 
 ![imgs](https://user-images.githubusercontent.com/26833433/124491703-dbb6b200-ddb3-11eb-8b57-ed0d58d0d8b4.jpg)
 
-# PyTorch Hub TTA
-TTA自动集成到所有YOLOv5 PyTorch Hub模型中，并可在推理时通过传递 augment=True 进行访问。
+# OneFlow Hub TTA
+TTA自动集成到所有YOLOv5 OneFlow Hub模型中，并可在推理时通过传递 augment=True 参数进行开启。
 ```python
-import torch
+import oneflow as flow
 
 # Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5x, custom
+model = flow.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5x, custom
 
 # Images
-img = 'https://ultralytics.com/images/zidane.jpg'  # or file, PIL, OpenCV, numpy, multiple
+img = 'https://raw.githubusercontent.com/Oneflow-Inc/one-yolov5/main/data/images/zidane.jpg'  # or file, PIL, OpenCV, numpy, multiple
 
 # Inference
 results = model(img, augment=True)  # <--- TTA inference
@@ -107,10 +108,11 @@ results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
 ```
 
 # 自定义
-我们可以自定义TTA操作在YOLOv5 **forward_augment()** 方法中, 应用的TTA操作具体可见：
+我们可以自定义TTA操作在 YOLOv5 **forward_augment()** 方法中, 应用的TTA操作细节具体可见：
 
-https://github.com/ultralytics/yolov5/blob/8c6f9e15bfc0000d18b976a95b9d7c17d407ec91/models/yolo.py#L125-L137
-
+https://github.com/Oneflow-Inc/one-yolov5/blob/bbdf286ad1b1d3fd2c82cecdfa4487db423d9cfe/models/yolo.py#L141-L153
 
 
 ### 参考文章
+
+- https://github.com/ultralytics/yolov5/issues/303
