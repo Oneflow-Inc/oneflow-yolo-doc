@@ -48,6 +48,8 @@ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505 #
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.730
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.826
 ```
+
+OneFlow 目前还未支持TTA 。
 ### 📌TTA测试
 在val.py 后附加 --augment 选项启用TTA。(`将图像大小增加约30%左右可以获得更好的结果哦`🚀)。
 
