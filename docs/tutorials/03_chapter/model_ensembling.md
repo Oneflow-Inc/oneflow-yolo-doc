@@ -20,12 +20,12 @@ pip install -r requirements.txt  # install
 在尝试`TTA`之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 `yolov5x` 是可用的最大并且最精确的模型。其它可用的是 `yolov5s`, `yolov5m`  和 `yolov5l`  或者 自己从数据集训练出的模型。`./weights/best`。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 
 ```python
-$ python val.py --weights yolov5x --data coco.yaml --img 640 --half
+$ python val.py --weights ./yolov5x --data coco.yaml --img 640 --half
 ```
 
 📢 输出:
 ```shell
-val: data=data/coco.yaml, weights=['yolov5x'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=True, project=runs/val, name=exp, exist_ok=False, half=True, dnn=False
+val: data=data/coco.yaml, weights=['./yolov5x'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=True, project=runs/val, name=exp, exist_ok=False, half=True, dnn=False
 YOLOv5 🚀 v1.0-8-g94ec5c4 Python-3.8.13 oneflow-0.8.1.dev20221018+cu112 
 Fusing layers... 
 Model summary: 322 layers, 86705005 parameters, 571965 gradients
@@ -107,13 +107,13 @@ python detect.py --weights ./yolov5x ./yolov5l6 --img 640 --source  data/images
 ```
 Output:
 ```
-detect: weights=['/data/dataset/fengwen/weight/yolov5/flow/yolov5x', '/data/dataset/fengwen/weight/yolov5/flow/yolov5l6'], source=data/images, data=data/coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
+detect: weights=['./yolov5x', './yolov5l6'], source=data/images, data=data/coco128.yaml, imgsz=[640, 640], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=False, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
 YOLOv5 🚀 v1.0-31-g6b1387c Python-3.8.13 oneflow-0.8.1.dev20221018+cu112 
 Fusing layers... 
 Model summary: 322 layers, 86705005 parameters, 571965 gradients
 Fusing layers... 
 Model summary: 346 layers, 76726332 parameters, 653820 gradients
-Ensemble created with ['/data/dataset/fengwen/weight/yolov5/flow/yolov5x', '/data/dataset/fengwen/weight/yolov5/flow/yolov5l6']
+Ensemble created with ['./yolov5x', './yolov5l6']
 
 detect.py:159: DeprecationWarning: In future, it will be an error for 'np.bool_' scalars to be interpreted as an index
   s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
