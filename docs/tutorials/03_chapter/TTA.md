@@ -118,7 +118,7 @@ detect.py:159: DeprecationWarning: In future, it will be an error for 'np.bool_'
 image 2/2 /home/fengwen/one-yolov5/data/images/zidane.jpg: 480x832 3 persons, 2 ties, Done. (0.041s)
 0.5ms pre-process, 48.6ms inference, 2.1ms NMS per image at shape (1, 3, 832, 832)
 ```
-<img src="./TTA_imgs/zidane.jpg">
+<img src="TTA_imgs/zidane.jpg">
 
 
 # OneFlow Hub TTA
