@@ -733,7 +733,7 @@
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a> Average Recall     <span class="o">(</span>AR<span class="o">)</span> @<span class="o">[</span> <span class="nv">IoU</span><span class="o">=</span><span class="m">0</span>.50:0.95 <span class="p">|</span> <span class="nv">area</span><span class="o">=</span> large <span class="p">|</span> <span class="nv">maxDets</span><span class="o">=</span><span class="m">100</span> <span class="o">]</span> <span class="o">=</span> <span class="m">0</span>.826
 </code></pre></div></p>
 <h3 id="_3">📌 融合测试</h3>
-<p>通过在任何现有的 val.py或detect.py命令中的 <code>--weights</code> 参数后添加额外的模型，可以在测试和推理时将多个预训练模型融合合在一起。</p>
+<p>通过在任何现有的 val.py或detect.py命令中的 <code>--weights</code> 参数后添加额外的模型，可以在测试和推理时将多个预训练模型融合在一起。</p>
 <p>📢 将 <code>yolov5x</code>,<code>yolov5l6</code> 两个模型的融合测试的指令如下：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python val.py --weights ./yolov5x ./yolov5l6  --data data/coco.yaml --img 640 --half
 </code></pre></div></p>
