@@ -703,7 +703,7 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
 </code></pre></div>
 <h3 id="_2">📌普通测试</h3>
-<p>在尝试<code>TTA</code>之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <code>yolov5x</code> 是可用的最大并且最精确的模型。其它可用的是 <code>yolov5s</code>, <code>yolov5m</code>  和 <code>yolov5l</code>  或者 自己从数据集训练出的模型。<code>./weights/best</code>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">READEME table</a></p>
+<p>在尝试<code>TTA</code>之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <code>yolov5x</code> 是可用的最大并且最精确的模型。其它可用的模型是 <code>yolov5s</code>, <code>yolov5m</code>  和 <code>yolov5l</code>等  或者 自己从数据集训练出的模型 <code>./weights/best</code>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">READEME table</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">$</span> <span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="o">./</span><span class="n">yolov5x</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> <span class="o">--</span><span class="n">half</span>
 </code></pre></div>
 <p>📢 输出:
