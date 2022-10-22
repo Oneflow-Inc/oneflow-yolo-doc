@@ -61,6 +61,7 @@ nav:
         -  快速开始: tutorials/03_chapter/quick_start.md
         -  模型训练: tutorials/03_chapter/model_train.md
         -  测试时增强 (TTA): tutorials/03_chapter/TTA.md
+        -  模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
         -  数据增强: tutorials/04_chapter/mosaic.md
         -  矩形推理: tutorials/05_chapter/rectangular_reasoning.md
         -  IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md

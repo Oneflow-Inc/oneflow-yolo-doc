@@ -1,7 +1,7 @@
 
 ## 测试时数据增强 🚀
 
-> 📚 这个教程用来解释 在YOLOv5训练和推理中如何使用 Test Time Augmentation (TTA) 提高mAP和Recall 🚀。
+> 📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用 Test Time Augmentation (TTA) 提高mAP和Recall 🚀。
 
 ### 📌开始之前
 
@@ -49,12 +49,13 @@ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505 #
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.826
 ```
 
+
 ### 📌TTA测试
 在val.py 后附加 --augment 选项启用TTA。(`将图像大小增加约30%左右可以获得更好的结果哦`🚀)。
 
 ❗请注意: 启用TTA的推断通常需要正常推断时间的2-3倍，因为图像左右翻转并以3种不同分辨率处理，输出在NMS之前合并。
 
-速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是 TTA 操作。
+速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是 TTA 操作造成的。
 
 ```python
 $ python val.py --weights yolov5x --data coco.yaml --img 832 --augment --half
