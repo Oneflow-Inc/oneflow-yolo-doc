@@ -53,7 +53,7 @@ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505 #
 
 ### 📌 融合测试
 
-通过在任何现有的 val.py或detect.py命令中的 `--weights` 参数后添加额外的模型，可以在测试和推理时将多个预训练模型融合合在一起。
+通过在任何现有的 val.py或detect.py命令中的 `--weights` 参数后添加额外的模型，可以在测试和推理时将多个预训练模型融合在一起。
 
 📢 将 `yolov5x`,`yolov5l6` 两个模型的融合测试的指令如下：
 ```
