@@ -17,7 +17,7 @@ pip install -r requirements.txt  # install
 
 ### 📌普通测试
 
-在尝试`TTA`之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 `yolov5x` 是可用的最大并且最精确的模型。其它可用的是 `yolov5s`, `yolov5m`  和 `yolov5l`  或者 自己从数据集训练出的模型。`./weights/best`。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
+在尝试`TTA`之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 `yolov5x` 是可用的最大并且最精确的模型。其它可用的模型是 `yolov5s`, `yolov5m`  和 `yolov5l`等  或者 自己从数据集训练出的模型 `./weights/best`。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 
 ```python
 $ python val.py --weights ./yolov5x --data coco.yaml --img 640 --half
