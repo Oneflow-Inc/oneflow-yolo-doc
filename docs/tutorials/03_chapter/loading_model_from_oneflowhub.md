@@ -216,14 +216,19 @@ crops = results.crop(save=True)  # cropped detections dictionary
 ```python
 results = model(im)  # inference
 results.pandas().xyxy[0]  # Pandas DataFrame
-
-print(results.pandas().xyxy[0])
- xmin        ymin         xmax        ymax  confidence  class    name
-0  743.290649   48.343842  1141.756348  720.000000    0.879861      0  person
-1  441.989624  437.336670   496.585083  710.036255    0.675118     27     tie
-2  123.051117  193.237976   714.690674  719.771362    0.666694      0  person
-3  978.989807  313.579468  1025.302856  415.526184    0.261517     27     tie
 ```
+
+<details>
+  <summary>Pandas输出（点击展开）</summary>
+  <pre><code> 
+    print(results.pandas().xyxy[0])
+    xmin        ymin         xmax        ymax  confidence  class    name
+    0  743.290649   48.343842  1141.756348  720.000000    0.879861      0  person
+    1  441.989624  437.336670   496.585083  710.036255    0.675118     27     tie
+    2  123.051117  193.237976   714.690674  719.771362    0.666694      0  person
+    3  978.989807  313.579468  1025.302856  415.526184    0.261517     27     tie
+  </code></pre>
+</details>
 
 #### 排序后的结果
 
@@ -234,6 +239,56 @@ results = model(im)  # inference
 results.pandas().xyxy[0].sort_values('xmin')  # sorted left-right
 ```
 
+#### Box-Cropped 结果
+
+结果可以返回并保存为 detection crops：
+
+```python
+results = model(im)  # inference
+crops = results.crop(save=True)  # cropped detections dictionary
+```
+
+#### JSON 结果
+
+结果一旦使用 `.pandas` 被保存为 pandas 数据格式，就可以再使用 `.to_json()` 方法保存为 JSON 格式。可以使用 `orient` 参数修改 JSON 格式。请查看 pandas 的 `.to_json()` 方法的[文档](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_json.html)了解细节。
+
+```python
+results = model(ims)  # inference
+results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
+```
+
+<details>
+  <summary>Json输出（点击展开）</summary>
+  <pre><code> 
+    [{"xmin":743.2906494141,"ymin":48.3438415527,"xmax":1141.7563476562,"ymax":720.0,"confidence":0.87986058,"class":0,"name":"person"},{"xmin":441.9896240234,"ymin":437.3366699219,"xmax":496.5850830078,"ymax":710.0362548828,"confidence":0.6751183867,"class":27,"name":"tie"},{"xmin":123.0511169434,"ymin":193.2379760742,"xmax":714.6906738281,"ymax":719.7713623047,"confidence":0.6666944027,"class":0,"name":"person"},{"xmin":978.9898071289,"ymin":313.5794677734,"xmax":1025.3028564453,"ymax":415.526184082,"confidence":0.2615173161,"class":27,"name":"tie"}]
+  </code></pre>
+</details>
+
+
+#### 自定义模型
+
+这个例子展示使用 OneFlow Hub 加载一个自定义的在VOC数据集上进行训练的20个类别的 YOLOV5s 模型 `best.pt` 。
+
+```python
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'custom', path='path/to/best.pt') # local model
+model = oneflow.hub.load('/path/to/one-yolov5', 'custom', path='path/to/best.pt') # local repo
+```
+
+#### TensorRT, ONNX 和 OpenVINO 模型
+
+OneFlow Hub 支持对大多数 YOLOv5 导出格式进行推理，包括自定义训练模型。查看 [TFLite, ONNX, CoreML, TensorRT 模型导出教程](https://start.oneflow.org/oneflow-yolo-doc/tutorials/06_chapter/export_onnx_tflite_tensorrt.html) 查看细节。
+
+- 💡 专家提示：在 [GPU benchmarks](https://github.com/ultralytics/yolov5/pull/6963) 上 **TensorRT** 可能比PyTorch快3-5倍。
+- 💡 专家提示：在 [CPU benchmarks](https://github.com/ultralytics/yolov5/pull/6613)  上 **ONNX** 和 **OpenVINO** 可能比 PyTorch 快2-3倍。
+
+```python
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'custom', path='yolov5s/')  # OneFlow
+                                                            'yolov5s.onnx')  # ONNX
+                                                            'yolov5s_openvino_model/')  # OpenVINO
+                                                            'yolov5s.engine')  # TensorRT
+                                                            'yolov5s.mlmodel')  # CoreML (macOS-only)
+                                                            'yolov5s.tflite')  # TFLite
+```
 
 
 ### 参考文章
