@@ -37,3 +37,147 @@ print(results.pandas().xyxy[0])
 ```
 
 #### 更细节的例子
+
+这个例子展示了使用 PIL 和 OpenCV 分别作为图像源的批量推理。`result` 可以打印到控制台，保存到 `runs/hub` , 在支持的环境中显示到屏幕上，并作为张量或 pandas 数据返回。
+
+```python
+import cv2
+import oneflow as flow
+from PIL import Image
+
+# Model
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s')
+
+# Images
+for f in 'zidane.jpg', 'bus.jpg':
+    flow.hub.download_url_to_file('https://ultralytics.com/images/' + f, f)  # download 2 images
+im1 = Image.open('zidane.jpg')  # PIL image
+im2 = cv2.imread('bus.jpg')[..., ::-1]  # OpenCV image (BGR to RGB)
+
+# Inference
+results = model([im1, im2], size=640) # batch of images
+
+# Results
+results.print()  
+results.save()  # or .show()
+
+results.xyxy[0]  # im1 predictions (tensor)
+print(results.pandas().xyxy[0])  # im1 predictions (pandas)
+```
+
+<center class="half">
+    <img src="https://user-images.githubusercontent.com/26833433/124915064-62a49e00-dff1-11eb-86b3-a85b97061afb.jpg" width="400"/><img src="https://user-images.githubusercontent.com/26833433/124915055-60424400-dff1-11eb-9055-24585b375a29.jpg" width="200"/><img src="图片链接" width="200"/>
+</center>
+
+对于所有推理选项，请参阅 [YOLOv5 `AutoShape()` forward方法](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/common.py#L566)。
+
+#### 推理设置
+
+YOLOv5 模型包含各种推理属性，例如置信度阈值、IoU 阈值等，可以通过以下方式设置：
+
+```python
+model.conf = 0.25  # NMS confidence threshold
+      iou = 0.45  # NMS IoU threshold
+      agnostic = False  # NMS class-agnostic
+      multi_label = False  # NMS multiple labels per box
+      classes = None  # (optional list) filter by class, i.e. = [0, 15, 16] for COCO persons, cats and dogs
+      max_det = 1000  # maximum number of detections per image
+      amp = False  # Automatic Mixed Precision (AMP) inference
+
+results = model(im, size=320)  # custom inference size
+```
+
+#### 设备
+
+模型创建后可以迁移到任意设备上
+
+```python
+model.cpu()  # CPU
+model.cuda()  # GPU
+model.to(device)  # i.e. device=flow.device(0)
+```
+
+模型也可以在任意 `device` 上直接创建：
+
+```python
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device='cpu') # load on CPU
+```
+
+💡 专家提示： 在推理之前，输入图像也会自动传输到模型所在的设备上。
+
+#### 静音输出
+
+使用 `_verbose=False` ,模型可以被静音的加载：
+
+```python
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)  # load silently
+```
+
+#### 输入通道
+
+```python
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', channels=4)
+```
+
+在这种情况下，模型除了第一个输入层外将由预训练的权重组成，它不再与预训练的输入层具有相同的形状。 输入层将保持由随机权重初始化。
+
+#### 类别数
+
+要加载具有 10 个输出类而不是默认的 80 个输出类的预训练 YOLOv5s 模型：
+
+```python
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', classes=10)
+```
+
+在这种情况下，模型除了输出层将由预训练的权重组成，它们不再与预训练的输出层具有相同的形状。 输出层将保持由随机权重初始化。
+
+#### 强制重新加载
+
+如果您在上述步骤中遇到问题，设置 `force_reload=True` 可能有助于丢弃现有缓存并强制从 OneFlow Hub 重新下载最新的 YOLOv5 版本。
+
+#### 截图推理
+
+要在桌面屏幕上运行推理：
+
+```python
+
+import oneflow as flow
+
+from PIL import ImageGrab
+
+# Model
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)
+
+# Image
+im = ImageGrab.grab()  # take a screenshot
+
+# Inference
+results = model(im)
+```
+
+#### 多 GPU 推理
+
+YOLOv5 模型可以加载到多个 GPU 实现多线程推理：
+
+```python
+import oneflow as flow
+import threading
+
+def run(model, im):
+  results = model(im)
+  results.save()
+
+# Models
+model0 = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=0)
+model1 = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=1)
+
+# Inference
+threading.Thread(target=run, args=[model0, 'https://ultralytics.com/images/zidane.jpg'], daemon=True).start()
+threading.Thread(target=run, args=[model1, 'https://ultralytics.com/images/bus.jpg'], daemon=True).start()
+```
+
+#### 训练
+
+### 参考文章
+
+- https://github.com/ultralytics/yolov5/issues/36
