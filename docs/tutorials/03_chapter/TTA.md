@@ -1,7 +1,7 @@
 
 ## 测试时数据增强 🚀
 
-> 📚 这个教程用来解释 在YOLOv5训练和推理中如何使用 Test Time Augmentation (TTA) 提高mAP和Recall 🚀。
+> 📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用 Test Time Augmentation (TTA) 提高mAP和Recall 🚀。
 
 ### 📌开始之前
 
@@ -49,22 +49,52 @@ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.505 #
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.826
 ```
 
-OneFlow 目前还未支持TTA 。
+
 ### 📌TTA测试
 在val.py 后附加 --augment 选项启用TTA。(`将图像大小增加约30%左右可以获得更好的结果哦`🚀)。
 
 ❗请注意: 启用TTA的推断通常需要正常推断时间的2-3倍，因为图像左右翻转并以3种不同分辨率处理，输出在NMS之前合并。
 
-速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是 TTA 操作。
+速度下降的部分原因是图像尺寸较大（832 vs 640），当然也有部分原因是 TTA 操作造成的。
 
 ```python
-$ python val.py --weights yolov5x.pt --data coco.yaml --img 832 --augment --half
+$ python val.py --weights yolov5x --data coco.yaml --img 832 --augment --half
 ```
 
 输出:
 ```python
+(python3.8) fengwen@oneflow-25:~/one-yolov5$ python val.py --weights yolov5x --data data/coco.yaml  --img 832 --augment --half
+loaded library: /lib/x86_64-linux-gnu/libibverbs.so.1
+val: data=data/coco.yaml, weights=['yolov5x'], batch_size=32, imgsz=832, conf_thres=0.001, iou_thres=0.6, task=val, device=, workers=8, single_cls=False, augment=True, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=True, project=runs/val, name=exp, exist_ok=False, half=True, dnn=False
+YOLOv5 🚀 v1.0-31-g6b1387c Python-3.8.13 oneflow-0.8.1.dev20221021+cu112 
+Fusing layers... 
+Model summary: 322 layers, 86705005 parameters, 571965 gradients
+val: Scanning '/data/dataset/fengwen/coco/val2017.cache' images and labels... 4952 found, 48 missing, 0 empty, 0 corrupt: 100%|██████████| 
+            Class     Images     Labels          P          R     mAP@.5 mAP@.5:.95: 100%|██████████| 157/157 [04:39<00:00,  1.78s/it]   
+              all       5000      36335      0.743      0.645        0.7      0.518
+Speed: 0.1ms pre-process, 40.6ms inference, 2.2ms NMS per image at shape (32, 3, 832, 832)
 
+Evaluating pycocotools mAP... saving runs/val/exp/yolov5x_predictions.json...
+...
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.519 # <--- TTA mAP
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.704
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.564
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.358
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.565
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.662
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.389
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.645
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698 # <--- TTA mAR
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.556
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.745
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.837
 ```
+
+📢 声明:上述两次测试的mAP，mAR结果如下：
+|          | mAP   | mAR   |
+|----------|-------|-------|
+| baseline | 0.505 | 0.677 |
+| TTA      | 0.519 | 0.698 |
 
 ### 📌TTA推理
 
@@ -75,39 +105,41 @@ $ python detect.py --weights yolov5s --img 832 --source data/images --augment
 ```
 输出:
 ```
-detect: weights=['yolov5s.pt'], source=data/images, imgsz=832, conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=True, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False
-YOLOv5 🚀 v5.0-267-g6a3ee7c torch 1.9.0+cu102 CUDA:0 (Tesla P100-PCIE-16GB, 16280.875MB)
-
-Downloading https://github.com/ultralytics/yolov5/releases/download/v5.0/yolov5s to yolov5s.pt...
-100% 14.1M/14.1M [00:00<00:00, 81.9MB/s]
-
+loaded library: /lib/x86_64-linux-gnu/libibverbs.so.1
+detect: weights=['yolov5x'], source=data/images/, data=data/coco128.yaml, imgsz=[832, 832], conf_thres=0.25, iou_thres=0.45, max_det=1000, device=, view_img=False, save_txt=False, save_conf=False, save_crop=False, nosave=False, classes=None, agnostic_nms=False, augment=True, visualize=False, update=False, project=runs/detect, name=exp, exist_ok=False, line_thickness=3, hide_labels=False, hide_conf=False, half=False, dnn=False
+YOLOv5 🚀 v1.0-31-g6b1387c Python-3.8.13 oneflow-0.8.1.dev20221021+cu112 
 Fusing layers... 
-Model Summary: 224 layers, 7266973 parameters, 0 gradients
-image 1/2 /content/yolov5/data/images/bus.jpg: 832x640 4 persons, 1 bus, 1 fire hydrant, Done. (0.029s)
-image 2/2 /content/yolov5/data/images/zidane.jpg: 480x832 3 persons, 3 ties, Done. (0.024s)
-Results saved to runs/detect/exp
-Done. (0.156s)
+Model summary: 322 layers, 86705005 parameters, 571965 gradients
+detect.py:159: DeprecationWarning: In future, it will be an error for 'np.bool_' scalars to be interpreted as an index
+  s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+image 1/2 /home/fengwen/one-yolov5/data/images/bus.jpg: 832x640 4 persons, 1 bicycle, 1 bus, Done. (0.057s)
+detect.py:159: DeprecationWarning: In future, it will be an error for 'np.bool_' scalars to be interpreted as an index
+  s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
+image 2/2 /home/fengwen/one-yolov5/data/images/zidane.jpg: 480x832 3 persons, 2 ties, Done. (0.041s)
+0.5ms pre-process, 48.6ms inference, 2.1ms NMS per image at shape (1, 3, 832, 832)
 ```
+<img src="TTA_imgs/zidane.jpg">
 
-![imgs](https://user-images.githubusercontent.com/26833433/124491703-dbb6b200-ddb3-11eb-8b57-ed0d58d0d8b4.jpg)
 
 # OneFlow Hub TTA
 TTA自动集成到所有YOLOv5 OneFlow Hub模型中，并可在推理时通过传递 augment=True 参数进行开启。
 ```python
 import oneflow as flow
 
-# Model
-model = flow.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5x, custom
+# 模型
+model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s')  # or yolov5n - yolov5x6, custom
 
-# Images
-img = 'https://raw.githubusercontent.com/Oneflow-Inc/one-yolov5/main/data/images/zidane.jpg'  # or file, PIL, OpenCV, numpy, multiple
+# 图像
+img = 'https://raw.githubusercontent.com/Oneflow-Inc/one-yolov5/main/data/images/zidane.jpg'  # or file, Path, PIL, OpenCV, numpy, list
 
-# Inference
-results = model(img, augment=True)  # <--- TTA inference
 
-# Results
+# 推理
+results = model(img)
+
+# 结果
 results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
 ```
+
 
 # 自定义
 我们可以自定义TTA操作在 YOLOv5 **forward_augment()** 方法中, 应用的TTA操作细节具体可见：
