@@ -267,11 +267,11 @@ results.pandas().xyxy[0].to_json(orient="records")  # JSON img1 predictions
 
 #### 自定义模型
 
-这个例子展示使用 OneFlow Hub 加载一个自定义的在VOC数据集上进行训练的20个类别的 YOLOV5s 模型 `best.pt` 。
+这个例子展示使用 OneFlow Hub 加载一个自定义的在VOC数据集上进行训练的20个类别的 YOLOV5s 模型 `best` 。
 
 ```python
-model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'custom', path='path/to/best.pt') # local model
-model = oneflow.hub.load('/path/to/one-yolov5', 'custom', path='path/to/best.pt') # local repo
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'custom', path='path/to/best') # local model
+model = oneflow.hub.load('/path/to/one-yolov5', 'custom', path='path/to/best') # local repo
 ```
 
 #### TensorRT, ONNX 和 OpenVINO 模型
