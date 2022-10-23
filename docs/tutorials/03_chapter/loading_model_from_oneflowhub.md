@@ -100,7 +100,7 @@ model.to(device)  # i.e. device=flow.device(0)
 模型也可以在任意 `device` 上直接创建：
 
 ```python
-model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device='cpu') # load on CPU
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device='cpu') # load on CPU
 ```
 
 💡 专家提示： 在推理之前，输入图像也会自动传输到模型所在的设备上。
@@ -110,7 +110,7 @@ model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device='cpu') # load 
 使用 `_verbose=False` ,模型可以被静音的加载：
 
 ```python
-model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)  # load silently
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)  # load silently
 ```
 
 #### 输入通道
@@ -126,7 +126,7 @@ model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', channels=4)
 要加载具有 10 个输出类而不是默认的 80 个输出类的预训练 YOLOv5s 模型：
 
 ```python
-model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', classes=10)
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', classes=10)
 ```
 
 在这种情况下，模型除了输出层将由预训练的权重组成，它们不再与预训练的输出层具有相同的形状。 输出层将保持由随机权重初始化。
@@ -146,7 +146,7 @@ import oneflow as flow
 from PIL import ImageGrab
 
 # Model
-model = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', _verbose=False)
 
 # Image
 im = ImageGrab.grab()  # take a screenshot
@@ -168,8 +168,8 @@ def run(model, im):
   results.save()
 
 # Models
-model0 = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=0)
-model1 = flow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=1)
+model0 = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=0)
+model1 = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', device=1)
 
 # Inference
 threading.Thread(target=run, args=[model0, 'https://ultralytics.com/images/zidane.jpg'], daemon=True).start()
@@ -177,6 +177,64 @@ threading.Thread(target=run, args=[model1, 'https://ultralytics.com/images/bus.j
 ```
 
 #### 训练
+要加载 YOLOv5 模型进行训练而不是推理，请设置 autoshape=False。 要加载具有随机初始化权重的模型（从头开始训练），请使用 pretrained=False。 在这种情况下，您必须提供自己的训练脚本。 或者，请参阅我们的 [YOLOv5 训练自定义数据教程](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html)进行模型训练。
+
+```python
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', autoshape=False)  # load pretrained
+model = oneflow.hub.load('Oneflow-Inc/one-yolov5', 'yolov5s', autoshape=False, pretrained=False)  # load scratch
+```
+
+#### Base64 结果
+
+用于 API 服务。 有关详细信息，请参阅 [#2291](https://github.com/ultralytics/yolov5/pull/2291) 和 [Flask REST API](https://github.com/ultralytics/yolov5/tree/master/utils/flask_rest_api) 示例。
+
+```python
+results = model(im)  # inference
+
+results.ims # array of original images (as np array) passed to model for inference
+results.render()  # updates results.ims with boxes and labels
+for im in results.ims:
+    buffered = BytesIO()
+    im_base64 = Image.fromarray(im)
+    im_base64.save(buffered, format="JPEG")
+    print(base64.b64encode(buffered.getvalue()).decode('utf-8'))  # base64 encoded image with results
+```
+
+#### 裁剪结果
+
+返回的检测结果可以被裁剪：
+
+```python
+results = model(im)  # inference
+crops = results.crop(save=True)  # cropped detections dictionary
+```
+
+#### Pandas 结果
+
+结果可以作为[Pandas DataFrames](https://pandas.pydata.org/)返回：
+
+```python
+results = model(im)  # inference
+results.pandas().xyxy[0]  # Pandas DataFrame
+
+print(results.pandas().xyxy[0])
+ xmin        ymin         xmax        ymax  confidence  class    name
+0  743.290649   48.343842  1141.756348  720.000000    0.879861      0  person
+1  441.989624  437.336670   496.585083  710.036255    0.675118     27     tie
+2  123.051117  193.237976   714.690674  719.771362    0.666694      0  person
+3  978.989807  313.579468  1025.302856  415.526184    0.261517     27     tie
+```
+
+#### 排序后的结果
+
+结果可以按列排序，例如从左到右（x轴）对车牌数字检测结果进行排序：
+
+```python
+results = model(im)  # inference
+results.pandas().xyxy[0].sort_values('xmin')  # sorted left-right
+```
+
+
 
 ### 参考文章
 
