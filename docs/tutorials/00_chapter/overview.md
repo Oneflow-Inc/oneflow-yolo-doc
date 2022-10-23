@@ -26,9 +26,18 @@
 
 ##### 🌟3. Model Train(以coco数据集为例)
 
-文章🎉$3.1$ [模型训练](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html)
+文章🎉$3.1$ [快速开始](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/quick_start.html)
+
+文章🎉$3.2$ [模型训练](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html)
+
+文章🎉$3.3$ [测试时增强 (TTA)](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/TTA.html)
+
+文章🎉$3.4$ [模型融合 (Model Ensembling)](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_ensembling.html)
+
+文章🎉$3.5$ [从 OneFlow Hub 加载 YOLOv5](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/loading_model_from_oneflowhub.html)
 
 ##### 🌟4. YOLOv5的数据组织与处理源码解读
+
 文章🎉$4.1$ [数据增强](https://start.oneflow.org/oneflow-yolo-doc/tutorials/04_chapter/mosaic.html)
 
 ##### 🌟5. YOLOv5中Loss部分计算
@@ -43,7 +52,7 @@
 
 ##### 🌟6. 模型导出和部署介绍
 
-文章🎉$6.1$ [模型导出](https://start.oneflow.org/oneflow-yolo-doc/tutorials/06_chapter/export_onnx_tflite_tensorrt.html)
+文章🎉$6.1$ [ONNX模型导出](https://start.oneflow.org/oneflow-yolo-doc/tutorials/06_chapter/export_onnx_tflite_tensorrt.html)
 
 施工中...
 
