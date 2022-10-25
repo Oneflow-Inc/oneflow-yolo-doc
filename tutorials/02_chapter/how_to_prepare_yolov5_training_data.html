@@ -760,7 +760,7 @@
 <h2 id="1datasetyaml">1.创建dataset.yaml</h2>
 <p>COCO128是官方给的一个小的数据集 由<a href="https://cocodataset.org/#home">COCO</a>数据集前128张图片组成。
 这128幅图像用于训练和验证，以验证我们的训练是否能够过正常进行。<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml">coco128.yaml</a> 。
-<a href="https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml">数据集配置文件 coco128.yaml</a>定义了如下的配置选项： </p>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml">数据集配置文件 coco128.yaml</a>定义了如下的配置选项： </p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a># 训练和验证图像的路径相同
@@ -796,30 +796,38 @@
 - 框坐标必须采用标准化xywh格式（从0到1）。如果框以像素为单位，则将x_center和width除以图像宽度，将y_centre和height除以图像高度。
 - 类号为零索引的编号（从0开始计数）。</p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
+  <img src="how_to_prepare_yolov5_training_data_imgs/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
   这里假设以coco数据集的目标类别约定来标注
 </p>
 <p>与上述图像相对应的标签文件包含2个人（class 0）和 一个领带（class 27）：</p>
-<p><img alt="imgs" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.image" /></p>
+<p><img alt="imgs" src="how_to_prepare_yolov5_training_data_imgs/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.png" /></p>
 <h2 id="3">3.目录结构</h2>
 <p>根据下面的示例组织训练集合验证集的图片和标签 。在本例中，我们的<strong>/coco128</strong>是位于 <strong>/yolov5</strong> 目录附近。YOLOv5通过将每个图像路径 <strong>xx/images/xx.jpg</strong> 替换为 <strong>xx/labels/xx.txt</strong> 来自动定位每个图像的标签。例如：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dataset</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">im0</span><span class="o">.</span><span class="n">jpg</span>  <span class="c1"># image</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">dataset</span><span class="o">/</span><span class="n">labels</span><span class="o">/</span><span class="n">im0</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># label</span>
 </code></pre></div>
-<img alt="imgs" src="https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.image" /></p>
+<img alt="imgs" src="how_to_prepare_yolov5_training_data_imgs/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.png" /></p>
 <h1 id="_3">制作数据集</h1>
 <h2 id="_4">数据集标注工具</h2>
 <p>这里主要介绍 labelimg: 是一种矩形标注工具，常用于目标识别和目标检测,可直接生成yolo读取的txt标签格式，但其只能进行矩形框标注。(当然也可以选用其它的工具进行标注并且网上都有大量关于标注工具的教程。)</p>
 <p>首先labelimg的安装十分简单，直接使用cmd中的pip进行安装，在cmd中输入命令行：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">labelimg</span>
 </code></pre></div>
-安装后直接输入命令：</p>
-<p>labelimg</p>
-<p>即可打开运行：</p>
+安装后直接输入命令：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>labelimg
+</code></pre></div>
+即可打开运行。</p>
+<p>点击Open Dir选择数据集文件夹，再点击Create RectBox进行标注。</p>
 <p align="center">
 
-  <img src="https://raw.githubusercontent.com/Oneflow-Inc/one-yolov5/how-to-prepare-yolov5-model-training-data/data/images/labelimg.png">
+  <img src="how_to_prepare_yolov5_training_data_imgs/labelimg.png">
 
+</p>
+
+<p>当你绘制框结束就会弹出标签选择框，然后标注类别。这个类别编辑更改在Labelimg文件里，里面有classes.txt文档，打开手动更改类别即可。（当出现新类别时也可在标签选择框里输入点OK就自动添加类别了）</p>
+<p>标注好后选择yolo格式，点击Save保存。标注结果保存在<code>图片名.txt</code>文件中，txt文件和图片名称一致，内容如下：</p>
+<p align="center">
+  <img src="how_to_prepare_yolov5_training_data_imgs/labelimg_txt.png">
 </p>
 
 <h2 id="_5">一个好的数据集</h2>
@@ -835,7 +843,7 @@
 </ul>
 <p align="center">
   <a href= "https://arxiv.org/abs/1405.0312">
-  <img src="https://user-images.githubusercontent.com/26833433/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
+  <img src="how_to_prepare_yolov5_training_data_imgs/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
   </a>  
 </p>
 
