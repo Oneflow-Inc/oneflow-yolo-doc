@@ -756,9 +756,9 @@
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>--resume /path/to/your/checkpoint/path
 </code></pre></div>
 <h2 id="_6">评估 👣</h2>
-<p>该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <strong>yolov5xpt</strong> 是可用的最大和最精确的模型。其它可用的是 <strong>yolov5s</strong>, <strong>yolov5m</strong>  和 <strong>yolov5l</strong>  或者 自己的检查点来自训练自定义数据集。<strong>./weights/best</strong>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/ultralytics/yolov5#pretrained-checkpoints">READEME table</a></p>
+<p>下面的命令是在COCO val2017数据集上以640像素的图像大小测试 <code>yolov5x</code> 模型。 <code>yolov5x</code>是可用小模型中最大且最精确的，其它可用选项是 <code>yolov5n</code> ，<code>yolov5m</code>，<code>yolov5s</code>，<code>yolov5l</code> ，以及他们的 P6 对应项比如 <code>yolov5s6</code> ，或者你自定义的模型，即 <code>runs/exp/weights/best</code> 。有关可用模型的更多信息，请参阅我们的<a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">README-TABLE</a>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">$</span> <span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5x</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> 
-</code></pre></div>
+</code></pre></div></p>
 <h2 id="_7">推理 👍</h2>
 <p>首先，下载一个训练好的模型权重文件，或选择您自己训练的模型；</p>
 <p>然后，
