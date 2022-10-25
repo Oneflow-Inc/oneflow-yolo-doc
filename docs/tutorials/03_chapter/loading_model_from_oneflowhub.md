@@ -66,7 +66,7 @@ print(results.pandas().xyxy[0])  # im1 predictions (pandas)
 ```
 
 <center class="half">
-    <img src="https://user-images.githubusercontent.com/26833433/124915064-62a49e00-dff1-11eb-86b3-a85b97061afb.jpg" width="400"/><img src="https://user-images.githubusercontent.com/26833433/124915055-60424400-dff1-11eb-9055-24585b375a29.jpg" width="200"/><img src="图片链接" width="200"/>
+    <img src="https://user-images.githubusercontent.com/26833433/124915064-62a49e00-dff1-11eb-86b3-a85b97061afb.jpg" width="300"/><img src="https://user-images.githubusercontent.com/26833433/124915055-60424400-dff1-11eb-9055-24585b375a29.jpg" width="200"/>
 </center>
 
 对于所有推理选项，请参阅 [YOLOv5 `AutoShape()` forward方法](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/common.py#L566)。
