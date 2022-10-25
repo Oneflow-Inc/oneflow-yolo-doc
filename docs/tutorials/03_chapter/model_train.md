@@ -37,7 +37,7 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 
 [SyncBatchNorm](https://pytorch.org/docs/master/generated/torch.nn.SyncBatchNorm.html)可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
 
-建议最好在每个GPU上的批处理数量较小（*批处理数量<=8*）时使用。
+建议最好在每个GPU上的样本数量较小（*样本数量<=8*）时使用。
 
 要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项，具体「案例🌰」如下:
 
@@ -69,17 +69,19 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 ![img](https://user-images.githubusercontent.com/26833433/83667635-90641b80-a583-11ea-8075-606316cebb9c.jpeg)
 
 
-训练训损失和性能的指标有记录到Tensorboard和自定义结果中**results.csv日志文件**，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5
+训练训损失和性能的指标有记录到Tensorboard和自定义结果中**results.csv日志文件**，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5结果
 - 从零开始训练 (蓝色)。
 - 加载预训练权重 --weights yolov5s (橙色)。
 
 ![img](https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png)
 
-具体的指标分析详见YOLOv5中Loss部分计算
+具体的指标分析详见文章[《模型精确度评估》](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/map_analysis.html) 
 
 
 ## 模型测试(val.py) 🔥
-该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 **yolov5x** 是可用的最大且最精确的小模型。其它可用的是 **yolov5s **, **yolov5m **  和 **yolov5l **  或者 自己的检查点来自训练自定义数据集。**./weights/best **。有关所有可用模型的详细信息，请参阅我们的 [READEME table]( https://github.com/Oneflow-Inc/one-yolov5#pretrained-checkpoints)
+
+下面的命令是在COCO val2017数据集上以640像素的图像大小测试 `YOLOv5x` 模型。其它可用选项是 `yolov5n` ，`yolov5m`，`yolov5s`，`yolov5l` ，以及他们的 P6 对应项比如 `yolov5s6` ，或者你自定义的模型，即 `runs/exp/weights/best` 。有关可用模型的更多信息，请参阅我们的[README-TABLE](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
+
 
 ```python
 $ python val.py --weights yolov5x --data coco.yaml --img 640 
