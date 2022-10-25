@@ -134,7 +134,7 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
 - Image size: COCO以 --img 640,的分辨率进行训练，但由于数据集中有大量的小对象，它可以从更高分辨率（如--img 1280）的训练中训练。 如果有许多小对象，则自定义数据集将从更高分辨率的训练中获益。最好的推断结果是在相同的--img 处获得的 ，即如果在-img 1280处进行训练，也应该在--img 1280处进行测试和检测。
 
 - Batch Size: 使用更大的 --batch-size 。能够有效缓解小批量产生的batchnorm统计的错误。
-- Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的[超参数演化教程]( https://github.com/Oneflow-Inc/one-yolov5/issues/607)。
+- Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的[超参数演化教程]( https://github.com/ultralytics/yolov5/issues/607)。
 
 
 
