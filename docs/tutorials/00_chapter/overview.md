@@ -10,6 +10,7 @@
 
 - 🎉代码仓库地址：https://github.com/Oneflow-Inc/one-yolov5
 - 🎉文档网站地址：https://start.oneflow.org/oneflow-yolo-doc/index.html
+- OneFlow 安装方法：https://github.com/Oneflow-Inc/oneflow#install-oneflow
 
 不过即使你对 OneFlow 带来的性能提升不太感兴趣，我们相信[文档网站](https://start.oneflow.org/oneflow-yolo-doc/index.html)中对 YOLOv5 教程的汉化以及源码剖析也会是从零开始深入学习 YOLOv5 一份不错的资料。欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟
 
