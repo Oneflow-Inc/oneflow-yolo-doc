@@ -66,10 +66,7 @@ python path/to/detect.py --weights yolov5s --source 0              # webcam
                                                     'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
 ```
 
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 快来给我Star呀😊~
-  
 <img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
-  
 </a>
