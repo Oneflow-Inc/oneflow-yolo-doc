@@ -6,7 +6,7 @@
 
 COCO128是官方给的一个小的数据集 由[COCO](https://cocodataset.org/#home)数据集前128张图片组成。
 这128幅图像用于训练和验证，以验证我们的训练是否能够过正常进行。[coco128.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml) 。
-[数据集配置文件 coco128.yaml](https://github.com/ultralytics/yolov5/blob/master/data/coco128.yaml)定义了如下的配置选项： 
+[数据集配置文件 coco128.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml)定义了如下的配置选项： 
 
 ```coco128.yaml
 # train and val data as 1) directory: path/images/, 2) file: path/images.txt, or 3) list: [path1/images/, path2/images/]
@@ -48,13 +48,13 @@ download: https://ultralytics.com/assets/coco128.zip
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/26833433/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
+  <img src="how_to_prepare_yolov5_training_data_imgs/91506361-c7965000-e886-11ea-8291-c72b98c25eec.jpg">
   这里假设以coco数据集的目标类别约定来标注
 </p>
 与上述图像相对应的标签文件包含2个人（class 0）和 一个领带（class 27）：
 
 
-![imgs](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.image)
+![imgs](how_to_prepare_yolov5_training_data_imgs/270bc6d3bb0b406fa12f4a83a763819b~tplv-k3u1fbpfcp-zoom-1.png)
 
 ## 3.目录结构
 
@@ -63,7 +63,7 @@ download: https://ultralytics.com/assets/coco128.zip
 dataset/images/im0.jpg  # image
 dataset/labels/im0.txt  # label
 ```
-![imgs](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.image)
+![imgs](how_to_prepare_yolov5_training_data_imgs/cf60a753e49b4982a212f0e28b727df9~tplv-k3u1fbpfcp-zoom-1.png)
 
 
 # 制作数据集
@@ -76,17 +76,29 @@ dataset/labels/im0.txt  # label
 pip install labelimg
 ```
 安装后直接输入命令：
-
+```
 labelimg
+```
+即可打开运行。
 
-即可打开运行：
+点击Open Dir选择数据集文件夹，再点击Create RectBox进行标注。
+
 
 
 <p align="center">
 
-  <img src="https://raw.githubusercontent.com/Oneflow-Inc/one-yolov5/how-to-prepare-yolov5-model-training-data/data/images/labelimg.png">
+  <img src="how_to_prepare_yolov5_training_data_imgs/labelimg.png">
 
 </p>
+
+当你绘制框结束就会弹出标签选择框，然后标注类别。这个类别编辑更改在Labelimg文件里，里面有classes.txt文档，打开手动更改类别即可。（当出现新类别时也可在标签选择框里输入点OK就自动添加类别了）
+
+标注好后选择yolo格式，点击Save保存。标注结果保存在`图片名.txt`文件中，txt文件和图片名称一致，内容如下：
+
+<p align="center">
+  <img src="how_to_prepare_yolov5_training_data_imgs/labelimg_txt.png">
+</p>
+
 
 
 
@@ -107,7 +119,7 @@ labelimg
 
 <p align="center">
   <a href= "https://arxiv.org/abs/1405.0312">
-  <img src="https://user-images.githubusercontent.com/26833433/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
+  <img src="how_to_prepare_yolov5_training_data_imgs/109398377-82b0ac00-78f1-11eb-9c76-cc7820669d0d.png">
   </a>  
 </p>
 

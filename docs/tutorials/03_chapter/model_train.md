@@ -35,7 +35,7 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 ```
 ###  📌使用SyncBatchNorm
 
-[SyncBatchNorm](https://pytorch.org/docs/master/generated/torch.nn.SyncBatchNorm.html)可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
+[SyncBatchNorm](https://oneflow.readthedocs.io/en/master/generated/oneflow.nn.SyncBatchNorm.html?highlight=SyncBatchNorm#oneflow.nn.SyncBatchNorm)可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
 
 建议最好在每个GPU上的样本数量较小（*样本数量<=8*）时使用。
 
@@ -109,7 +109,7 @@ python detect.py --weights yolov5s --img 832
 ![imgs]( https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0/model_comparison.png)
 
 
-- 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/ultralytics/yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/ultralytics/yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/ultralytics/yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/ultralytics/yolov5/releases) 下载 。
+- 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/Oneflow-Inc/one-yolov5/releases) 下载 。
 
 ```python
 python train.py --data custom.yaml --weights yolov5s 
@@ -120,7 +120,7 @@ python train.py --data custom.yaml --weights yolov5s
                                         
 ```
 
-- 从头开始训练的话，推荐用大的数据集(即 COCO、Objects365、OIv6 ) --cfg 后传递您感兴趣的网络结构文件参数 以及空的--weights ' ' 参数：
+- 从头开始训练的话，推荐用大的数据集(即 COCO、Objects365、OIv6 )在 `--cfg` 选项后传递您感兴趣的网络结构文件参数 以及空的` --weights ''` 参数：
   
 ```python
 python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
