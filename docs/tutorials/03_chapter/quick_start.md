@@ -45,8 +45,7 @@ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --resume
 
 ## 评估 👣
 
-该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 **yolov5xpt** 是可用的最大和最精确的模型。其它可用的是 **yolov5s**, **yolov5m**  和 **yolov5l**  或者 自己的检查点来自训练自定义数据集。**./weights/best**。有关所有可用模型的详细信息，请参阅我们的 [READEME table](https://github.com/ultralytics/yolov5#pretrained-checkpoints)
-
+下面的命令是在COCO val2017数据集上以640像素的图像大小测试 `yolov5x` 模型。 `yolov5x`是可用小模型中最大且最精确的，其它可用选项是 `yolov5n` ，`yolov5m`，`yolov5s`，`yolov5l` ，以及他们的 P6 对应项比如 `yolov5s6` ，或者你自定义的模型，即 `runs/exp/weights/best` 。有关可用模型的更多信息，请参阅我们的[README-TABLE](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 ```python
 $ python val.py --weights yolov5x --data coco.yaml --img 640 
 ```
