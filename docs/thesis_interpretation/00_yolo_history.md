@@ -41,7 +41,7 @@ $YOLOv3$ 是 $YOLOv2$ 改良版 ，出自 $YOLOv2$ 的原作者 (Joseph Redmon �
 
 $YOLOv4$ 发布后不久，Glenn Jocher使用Pytorch框架引入了 $YOLOv5$ 没有发布论文。
 
-代码链接: [GitHub](https://github.com/ultralytics/yolov5)
+代码链接: [https://github.com/ultralytics/yolov5](https://github.com/ultralytics/yolov5)
 
 
 ## YOLOv6⚡
@@ -49,13 +49,13 @@ $YOLOv6$ 提供了一系列面向各种工业应用场景的模型，包括微�
 
 官方论文: [YOLOv6: A Single-Stage Object Detection Framework for Industrial Applications](https://arxiv.org/abs/2209.02976)
 
-代码链接：https://github.com/meituan/YOLOv6
+代码链接：[https://github.com/meituan/YOLOv6](https://github.com/meituan/YOLOv6)
 
 ## YOLOv7👍
 
 官方论文:[YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors](https://arxiv.org/abs/2207.02696)
 
-代码链接：https://github.com/WongKinYiu/yolov7
+代码链接：[https://github.com/WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7)
 
 
 
