@@ -47,9 +47,32 @@
 
 最终在第 300 个 epoch 时，我们的 `map_0.5` 达到了 **0.45174** ，`map_0.5:0.95` 达到了 **0.27726** 。
 
-和[官方 YOLOv5 给出的精度数据](https://github.com/ultralytics/yolov5#pretrained-checkpoints) 非常接近，基本可以认为此网络在 COCO 上已经对齐了目标精度。
+和 [官方 YOLOv5 给出的精度数据](https://github.com/ultralytics/yolov5#pretrained-checkpoints) 一致（注意官网给出的精度指定 `iou` 为 0.65 的精度，而上述 csv 文件中是在 `iou` 为 0.60 下的精度，使用我们训练的权重并把 `iou` 指定为 0.65 可以完全对齐官方给出的精度数据）。
 
-精度复现的命令为 (2卡DDP模式) ：
+关于这一点，我们可以使用 ultralytics/yolov5 来验证一下：
+
+```python
+python val.py  --weights yolov5n.pt --data data/coco.yaml --img 640 --iou 0.60
+```
+
+输出：
+
+```shell
+val: data=data/coco.yaml, weights=['yolov5n.pt'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, max_det=300, task=val, device=, workers=8, single_cls=False, augment=False, verbose=False, save_txt=False, save_hybrid=False, save_conf=False, save_json=True, project=runs/val, name=exp, exist_ok=False, half=False, dnn=False
+YOLOv5 🚀 v6.1-384-g7fd9867 Python-3.8.13 torch-1.10.0+cu113 CUDA:0 (NVIDIA GeForce RTX 3080 Ti, 12054MiB)
+
+cuda:0
+Fusing layers... 
+YOLOv5n summary: 213 layers, 1867405 parameters, 0 gradients, 4.5 GFLOPs
+val: Scanning '/data/dataset/fengwen/coco/val2017.cache' images and labels... 4952 found, 48 missing, 0 empty, 0 corrupt: 100%|█████
+                 Class     Images  Instances          P          R      mAP50   mAP50-95: 100%|██████████| 157/157 [00:40<00:00,  3.
+                   all       5000      36335      0.573      0.432      0.456      0.277
+```
+
+上面的输出可以说明我们和 ultralytics/yolov5 的精度是完全对齐的。
+
+
+在 one-yolov5 从零开始训练 yolov5n 进行精度复现的命令为 (2卡DDP模式) ：
 
 ```python3
 python  -m oneflow.distributed.launch --nproc_per_node 2 train.py --data  data/coco.yaml  --weights ' ' --cfg models/yolov5n.yaml --batch 64
