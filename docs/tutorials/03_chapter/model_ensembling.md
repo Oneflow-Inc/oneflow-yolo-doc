@@ -123,7 +123,7 @@ detect.py:159: DeprecationWarning: In future, it will be an error for 'np.bool_'
 image 2/2 /home/fengwen/one-yolov5/data/images/zidane.jpg: 384x640 3 persons, 2 ties, Done. (0.023s)
 0.6ms pre-process, 25.6ms inference, 2.4ms NMS per image at shape (1, 3, 640, 640)
 ```
-<img src="/tutorials/03_chapter/model_ensembling_imgs/zidane.jpg">
+<img src="./model_ensembling_imgs/zidane.jpg">
 
 ### 参考文章
 
