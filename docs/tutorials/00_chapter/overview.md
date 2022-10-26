@@ -47,7 +47,7 @@
 
 最终在第 300 个 epoch 时，我们的 `map_0.5` 达到了 **0.45174** ，`map_0.5:0.95` 达到了 **0.27726** 。
 
-和 [官方 YOLOv5 给出的精度数据](https://github.com/ultralytics/yolov5#pretrained-checkpoints) 一致（注意官网给出的精度指定 `iou` 为 0.65 的精度，而上述 csv 文件中是在 `iou` 为 0.60 下的精度，使用我们训练的权重并把 `iou` 指定为 0.65 可以完全对齐官方给出的精度数据）。
+和 [ultralytics/yolov5 给出的精度数据](https://github.com/ultralytics/yolov5#pretrained-checkpoints) 一致（注意官网给出的精度指定 `iou` 为 0.65 的精度，而上述 csv 文件中是在 `iou` 为 0.60 下的精度，使用我们训练的权重并把 `iou` 指定为 0.65 可以完全对齐官方给出的精度数据）。
 
 关于这一点，我们可以使用 ultralytics/yolov5 来验证一下：
 
