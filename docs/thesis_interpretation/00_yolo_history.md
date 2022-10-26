@@ -49,7 +49,7 @@ $YOLOv6$ 提供了一系列面向各种工业应用场景的模型，包括微�
 
 官方论文: [YOLOv6: A Single-Stage Object Detection Framework for Industrial Applications](https://arxiv.org/abs/2209.02976)
 
-代码链接：https://github.com/WongKinYiu/yolov7
+代码链接：https://github.com/meituan/YOLOv6
 
 ## YOLOv7👍
 
