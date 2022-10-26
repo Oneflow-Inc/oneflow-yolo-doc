@@ -41,9 +41,19 @@
 
 # 0x2. 在COCO上的精度表现
 
-[result.csv](https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/YOLOv5n_results.csv) 这个日志展示了我们基于 one-yolov5 在 COCO 上从零开始训练 YOLOv5n 网络的日志。
+我们以 yolov5n 网络为例， [result.csv](https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/YOLOv5n_results.csv) 这个日志展示了我们基于 one-yolov5 在 COCO 上从零开始训练 YOLOv5n 网络的日志。下图展示了 `box_loss` , `obj_loss`, `cls_loss` ，`map_0.5`, `map_0.5:0.95` 等指标在训练过程中的变化情况：
 
-需要扩展...
+![图片](https://user-images.githubusercontent.com/35585791/197911473-ec1b246f-aa3d-4f25-bf35-534458804213.png)
+
+最终在第 300 个 epoch 时，我们的 `map_0.5` 达到了 **0.45174** ，`map_0.5:0.95` 达到了 **0.27726** 。
+
+和[官方 YOLOv5 给出的精度数据](https://github.com/ultralytics/yolov5#pretrained-checkpoints) 非常接近，基本可以认为此网络在 COCO 上已经对齐了目标精度。
+
+精度复现的命令为 (2卡DDP模式) ：
+
+```python3
+python  -m oneflow.distributed.launch --nproc_per_node 2 train.py --data  data/coco.yaml  --weights ' ' --cfg models/yolov5n.yaml --batch 64
+```
 
 # 0x3. 在COCO上的性能表现
 
@@ -63,7 +73,7 @@
 
 ![图片](https://user-images.githubusercontent.com/35585791/196843664-ceaabc3c-aae9-40dc-9972-60254f8b2549.png)
 
-可以看到，在 batch 比较小的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 有 5%-10% 左右的性能优势，这可能得益于 OneFlow 的 Eager 运行时系统可以更快的做 Kernel Launch。而 batch 比较大的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 的性能差不多是持平，这可能是因为当 Batch 比较大的时候 Kernel Launch 的开销相比于计算的开销会比较小。
+可以看到，在 batch 比较小的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 有 5%-10% 左右的性能优势，这可能得益于 OneFlow 的 Eager 运行时系统可以更快的做 CUDA Kernel Launch。而 batch 比较大的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 的性能差不多是持平，这可能是因为当 Batch 比较大的时候 CUDA Kernel Launch 的开销相比于计算的开销会比较小。
 
 ### 两卡DDP测试结果
 
