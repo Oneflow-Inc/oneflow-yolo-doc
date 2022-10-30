@@ -68,7 +68,7 @@ nav:
         -  11. IOU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
         -  12. 模型精确度评估: tutorials/05_chapter/map_analysis.md
         -  13. 模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
-     
+        -  14. 计算mAP用到的numpy函数: tutorials/05_chapter/Introduction_to_functions_used_in_metrics.md
     
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
