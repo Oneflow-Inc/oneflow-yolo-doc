@@ -41,6 +41,7 @@ np.cumsum(a) # 计算累积和的轴。默认（无）是在展平的数组上�
 
 
 ```python
+a = np.array([[1,2,3], [4,5,6]])
 np.cumsum(a, dtype=float)     # 指定输出的特定的类型
 ```
 
@@ -96,7 +97,7 @@ np.cumsum(a,axis=1)      # 2行中每行的列总和
 - 参数
  * x: 数组 待插入数据的横坐标
  * xp: 一维浮点数序列 原始数据点的横坐标，如果period参数没有指定那么就必须是递增的 否则，在使用xp = xp % period正则 化之后，xp在内部进行排序
- * fp: 维浮点数或复数序列 原始数据点的纵坐标，和xp序列等长.
+ * fp: 一维浮点数或复数序列 原始数据点的纵坐标，和xp序列等长.
  * left: 可选参数，类型为浮点数或复数（对应于fp值） 当x < xp[0]时的插值返回值，默认为fp[0].
  * right: 可选参数，类型为浮点数或复数（对应于fp值），当x > xp[-1]时的插值返回值，默认为fp[-1].
  * period: None或者浮点数，可选参数 横坐标的周期 此参数使得可以正确插入angular x-coordinates. 如果该参数被设定，那么忽略left参数和right参数
@@ -197,7 +198,8 @@ plt.show() # (1 + 3)*(3 - 1)/2 = 4
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
-y = [1, 2, 3] ; x = [4, 6, 8]
+y = [1, 2, 3] 
+x = [4, 6, 8]
 print(np.trapz(y,x))
 plt.fill_between(x, y)
 plt.show() # (3 + 1)*(8 - 4) / 2 = 8
