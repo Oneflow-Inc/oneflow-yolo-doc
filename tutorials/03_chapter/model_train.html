@@ -465,6 +465,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    拓展 📘
+  </a>
+  
+    <nav class="md-nav" aria-label="拓展 📘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    📌使用多机训练
+  </a>
+  
+    <nav class="md-nav" aria-label="📌使用多机训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    注意⚠️
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    配置代码⚡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -809,6 +870,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    拓展 📘
+  </a>
+  
+    <nav class="md-nav" aria-label="拓展 📘">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    📌使用多机训练
+  </a>
+  
+    <nav class="md-nav" aria-label="📌使用多机训练">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    注意⚠️
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    配置代码⚡
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    附件
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -894,7 +1016,7 @@
 <p>类似于YOLOv5x和YOLOv5x6的大型模型在几乎所有情况下都会产生更好的结果，但参数更多，需要更多的CUDA内存进行训练，运行速度较慢。</p>
 <p>对于移动部署，我们推荐YOLOv5s/m，对于云部署，我们建议YOLOV5l/x。</p>
 <p>有关所有模型的完整比较，请参阅<a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">详细表</a></p>
-<p><img alt="imgs" src="https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0/model_comparison.png" /></p>
+<p><img alt="imgs" src="https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0.0/model_comparison.png" /></p>
 <ul>
 <li>从预先训练的权重开始训练。建议用于中小型数据集（即<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml">VOC</a>、<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml">VisDrone</a>、<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml">GlobalWheat</a>）。将模型的名称传递给--weights参数。模型自动从<a href="https://github.com/Oneflow-Inc/one-yolov5/releases">latest YOLOv5 releasse</a> 下载 。</li>
 </ul>
@@ -924,43 +1046,35 @@
 
 <li> Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的 <a href="https://github.com/ultralytics/yolov5/issues/607"> 《超参数演化教程》</a>。</li>
 
+</ul>
 
-
-
-## 拓展 📘
-
-### 📌使用多机训练
-这仅适用于多GPU分布式数据并行训练。
-
-在训练之前，确保所有机器上的文件都相同，数据集、代码库等。之后，确保机器可以相互通信。
-
-您必须选择一台主机器（其他机器将与之对话）。记下它的地址（master_addr）并选择一个端口（master-port）。对于下面的示例，将使用master_addr=192.168.1.1和master_ port=1234。
-
-要使用它，可以执行以下指令：
+<h2 id="_9">拓展 📘</h2>
+<h3 id="_10">📌使用多机训练</h3>
+<p>这仅适用于多GPU分布式数据并行训练。</p>
+<p>在训练之前，确保所有机器上的文件都相同，数据集、代码库等。之后，确保机器可以相互通信。</p>
+<p>您必须选择一台主机器（其他机器将与之对话）。记下它的地址（master_addr）并选择一个端口（master-port）。对于下面的示例，将使用master_addr=192.168.1.1和master_ port=1234。</p>
+<p>要使用它，可以执行以下指令：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># On master machine 0</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="n">G</span> <span class="o">--</span><span class="n">nnodes</span> <span class="n">N</span> <span class="o">--</span><span class="n">node_rank</span> <span class="mi">0</span> <span class="o">--</span><span class="n">master_addr</span> <span class="s2">&quot;192.168.1.1&quot;</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span>
-</code></pre></div>
-
+</code></pre></div></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># On machine R</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="n">G</span> <span class="o">--</span><span class="n">nnodes</span> <span class="n">N</span> <span class="o">--</span><span class="n">node_rank</span> <span class="n">R</span> <span class="o">--</span><span class="n">master_addr</span> <span class="s2">&quot;192.168.1.1&quot;</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39;&#39;</span>
 </code></pre></div>
-
-其中G是每台机器的GPU数量，N是机器数量，R是从0到（N-1）的机器数量。
-
-假设我有两台机器，每台机器有两个GPU，对于上面的情况，G=2，N=2，R=1。
-
-在连接所有N台机器之前，训练不会开始。输出将仅显示在主机上！
-
-#### 注意⚠️
-- oneflow目前不支持windows平台
-- --batch 必须是GPU数量的倍数。
-- GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
-- 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
+<p>其中G是每台机器的GPU数量，N是机器数量，R是从0到（N-1）的机器数量。</p>
+<p>假设我有两台机器，每台机器有两个GPU，对于上面的情况，G=2，N=2，R=1。</p>
+<p>在连接所有N台机器之前，训练不会开始。输出将仅显示在主机上！</p>
+<h4 id="_11">注意⚠️</h4>
+<ul>
+<li>oneflow目前不支持windows平台</li>
+<li>--batch 必须是GPU数量的倍数。</li>
+<li>GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。</li>
+<li>如果您得到 <strong>RuntimeError: Address already in use</strong> ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">master_port</span> <span class="mi">1234</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">2</span> <span class="o">...</span>
-</code></pre></div>
-#### 结果💡
-DDP 分析结果在[AWS EC2 P4d instance]( https://github.com/Oneflow-Inc/one-yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
-####  配置代码⚡
+</code></pre></div></li>
+</ul>
+<h4 id="_12">结果</h4>
+<p>DDP 分析结果在<a href="https://github.com/Oneflow-Inc/one-yolov5/wiki/AWS-Quickstart">AWS EC2 P4d instance</a> with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.</p>
+<h4 id="_13">配置代码⚡</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># prepare</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">t</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Oneflow</span><span class="o">-</span><span class="n">Inc</span><span class="o">/</span><span class="n">one</span><span class="o">-</span><span class="n">yolov5</span><span class="p">:</span><span class="n">latest</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">docker</span> <span class="n">pull</span> <span class="err">$</span><span class="n">t</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">ipc</span><span class="o">=</span><span class="n">host</span> <span class="o">--</span><span class="n">gpus</span> <span class="nb">all</span> <span class="o">-</span><span class="n">v</span> <span class="s2">&quot;$(pwd)&quot;</span><span class="o">/</span><span class="n">coco</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">coco</span> <span class="err">$</span><span class="n">t</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">pre</span> <span class="n">oneflow</span> <span class="o">-</span><span class="n">f</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">staging</span><span class="o">.</span><span class="n">oneflow</span><span class="o">.</span><span class="n">info</span><span class="o">/</span><span class="n">branch</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">cu112</span>
@@ -973,68 +1087,189 @@ DDP 分析结果在[AWS EC2 P4d instance]( https://github.com/Oneflow-Inc/one-yo
 <a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">4</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">64</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span>  <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>  
 <a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">8</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">batch</span><span class="o">-</span><span class="n">size</span> <span class="mi">128</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco_profile</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5l</span>  <span class="o">--</span><span class="n">epochs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">device</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span>
 </code></pre></div>
-
-<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
+<p><a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
 📢 快来给我Star呀😊~
 <img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
-</a>
-
-
-
-
-## 附件
-
-
- <span id="table_31"> 表3.1</span> 
-
-表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
-
-
-
-
-
-| 参数              | help                                                | 帮助                                                                                             |
-|-------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------|
-| --weight          | initial weights path                                | 加载的权重文件路径                                                                               |
-| --cfg             | model.yaml path                                     | 模型配置文件，网络结构 路径                                                                       |
-| --data            | dataset.yaml path                                   | 数据集配置文件，数据集路径                                                                        |
-| --hyp             | hyperparameters path                                | 超参数文件 路径                                                                                  |
-| --epochs          | Total training rounds                               | 训练总轮次                                                                                       |
-| --batch-size      | total batch size for all GPUs, -1 for autobatch     | 一次训练所选取的样本数                                                                           |
-| --imgsz           | train, val image size (pixels)                      | 输入图片分辨率大小                                                                               |
-| --rect            | rectangular training                                | 是否采用矩形训练，默认False                                                                       |
-| --resume          | resume most recent training                         | 接着打断训练上次的结果接着训练                                                                   |
-| --nosave          | only save final checkpoint                          | 只保存最终的模型，默认False                                                                       |
-| --noautoanchor    | disable AutoAnchor                                  | 不自动调整anchor，默认False                                                                       |
-| --noplots         | save no plot files                                  | 不保存打印文件，默认False                                                                         |
-| --evolve          | evolve hyperparameters for x generations            | 是否进行超参数进化，默认False                                                                     |
-| --bucket          | gsutil bucket                                       | 谷歌云盘bucket，一般不会用到                                                                      |
-| --cache           | --cache images in "ram" (default) or "disk"         | 是否提前缓存图片到内存，以加快训练速度，默认False                                                  |
-| --device          | cuda device, i.e. 0 or 0,1,2,3 or cpu               | 训练的设备，cpu；0(表示一个gpu设备cuda:0)；0,1,2,3(多个gpu设备)                                     |
-| --multi-scale     | vary img-size +/- 50%%                              | 是否进行多尺度训练，默认False                                                                     |
-| --single-cls      | train multi-class data as single-class              | 数据集是否只有一个类别，默认False                                                                 |
-| --optimizer       | optimizer                                           | 优化器                                                                                           |
-| --sync-bn         | use SyncBatchNorm, only available in DDP mode       | 是否使用跨卡同步BN,在DDP模式使用                                                                 |
-| --workers         | max dataloader workers (per RANK in DDP mode)       | dataloader的最大worker数量                                                                       |
-| --project         | save to project path                                | 保存到项目结果地址                                                                               |
-| --name            | save to project/name/                               | 保存到项目结果/名称                                                                              |
-| --exist-ok        | existing project/name ok, do not increment          | 现有项目/名称确定，不递增，默认False                                                               |
-| --quad            | quad dataloader                                     | 四元数据加载器 开启之后在尺寸大于640的图像上识别效果更好，但是有可能会使在640尺寸的图片上效果更差 |
-| --cos-lr          | cosine LR scheduler                                 | 是否采用退火余弦学习率，默认False                                                                 |
-| --label-smoothing | Label smoothing epsilon                             | 标签平滑                                                                                         |
-| --patience        | EarlyStopping patience (epochs without improvement) | 早停机制，默认False                                                                               |
-| --freez           | Freeze layers: backbone=10, first3=0 1 2            | 冻结层数，默认不冻结                                                                              |
-| --save-period     | Save checkpoint every x epochs (disabled if < 1)    | 用于记录训练日志信息，int 型，默认 -1                                                              |
-| --seed            | Global training seed                                | 随机数种子设置                                                                                       |
-| --local_rank      | Automatic DDP Multi-GPU argument, do not modify     | 自动单机多卡训练 一般不改动                                                                      |
-
-
-
-
-
-## 参考文章
-- https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
-- https://docs.ultralytics.com/quick-start/
+</a></p>
+<h2 id="_14">附件</h2>
+<p><span id="table_31"> 表3.1</span> </p>
+<p>表3.1 : <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566">train.py参数解析表</a></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>help</th>
+<th>帮助</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>--weight</td>
+<td>initial weights path</td>
+<td>加载的权重文件路径</td>
+</tr>
+<tr>
+<td>--cfg</td>
+<td>model.yaml path</td>
+<td>模型配置文件，网络结构 路径</td>
+</tr>
+<tr>
+<td>--data</td>
+<td>dataset.yaml path</td>
+<td>数据集配置文件，数据集路径</td>
+</tr>
+<tr>
+<td>--hyp</td>
+<td>hyperparameters path</td>
+<td>超参数文件 路径</td>
+</tr>
+<tr>
+<td>--epochs</td>
+<td>Total training rounds</td>
+<td>训练总轮次</td>
+</tr>
+<tr>
+<td>--batch-size</td>
+<td>total batch size for all GPUs, -1 for autobatch</td>
+<td>一次训练所选取的样本数</td>
+</tr>
+<tr>
+<td>--imgsz</td>
+<td>train, val image size (pixels)</td>
+<td>输入图片分辨率大小</td>
+</tr>
+<tr>
+<td>--rect</td>
+<td>rectangular training</td>
+<td>是否采用矩形训练，默认False</td>
+</tr>
+<tr>
+<td>--resume</td>
+<td>resume most recent training</td>
+<td>接着打断训练上次的结果接着训练</td>
+</tr>
+<tr>
+<td>--nosave</td>
+<td>only save final checkpoint</td>
+<td>只保存最终的模型，默认False</td>
+</tr>
+<tr>
+<td>--noautoanchor</td>
+<td>disable AutoAnchor</td>
+<td>不自动调整anchor，默认False</td>
+</tr>
+<tr>
+<td>--noplots</td>
+<td>save no plot files</td>
+<td>不保存打印文件，默认False</td>
+</tr>
+<tr>
+<td>--evolve</td>
+<td>evolve hyperparameters for x generations</td>
+<td>是否进行超参数进化，默认False</td>
+</tr>
+<tr>
+<td>--bucket</td>
+<td>gsutil bucket</td>
+<td>谷歌云盘bucket，一般不会用到</td>
+</tr>
+<tr>
+<td>--cache</td>
+<td>--cache images in "ram" (default) or "disk"</td>
+<td>是否提前缓存图片到内存，以加快训练速度，默认False</td>
+</tr>
+<tr>
+<td>--device</td>
+<td>cuda device, i.e. 0 or 0,1,2,3 or cpu</td>
+<td>训练的设备，cpu；0(表示一个gpu设备cuda:0)；0,1,2,3(多个gpu设备)</td>
+</tr>
+<tr>
+<td>--multi-scale</td>
+<td>vary img-size +/- 50%%</td>
+<td>是否进行多尺度训练，默认False</td>
+</tr>
+<tr>
+<td>--single-cls</td>
+<td>train multi-class data as single-class</td>
+<td>数据集是否只有一个类别，默认False</td>
+</tr>
+<tr>
+<td>--optimizer</td>
+<td>optimizer</td>
+<td>优化器</td>
+</tr>
+<tr>
+<td>--sync-bn</td>
+<td>use SyncBatchNorm, only available in DDP mode</td>
+<td>是否使用跨卡同步BN,在DDP模式使用</td>
+</tr>
+<tr>
+<td>--workers</td>
+<td>max dataloader workers (per RANK in DDP mode)</td>
+<td>dataloader的最大worker数量</td>
+</tr>
+<tr>
+<td>--project</td>
+<td>save to project path</td>
+<td>保存到项目结果地址</td>
+</tr>
+<tr>
+<td>--name</td>
+<td>save to project/name/</td>
+<td>保存到项目结果/名称</td>
+</tr>
+<tr>
+<td>--exist-ok</td>
+<td>existing project/name ok, do not increment</td>
+<td>现有项目/名称确定，不递增，默认False</td>
+</tr>
+<tr>
+<td>--quad</td>
+<td>quad dataloader</td>
+<td>四元数据加载器 开启之后在尺寸大于640的图像上识别效果更好，但是有可能会使在640尺寸的图片上效果更差</td>
+</tr>
+<tr>
+<td>--cos-lr</td>
+<td>cosine LR scheduler</td>
+<td>是否采用退火余弦学习率，默认False</td>
+</tr>
+<tr>
+<td>--label-smoothing</td>
+<td>Label smoothing epsilon</td>
+<td>标签平滑</td>
+</tr>
+<tr>
+<td>--patience</td>
+<td>EarlyStopping patience (epochs without improvement)</td>
+<td>早停机制，默认False</td>
+</tr>
+<tr>
+<td>--freez</td>
+<td>Freeze layers: backbone=10, first3=0 1 2</td>
+<td>冻结层数，默认不冻结</td>
+</tr>
+<tr>
+<td>--save-period</td>
+<td>Save checkpoint every x epochs (disabled if &lt; 1)</td>
+<td>用于记录训练日志信息，int 型，默认 -1</td>
+</tr>
+<tr>
+<td>--seed</td>
+<td>Global training seed</td>
+<td>随机数种子设置</td>
+</tr>
+<tr>
+<td>--local_rank</td>
+<td>Automatic DDP Multi-GPU argument, do not modify</td>
+<td>自动单机多卡训练 一般不改动</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_15">参考文章</h2>
+<ul>
+<li>https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data</li>
+<li>https://docs.ultralytics.com/quick-start/</li>
+</ul>
                 
               
               
