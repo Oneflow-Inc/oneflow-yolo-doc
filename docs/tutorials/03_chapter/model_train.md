@@ -106,7 +106,7 @@ python detect.py --weights yolov5s --img 832
 
 有关所有模型的完整比较，请参阅[详细表](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 
-![imgs]( https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0/model_comparison.png)
+![imgs]( https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0.0/model_comparison.png)
 
 
 - 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/Oneflow-Inc/one-yolov5/releases) 下载 。
@@ -141,8 +141,8 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
   <li> Batch Size: 使用更大的 --batch-size 。能够有效缓解小样本数产生的batchnorm统计的错误。</li>
 
 <li> Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的 <a href="https://github.com/ultralytics/yolov5/issues/607"> 《超参数演化教程》</a>。</li>
-  
 
+</ul>
 
 
 ## 拓展 📘
@@ -179,8 +179,10 @@ $ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank
 ```python
 $ python -m oneflow.distributed.launch --master_port 1234 --nproc_per_node 2 ...
 ```
-#### 结果💡
+#### 结果
+
 DDP 分析结果在[AWS EC2 P4d instance]( https://github.com/Oneflow-Inc/one-yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
+
 ####  配置代码⚡
 ```python
 # prepare
@@ -207,7 +209,7 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
 ## 附件
 
 
- <span id="table_31"> 表3.1</span> 
+<span id="table_31"> 表3.1</span> 
  
 表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
 
