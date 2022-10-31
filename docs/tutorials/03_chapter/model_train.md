@@ -208,7 +208,12 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
 
 
  <span id="table_31"> 表3.1</span> 
- 表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
+ 
+表3.1 : [train.py参数解析表](https://github.com/Oneflow-Inc/one-yolov5/blob/e91659e981da258b8e8d9b5ad4fd27e6e31d04d4/train.py#L478-L566)
+
+  
+  
+ 
 
 | 参数              | help                                                | 帮助                                                                                             |
 |-------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------------|
@@ -247,6 +252,7 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
 
 
 
+                                                                      
 
 ## 参考文章
 - https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
