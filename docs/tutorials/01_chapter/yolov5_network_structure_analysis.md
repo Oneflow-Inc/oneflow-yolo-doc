@@ -169,6 +169,7 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 
 2. 模块组件右边参数 表示特征图的的形状，比如 在 第 一 层( Conv )输入 图片形状为 [ 3, 640, 640] ,关于这些参数，可以固定一张图片输入到网络并通过[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)的模型参数计算得到，并且可以在工程 models/[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 通过代码进行print查看,详细数据可以参考附件表2.1。
 
+3. [1, 128, 80, 80],[1, 256, 40, 40],[1, 512, 20, 20] 作为输入经过Detect的forward, 接着flow.cat()函数拼接成为output: [1, 25200, 85]
 
 ## [yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 解读
 
@@ -480,9 +481,9 @@ class Detect(nn.Module):
     def __init__(self, nc=80, anchors=(), ch=(), inplace=True):  # detection layer
         super().__init__()
         #  nc:分类数量
-        self.nc = nc  # number of classes  
-        #  no:每个anchor的输出数
-        self.no = nc + 5  # number of outputs per anchor
+        self.nc = nc  # number of classes  COCO : 80
+        #  no:每个anchor的输出数 COCO: 80 + 5 = 85 
+        self.no = nc + 5  # number of outputs per anchor  Detect的个数 3
         # nl:预测层数，此次为3
         self.nl = len(anchors)  # number of detection layers
         #  na:anchors的数量，此次为3
@@ -491,6 +492,9 @@ class Detect(nn.Module):
         self.grid = [flow.zeros(1)] * self.nl  # init grid
         self.anchor_grid = [flow.zeros(1)] * self.nl  # init anchor grid
         # 写入缓存中，并命名为anchors
+        # register_buffer
+        # 模型中需要保存的参数一般有两种：一种是反向传播需要被optimizer更新的，称为parameter; 另一种不要被更新称为buffer
+        # buffer的参数更新是在forward中，而optim.step只能更新nn.parameter类型的参数
         self.register_buffer('anchors', flow.tensor(anchors).float().view(self.nl, -1, 2))  # shape(nl,na,2)
         # 将输出通过卷积到 self.no * self.na 的通道，达到全连接的作用
         self.m = nn.ModuleList(nn.Conv2d(x, self.no * self.na, 1) for x in ch)  # output conv
@@ -504,11 +508,16 @@ class Detect(nn.Module):
             x[i] = x[i].view(bs, self.na, self.no, ny, nx).permute(0, 1, 3, 4, 2).contiguous()
 
             if not self.training:  # inference
+                # 构造网格
+                # 因为推理返回的不是归一化后的网格偏移量 需要再加上网格的位置 得到最终的推理坐标 再送入nms
+                # 所以这里构建网格就是为了记录每个grid的网格坐标 方面后面使用
                 if self.onnx_dynamic or self.grid[i].shape[2:4] != x[i].shape[2:4]:
                     # 向前传播时需要将相对坐标转换到grid绝对坐标系中
                     self.grid[i], self.anchor_grid[i] = self._make_grid(nx, ny, i)
                 y = x[i].sigmoid()
                 if self.inplace:
+                    # 默认执行 不使用AWS Inferentia
+                    # 这里的公式和yolov3、v4中使用的不一样 是yolov5作者自己用的 效果更好
                     y[..., 0:2] = (y[..., 0:2] * 2 + self.grid[i]) * self.stride[i]  # xy
                     y[..., 2:4] = (y[..., 2:4] * 2) ** 2 * self.anchor_grid[i]  # wh
                 else:  # for YOLOv5 on AWS Inferentia https://github.com/ultralytics/yolov5/pull/2953
@@ -516,8 +525,11 @@ class Detect(nn.Module):
                     xy = (xy * 2 + self.grid[i]) * self.stride[i]  # xy
                     wh = (wh * 2) ** 2 * self.anchor_grid[i]  # wh
                     y = flow.cat((xy, wh, conf), 4)
-                z.append(y.view(bs, -1, self.no))
 
+                # z [oneflow.Size([1, 19200, 85])  oneflow.Size([1, 4800, 85]) oneflow.Size([1, 1200, 85])]
+                z.append(y.view(bs, -1, self.no))
+                
+        
         return x if self.training else (flow.cat(z, 1),) if self.export else (flow.cat(z, 1), x)
     
     # 相对坐标转换到grid绝对坐标系
