@@ -73,7 +73,8 @@ one-yolov5 : 是以 [OneFlow](https://github.com/Oneflow-Inc/oneflow) 为后端�
 - [YOLOv6 ](https://start.oneflow.org/oneflow-yolo-doc/thesis_interpretation/06_yolo.html)
 
 ## YOLOv5源码详解导航📚
-- 施工中。。。
+- utils 
+     - [autoanchor.py](https://start.oneflow.org/oneflow-yolo-doc/docs/source_code_interpretation/utils/autoanchor_py.html)
 ## FAQ 💘
 <a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
 
