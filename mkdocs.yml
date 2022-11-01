@@ -76,6 +76,7 @@ nav:
         - 第六章 模型导出和部署介绍:
             - 6.1 模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
 
+
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
         - YOLOv1 : thesis_interpretation/01_yolo.md
