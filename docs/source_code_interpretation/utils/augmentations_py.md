@@ -1,3 +1,21 @@
+## 前言
+
+源码解读： [utils/augmentations.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/augmentations.py)
+
+- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
+- OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a>
+
+
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+
+
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
+
 ## 0、random_perspective
 &emsp;这个函数是进行随机透视变换，对mosaic整合后的图片进行随机旋转、缩放、平移、裁剪，透视变换，
 
@@ -171,8 +189,8 @@ def random_perspective(
 ```
 
 这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：
-![image.png](attachment:image.png)这个函数的参数来自hyp中的5个参数
-![image-2.png](attachment:image-2.png)
+![image.png](augmentations_imgs/picture_00.png)这个函数的参数来自hyp中的5个参数
+![image-2.png](augmentations_imgs/picture_01.png)
 
 ## 1、box_candidates
 &emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。
@@ -248,7 +266,7 @@ def replicate(img, labels):
 ```
 
 会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）：
-![image.png](attachment:image.png)
+![image.png](augmentations_imgs/picture_02.png)
 
 ## 3、letterbox
 letterbox 的img转换部分
@@ -262,7 +280,7 @@ letterbox 的img转换部分
 大小是不相同的）即可。
 
 也可以结合下面画的流程图来理解下面的letterbox代码：
-![image.png](attachment:image.png)
+![image.png](augmentations_imgs/picture_02.png)
 
 
 ```python
@@ -495,5 +513,4 @@ def hist_equalize(img, clahe=True, bgr=False):
     return cv2.cvtColor(
         yuv, cv2.COLOR_YUV2BGR if bgr else cv2.COLOR_YUV2RGB
     )  # convert YUV image to RGB
-
 ```
