@@ -1103,12 +1103,12 @@
 <p>&emsp;<strong>维度聚类</strong>（Dimension Clusters）。当把 YOLO 结合 <span class="arithmatex">\(anchor \ boxes\)</span> 使用时，我们会遇到两个问题： 首先 <span class="arithmatex">\(anchor \ boxes\)</span> 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整<span class="arithmatex">\(anchor \ boxes\)</span> 形状，但是如果我们从一开始就为网络选择更好的 <span class="arithmatex">\(anchor \ boxes\)</span> ，就可以让网络更容易学习到并获得更好的检测结果。</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199901435-76986df9-cc7b-4eac-97f1-fc905ed3d8d7.png" /></p>
 <p>图1：<span class="arithmatex">\(VOC\)</span> 和  <span class="arithmatex">\(COCO\)</span>  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 <span class="arithmatex">\(k-means\)</span> 聚类，以获得我们模型的良好初始 <span class="arithmatex">\(anchor \ boxes\)</span> 。左图显示了我们通过 k 的各种选择获得的 <span class="arithmatex">\(Avg \ IoU\)</span> 。我们发现 <span class="arithmatex">\(k = 5\)</span> 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 <span class="arithmatex">\(VOC\)</span> 和 <span class="arithmatex">\(COCO\)</span> 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 <span class="arithmatex">\(COCO\)</span> 的尺寸的变化比 <span class="arithmatex">\(VOC\)</span> 更大。</p>
-<p>&emsp;我们不用手工选择 <span class="arithmatex">\(anchor \ boxes\)</span>，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的先验框。 因此对于距离度量我们使用:</p>
+<p>&emsp;我们不用手工选择 <span class="arithmatex">\(anchor \ boxes\)</span>，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 因此对于距离度量我们使用:</p>
 <p><center></p>
 <p><span class="arithmatex">\(d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centroid })\)</span></p>
 <p></center></p>
 <p>&emsp;我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 <span class="arithmatex">\(k-means\)</span> 算法，并绘制最接近质心的平均 <span class="arithmatex">\(Avg \ IoU\)</span>（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 <span class="arithmatex">\(k = 5\)</span> （<em>也就是5种anchor boxs</em>）簇的相对中心 与手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。</p>
-<p>&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 在最接近的 <span class="arithmatex">\(Avg \ IoU\)</span> 上进行比较。仅5种 <span class="arithmatex">\(anchor \ boxes\)</span> 中心的 <span class="arithmatex">\(Avg \ IoU\)</span> 为61.0，其性能类似于9个<span class="arithmatex">\(anchor \ boxes\)</span> 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 <span class="arithmatex">\(anchor \ boxes\)</span> 会得到更高的 <span class="arithmatex">\(Avg \ IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成 <span class="arithmatex">\(anchor \ boxes\)</span> 可以更好地表示模型并使其更容易学习。</p>
+<p>&emsp;表1中，我们将聚类策略的 <span class="arithmatex">\(anchor \ boxes\)</span> 中心数和手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 在最接近的 <span class="arithmatex">\(Avg \ IoU\)</span> 上进行比较。仅5种 <span class="arithmatex">\(anchor \ boxes\)</span> 中心的 <span class="arithmatex">\(Avg \ IoU\)</span> 为61.0，其性能类似于9个<span class="arithmatex">\(anchor \ boxes\)</span> 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 <span class="arithmatex">\(anchor \ boxes\)</span> 会得到更高的 <span class="arithmatex">\(Avg \ IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成 <span class="arithmatex">\(anchor \ boxes\)</span> 可以更好地表示模型并使其更容易学习。</p>
 <p><span class="arithmatex">\(\begin{array}{lcc}
 \text { Box Generation } &amp; \# &amp; \text { Avg IoU } \\
 \hline \text { Cluster SSE } &amp; 5 &amp; 58.7 \\
@@ -1116,7 +1116,7 @@
 \text { Anchor Boxes [15] } &amp; 9 &amp; 60.9 \\
 \text { Cluster IoU } &amp; 9 &amp; 67.2
 \end{array}\)</span></p>
-<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的 <span class="arithmatex">\(Avg \ IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的<span class="arithmatex">\(Avg \ IoU\)</span>与其最接近的，未经修改的使用不同生成方法的目标之间的 <span class="arithmatex">\(Avg \ IoU\)</span> 。聚类得结果比使用手工选取的先验框结果要好得多。 </p>
+<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的 <span class="arithmatex">\(Avg \ IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的<span class="arithmatex">\(Avg \ IoU\)</span>与其最接近的，未经修改的使用不同生成方法的目标之间的 <span class="arithmatex">\(Avg \ IoU\)</span> 。聚类得结果比使用手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 结果要好得多。 </p>
 <h2 id="k-means">什么是k-means?</h2>
 <p>&emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
 <p>在One-YOLOv5项目中使用K-means
