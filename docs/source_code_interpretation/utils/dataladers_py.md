@@ -1,19 +1,17 @@
 ## 前言
-源码解读： [utils/dataloaders.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/dataloaders.py)
 
-- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
-- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
-
-
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
 欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
-
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
-## 0. 导入需要的包和基本配置
+
+源码解读： [utils/dataloaders.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/dataloaders.py)
+
+
+
+## 1. 导入需要的包和基本配置
 
 
 ```python
@@ -98,7 +96,7 @@ LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  # https://pytorch.org/docs/stable
 RANK = int(os.getenv("RANK", -1))
 ```
 
-## 1. 相机设置
+## 2. 相机设置
 &emsp;这部分是相机相关设置，当使用相机采样时才会使用。
 
 
@@ -285,8 +283,10 @@ class _RepeatSampler:
 
 ### 4.1 init
 这个函数的入口是上面的create_dataloader函数：
-![image.png](dataladers_imgs/picture_00.png)
-![image-2.png](dataladers_imgs/picture_01.png)
+<!-- ![image.png](dataladers_imgs/picture_00.png)
+![image-2.png](dataladers_imgs/picture_01.png)  -->
+![image](https://user-images.githubusercontent.com/109639975/199916141-2ac22f90-abe0-4b0f-8654-282c857d5804.png)
+![image](https://user-images.githubusercontent.com/109639975/199916291-e60a796a-2e77-4fa1-aa22-869cafb23969.png)
 
 __init__ 主要干了一下几件事：
 
@@ -682,7 +682,7 @@ def cache_labels(self, path=Path('./labels.cache'), prefix=''):
 同样在create_dataloader中生成dataloader时调用：
 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/utils/dataloaders.py#L183-L195
 "  target="blank"> 
-![image.png](dataladers_imgs/picture_02.png)
+![image](https://user-images.githubusercontent.com/109639975/199916498-ee01bd46-9bdc-4cf8-90ce-958f483ce257.png)
 </a>
 
 
@@ -943,18 +943,19 @@ def augment_hsv(img, hgain=0.5, sgain=0.5, vgain=0.5):
 
 这个函数用在LoadImagesAndLabels模块的__getitem__函数中：
 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/utils/dataloaders.py#L707" target="blank">
-![image.png](dataladers_imgs/picture_03.png)
+
+![image](https://user-images.githubusercontent.com/109639975/199916719-8917e8eb-e3c8-4be8-9d5b-f9174a77195f.png)
+
 
 </a>
     
 另外，这里涉及到的三个变量来自hyp.yaml超参文件：
-![image-2.png](dataladers_imgs/picture_04.png)
-
+![image](https://user-images.githubusercontent.com/109639975/199916836-d2277200-0763-47f7-8b4e-65cd7d62ca3b.png)
 ## 9. load_mosaic、load_mosaic9
 &emsp;这两个函数都是mosaic数据增强，只不过load_mosaic函数是拼接四张图，而load_mosaic9函数是拼接九张图。
 更多请参阅[《mosaic 解读》](https://start.oneflow.org/oneflow-yolo-doc/tutorials/04_chapter/mosaic.html)
 ### 9.1 load_mosaic
-![image.png](dataladers_imgs/picture_05.png)
+![image](https://user-images.githubusercontent.com/109639975/199916906-07ba8364-148b-4298-b7eb-bd0d52d98f0e.png)
 &emsp;这个模块就是很有名的mosaic增强模块，几乎训练的时候都会用它，可以显著的提高小样本的mAP。
 
 代码是数据增强里面最难的, 也是最有价值的，mosaic是非常非常有用的数据增强trick, 一定要熟练掌握。
@@ -1160,7 +1161,7 @@ def load_mosaic9(self, index):
 用法和mosaic一样，使用直接将class LoadImagesAndLabels(Dataset): 中 __getitem__ 的load_mosaic直接
 直接替换成load_mosaic9即可：
 
-![image.png](dataladers_imgs/picture_06.png)
+![image](https://user-images.githubusercontent.com/109639975/199917054-2783d335-7ad7-42ce-91b7-73659010d679.png)
 
 
 ## 10. LoadImages & LoadStreams & LoadWebcam
