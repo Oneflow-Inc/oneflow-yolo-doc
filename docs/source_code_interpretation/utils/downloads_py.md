@@ -1,22 +1,13 @@
 
 ## 前言
 
-源码解读： [utils/augmentations.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/augmentations.py)
-
-- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
-- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
-- OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a>
-
-
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
 欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
-
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
-
+源码解读： [utils/augmentations.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/augmentations.py)
 
 > 这个文件主要是负责从github/googleleaps/google drive 等网站或者[云服务器](https://so.csdn.net/so/search?q=%E4%BA%91%E6%9C%8D%E5%8A%A1&spm=1001.2101.3001.7020)上下载所需的一些文件。
 
@@ -24,7 +15,7 @@
 
 这个文件比较重要的是两个函数：safe_download和attempt_download。在train.py或者yolo.py等文件中都会用到。
 
-## 0. 导入需要的包
+## 1. 导入需要的包
 
 
 
@@ -46,7 +37,7 @@ import oneflow as flow
 import requests   # 通过urllib3实现自动发送HTTP/1.1请求的第三方模块
 ```
 
-## 1. gsutil_getsize
+## 2. gsutil_getsize
 这个函数是用来返回网站链接url对应文件的大小。
 
 
@@ -62,12 +53,12 @@ def gsutil_getsize(url=""):
     return eval(s.split(" ")[0]) if len(s) else 0  # bytes
 ```
 
-## 2. safe_download、attempt_download
+## 3. safe_download、attempt_download
 这两个函数主要是用来从github或者googleleaps云服务器中下载文件的，主要是下载权重文件。
 
 attempt_download函数调用safe_download函数。
 
-### 2.1 safe_download
+### 3.1 safe_download
 
 这个函数是用来下载 url（github） 或者 url2（googleleaps云服务器） 路径对应的网页文件，
 
@@ -132,11 +123,11 @@ display(Image.open("op.png")) # 显示下载的图片
 
 
     
-![png](downloads_imgs/output_8_0.png)
+![image](https://user-images.githubusercontent.com/109639975/199926866-066c6f9f-b137-4292-a9c1-091fabaef1d7.png)
     
 
 
-### 2.2 attempt_download
+### 3.2 attempt_download
 
 这个函数是实现从几个云平台(github/googleleaps云服务器)下载文件(预训练模型)，
 
@@ -259,11 +250,11 @@ attempt_download("yolov5n")
 
 
 
-## 3. get_token & gdrive_download（没使用）
+## 4. get_token & gdrive_download（没使用）
 
 这两个函数是实现从google drive上下载压缩文件并将其解压, 再删除掉压缩文件。但是这好像并没有在代码中使用，所以这两个函数可以随便了解下就好，主要还是要掌握上面的两个下载函数用的比较多。
 
-### 3.1 get_token
+### 4.1 get_token
 这个函数实现从cookie中获取令牌token。会在gdrive_download中被调用。
 
 get_token函数代码：
@@ -281,7 +272,7 @@ def get_token(cookie="./cookie"):
     return ""
 ```
 
-### 3.2 gdrive_download
+### 4.2 gdrive_download
 这个函数实现从google drive上下载压缩文件并将其解压, 再删除掉压缩文件。这个函数貌似没用到，随便看下就好。
 
 gdrive_download函数代码：
