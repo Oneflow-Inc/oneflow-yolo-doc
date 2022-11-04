@@ -1,29 +1,23 @@
 ## 前言
-源码解读： [utils/autoanchor.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py)
 
-- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
-- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
-- OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a>
-
-不过即使你对 OneFlow 带来的性能提升不太感兴趣，我们相信[文档网站](https://start.oneflow.org/oneflow-yolo-doc/index.html)中对 YOLOv5 教程的汉化以及源码剖析也会是从零开始深入学习 YOLOv5 一份不错的资料。欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟
-
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
 欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
-
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
+
+源码解读： [utils/autoanchor.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py)
+
 ## 摘要
-&emsp;**维度聚类**（Dimension Clusters）。当把锚框与YOLO一起使用时，我们会遇到两个问题。 首先是框的尺寸是手工挑选的。虽然网络可以通过学习适当地调整方框，但是如果我们从一开始就为网络选择更好的先验框，就可以让网络更容易学习到更好的检测结果。
+&emsp;**维度聚类**（Dimension Clusters）。当把 YOLO 结合 $anchor \ boxes$ 使用时，我们会遇到两个问题： 首先 $anchor \ boxes$ 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整$anchor \ boxes$ 形状，但是如果我们从一开始就为网络选择更好的 $anchor \ boxes$ ，就可以让网络更容易学习到并获得更好的检测结果。
 
-![image.png](autoanchor_imgs/picture_00.png)
+![image](https://user-images.githubusercontent.com/109639975/199901435-76986df9-cc7b-4eac-97f1-fc905ed3d8d7.png)
 
-图1：$VOC$ 和  $COCO$  上的聚类框尺寸。我们在边界框的维上运行 $k-means$ 聚类，以获得我们模型的良好先验。左图显示了我们通过k的各种选择获得的平均 $IoU$ 。我们发现 $k = 5$ 为召回与模型的复杂性提供了良好的折中。右图显示了 $VOC$ 和 $COCO$ 的相对质心。这两种方案都喜欢更稀疏的，更高的框，并且 $COCO$ 的尺寸的变化比 $VOC$ 更大。
+图1：$VOC$ 和  $COCO$  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 $k-means$ 聚类，以获得我们模型的良好初始 $anchor \ boxes$ 。左图显示了我们通过 k 的各种选择获得的 $Avg \ IoU$ 。我们发现 $k = 5$ 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 $VOC$ 和 $COCO$ 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 $COCO$ 的尺寸的变化比 $VOC$ 更大。
 
 
-&emsp;我们不用手工选择先验框，而是在训练集的边界框上运行k-means聚类，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IoU$ 分数的先验框。 因此对于距离度量我们使用:
+&emsp;我们不用手工选择 $anchor \ boxes$，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IoU$ 分数的先验框。 因此对于距离度量我们使用:
 
 <center>
 
@@ -31,10 +25,10 @@ $d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centro
 
 </center>
 
-&emsp;我们用不同的 $k$ 值运行 $k-means$ ，并绘制最接近质心的平均 $IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折衷，我们选择 $k = 5$。聚类的质心与手工选取的锚框显着不同，它有更少的短且宽的框，而且有更多既长又窄的框。
+&emsp;我们用不同的 $k$ 值运行 $k-means$ 算法，并绘制最接近质心的平均 $Avg \ IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 $k = 5$ （*也就是5种anchor boxs*）簇的相对中心 与手工选取的 $anchor \ boxes$ 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。
 
 
-&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的锚框数在最接近的平均 $IoU$ 上进行比较。仅5个先验框中心的平均 $IoU$ 为61.0，其性能类似于9个锚框的60.9。 使用9个质心会得到更高的平均 $IoU$ 。这表明使用 $k-means$ 生成边界框可以更好地表示模型并使其更容易学习。
+&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的 $anchor \ boxes$ 在最接近的 $Avg \ IoU$ 上进行比较。仅5种 $anchor \ boxes$ 中心的 $Avg \ IoU$ 为61.0，其性能类似于9个$anchor \ boxes$ 的60.9 (*即Avg IoU已经达到了Faster RCNN的水平*)。 而且使用9种 $anchor \ boxes$ 会得到更高的 $Avg \ IoU$ 。这表明使用 $k-means$ 生成 $anchor \ boxes$ 可以更好地表示模型并使其更容易学习。
 
 
 
@@ -46,7 +40,7 @@ $\begin{array}{lcc}
 \text { Cluster IoU } & 9 & 67.2
 \end{array}$
 
-表1： $VOC \  2007$ 最接近先验的框的平均 $IoU$。 $VOC \  2007$ 上的目标的平均IOU与其最接近的，未经修改的使用不同生成方法的目标之间的平均 $IoU$ 。聚类得结果比使用手工选取的先验框结果要好得多。 
+表1： $VOC \  2007$ 最接近先验的框的 $Avg \ IoU$。 $VOC \  2007$ 上的目标的$Avg \ IoU$与其最接近的，未经修改的使用不同生成方法的目标之间的 $Avg \ IoU$ 。聚类得结果比使用手工选取的先验框结果要好得多。 
 
 ## 什么是k-means?
 &emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
@@ -57,7 +51,7 @@ $\begin{array}{lcc}
 
 ### 使用k-means时主要关注两点
 
-1. 如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IOU。
+1. 如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IoU。
 2. 分为几类，这个也是需要根据应用场景取选择的，也是一个超参数。
 ### k-means算法主要流程
 
@@ -89,8 +83,7 @@ BPR（bpr best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904
 &emsp;常见的作法是：对每一个数据做一个标准差归一化处理（除以标准差）。scipy.cluster.vq.kmeans() 函数输入的数据就是必须是白化后的数据。相应的输出的[anchor](https://so.csdn.net/so/search?q=anchor&spm=1001.2101.3001.7020) k也是白化后的anchor，所以需要将anchor k 都乘以标准差恢复。
 
 
-## autoanchor.py 源码解读
-### 0. 导入需要的包
+## 1. 导入需要的包
 
 
 ```python
@@ -99,12 +92,12 @@ import oneflow as flow  # OneFlow深度学习模块
 import yaml             # 操作yaml文件模块
 from tqdm import tqdm   # Python进度条模块
 
-from utils.general import LOGGER, colorstr
+from utils.general import LOGGER, colorstr # 日志模块
 
 PREFIX = colorstr("AutoAnchor: ")
 ```
 
-### 1.check_anchor_order
+## 2.check_anchor_order
 这个函数用于确认当前anchors和stride的顺序是否是一致的，因为我们的m.anchors是相对各个feature map
 
 （每个feature map的感受野不同 检测的目标大小也不同 适合的anchor大小也不同）所以必须要顺序一致 否则效果会很不好。
@@ -131,7 +124,7 @@ def check_anchor_order(m):
         LOGGER.info(f"{PREFIX}Reversing anchor order")
         m.anchors[:] = m.anchors.flip(0)
 ```
-### 2. kmean_anchors
+## 3. kmean_anchors
 &emsp;这个函数才是这个这个文件的核心函数，功能：使用K-means + 遗传算法 算出更符合当前数据集的anchors。
 
 &emsp;这里不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：
@@ -310,9 +303,9 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
     return print_results(k)
 ```
 
-### 3. check_anchors
+## 4. check_anchors
 
- 这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。
+这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。
 
 
 ```python
@@ -331,7 +324,7 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
     # dataset.shapes.max(1, keepdims=True) = 每张图片的较长边
     # shapes: 将数据集图片的最长边缩放到img_size, 较小边相应缩放 得到新的所有数据集图片的宽高 [N, 2]
     shapes = imgsz * dataset.shapes / dataset.shapes.max(1, keepdims=True)
-    # 产生随机数scale [batch-size, 1]
+    # 产生随机数scale [img_size, 1]
     scale = np.random.uniform(0.9, 1.1, size=(shapes.shape[0], 1))  # augment scale
     # [6301, 2]  所有target(6301个)的wh   基于原图大小    shapes * scale: 随机化尺度变化
     wh = flow.tensor(np.concatenate([l[:, 3:5] * s for s, l in zip(shapes * scale, dataset.labels)])).float()  # wh
@@ -393,8 +386,7 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
 
 这个函数会在[train.py中调用：](https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253)
 
-![image.png](autoanchor_imgs/picture_02.png)
-
+![image](https://user-images.githubusercontent.com/109639975/199909323-103aaf2f-cdcd-4601-9faf-4618d08d3558.png)
 
 
 
@@ -402,8 +394,8 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
 k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
 
 ## Reference
-- [YOLOv2论文](https://arxiv.org/pdf/1612.08242.pdf)
--【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706
+- [YOLO9000:Better, Faster, Stronger](https://arxiv.org/pdf/1612.08242.pdf)
+- 【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706
 - CSDN 霹雳吧啦Wz : [使用k-means聚类anchors](https://blog.csdn.net/qq_37541097/article/details/119647026?spm=1001.2014.3001.5501)
 - Bilibili 霹雳吧啦Wz : [如何使用k-means聚类得到anchors以及需要注意的坑.](https://www.bilibili.com/video/BV1Tv411T7qa)
 - CSDN 恩泽君 : [YOLOV3中k-means聚类获得anchor boxes过程详解.](https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py)
