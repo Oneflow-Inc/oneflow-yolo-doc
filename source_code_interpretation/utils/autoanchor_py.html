@@ -792,43 +792,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autoanchorpy" class="md-nav__link">
-    autoanchor.py 源码解读
-  </a>
-  
-    <nav class="md-nav" aria-label="autoanchor.py 源码解读">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    0. 导入需要的包
+  <a href="#1" class="md-nav__link">
+    1. 导入需要的包
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#1check_anchor_order" class="md-nav__link">
-    1.check_anchor_order
+      
+        <li class="md-nav__item">
+  <a href="#2check_anchor_order" class="md-nav__link">
+    2.check_anchor_order
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-kmean_anchors" class="md-nav__link">
-    2. kmean_anchors
+      
+        <li class="md-nav__item">
+  <a href="#3-kmean_anchors" class="md-nav__link">
+    3. kmean_anchors
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-check_anchors" class="md-nav__link">
-    3. check_anchors
+      
+        <li class="md-nav__item">
+  <a href="#4-check_anchors" class="md-nav__link">
+    4. check_anchors
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1047,43 +1034,30 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#autoanchorpy" class="md-nav__link">
-    autoanchor.py 源码解读
-  </a>
-  
-    <nav class="md-nav" aria-label="autoanchor.py 源码解读">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0" class="md-nav__link">
-    0. 导入需要的包
+  <a href="#1" class="md-nav__link">
+    1. 导入需要的包
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#1check_anchor_order" class="md-nav__link">
-    1.check_anchor_order
+      
+        <li class="md-nav__item">
+  <a href="#2check_anchor_order" class="md-nav__link">
+    2.check_anchor_order
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-kmean_anchors" class="md-nav__link">
-    2. kmean_anchors
+      
+        <li class="md-nav__item">
+  <a href="#3-kmean_anchors" class="md-nav__link">
+    3. kmean_anchors
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-check_anchors" class="md-nav__link">
-    3. check_anchors
+      
+        <li class="md-nav__item">
+  <a href="#4-check_anchors" class="md-nav__link">
+    4. check_anchors
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1117,27 +1091,24 @@
                   <h1>autoanchor_py</h1>
                 
                 <h2 id="_1">前言</h2>
-<p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py">utils/autoanchor.py</a></p>
-<ul>
-<li>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a></li>
-<li>🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a></li>
-<li>OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a></li>
-</ul>
-<p>不过即使你对 OneFlow 带来的性能提升不太感兴趣，我们相信<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html">文档网站</a>中对 YOLOv5 教程的汉化以及源码剖析也会是从零开始深入学习 YOLOv5 一份不错的资料。欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</p>
-<p>欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a></p>
-<p><a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a></p>
-<p><a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+<blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py">utils/autoanchor.py</a></p>
 <h2 id="_2">摘要</h2>
-<p>&emsp;<strong>维度聚类</strong>（Dimension Clusters）。当把锚框 (Anchor) 与YOLO一起使用时，我们会遇到两个问题。 首先锚框的尺寸是手工挑选的。虽然网络可以通过学习适当地调整锚框，但是如果我们从一开始就为网络选择更好的锚框，就可以让网络更容易学习到更好的检测结果。</p>
-<p><img alt="image.png" src="autoanchor_imgs/picture_00.png" /></p>
-<p>图1：<span class="arithmatex">\(VOC\)</span> 和  <span class="arithmatex">\(COCO\)</span>  上的聚类框尺寸。我们在边界框的维上运行 <span class="arithmatex">\(k-means\)</span> 聚类，以获得我们模型的良好先验。左图显示了我们通过k的各种选择获得的平均 <span class="arithmatex">\(IoU\)</span> 。我们发现 <span class="arithmatex">\(k = 5\)</span> 为召回与模型的复杂性提供了良好的折中。右图显示了 <span class="arithmatex">\(VOC\)</span> 和 <span class="arithmatex">\(COCO\)</span> 的相对质心。这两种方案都喜欢更稀疏的，更高的框，并且 <span class="arithmatex">\(COCO\)</span> 的尺寸的变化比 <span class="arithmatex">\(VOC\)</span> 更大。</p>
-<p>&emsp;我们不用手工选择先验框，而是在训练集的边界框上运行k-means聚类，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的先验框。 因此对于距离度量我们使用:</p>
+<p>&emsp;<strong>维度聚类</strong>（Dimension Clusters）。当把 YOLO 结合 <span class="arithmatex">\(anchor \ boxes\)</span> 使用时，我们会遇到两个问题： 首先 <span class="arithmatex">\(anchor \ boxes\)</span> 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整<span class="arithmatex">\(anchor \ boxes\)</span> 形状，但是如果我们从一开始就为网络选择更好的 <span class="arithmatex">\(anchor \ boxes\)</span> ，就可以让网络更容易学习到并获得更好的检测结果。</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199901435-76986df9-cc7b-4eac-97f1-fc905ed3d8d7.png" /></p>
+<p>图1：<span class="arithmatex">\(VOC\)</span> 和  <span class="arithmatex">\(COCO\)</span>  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 <span class="arithmatex">\(k-means\)</span> 聚类，以获得我们模型的良好初始 <span class="arithmatex">\(anchor \ boxes\)</span> 。左图显示了我们通过 k 的各种选择获得的 <span class="arithmatex">\(Avg \ IoU\)</span> 。我们发现 <span class="arithmatex">\(k = 5\)</span> 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 <span class="arithmatex">\(VOC\)</span> 和 <span class="arithmatex">\(COCO\)</span> 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 <span class="arithmatex">\(COCO\)</span> 的尺寸的变化比 <span class="arithmatex">\(VOC\)</span> 更大。</p>
+<p>&emsp;我们不用手工选择 <span class="arithmatex">\(anchor \ boxes\)</span>，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的先验框。 因此对于距离度量我们使用:</p>
 <p><center></p>
 <p><span class="arithmatex">\(d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centroid })\)</span></p>
 <p></center></p>
-<p>&emsp;我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 <span class="arithmatex">\(k-means\)</span> ，并绘制最接近质心的平均 <span class="arithmatex">\(IoU\)</span>（见图1）。为了在模型复杂度和高召回率之间的良好折衷，我们选择 <span class="arithmatex">\(k = 5\)</span>。聚类的质心与手工选取的锚框显着不同，它有更少的短且宽的框，而且有更多既长又窄的框。</p>
-<p>&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的锚框数在最接近的平均 <span class="arithmatex">\(IoU\)</span> 上进行比较。仅5个先验框中心的平均 <span class="arithmatex">\(IoU\)</span> 为61.0，其性能类似于9个锚框的60.9。 使用9个质心会得到更高的平均 <span class="arithmatex">\(IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成边界框可以更好地表示模型并使其更容易学习。</p>
+<p>&emsp;我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 <span class="arithmatex">\(k-means\)</span> 算法，并绘制最接近质心的平均 <span class="arithmatex">\(Avg \ IoU\)</span>（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 <span class="arithmatex">\(k = 5\)</span> （<em>也就是5种anchor boxs</em>）簇的相对中心 与手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。</p>
+<p>&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 在最接近的 <span class="arithmatex">\(Avg \ IoU\)</span> 上进行比较。仅5种 <span class="arithmatex">\(anchor \ boxes\)</span> 中心的 <span class="arithmatex">\(Avg \ IoU\)</span> 为61.0，其性能类似于9个<span class="arithmatex">\(anchor \ boxes\)</span> 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 <span class="arithmatex">\(anchor \ boxes\)</span> 会得到更高的 <span class="arithmatex">\(Avg \ IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成 <span class="arithmatex">\(anchor \ boxes\)</span> 可以更好地表示模型并使其更容易学习。</p>
 <p><span class="arithmatex">\(\begin{array}{lcc}
 \text { Box Generation } &amp; \# &amp; \text { Avg IoU } \\
 \hline \text { Cluster SSE } &amp; 5 &amp; 58.7 \\
@@ -1145,7 +1116,7 @@
 \text { Anchor Boxes [15] } &amp; 9 &amp; 60.9 \\
 \text { Cluster IoU } &amp; 9 &amp; 67.2
 \end{array}\)</span></p>
-<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的平均 <span class="arithmatex">\(IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的平均IOU与其最接近的，未经修改的使用不同生成方法的目标之间的平均 <span class="arithmatex">\(IoU\)</span> 。聚类得结果比使用手工选取的先验框结果要好得多。 </p>
+<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的 <span class="arithmatex">\(Avg \ IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的<span class="arithmatex">\(Avg \ IoU\)</span>与其最接近的，未经修改的使用不同生成方法的目标之间的 <span class="arithmatex">\(Avg \ IoU\)</span> 。聚类得结果比使用手工选取的先验框结果要好得多。 </p>
 <h2 id="k-means">什么是k-means?</h2>
 <p>&emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
 <p>在One-YOLOv5项目中使用K-means
@@ -1153,7 +1124,7 @@
   2. hpy.scratch.yaml下的anchors参数注释掉。</p>
 <h3 id="k-means_1">使用k-means时主要关注两点</h3>
 <ol>
-<li>如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IOU。</li>
+<li>如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IoU。</li>
 <li>分为几类，这个也是需要根据应用场景取选择的，也是一个超参数。</li>
 </ol>
 <h3 id="k-means_2">k-means算法主要流程</h3>
@@ -1180,18 +1151,17 @@
 <li>所有特征具有相同的方差=1</li>
 </ol>
 <p>&emsp;常见的作法是：对每一个数据做一个标准差归一化处理（除以标准差）。scipy.cluster.vq.kmeans() 函数输入的数据就是必须是白化后的数据。相应的输出的<a href="https://so.csdn.net/so/search?q=anchor&amp;spm=1001.2101.3001.7020">anchor</a> k也是白化后的anchor，所以需要将anchor k 都乘以标准差恢复。</p>
-<h2 id="autoanchorpy">autoanchor.py 源码解读</h2>
-<h3 id="0">0. 导入需要的包</h3>
+<h2 id="1">1. 导入需要的包</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>      <span class="c1"># numpy矩阵操作模块</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span>  <span class="c1"># OneFlow深度学习模块</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">yaml</span>             <span class="c1"># 操作yaml文件模块</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>   <span class="c1"># Python进度条模块</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span> <span class="nn">utils.general</span> <span class="kn">import</span> <span class="n">LOGGER</span><span class="p">,</span> <span class="n">colorstr</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span> <span class="nn">utils.general</span> <span class="kn">import</span> <span class="n">LOGGER</span><span class="p">,</span> <span class="n">colorstr</span> <span class="c1"># 日志模块</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">PREFIX</span> <span class="o">=</span> <span class="n">colorstr</span><span class="p">(</span><span class="s2">&quot;AutoAnchor: &quot;</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="1check_anchor_order">1.check_anchor_order</h3>
+<h2 id="2check_anchor_order">2.check_anchor_order</h2>
 <p>这个函数用于确认当前anchors和stride的顺序是否是一致的，因为我们的m.anchors是相对各个feature map</p>
 <p>（每个feature map的感受野不同 检测的目标大小也不同 适合的anchor大小也不同）所以必须要顺序一致 否则效果会很不好。</p>
 <p>这个函数一般用于check_anchors最后阶段。</p>
@@ -1213,7 +1183,7 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">Reversing anchor order&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="2-kmean_anchors">2. kmean_anchors</h3>
+<h2 id="3-kmean_anchors">3. kmean_anchors</h2>
 <p>&emsp;这个函数才是这个这个文件的核心函数，功能：使用K-means + 遗传算法 算出更符合当前数据集的anchors。</p>
 <p>&emsp;这里不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：</p>
 <ol>
@@ -1389,7 +1359,7 @@
 <a id="__codelineno-2-159" name="__codelineno-2-159" href="#__codelineno-2-159"></a>                <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <a id="__codelineno-2-160" name="__codelineno-2-160" href="#__codelineno-2-160"></a>    <span class="k">return</span> <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="3-check_anchors">3. check_anchors</h3>
+<h2 id="4-check_anchors">4. check_anchors</h2>
 <p>这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">check_anchors</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">):</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Check anchor fit to data, recompute if necessary  </span>
@@ -1406,7 +1376,7 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="c1"># dataset.shapes.max(1, keepdims=True) = 每张图片的较长边</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="c1"># shapes: 将数据集图片的最长边缩放到img_size, 较小边相应缩放 得到新的所有数据集图片的宽高 [N, 2]</span>
 <a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">shapes</span> <span class="o">=</span> <span class="n">imgsz</span> <span class="o">*</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span> <span class="o">/</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="c1"># 产生随机数scale [batch-size, 1]</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="c1"># 产生随机数scale [img_size, 1]</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">shapes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># augment scale</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="c1"># [6301, 2]  所有target(6301个)的wh   基于原图大小    shapes * scale: 随机化尺度变化</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="n">wh</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">l</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shapes</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">labels</span><span class="p">)]))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>  <span class="c1"># wh</span>
@@ -1466,13 +1436,13 @@
 <a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </code></pre></div>
 <p>这个函数会在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253">train.py中调用：</a></p>
-<p><img alt="image.png" src="autoanchor_imgs/picture_02.png" /></p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199909323-103aaf2f-cdcd-4601-9faf-4618d08d3558.png" /></p>
 <h2 id="_3">总结</h2>
 <p>k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
 <h2 id="reference">Reference</h2>
 <ul>
-<li><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLOv2论文</a>
--【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706</li>
+<li><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></li>
+<li>【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706</li>
 <li>CSDN 霹雳吧啦Wz : <a href="https://blog.csdn.net/qq_37541097/article/details/119647026?spm=1001.2014.3001.5501">使用k-means聚类anchors</a></li>
 <li>Bilibili 霹雳吧啦Wz : <a href="https://www.bilibili.com/video/BV1Tv411T7qa">如何使用k-means聚类得到anchors以及需要注意的坑.</a></li>
 <li>CSDN 恩泽君 : <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">YOLOV3中k-means聚类获得anchor boxes过程详解.</a></li>
