@@ -17,7 +17,7 @@
 图1：$VOC$ 和  $COCO$  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 $k-means$ 聚类，以获得我们模型的良好初始 $anchor \ boxes$ 。左图显示了我们通过 k 的各种选择获得的 $Avg \ IoU$ 。我们发现 $k = 5$ 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 $VOC$ 和 $COCO$ 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 $COCO$ 的尺寸的变化比 $VOC$ 更大。
 
 
-&emsp;我们不用手工选择 $anchor \ boxes$，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IoU$ 分数的先验框。 因此对于距离度量我们使用:
+&emsp;我们不用手工选择 $anchor \ boxes$，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的 $anchor \ boxes$ 。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IoU$ 分数的 $anchor \ boxes$ 。 因此对于距离度量我们使用:
 
 <center>
 
@@ -28,7 +28,7 @@ $d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centro
 &emsp;我们用不同的 $k$ 值运行 $k-means$ 算法，并绘制最接近质心的平均 $Avg \ IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 $k = 5$ （*也就是5种anchor boxs*）簇的相对中心 与手工选取的 $anchor \ boxes$ 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。
 
 
-&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的 $anchor \ boxes$ 在最接近的 $Avg \ IoU$ 上进行比较。仅5种 $anchor \ boxes$ 中心的 $Avg \ IoU$ 为61.0，其性能类似于9个$anchor \ boxes$ 的60.9 (*即Avg IoU已经达到了Faster RCNN的水平*)。 而且使用9种 $anchor \ boxes$ 会得到更高的 $Avg \ IoU$ 。这表明使用 $k-means$ 生成 $anchor \ boxes$ 可以更好地表示模型并使其更容易学习。
+&emsp;表1中，我们将聚类策略的 $anchor \ boxes$ 中心数和手工选取的 $anchor \ boxes$ 在最接近的 $Avg \ IoU$ 上进行比较。仅5种 $anchor \ boxes$ 中心的 $Avg \ IoU$ 为61.0，其性能类似于9个$anchor \ boxes$ 的60.9 (*即Avg IoU已经达到了Faster RCNN的水平*)。 而且使用9种 $anchor \ boxes$ 会得到更高的 $Avg \ IoU$ 。这表明使用 $k-means$ 生成 $anchor \ boxes$ 可以更好地表示模型并使其更容易学习。
 
 
 
@@ -40,7 +40,7 @@ $\begin{array}{lcc}
 \text { Cluster IoU } & 9 & 67.2
 \end{array}$
 
-表1： $VOC \  2007$ 最接近先验的框的 $Avg \ IoU$。 $VOC \  2007$ 上的目标的$Avg \ IoU$与其最接近的，未经修改的使用不同生成方法的目标之间的 $Avg \ IoU$ 。聚类得结果比使用手工选取的先验框结果要好得多。 
+表1： $VOC \  2007$ 最接近先验的框的 $Avg \ IoU$。 $VOC \  2007$ 上的目标的$Avg \ IoU$与其最接近的，未经修改的使用不同生成方法的目标之间的 $Avg \ IoU$ 。聚类得结果比使用手工选取的 $anchor \ boxes$ 结果要好得多。 
 
 ## 什么是k-means?
 &emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
