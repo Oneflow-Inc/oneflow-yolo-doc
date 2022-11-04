@@ -1,23 +1,15 @@
 ## 前言
 
-源码解读： [utils/augmentations.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/augmentations.py)
-
-- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
-- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
-- OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a>
-
-
+> 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
 欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
-
-
-<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
-
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
+源码解读： [utils/augmentations.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/augmentations.py)
 
-## 0、random_perspective
-&emsp;这个函数是进行随机透视变换，对mosaic整合后的图片进行随机旋转、缩放、平移、裁剪，透视变换，
+
+## 1. random_perspective
+&emsp;这个函数是对mosaic整合后的图片进行随机旋转、缩放、平移、裁剪，透视变换，
 
 并resize为输入大小img_size。
 
@@ -39,7 +31,8 @@ def random_perspective(
     """这个函数会用于load_mosaic中用在mosaic操作之后
     随机透视变换  对mosaic整合后的图片进行随机旋转、缩放、平移、裁剪，透视变换，并resize为输入大小img_size
     :params img: mosaic整合后的图片img4 [2*img_size, 2*img_size]
-    如果mosaic后的图片没有一个多边形标签就使用targets, segments为空  如果有一个多边形标签就使用segments, targets不为空
+    如果mosaic后的图片没有一个多边形标签 segments为空 
+    如果有一个多边形标签则 segments不为空。
     :params targets: mosaic整合后图片的所有正常label标签labels4(不正常的会通过segments2boxes将多边形标签转化为正常标签) [N, cls+xyxy]
     :params segments: mosaic整合后图片的所有不正常label信息(包含segments多边形也包含正常gt)  [m, x1y1....]
     :params degrees: 旋转和缩放矩阵参数
@@ -47,8 +40,9 @@ def random_perspective(
     :params scale: 缩放矩阵参数
     :params shear: 剪切矩阵参数
     :params perspective: 透视变换参数
-    :params border: 用于确定最后输出的图片大小 一般等于[-img_size, -img_size] 那么最后输出的图片大小为 [img_size, img_size]
-    :return img: 通过透视变换/仿射变换后的img [img_size, img_size]
+    :params border: 用于确定最后输出的图片大小 
+    一般等于[-img_size//2, -img_size//2] 那么最后输出的图片大小为 [img_size, img_size]
+    :return img: 通过透视变换/仿射变换后的img [img_size, img_size] 
     :return targets: 通过透视变换/仿射变换后的img对应的标签 [n, cls+x1y1x2y2]  (通过筛选后的)
     """
     # 设定输出图片的 H W
@@ -189,10 +183,11 @@ def random_perspective(
 ```
 
 这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：
-![image.png](augmentations_imgs/picture_00.png)这个函数的参数来自hyp中的5个参数
-![image-2.png](augmentations_imgs/picture_01.png)
+![image](https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png)
+这个函数的参数来自hyp中的5个参数
+![image](https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png)
 
-## 1、box_candidates
+## 2. box_candidates
 &emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。
 
 box_candidates模块代码：
@@ -224,7 +219,7 @@ def box_candidates(box1, box2, wh_thr=2, ar_thr=20, area_thr=0.1, eps=1e-16):
 
 ```
 
-## 2、replicate
+## 3. replicate
 &emsp;这个函数是随机偏移标签中心，生成新的标签与原标签结合。可以用在load_mosaic里在mosaic操作之后 random_perspective操作之前， 作者默认是关闭的， 自己可以实验一下效果。
 
 replicate模块代码：
@@ -265,10 +260,10 @@ def replicate(img, labels):
 
 ```
 
-会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）：
-![image.png](augmentations_imgs/picture_02.png)
+会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）
 
-## 3、letterbox
+## 4. letterbox
+
 letterbox 的img转换部分
 
 &emsp;此时：auto=False（需要pad）, scale_fill=False, scale_up=False。
@@ -280,7 +275,7 @@ letterbox 的img转换部分
 大小是不相同的）即可。
 
 也可以结合下面画的流程图来理解下面的letterbox代码：
-![image.png](augmentations_imgs/picture_02.png)
+![image](https://user-images.githubusercontent.com/109639975/199886935-f1eb92fa-4965-48de-9d2a-e130cd2ae695.png)
 
 
 ```python
@@ -369,10 +364,10 @@ def letterbox(
 3. 将label从相对原图尺寸（原文件中图片尺寸）缩放到相对letterbox pad后的图片尺寸。因为前两部分的图片尺寸发生了变化，同样的我们的label也需要发生相应的变化。
 
 
-## 4、cutout
-&emsp; cutout数据增强，给图片随机添加随机大小的方块噪声 ，目的是提高泛化能力和鲁棒性。来自论文： [https://arxiv.org/abs/1708.04552](https://arxiv.org/abs/1708.04552) 。
+## 5. cutout
+&emsp; cutout数据增强，给图片随机添加随机大小的方块噪声 ，目的是提高泛化能力和鲁棒性。源自论文： [Improved Regularization of Convolutional Neural Networks with Cutout](https://arxiv.org/abs/1708.04552) 。
 
-&emsp;更多原理细节请看博客：[【YOLO v4】【trick 8】Data augmentation: MixUp、Random Erasing、CutOut、CutMix、Mosic。](https://blog.csdn.net/qq_38253797/article/details/116668074)
+&emsp;更多原理细节请参阅：[mosaic 解读](https://start.oneflow.org/oneflow-yolo-doc/tutorials/04_chapter/mosaic.html) , [【YOLO v4】【trick 8】Data augmentation: MixUp、Random Erasing、CutOut、CutMix、Mosic。](https://blog.csdn.net/qq_38253797/article/details/116668074)
 
 &emsp; 具体要不要使用，概率是多少可以自己实验。
 
@@ -450,7 +445,7 @@ def cutout(image, labels):
 2. mixup增强由超参hyp[‘mixup’]控制，0则关闭 默认为1则100%打开（自己实验判断）：
 
 
-## 5、mixup
+## 6. mixup
 &emsp;这个函数是进行mixup数据增强：按比例融合两张图片。论文：[https://arxiv.org/pdf/1710.09412.pdf](https://arxiv.org/pdf/1710.09412.pdf)。
 
 &emsp;更多原理细节请看博客：[【YOLO v4】【trick 8】Data augmentation: MixUp、Random Erasing、CutOut、CutMix、Mosic](https://blog.csdn.net/qq_38253797/article/details/116668074)
@@ -486,7 +481,7 @@ def mixup(im, labels, im2, labels2):
 - mixup增强由超参hyp["mixup"]控制，0则关闭 默认为1则100%打开（自己实验判断）
         
 
-## 6、hist_equalize
+## 7. hist_equalize
 &emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到按这个函数，学习了解下就好，不是重点。
 
 hist_equalize模块代码:
@@ -514,3 +509,6 @@ def hist_equalize(img, clahe=True, bgr=False):
         yuv, cv2.COLOR_YUV2BGR if bgr else cv2.COLOR_YUV2RGB
     )  # convert YUV image to RGB
 ```
+
+## Reference
+- 【YOLOV5-5.x 源码解读】[atasets.py](https://blog.csdn.net/qq_38253797/article/details/119904518)
