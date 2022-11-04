@@ -51,7 +51,7 @@ $\begin{array}{lcc}
 ## 什么是k-means?
 &emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
 
-在项目中使用K-means
+在One-YOLOv5项目中使用K-means
   1. train.py的parse_opt下的参数noautoanchor必须为False 
   2. hpy.scratch.yaml下的anchors参数注释掉。
 
