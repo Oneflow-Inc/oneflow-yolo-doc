@@ -1,22 +1,17 @@
 ## 前言
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
 源码解读： [utils/autoanchor.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py)
 
 >   这个文件是yolov5的通用工具类，写了一些通用的工具函数，用的很广，整个项目哪里都可能用到。
      这个文件的函数非常多，代码量也很大（上千行了），也都比较重要，希望大家看的时候多点耐心，都能掌握！
 
-- 🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
-- 🎉文档网站地址：<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html" target="blank"> https://start.oneflow.org/oneflow-yolo-doc/index.html</a>
-- OneFlow 安装方法：<a href="https://github.com/Oneflow-Inc/oneflow#install-oneflow" target="blank"> https://github.com/Oneflow-Inc/oneflow#install-oneflow</a>
 
-不过即使你对 OneFlow 带来的性能提升不太感兴趣，我们相信[文档网站](https://start.oneflow.org/oneflow-yolo-doc/index.html)中对 YOLOv5 教程的汉化以及源码剖析也会是从零开始深入学习 YOLOv5 一份不错的资料。欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟
-
-欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
-
-
-
-
-## 0、导入需要的包和基本配置
-
+## 1. 导入需要的包和基本配置
 
 ```python
 # import contextlib   # python上下文管理器   执行with…as…的时候调用contextlib
@@ -74,7 +69,7 @@ os.environ["NUMEXPR_MAX_THREADS"] = str(NUM_THREADS)  # NumExpr max threads
 os.environ["OMP_NUM_THREADS"] = "1" if platform.system() == "darwin" else str(NUM_THREADS)  # OpenMP (Pyflow and SciPy)
 ```
 
-## 1、timeout（没用到）
+## 2. timeout（没用到）
 这个函数是自定义的timeout超时函数，如果某个程序执行超时，
 
 就会触发超时处理函数_timeout_handler 返回超时异常信息。
@@ -118,13 +113,13 @@ class timeout(contextlib.ContextDecorator):
 
 ```
 
-## 2、set_logging、init_seeds
+## 3.set_logging、init_seeds
 
 这两个函数是一些初始化操作。
 
 set_logging是对日志的设置(format、level)等进行初始化，init_seeds是进行一系列的随机数种子
 
-### 2.1、set_logging
+### 3.1 set_logging
 这个函数是对日志的格式、等级等进行一个初始化，但是这个函数没用到。
 
 
@@ -149,7 +144,7 @@ def set_logging(name=None, verbose=VERBOSE):
 
 ```
 
-### 2.2、init_seeds
+### 3.2 init_seeds
 这个函数是使用random.random()、np.random.rand()、init_torch_seeds（调用torch_utils.py中的函数）
 
 等生成一系列的随机数种子，以保证结果的可复现性。
@@ -172,7 +167,7 @@ def init_seeds(seed=0, deterministic=False):
     flow.cuda.manual_seed_all(seed)  # for Multi-GPU, exception safe
 ```
 
-## 3、get_latest_run
+## 4. get_latest_run
 
 这个函数的作用是查找最近保存的权重文件 last*.pt，用以进行断点续训。
 
@@ -195,14 +190,14 @@ def get_latest_run(search_dir="."):
 ```
 
 函数在train.py中被调用：
-![image.png](general_imgs/picture_00.png)
+![image](https://user-images.githubusercontent.com/109639975/199921105-a402c34a-e040-4b8f-b6f3-23f0cad475ef.png)
 
-## 4、is_docker、is_colab、is_pip
+## 5. is_docker、is_colab、is_pip
 下面是三个检测函数，is_docker检测当前环境是否是docker环境，
 
 is_colab检查当前环境是否是Google Colab环境，is_pip检测
 
-### 4.1、is_docker
+### 5.1 is_docker
 这个函数是查询当前环境是否是docker环境，会用到后面的check_git_status和check_imshow等函数中。
 
 is_docker函数代码：
@@ -224,7 +219,7 @@ def is_docker() -> bool:
         return False
 ```
 
-### 4.2、is_colab
+### 5.2 is_colab
 这个函数是检查当前环境是否是Google Colab环境，会用到后面的check_imshow函数中。
 
 is_colab函数代码：
@@ -242,7 +237,7 @@ def is_colab():
         return False
 ```
 
-### 4.3、is_pip（没用到）
+### 5.3 is_pip（没用到）
 这个函数是检测当前文件是否在pip package(site-packages)文件里，不过这个函数没用到。
 
 is_pip函数代码：
@@ -257,7 +252,8 @@ def is_pip():
     return 'site-packages' in Path(__file__).absolute().parts
 ```
 
-## 5、file_size（没用到）
+## 6. file_size（没用到）
+
 这个函数是返回本地文件的大小，
 
 功能和之前google_utils.py中的gsutil_getsize函数（返回网站链接对应文件的大小）很像。
@@ -281,7 +277,7 @@ def file_size(path):
         return 0.0
 ```
 
-## 6、colorstr
+## 7. colorstr
 这个函数是将输出的开头和结尾加上颜色，使命令行输出显示会更加好看。
 
 colorstr函数代码：
@@ -326,12 +322,12 @@ def colorstr(*input):
 这个函数会用到下面的check_git_status、check_requirements等函数中，
 
 而且还会广泛用在train.py、val.py、detect.py等其他文件中如：
-![image.png](general_imgs/picture_01.png)
+![image](https://user-images.githubusercontent.com/109639975/199921465-3b9b7f37-b74a-460f-81bf-a86bf1704340.png)
 函数效果如下（可以看到输出开头、结尾变量使用其他颜色）：
-![image-3.png](general_imgs/picture_02.png)
+![image](https://user-images.githubusercontent.com/109639975/199921512-6123d744-e846-4eae-bd57-9763b7ba6884.png)
 
 
-## 7、check_online
+## 8. check_online
 
 这个函数是检查当前主机是否联网了。会在下面的check_git_status、check_requirements等函数中使用。
 
@@ -354,7 +350,8 @@ def check_online():
         return False
 ```
 
-## 8、emojis
+
+## 9.emojis
 这个函数是忽略掉字符串中无法用ascii编码的内容(比如表情、图像)，返回Windows系统可以安全、完整显示的字符串。会在下面的check_git_status、check_requirements等函数中使用。
 
 emojis函数代码：
@@ -371,13 +368,11 @@ def emojis(str=''):
 ```
 
 
-```python
-## 9、check_git_status
+## 10. check_git_status
 
 这个函数是检查当前的代码版本是否是最新的。如果不是最新的，会提示使用git pull命令进行升级。
 
 函数代码：
-```
 
 
 ```python
@@ -417,9 +412,10 @@ def check_git_status(repo="Oneflow-Inc/one-yolo"):
 ```
 
 这个函数只用在train.py的main函数的一开始部分：
-![image.png](general_imgs/picture_03.png)
 
-## 10、check_python、check_requirements
+![image](https://user-images.githubusercontent.com/109639975/199921857-018ce1fa-c95f-4a77-93ec-9a0d37afab82.png)
+
+## 11. check_python、check_requirements
 
 check_python是检查当前的版本号是否满足最小版本号minimum，
 
@@ -428,7 +424,7 @@ check_requirements是检查已经安装的包是否满足requirements对应txt�
 check_requirements会调用check_python。
 
 
-### 10.1、check_python
+### 11.1 check_python
 这个函数是检查当前的版本号是否满足最小版本号minimum。
 
 会在下面的check_requirements函数被调用。
@@ -442,7 +438,7 @@ def check_python(minimum='3.7.0'):
     check_version(platform.python_version(), minimum, name='Python ', hard=True)
 ```
 
-### 10.2、check_requirements
+### 11.2 check_requirements
 这个函数用于检查已经安装的包是否满足requirements对应txt文件的要求。会调用colorstr、check_python、check_online等函数。
 
 check_requirements函数代码：
@@ -499,17 +495,17 @@ def check_requirements(requirements=ROOT / 'requirements.txt', exclude=(), insta
 
 用在train.py中：
 
-![image.png](general_imgs/picture_04.png)
-
+![image](https://user-images.githubusercontent.com/109639975/199922077-d60aa8b2-ac1a-48a6-aeed-57713291825e.png)
 val.py 中：
-![image-2.png](general_imgs/picture_05.png)
 
-## 11、make_divisible、check_img_size
+![image](https://user-images.githubusercontent.com/109639975/199922200-7dcdfd99-df58-473c-a9a8-4e47ce981bfd.png)
+
+## 12. make_divisible、check_img_size
 这两个函数主要是用来约束图像的长款或者feature map的长款，
 
 必须是divisor（等于算法的最大下采样率一般是32）的最小倍数。
 
-
+### 12.1 make_divisible
 
 ```python
 def make_divisible(x, divisor):
@@ -524,9 +520,10 @@ def make_divisible(x, divisor):
 ```
 
 这个函数用在下面的make_divisible函数中及 yolo.py的parse_model函数和commom.py的AutoShape函数中：
-![image.png](general_imgs/picture_06.png)
 
-### 11.2、check_img_size
+![image](https://user-images.githubusercontent.com/109639975/199922801-16f78242-3973-450d-8f78-880aacd6834f.png)
+
+### 12.2 check_img_size
 这个函数是为了保证img_size是能被s（32）整除，如果不能就返回大于等于img_size且是s的最小倍数。
 
 这个函数本质是通过调用make_divisible函数实现的。
@@ -553,10 +550,12 @@ def check_img_size(imgsz, s=32, floor=0):
 ```
 
 用来保证img的长宽符合规定，用在val.py , detect.py ,train.py中：
-![image.png](general_imgs/picture_07.png)
+
+![image](https://user-images.githubusercontent.com/109639975/199923004-fc4ff8b8-8647-4092-8fbb-caa7397a30a0.png)
 
 
-## 12、check_imshow
+## 13. check_imshow
+
 这个函数是检查一下前环境是否可以使用opencv.imshow显示图片。
 
 
@@ -583,9 +582,9 @@ def check_imshow():
 
 会在detect.py中使用webcam的时候调用：
 
-![image.png](general_imgs/picture_08.png)
+![image](https://user-images.githubusercontent.com/109639975/199923396-eff2bcd3-fbca-4755-aa4a-a186a7f5cdcf.png)
 
-## 13、check_file
+## 14. check_file
 这个函数是检查本都相关文件路径能否找到这个文件，没找到就说明文件丢失了，
 
 返回空；
@@ -639,7 +638,7 @@ def check_file(file, suffix=""):
 2. 在test.py中使用（检查本地data文件是否存在）
 
 
-## 14、check_dataset
+## 15. check_dataset
 这个函数是检查本地是否有指定的数据集，没用就从torch库中下载并解压数据集。
 
 check_dataset函数代码:
@@ -718,9 +717,9 @@ def check_dataset(data, autodownload=True):
 ```
 
 
-![image.png](general_imgs/picture_09.png)
+![image](https://user-images.githubusercontent.com/109639975/199923505-34c41280-15e0-4b7f-8bae-e2f0ecdf4c40.png)
 
-### 15、download
+## 16. download
 这个函数是将url中的文件下载下来，再解压。但是这个文件并没有在程序中被调用，
 
 flow.hub.download_url_to_file系统函数和google_utils.py
@@ -795,7 +794,7 @@ def download(url, dir=".", unzip=True, delete=True, curl=False, threads=1, retry
             download_one(u, dir)
 ```
 
-## 16、clean_str
+## 17. clean_str
 这个函数是将字符串中一些奇怪的符号 “|@#!¡·$€%&()=?¿^*;:,¨´><+” 换成下划线 ‘_’。
 
 
@@ -813,9 +812,10 @@ def clean_str(s):
 ```
 
 只用在datasets.py中的LoadStreams类中：
-![image.png](general_imgs/picture_10.png)
 
-## 17. one_cycle
+![image](https://user-images.githubusercontent.com/109639975/199923505-34c41280-15e0-4b7f-8bae-e2f0ecdf4c40.png)
+
+## 18. one_cycle
 
 这个函数是一种特殊的学习率衰减策略。来自这篇论文： [one_cycle](https://arxiv.org/pdf/1803.09820.pdf). 感兴趣的
 朋友可以读一读。
@@ -833,9 +833,10 @@ def one_cycle(y1=0.0, y2=1.0, steps=100):
 ```
 
 一般使用one_cycle的效果会比较好。
-![image.png](general_imgs/picture_11.png)
+![image](https://user-images.githubusercontent.com/109639975/199924017-be1893d1-8c23-4624-8fde-ba1d62286346.png)
 
-## 18. labels_to_class_weights & labels_to_image_weights
+## 19. labels_to_class_weights & labels_to_image_weights
+
 这两个函数是联合使用的。
 
 最终的目的是为了在数据集中采样的时候，不使用随机采样，而是使用更加科学的按图片权重进行采样。
@@ -847,10 +848,12 @@ def one_cycle(y1=0.0, y2=1.0, steps=100):
 然后利用每张图片的权重在当前batch进行采样，这样的采样方式会更加科学点。
 
 两个函数都只在train.py中使用，且是同时使用的如图：
-![image.png](general_imgs/imgs_00.png)
-![image-2.png](general_imgs/imgs_01.png)
+![image](https://user-images.githubusercontent.com/109639975/199924234-f06c87b0-6709-45c6-8f0a-632136a178a0.png)
 
-## 18.1 、labels_to_class_weights
+![image](https://user-images.githubusercontent.com/109639975/199924103-1feb8f29-2ce5-4335-8315-e03e4d6bcf07.png)
+
+
+## 19.1  labels_to_class_weights
 这个函数是从训练(gt)标签获得每个类的权重 ，标签频率高的类权重低。
 
 labels_to_class_weights函数代码：
@@ -888,7 +891,7 @@ def labels_to_class_weights(labels, nc=80):
 
 ```
 
-## 18.2 labels_to_image_weights
+## 19.2 labels_to_image_weights
 
 这个函数是利用每张图片真实gt框的真实标签labels和上一步labels_to_class_weights得到的每个类别的权重得到数据集中每
 
@@ -915,7 +918,7 @@ def labels_to_image_weights(labels, nc=80, class_weights=np.ones(80)):
     return (class_weights.reshape(1, nc) * class_counts).sum(1)
 ```
 
-## 19. coco80_to_coco91_class
+## 20. coco80_to_coco91_class
 这个函数是将80个类的coco索引换成91类的coco索引。
 
 coco80_to_coco91_class函数代码:
@@ -941,9 +944,9 @@ def coco80_to_coco91_class():
 ```
 
 在val.py中定义：
-![image.png](general_imgs/picture_12.png)
+![image](https://user-images.githubusercontent.com/109639975/199926030-7afba57f-21f8-4752-b0ae-952956b16a07.png)
 
-## 20. clip_coords
+## 21. clip_coords
 这个函数的作用是：
 
 将boxes的坐标(x1y1x2y2 左上角右下角)限定在图像的尺寸(img_shape hw)内，防止出界。
@@ -971,7 +974,7 @@ def clip_coords(boxes, shape):
 
 ```
 
-## 21. scale_coords
+## 22. scale_coords
 这个函数是将坐标coords(x1y1x2y2)从img1_shape尺寸缩放到img0_shape尺寸。
 
 x的正坐标是向右，y的正坐标是向下。这个函数也是很重要的。
@@ -1011,11 +1014,10 @@ def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
     return coords
 
 ```
+![image](https://user-images.githubusercontent.com/109639975/199925212-bc80ea53-1cfc-4ee1-af6b-dd142cdefa27.png)
+![image](https://user-images.githubusercontent.com/109639975/199925289-a5d2d2b6-2203-440f-97c0-ca66ae3dac21.png)
 
-![image.png](general_imgs/picture_13.png)
-![image-2.png](general_imgs/picture_14.png)
-
-##  22. xyxy2xywh & xywh2xyxy
+##  23. xyxy2xywh & xywh2xyxy
 这两个函数是两个相反的过程。
 
 xyxy2xywh是将预测信息xyxy格式转化为xywh的格式，而xywh2xyxy是将预测信息xywh格式转化为xyxy的格式。
@@ -1024,7 +1026,7 @@ xyxy2xywh是将预测信息xyxy格式转化为xywh的格式，而xywh2xyxy是将
 
 代码还是那句话：x的正坐标是向右，y的正坐标是向下。
 
-### 22.1 xyxy2xywh
+### 23.1 xyxy2xywh
 
 这个函数是将预测信息xyxy格式转化为xywh的格式。
 
@@ -1054,7 +1056,7 @@ for *xyxy, conf, cls in reversed(det):
         xywh = (xyxy2xywh(flow.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
 ```
 
-### 22.2 xywh2xyxy
+### 23.2 xywh2xyxy
 
 这个函数是将预测信息xywh格式转化为xyxy的格式。
 
@@ -1077,16 +1079,16 @@ def xywh2xyxy(x):
     return y
 ```
 
-## 23. xywhn2xyxy & xyxy2xywhn & xyn2xy
+## 24. xywhn2xyxy & xyxy2xywhn & xyn2xy
 这三个函数主要用于dataloaders.py文件中。主要是对图像进行一些变换操作。
 
 xywhn2xyxy是将xywh(normalized) -> x1y1x2y2。xyxy2xywhn是将x1y1x2y2 -> xywh(normalized)。
 
 xyn2xy是将xy(normalized) -> xy。这三个函数也是比较重要的，大家必须掌握。
 
-![image.png](general_imgs/imgs_02.png)
+![image](https://user-images.githubusercontent.com/109639975/199925432-ea7f3142-2800-4de3-96cc-1fcc7acc88b4.png)
 
-### 23.1 xywhn2xyxy
+### 24.1 xywhn2xyxy
 
 这个函数是xywh(normalized) -> x1y1x2y2。
 
@@ -1107,7 +1109,7 @@ def xywhn2xyxy(x, w=640, h=640, padw=0, padh=0):
     return y
 ```
 
-### 23.2 xyxy2xywhn
+### 24.2 xyxy2xywhn
 这个函数是将x1y1x2y2 -> xywh(normalized)。
 
 xyxy2xywhn函数代码：
@@ -1130,7 +1132,7 @@ def xyxy2xywhn(x, w=640, h=640, clip=False, eps=0.0):
     return y
 ```
 
-### 23.3 xyn2xy
+### 24.3 xyn2xy
 这个函数是将xy(normalized) -> xy。
 
 xyn2xy函数代码：
@@ -1149,7 +1151,7 @@ def xyn2xy(x, w=640, h=640, padw=0, padh=0):
     return 
 ```
 
-### 24、non_max_suppression
+### 25. non_max_suppression
 NMS(非极大值抑制)，这个函数相信大家都已经很熟悉了，这是目标检测最基本的操作之一了。
 
 可以说这个函数是这篇博客当中最重要的代码也不为过，所以大家一定要掌握这个函数（流程原理+代码）。
@@ -1294,7 +1296,7 @@ def non_max_suppression(
 更多关于NMS函数流程和代码：[【YOLO-V3-SPP 源码解读】三、预测模块.](https://blog.csdn.net/qq_38253797/article/details/117920079)
 
 
-## 25 strip_optimizer
+## 26. strip_optimizer
 
 这个函数是在模型训练完后, strip_optimizer函数将optimizer、training_results、updates…
 
@@ -1327,10 +1329,9 @@ def strip_optimizer(f="best", s=""):  # from utils.general import *; strip_optim
     mb = os.path.getsize(s or f) / 1e6  # filesize
     LOGGER.info(f"Optimizer stripped from {f},{f' saved as {s},' if s else ''} {mb:.1f}MB")
 ```
+![image](https://user-images.githubusercontent.com/109639975/199925562-a6fa90bb-9157-4cc6-83ea-159feb0c11a5.png)
 
-![image.png](general_imgs/picture_15.png)
-
-## 26 print_mutation
+## 27. print_mutation
 
 这个函数用来打印进化后的超参结果和results到evolve.txt和hyp_evolved.yaml中。
 
@@ -1396,7 +1397,7 @@ def print_mutation(results, hyp, save_dir, bucket, prefix=colorstr("evolve: ")):
         os.system(f"gsutil cp {evolve_csv} {evolve_yaml} gs://{bucket}")  # upload
 ```
 
-## 27. apply_classifier
+## 28. apply_classifier
 这个函数定义了一个二级分类器来处理yolo的输出，可以将它用在detect.py中。
 
 这里写的这个函数只是一个普通的实现，你也可以根据自己的任务改写这个函数。
@@ -1454,7 +1455,7 @@ def apply_classifier(x, model, img, im0):
     return x
 ```
 
-## 28. increment_path
+## 29. increment_path
 用于递增路径。
 
 比如我输入路径是run/train/exp，但是发现文件夹里面已经有这个文件了，
@@ -1500,7 +1501,7 @@ def increment_path(path, exist_ok=False, sep="", mkdir=False):
     return path
 ```
 
-## 29. resample_segments
+## 30. resample_segments
 这个函数是 对segment重新采样，比如说segment坐标只有100个，通过interp函数将其采样为n个(默认1000)。
 
 resample_segments函数代码：
@@ -1525,9 +1526,9 @@ def resample_segments(segments, n=1000):
     return segments
 ```
 
-![image.png](general_imgs/picture_16.png)
+![image](https://user-images.githubusercontent.com/109639975/199925646-f72a319a-4092-4ca9-9f97-0b8d65327466.png)
 
-## 30. segment2box
+## 31. segment2box
 
 这个函数是将一个多边形标签(不是矩形标签 到底是几边形未知)转化为一个矩形标签。
 
@@ -1556,10 +1557,9 @@ def segment2box(segment, width=640, height=640):
 
 ```
 
+![image](https://user-images.githubusercontent.com/109639975/199925761-d292db95-3c1f-45d7-8647-71af0c1f49ad.png)
 
-![image.png](general_imgs/picture_17.png)
-
-## 31. segments2boxes
+## 32. segments2boxes
 
 这个函数是将多个多边形标签(不是矩形标签 到底是几边形未知)转化为多个矩形标签。
 
@@ -1585,7 +1585,7 @@ def segments2boxes(segments):
 
 ```
 
-![image.png](general_imgs/picture_18.png)
+![image](https://user-images.githubusercontent.com/109639975/199925809-8e9098a7-df8d-4b48-a3ae-a454307df1df.png)
 
 ## 总结
 这个文件的代码主要是一些通用的工具函数，会广泛的在整个项目的文件中使用，所以比较重要，希望大家都可以掌握。
