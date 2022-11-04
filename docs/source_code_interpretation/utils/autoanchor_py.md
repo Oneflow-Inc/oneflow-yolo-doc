@@ -20,33 +20,33 @@
 
 ![image.png](autoanchor_imgs/picture_00.png)
 
-图1：$VOC$ 和  $COCO$  上的聚类框尺寸。我们在边界框的维上运行 $k-means$ 聚类，以获得我们模型的良好先验。左图显示了我们通过k的各种选择获得的平均 $IOU$ 。我们发现 $k = 5$ 为召回与模型的复杂性提供了良好的折中。右图显示了 $VOC$ 和 $COCO$ 的相对质心。这两种方案都喜欢更稀疏的，更高的框，并且 $COCO$ 的尺寸的变化比 $VOC$ 更大。
+图1：$VOC$ 和  $COCO$  上的聚类框尺寸。我们在边界框的维上运行 $k-means$ 聚类，以获得我们模型的良好先验。左图显示了我们通过k的各种选择获得的平均 $IoU$ 。我们发现 $k = 5$ 为召回与模型的复杂性提供了良好的折中。右图显示了 $VOC$ 和 $COCO$ 的相对质心。这两种方案都喜欢更稀疏的，更高的框，并且 $COCO$ 的尺寸的变化比 $VOC$ 更大。
 
 
-&emsp;我们不用手工选择先验框，而是在训练集的边界框上运行k-means聚类，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IOU$ 分数的先验框。 因此对于距离度量我们使用:
+&emsp;我们不用手工选择先验框，而是在训练集的边界框上运行k-means聚类，自动找到良好的先验框。 如果我们使用具有欧几里得距离的标准 $k-means$ ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 $IoU$ 分数的先验框。 因此对于距离度量我们使用:
 
 <center>
 
-$d(\text { box, centroid }) = 1-\operatorname{IOU}(\text { box }, \text { centroid })$
+$d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centroid })$
 
 </center>
 
-&emsp;我们用不同的 $k$ 值运行 $k-means$ ，并绘制最接近质心的平均 $IOU$（见图1）。为了在模型复杂度和高召回率之间的良好折衷，我们选择 $k = 5$。聚类的质心与手工选取的锚框显着不同，它有更少的短且宽的框，而且有更多既长又窄的框。
+&emsp;我们用不同的 $k$ 值运行 $k-means$ ，并绘制最接近质心的平均 $IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折衷，我们选择 $k = 5$。聚类的质心与手工选取的锚框显着不同，它有更少的短且宽的框，而且有更多既长又窄的框。
 
 
-&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的锚框数在最接近的平均 $IOU$ 上进行比较。仅5个先验框中心的平均 $IOU$ 为61.0，其性能类似于9个锚框的60.9。 使用9个质心会得到更高的平均 $IOU$ 。这表明使用 $k-means$ 生成边界框可以更好地表示模型并使其更容易学习。
+&emsp;表1中，我们将聚类策略的先验框中心数和手工选取的锚框数在最接近的平均 $IoU$ 上进行比较。仅5个先验框中心的平均 $IoU$ 为61.0，其性能类似于9个锚框的60.9。 使用9个质心会得到更高的平均 $IoU$ 。这表明使用 $k-means$ 生成边界框可以更好地表示模型并使其更容易学习。
 
 
 
 $\begin{array}{lcc}
-\text { Box Generation } & \# & \text { Avg IOU } \\
+\text { Box Generation } & \# & \text { Avg IoU } \\
 \hline \text { Cluster SSE } & 5 & 58.7 \\
-\text { Cluster IOU } & 5 & 61.0 \\
+\text { Cluster IoU } & 5 & 61.0 \\
 \text { Anchor Boxes [15] } & 9 & 60.9 \\
-\text { Cluster IOU } & 9 & 67.2
+\text { Cluster IoU } & 9 & 67.2
 \end{array}$
 
-表1： $VOC \  2007$ 最接近先验的框的平均 $IOU$。 $VOC \  2007$ 上的目标的平均IOU与其最接近的，未经修改的使用不同生成方法的目标之间的平均 $IOU$ 。聚类得结果比使用手工选取的先验框结果要好得多。 
+表1： $VOC \  2007$ 最接近先验的框的平均 $IoU$。 $VOC \  2007$ 上的目标的平均IOU与其最接近的，未经修改的使用不同生成方法的目标之间的平均 $IoU$ 。聚类得结果比使用手工选取的先验框结果要好得多。 
 
 ## 什么是k-means?
 &emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
@@ -94,13 +94,14 @@ BPR（bpr best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904
 
 
 ```python
-import numpy as np               # numpy矩阵操作模块
-import matplotlib.pyplot as plt  # matplotlib画图模块
-import torch                     # PyTorch深度学习模块
-import yaml                      # 操作yaml文件模块
-from tqdm import tqdm            # Python进度条模块
-import random
+import numpy as np      # numpy矩阵操作模块
+import oneflow as flow  # OneFlow深度学习模块
+import yaml             # 操作yaml文件模块
+from tqdm import tqdm   # Python进度条模块
+
 from utils.general import LOGGER, colorstr
+
+PREFIX = colorstr("AutoAnchor: ")
 ```
 
 ### 1.check_anchor_order
@@ -130,94 +131,7 @@ def check_anchor_order(m):
         LOGGER.info(f"{PREFIX}Reversing anchor order")
         m.anchors[:] = m.anchors.flip(0)
 ```
-
-### 2、check_anchors
-
- 这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。
-
-
-```python
-def check_anchors(dataset, model, thr=4.0, imgsz=640):
-    # Check anchor fit to data, recompute if necessary  
-    """用于train.py中
-    通过bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors
-    Check anchor fit to data, recompute if necessary
-    :params dataset: 自定义数据集LoadImagesAndLabels返回的数据集
-    :params model: 初始化的模型
-    :params thr: 超参中得到  界定anchor与label匹配程度的阈值
-    :params imgsz: 图片尺寸 默认640
-    """
-    # 从model中取出最后一层(Detect)
-    m = model.module.model[-1] if hasattr(model, "module") else model.model[-1]  # Detect()
-    # dataset.shapes.max(1, keepdims=True) = 每张图片的较长边
-    # shapes: 将数据集图片的最长边缩放到img_size, 较小边相应缩放 得到新的所有数据集图片的宽高 [N, 2]
-    shapes = imgsz * dataset.shapes / dataset.shapes.max(1, keepdims=True)
-    # 产生随机数scale [2501, 1]
-    scale = np.random.uniform(0.9, 1.1, size=(shapes.shape[0], 1))  # augment scale
-    # [6301, 2]  所有target(6301个)的wh   基于原图大小    shapes * scale: 随机化尺度变化
-    wh = flow.tensor(np.concatenate([l[:, 3:5] * s for s, l in zip(shapes * scale, dataset.labels)])).float()  # wh
-
-    def metric(k):  # compute metric
-        """用在check_anchors函数中  compute metric
-        根据数据集的所有图片的wh和当前所有anchors k计算 bpr(best possible recall) 和 aat(anchors above threshold)
-        :params k: anchors [9, 2]  wh: [N, 2]
-        :return bpr: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用k-means计算anchor
-        :return aat: anchors above threshold 每个target平均有多少个anchors
-        """
-        # None添加维度  所有target(gt)的wh wh[:, None] [6301, 2]->[6301, 1, 2]
-        #             所有anchor的wh k[None] [9, 2]->[1, 9, 2]
-        # r: target的高h宽w与anchor的高h_a宽w_a的比值，即h/h_a, w/w_a  [6301, 9, 2]  有可能大于1，也可能小于等于1
-        r = wh[:, None] / k[None]
-        # x 高宽比和宽高比的最小值 无论r大于1，还是小于等于1最后统一结果都要小于1   [6301, 9]
-        x = flow.min(r, 1 / r).min(2)[0]  # ratio metric
-        # best [6301] 为每个gt框选择匹配所有anchors宽高比例值最好的那一个比值
-        best = x.max(1)[0]  # best_x
-        # aat(anchors above threshold)  每个target平均有多少个anchors
-        aat = (x > 1 / thr).float().sum(1).mean()  # anchors above threshold
-        # bpr(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用k-means计算anchor
-        bpr = (best > 1 / thr).float().mean()  # best possible recall
-        return bpr, aat
-
-    stride = m.stride.to(m.anchors.device).view(-1, 1, 1)  # model strides
-    # anchors: [N,2]  所有anchors的宽高   基于缩放后的图片大小(较长边为640 较小边相应缩放)
-    anchors = m.anchors.clone() * stride  # current anchors
-    bpr, aat = metric(anchors.cpu().view(-1, 2))
-    s = f"\n{PREFIX}{aat:.2f} anchors/target, {bpr:.3f} Best Possible Recall (BPR). "
-    # 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果bpr<0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据k-means算法重新聚类新的anchor
-    if bpr > 0.98:  # threshold to recompute
-        LOGGER.info(f"{s}Current anchors are a good fit to dataset ✅")
-    else:
-        LOGGER.info(f"{s}Anchors are a poor fit to dataset ⚠️, attempting to improve...")
-        na = m.anchors.numel() // 2  # number of anchors
-        try:
-            # 如果bpr<0.98(最大为1 越大越好) 使用k-means + 遗传进化算法选择出与数据集更匹配的anchors框  [9, 2]
-            anchors = kmean_anchors(dataset, n=na, img_size=imgsz, thr=thr, gen=1000, verbose=False)
-        except Exception as e:
-            LOGGER.info(f"{PREFIX}ERROR: {e}")
-        # 计算新的anchors的new_bpr
-        new_bpr = metric(anchors)[0]
-        # 比较 k-means + 遗传进化算法进化后的anchors的new_bpr和原始anchors的bpr
-        # 注意: 这里并不一定进化后的bpr必大于原始anchors的bpr, 因为两者的衡量标注是不一样的  进化算法的衡量标准是适应度 而这里比的是bpr
-        if new_bpr > bpr:  # replace anchors
-            anchors = flow.tensor(anchors, device=m.anchors.device).type_as(m.anchors)
-            # 替换m的anchor_grid                      [9, 2] -> [3, 1, 3, 1, 1, 2]
-            m.anchors[:] = anchors.clone().view_as(m.anchors)
-            # 检查anchor顺序和stride顺序是否一致 不一致就调整
-            # 因为我们的m.anchors是相对各个 feature map 所以必须要顺序一致 否则效果会很不好
-            check_anchor_order(m)  # must be in pixel-space (not grid-space)
-            m.anchors /= stride
-            s = f"{PREFIX}Done ✅ (optional: update model *.yaml to use these anchors in the future)"
-        else:
-            s = f"{PREFIX}Done ⚠️ (original anchors better than new anchors, proceeding with original anchors)"
-        LOGGER.info(s)
-```
-
-这个函数会在[train.py中调用：](https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253)
-
-![image.png](autoanchor_imgs/picture_02.png)
-
-
-### 3、kmean_anchors
+### 2. kmean_anchors
 &emsp;这个函数才是这个这个文件的核心函数，功能：使用K-means + 遗传算法 算出更符合当前数据集的anchors。
 
 &emsp;这里不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：
@@ -270,7 +184,7 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
         # .min(2): value=[N, 9] 选出每个gt个和anchor的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)
         # [0] 返回value [N, 9] 每个gt个和anchor的宽比和高比最小的值 就是所有gt与anchor重合程度最低的
         x = flow.min(r, 1. / r).min(2)[0]  # ratio metric
-        # x = wh_iou(wh, torch.tensor(k))  # iou metric
+        # x = wh_iou(wh, torch.tensor(k))  # IoU metric
         # x.max(1)[0]: [N] 返回每个gt和所有anchor(9个)中宽比/高比最大的值
         return x, x.max(1)[0]  # x, best_x
 
@@ -395,6 +309,94 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
                 print_results(k)
     return print_results(k)
 ```
+
+### 3. check_anchors
+
+ 这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。
+
+
+```python
+def check_anchors(dataset, model, thr=4.0, imgsz=640):
+    # Check anchor fit to data, recompute if necessary  
+    """用于train.py中
+    通过bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors
+    Check anchor fit to data, recompute if necessary
+    :params dataset: 自定义数据集LoadImagesAndLabels返回的数据集
+    :params model: 初始化的模型
+    :params thr: 超参中得到  界定anchor与label匹配程度的阈值
+    :params imgsz: 图片尺寸 默认640
+    """
+    # 从model中取出最后一层(Detect)
+    m = model.module.model[-1] if hasattr(model, "module") else model.model[-1]  # Detect()
+    # dataset.shapes.max(1, keepdims=True) = 每张图片的较长边
+    # shapes: 将数据集图片的最长边缩放到img_size, 较小边相应缩放 得到新的所有数据集图片的宽高 [N, 2]
+    shapes = imgsz * dataset.shapes / dataset.shapes.max(1, keepdims=True)
+    # 产生随机数scale [batch-size, 1]
+    scale = np.random.uniform(0.9, 1.1, size=(shapes.shape[0], 1))  # augment scale
+    # [6301, 2]  所有target(6301个)的wh   基于原图大小    shapes * scale: 随机化尺度变化
+    wh = flow.tensor(np.concatenate([l[:, 3:5] * s for s, l in zip(shapes * scale, dataset.labels)])).float()  # wh
+
+    def metric(k):  # compute metric
+        """用在check_anchors函数中  compute metric
+        根据数据集的所有图片的wh和当前所有anchors k计算 bpr(best possible recall) 和 aat(anchors above threshold)
+        :params k: anchors [9, 2]  wh: [N, 2]
+        :return bpr: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用k-means计算anchor
+        :return aat: anchors above threshold 每个target平均有多少个anchors
+        """
+        # None添加维度  所有target(gt)的wh wh[:, None] [6301, 2]->[6301, 1, 2]
+        #             所有anchor的wh k[None] [9, 2]->[1, 9, 2]
+        # r: target的高h宽w与anchor的高h_a宽w_a的比值，即h/h_a, w/w_a  [6301, 9, 2]  有可能大于1，也可能小于等于1
+        r = wh[:, None] / k[None]
+        # x 高宽比和宽高比的最小值 无论r大于1，还是小于等于1最后统一结果都要小于1   [6301, 9]
+        x = flow.min(r, 1 / r).min(2)[0]  # ratio metric
+        # best [6301] 为每个gt框选择匹配所有anchors宽高比例值最好的那一个比值
+        best = x.max(1)[0]  # best_x
+        # aat(anchors above threshold)  每个target平均有多少个anchors
+        aat = (x > 1 / thr).float().sum(1).mean()  # anchors above threshold
+        # bpr(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用k-means计算anchor
+        bpr = (best > 1 / thr).float().mean()  # best possible recall
+        return bpr, aat
+
+    stride = m.stride.to(m.anchors.device).view(-1, 1, 1)  # model strides
+    # anchors: [N,2]  所有anchors的宽高   基于缩放后的图片大小(较长边为640 较小边相应缩放)
+    anchors = m.anchors.clone() * stride  # current anchors
+    bpr, aat = metric(anchors.cpu().view(-1, 2))
+    s = f"\n{PREFIX}{aat:.2f} anchors/target, {bpr:.3f} Best Possible Recall (BPR). "
+    # 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果bpr<0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据k-means算法重新聚类新的anchor
+    if bpr > 0.98:  # threshold to recompute
+        LOGGER.info(f"{s}Current anchors are a good fit to dataset ✅")
+    else:
+        LOGGER.info(f"{s}Anchors are a poor fit to dataset ⚠️, attempting to improve...")
+        na = m.anchors.numel() // 2  # number of anchors
+        try:
+            # 如果bpr<0.98(最大为1 越大越好) 使用k-means + 遗传进化算法选择出与数据集更匹配的anchors框  [9, 2]
+            anchors = kmean_anchors(dataset, n=na, img_size=imgsz, thr=thr, gen=1000, verbose=False)
+        except Exception as e:
+            LOGGER.info(f"{PREFIX}ERROR: {e}")
+        # 计算新的anchors的new_bpr
+        new_bpr = metric(anchors)[0]
+        # 比较 k-means + 遗传进化算法进化后的anchors的new_bpr和原始anchors的bpr
+        # 注意: 这里并不一定进化后的bpr必大于原始anchors的bpr, 因为两者的衡量标注是不一样的  进化算法的衡量标准是适应度 而这里比的是bpr
+        if new_bpr > bpr:  # replace anchors
+            anchors = flow.tensor(anchors, device=m.anchors.device).type_as(m.anchors)
+            # 替换m的anchor_grid                      [9, 2] -> [3, 1, 3, 1, 1, 2]
+            m.anchors[:] = anchors.clone().view_as(m.anchors)
+            # 检查anchor顺序和stride顺序是否一致 不一致就调整
+            # 因为我们的m.anchors是相对各个 feature map 所以必须要顺序一致 否则效果会很不好
+            check_anchor_order(m)  # must be in pixel-space (not grid-space)
+            m.anchors /= stride
+            s = f"{PREFIX}Done ✅ (optional: update model *.yaml to use these anchors in the future)"
+        else:
+            s = f"{PREFIX}Done ⚠️ (original anchors better than new anchors, proceeding with original anchors)"
+        LOGGER.info(s)
+```
+
+这个函数会在[train.py中调用：](https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253)
+
+![image.png](autoanchor_imgs/picture_02.png)
+
+
+
 
 ## 总结
 k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
