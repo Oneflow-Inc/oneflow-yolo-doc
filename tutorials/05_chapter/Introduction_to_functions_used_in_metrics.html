@@ -14,7 +14,7 @@
     
     
       
-        <title>Introduction to functions used in metrics - oneflow-yolo-doc</title>
+        <title>5.4 计算mAP用到的numpy函数 - oneflow-yolo-doc</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Introduction to functions used in metrics
+              5.4 计算mAP用到的numpy函数
             
           </span>
         </div>
@@ -167,6 +167,8 @@
         
   
   
+    
+  
 
 
   
@@ -178,31 +180,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="../00_chapter/overview.html" class="md-tabs__link">
+      <a href="../00_chapter/overview.html" class="md-tabs__link md-tabs__link--active">
         YOLOv5教程📚
-      </a>
-    </li>
-  
-
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../source_code_interpretation/utils/downloads_py.html" class="md-tabs__link">
-        源码解读
       </a>
     </li>
   
@@ -283,12 +262,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
       
       <label class="md-nav__link" for="__nav_2">
         YOLOv5教程📚
@@ -547,12 +528,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" checked>
       
       <label class="md-nav__link" for="__nav_2_6">
         第五章 YOLOv5中IoU损失
@@ -597,6 +580,89 @@
       <a href="map_analysis.html" class="md-nav__link">
         5.3 模型精确度评估
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          5.4 计算mAP用到的numpy函数
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="Introduction_to_functions_used_in_metrics.html" class="md-nav__link md-nav__link--active">
+        5.4 计算mAP用到的numpy函数
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    引言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#npcumsum" class="md-nav__link">
+    np.cumsum()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#npinterp" class="md-nav__link">
+    np.interp()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#npmaximumaccumulate" class="md-nav__link">
+    np.maximum.accumulate
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nptrapz" class="md-nav__link">
+    np.trapz()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考文章
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -666,80 +732,11 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
       
       <label class="md-nav__link" for="__nav_3">
-        源码解读
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="源码解读" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          源码解读
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
-      
-      <label class="md-nav__link" for="__nav_3_1">
-        utils
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="utils" data-md-level="2">
-        <label class="md-nav__title" for="__nav_3_1">
-          <span class="md-nav__icon md-icon"></span>
-          utils
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../source_code_interpretation/utils/downloads_py.html" class="md-nav__link">
-        downloads_py
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
-      
-      <label class="md-nav__link" for="__nav_4">
         论文解读
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="论文解读" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
+        <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           论文解读
         </label>
@@ -901,7 +898,7 @@
               
                 
                 
-                  <h1>Introduction to functions used in metrics</h1>
+                  <h1>5.4 计算mAP用到的numpy函数</h1>
                 
                 <h2 id="_1">引言</h2>
 <p>本文主要介绍在YOLOv5项目中 计算mAP用到的一些numpy操作，函数使用在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/734609fca9d844ac48749b132fb0a5777df34167/utils/metrics.py">utils/metrics.py</a>中。</p>
@@ -1063,6 +1060,41 @@ c:
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="map_analysis.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 5.3 模型精确度评估" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              5.3 模型精确度评估
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../06_chapter/export_onnx_tflite_tensorrt.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 6.1 模型导出" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              6.1 模型导出
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
