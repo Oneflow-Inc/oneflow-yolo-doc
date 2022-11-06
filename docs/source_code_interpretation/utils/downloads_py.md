@@ -131,7 +131,7 @@ display(Image.open("op.png")) # 显示下载的图片
 
 这个函数是实现从几个云平台(github/googleleaps云服务器)下载文件(预训练模型)，
 
-会调用上面的 safe_download 函数。会用在experimental.py中的attempt_load函数和train.py中，都是用来下载预训练权重 如：
+会调用上面的 safe_download 函数。会用在experimental.py中的attempt_load函数和train.py中，都是用来下载预训练权重。代码详解如下：
 
 
 ```python
