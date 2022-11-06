@@ -233,7 +233,7 @@ def create_dataloader(
 ```
 
 ## 3.自定义DataLoader
-&emsp;当image_weights=False时（不根据图片样本真实框分布权重来选择图片）就会调用这两个函数 进行自定义DataLoader，进行持续性采样。在上面的create_dataloader模块中被调用。
+&emsp;当image_weights=False时（不根据图片样本真实框分布权重来选择图片）就会调用这两个函数 进行自定义DataLoader，进行持续性采样。在上面的create_dataloade函数中被调用。
 
 
 
