@@ -178,7 +178,7 @@ def create_dataloader(
     pad=0.0, # 设置矩形训练的shape时进行的填充 默认0.0
     rect=False, # 是否开启矩形train/test  默认训练集关闭 验证集开启
     rank=-1, # 多卡训练时的进程编号 rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu使用DataParallel模式  默认-1
-    workers=8,# dataloader的numworks 加载数据时的cpu进程数
+    workers=8,# dataloader的num_works 加载数据时的cpu进程数
     image_weights=False, # 训练时是否根据图片样本真实框分布权重来选择图片  默认False
     quad=False, # dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
     prefix="", # 显示信息   一个标志，多为train/val，处理标签时保存cache文件会用到
