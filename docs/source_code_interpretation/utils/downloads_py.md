@@ -74,7 +74,7 @@ def safe_download(file, url, url2=None, min_bytes=1e0, error_msg=""):
     @params url: 第一个下载地址 一般是github
     @params url2: 第二个下载地址(第一个下载地址下载失败后使用) 一般是googleleaps等云服务器
     @params min_bytes: 判断文件是否下载下来 只有文件存在且文件大小要大于min_bytes才能判断文件已经下载下来了
-    @params error_msg: 文件下载失败的显示信息 初始化默认` `
+    @params error_msg: 文件下载失败的显示信息 初始化默认为空
     """
     # Attempts to download file from url or url2, checks and removes incomplete downloads < min_bytes
     file = Path(file)
