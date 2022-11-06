@@ -81,6 +81,8 @@ def safe_download(file, url, url2=None, min_bytes=1e0, error_msg=""):
     assert_msg = f"Downloaded file '{file}' does not exist or size is < min_bytes={min_bytes}"
     try:  # url1 y:  尝试从url中下载文件 一般是github
         print(f"Downloading {url} to {file}...")
+        // 使用 oneflow.hub.download_url_to_file 下载 url 链接对应的文件，
+        // 关于oneflow.hub模块讲解可以看：https://www.bilibili.com/video/BV1YG4y1B72u/?spm_id_from=333.999.0.0
         flow.hub.download_url_to_file(url, str(file)) 
         # 判断文件是否下载下来了(文件存在且文件大小要大于min_bytes)
         assert file.exists() and file.stat().st_size > min_bytes, assert_msg  # check
