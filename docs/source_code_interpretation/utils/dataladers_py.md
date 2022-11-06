@@ -212,7 +212,7 @@ def create_dataloader(
     nw = min([os.cpu_count() // max(nd, 1), batch_size if batch_size > 1 else 0, workers])  # number of workers
     # 分布式采样器DistributedSampler
     sampler = None if rank == -1 else distributed.DistributedSampler(dataset, shuffle=shuffle)
-    # 使用InfiniteDataLoader和_RepeatSampler来对DataLoader进行封装, 代替原D先的DataLoader, 能够永久持续的采样数据
+    # 使用InfiniteDataLoader和_RepeatSampler来对DataLoader进行封装, 代替原先的DataLoader, 能够永久持续的采样数据
     loader = DataLoader if image_weights else InfiniteDataLoader  # only DataLoader allows for attribute updates
     generator = flow.Generator()
     generator.manual_seed(6148914691236517205 + RANK)
