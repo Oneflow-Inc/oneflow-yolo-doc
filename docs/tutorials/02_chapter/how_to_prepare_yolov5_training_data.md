@@ -6,7 +6,7 @@
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
-本文主要介绍 one-yolov5 使用的数据集的格式以及如何制作一个可以获得更好训练效果的数据集。本节教程部分翻译了 ultralytics/yolov5 wiki 中[对数据集相关的描述](https://github.com/ultralytics/yolov5/wiki/Tips-for-Best-Training-Results)。
+本文主要介绍 one-yolov5 使用的数据集的格式以及如何制作一个可以获得更好训练效果的数据集。本节教程好的数据集标准部分翻译了 ultralytics/yolov5 wiki 中[对数据集相关的描述](https://github.com/ultralytics/yolov5/wiki/Tips-for-Best-Training-Results)。
 
 
 # 数据集结构解读
