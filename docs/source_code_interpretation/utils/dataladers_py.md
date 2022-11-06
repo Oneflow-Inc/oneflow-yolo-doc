@@ -38,7 +38,7 @@ from zipfile import ZipFile
 
 import numpy as np # numpy矩阵操作模块
 import oneflow as flow    # OneFlow深度学习模块
-import oneflow.nn.functional as F     # PyTorch函数接口 封装了很多卷积、池化等函数
+import oneflow.nn.functional as F     # OneFlow函数接口 封装了很多卷积、池化等函数
 import yaml  # yaml文件操作模块
 from oneflow.utils.data import DataLoader, Dataset, dataloader, distributed
 from PIL import ExifTags, Image, ImageOps    # 图片、相机操作模块
