@@ -1264,7 +1264,7 @@
 <a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="kn">from</span> <span class="nn">oneflow.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">dataloader</span><span class="p">,</span> <span class="n">distributed</span>
 <a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ExifTags</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">ImageOps</span>    <span class="c1"># 图片、相机操作模块</span>
 <a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>   <span class="c1"># 进度条模块</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="c1"># augmentations.py源码解读:  https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/utils/augmentations_py.html</span>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="kn">from</span> <span class="nn">utils.augmentations</span> <span class="kn">import</span> <span class="n">Albumentations</span><span class="p">,</span> <span class="n">augment_hsv</span><span class="p">,</span> <span class="n">copy_paste</span><span class="p">,</span> <span class="n">letterbox</span><span class="p">,</span> <span class="n">mixup</span><span class="p">,</span> <span class="n">random_perspective</span>
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
 <a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="kn">from</span> <span class="nn">utils.general</span> <span class="kn">import</span> <span class="p">(</span>
@@ -1284,37 +1284,36 @@
 <a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>    <span class="n">xywhn2xyxy</span><span class="p">,</span>
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="n">xyxy2xywhn</span><span class="p">,</span>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="p">)</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="c1"># from utils.oneflow_utils import oneflow_distributed_zero_first</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="c1"># Parameters</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="n">HELP_URL</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data&quot;</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="n">IMG_FORMATS</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="s2">&quot;bmp&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="s2">&quot;dng&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="s2">&quot;jpeg&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    <span class="s2">&quot;jpg&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    <span class="s2">&quot;mpo&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    <span class="s2">&quot;png&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    <span class="s2">&quot;tif&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="s2">&quot;tiff&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="s2">&quot;webp&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="p">)</span>  <span class="c1"># include image suffixes</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="n">VID_FORMATS</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    <span class="s2">&quot;asf&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="s2">&quot;avi&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="s2">&quot;gif&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="s2">&quot;m4v&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>    <span class="s2">&quot;mkv&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    <span class="s2">&quot;mov&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>    <span class="s2">&quot;mp4&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>    <span class="s2">&quot;mpeg&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="s2">&quot;ts&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>    <span class="s2">&quot;wmv&quot;</span><span class="p">,</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="p">)</span>  <span class="c1"># include video suffixes</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="n">BAR_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{l_bar}{bar:10}{r_bar}{bar:-10b}</span><span class="s2">&quot;</span>  <span class="c1"># tqdm bar format</span>
-<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a><span class="n">LOCAL_RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># https://pytorch.org/docs/stable/elastic/run.html</span>
-<a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="n">RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="c1"># Parameters</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="n">HELP_URL</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data&quot;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="n">IMG_FORMATS</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="s2">&quot;bmp&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="s2">&quot;dng&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="s2">&quot;jpeg&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="s2">&quot;jpg&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    <span class="s2">&quot;mpo&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    <span class="s2">&quot;png&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>    <span class="s2">&quot;tif&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    <span class="s2">&quot;tiff&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="s2">&quot;webp&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="p">)</span>  <span class="c1"># include image suffixes</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="n">VID_FORMATS</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    <span class="s2">&quot;asf&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    <span class="s2">&quot;avi&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="s2">&quot;gif&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="s2">&quot;m4v&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="s2">&quot;mkv&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>    <span class="s2">&quot;mov&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    <span class="s2">&quot;mp4&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>    <span class="s2">&quot;mpeg&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>    <span class="s2">&quot;mpg&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    <span class="s2">&quot;ts&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="s2">&quot;wmv&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="p">)</span>  <span class="c1"># include video suffixes</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a><span class="n">BAR_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{l_bar}{bar:10}{r_bar}{bar:-10b}</span><span class="s2">&quot;</span>  <span class="c1"># tqdm bar format</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a><span class="n">LOCAL_RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># https://pytorch.org/docs/stable/elastic/run.html</span>
+<a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a><span class="n">RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div>
 <h2 id="2">2. 相机设置</h2>
 <p>&emsp;这部分是相机相关设置，当使用相机采样时才会使用。</p>
@@ -1374,7 +1373,7 @@
 <a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>    <span class="k">return</span> <span class="n">image</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">seed_worker</span><span class="p">(</span><span class="n">worker_id</span><span class="p">):</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Set dataloader worker seed https://pyflow.org/docs/stable/notes/randomness.html#dataloader</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Set dataloader worker seed https://pytorch.org/docs/stable/notes/randomness.html#dataloader</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">worker_seed</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">initial_seed</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">**</span> <span class="mi">32</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">worker_seed</span><span class="p">)</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">worker_seed</span><span class="p">)</span>
