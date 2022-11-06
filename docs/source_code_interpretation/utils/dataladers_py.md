@@ -159,7 +159,8 @@ def exif_transpose(image):
 
 ```python
 def seed_worker(worker_id):
-    # Set dataloader worker seed https://pytorch.org/docs/stable/notes/randomness.html#dataloader
+    # Set dataloader worker seed 
+    # https://oneflow.readthedocs.io/en/master/utils.data.html?highlight=randomness#platform-specific-behaviors
     worker_seed = flow.initial_seed() % 2 ** 32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
