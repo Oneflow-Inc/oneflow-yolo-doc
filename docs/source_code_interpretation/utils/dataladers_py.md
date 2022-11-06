@@ -240,7 +240,7 @@ def create_dataloader(
 ```python
 class InfiniteDataLoader(dataloader.DataLoader):
     """Dataloader that reuses workers
-    当image_weights=False时就会调用这两个函数 进行自定义DataLoader
+    当image_weights=False时就会使用InfiniteDataLoader和_RepeatSampler这两个类实现自定义DataLoader
     使用InfiniteDataLoader和_RepeatSampler来对DataLoader进行封装, 代替原先的DataLoader, 能够永久持续的采样数据
     Uses same syntax as vanilla DataLoader
     """
