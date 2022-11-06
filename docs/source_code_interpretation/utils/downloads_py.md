@@ -60,7 +60,7 @@ attempt_download函数调用safe_download函数。
 
 ### 3.1 safe_download
 
-这个函数是用来下载 url（github） 或者 url2（googleleaps云服务器） 路径对应的网页文件，
+这个函数是用来下载 url（github） 或者 url2（谷歌云服务器） 路径对应的网页文件，
 
 通常是下载权重文件，会用在attempt_download函数中如：
 
