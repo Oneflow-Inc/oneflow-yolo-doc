@@ -13,7 +13,7 @@
 ## 1.创建dataset.yaml
 
 COCO128是官方给的一个小的数据集 由[COCO](https://cocodataset.org/#home) 数据集前 128 张图片组成。
-这128幅图像用于训练和验证，判断yolov5脚本是否能够过正常进行。
+这128幅图像用于训练和验证，判断 yolov5 脚本是否能够过正常进行。
 [数据集配置文件 coco128.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/coco128.yaml) 定义了如下的配置选项： 
 
 ```coco128.yaml
@@ -82,7 +82,7 @@ download: https://ultralytics.com/assets/coco128.zip
 
 ## 3.COCO128 数据集目录结构组织
 
-在本例中，我们的 **coco128** 是位于 **yolov5** 目录附近。YOLOv5通过将每个图像路径 **xx/images/xx.jpg** 替换为 **xx/labels/xx.txt** 来自动定位每个图像的标签。例如：
+在本例中，我们的 **coco128** 是位于 **yolov5** 目录附近。yolov5 通过将每个图像路径 **xx/images/xx.jpg** 替换为 **xx/labels/xx.txt** 来自动定位每个图像的标签。例如：
 ```Python
 dataset/images/im0.jpg  # image
 dataset/labels/im0.txt  # label
@@ -93,7 +93,7 @@ dataset/labels/im0.txt  # label
 # 制作数据集
 
 ## 数据集标注工具
-这里主要介绍 LabelImg: 是一种矩形标注工具，常用于目标识别和目标检测,可直接生成 one-yolov5 读取的txt标签格式，但其只能进行矩形框标注。(当然也可以选用其它的工具进行标注并且网上都有大量关于标注工具的教程。)
+这里主要介绍 LabelImg: 是一种矩形标注工具，常用于目标识别和目标检测,可直接生成 yolov5 读取的txt标签格式，但其只能进行矩形框标注。(当然也可以选用其它的工具进行标注并且网上都有大量关于标注工具的教程。)
 
 首先labelimg的安装十分简单，直接使用cmd中的pip进行安装，在cmd中输入命令行：
 ```python3
@@ -107,14 +107,12 @@ labelimg
 
 点击Open Dir选择数据集文件夹，再点击Create RectBox进行标注。
 
-
-
 ![图片](https://user-images.githubusercontent.com/35585791/200170723-559ceea0-5473-4c97-99e9-a5c5f4a16167.png)
 
 
 当你绘制框结束就会弹出标签选择框，然后标注类别。这个类别编辑更改在Labelimg文件里，里面有classes.txt文档，打开手动更改类别即可。（当出现新类别时也可在标签选择框里输入点OK就自动添加类别了）
 
-标注好后选择 yolo 格式，点击Save保存。标注结果保存在`图片名.txt`文件中，txt文件和图片名称一致，内容如下：
+标注好后选择 yolo 格式，点击 Save 保存。标注结果保存在`图片名.txt`文件中，txt文件和图片名称一致，内容如下：
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/35585791/200170815-f4a6b66e-b7b8-486b-8641-099020e60c69.png">
@@ -132,6 +130,7 @@ labelimg
 - 标签验证。查看train_batch*.jpg 在 训练开始验证标签是否正确，即参见 mosaic （在 yolov5 的训练日志 runs/train/exp* 文件夹里面可以看到）。
 - 背景图像。背景图像是没有添加到数据集以减少 False Positives（FP）的对象的图像。我们建议使用大约0-10%的背景图像来帮助减少FPs（COCO有1000个背景图像供参考，占总数的1%）。背景图像不需要标签。
 
+下图展示了多种数据集的标签特点：
 
 <p align="center">
   <a href= "https://arxiv.org/abs/1405.0312">
@@ -139,13 +138,15 @@ labelimg
   </a>  
 </p>
 
-- lnstances per category 每个类别的情况
-- Categories per image 每幅图像类别
-- (a) lnstances per image 每幅图像的内容
-- (b) Number of categories vs. number of instances 类别数目 vs 实例数目
-- (c) lnstance size 干扰大小
-- (d) Number of categories 类别数
-- (e) Percent of image size 图像大小百分比
+其中：
+
+- Instances per category 表示每个类别的实例数
+- Categories per image 表示每幅图像的类别
+- (a) Instances per image 表示每幅图像的实例数
+- (b) Number of categories vs. number of instances 表示类别数目 vs 实例数目 （我们可以看到 COCO 数据集的类别和实例的数目达到了一个较好的平衡）
+- (c) Instance size 表示实例个数
+- (d) Number of categories 表示类别数
+- (e) Percent of image size 表示图像大小百分比
 
 ## 参考文章
 - https://github.com/ultralytics/yolov5/wiki/Tips-for-Best-Training-Results
