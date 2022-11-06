@@ -43,7 +43,7 @@ import yaml  # yaml文件操作模块
 from oneflow.utils.data import DataLoader, Dataset, dataloader, distributed
 from PIL import ExifTags, Image, ImageOps    # 图片、相机操作模块
 from tqdm import tqdm   # 进度条模块
-
+# augmentations.py源码解读:  https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/utils/augmentations_py.html
 from utils.augmentations import Albumentations, augment_hsv, copy_paste, letterbox, mixup, random_perspective
 
 from utils.general import (
@@ -63,7 +63,6 @@ from utils.general import (
     xywhn2xyxy,
     xyxy2xywhn,
 )
-# from utils.oneflow_utils import oneflow_distributed_zero_first
 
 # Parameters
 HELP_URL = "https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data"
@@ -160,7 +159,7 @@ def exif_transpose(image):
 
 ```python
 def seed_worker(worker_id):
-    # Set dataloader worker seed https://pyflow.org/docs/stable/notes/randomness.html#dataloader
+    # Set dataloader worker seed https://pytorch.org/docs/stable/notes/randomness.html#dataloader
     worker_seed = flow.initial_seed() % 2 ** 32
     np.random.seed(worker_seed)
     random.seed(worker_seed)
