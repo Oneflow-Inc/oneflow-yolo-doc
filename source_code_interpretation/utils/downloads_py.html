@@ -1182,7 +1182,7 @@
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199926866-066c6f9f-b137-4292-a9c1-091fabaef1d7.png" /></p>
 <h3 id="32-attempt_download">3.2 attempt_download</h3>
 <p>这个函数是实现从几个云平台(github/googleleaps云服务器)下载文件(预训练模型)，</p>
-<p>会调用上面的 safe_download 函数。会用在experimental.py中的attempt_load函数和train.py中，都是用来下载预训练权重 如：</p>
+<p>会调用上面的 safe_download 函数。会用在experimental.py中的attempt_load函数和train.py中，都是用来下载预训练权重。代码详解如下：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">attempt_download</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">repo</span><span class="o">=</span><span class="s2">&quot;Oneflow-Inc/one-yolov5&quot;</span><span class="p">):</span>  <span class="c1"># from utils.downloads import *; attempt_download()</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="sd">&quot;&quot;&quot;用在attempt_download函数中</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sd">    下载 url/url2 路径对应的网页文件</span>
