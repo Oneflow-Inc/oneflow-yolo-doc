@@ -14,7 +14,7 @@
     
     
       
-        <title>Dataladers py - oneflow-yolo-doc</title>
+        <title>dataladers_py - oneflow-yolo-doc</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Dataladers py
+              dataladers_py
             
           </span>
         </div>
@@ -190,6 +190,8 @@
         
   
   
+    
+  
 
 
   
@@ -201,7 +203,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="augmentations_py.html" class="md-tabs__link">
+      <a href="augmentations_py.html" class="md-tabs__link md-tabs__link--active">
         源码解读
       </a>
     </li>
@@ -670,12 +672,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
       
       <label class="md-nav__link" for="__nav_3">
         源码解读
@@ -691,12 +695,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_1" type="checkbox" id="__nav_3_1" checked>
       
       <label class="md-nav__link" for="__nav_3_1">
         utils
@@ -717,6 +723,206 @@
       <a href="augmentations_py.html" class="md-nav__link">
         augmentations_py
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          dataladers_py
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="dataladers_py.html" class="md-nav__link md-nav__link--active">
+        dataladers_py
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 导入需要的包和基本配置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 相机设置
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3dataloader" class="md-nav__link">
+    3.自定义DataLoader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-loadimagesandlabels" class="md-nav__link">
+    4. LoadImagesAndLabels
+  </a>
+  
+    <nav class="md-nav" aria-label="4. LoadImagesAndLabels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-init" class="md-nav__link">
+    4.1 init
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-cache_labels" class="md-nav__link">
+    4.2 cache_labels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-getitem" class="md-nav__link">
+    4.3 getitem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-collate_fn" class="md-nav__link">
+    4.4 collate_fn
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-img2label_paths" class="md-nav__link">
+    5. img2label_paths
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-verify_image_label" class="md-nav__link">
+    6. verify_image_label
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-load_image" class="md-nav__link">
+    7. load_image
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-augment_hsv" class="md-nav__link">
+    8. augment_hsv
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-load_mosaicload_mosaic9" class="md-nav__link">
+    9. load_mosaic、load_mosaic9
+  </a>
+  
+    <nav class="md-nav" aria-label="9. load_mosaic、load_mosaic9">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-load_mosaic" class="md-nav__link">
+    9.1 load_mosaic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-load_mosaic9" class="md-nav__link">
+    9.2 load_mosaic9
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-loadimages-loadstreams-loadwebcam" class="md-nav__link">
+    10. LoadImages &amp; LoadStreams &amp; LoadWebcam
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-flatten_recursive" class="md-nav__link">
+    11. flatten_recursive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12extract_boxes" class="md-nav__link">
+    12.extract_boxes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-autosplit" class="md-nav__link">
+    13. autosplit
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1030,7 +1236,7 @@
               
                 
                 
-                  <h1>Dataladers py</h1>
+                  <h1>dataladers_py</h1>
                 
                 <h2 id="_1">前言</h2>
 <blockquote>
@@ -2522,6 +2728,41 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="augmentations_py.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: augmentations_py" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              augmentations_py
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../thesis_interpretation/00_yolo_history.html" class="md-footer__link md-footer__link--next" aria-label="下一页: history" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              history
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
