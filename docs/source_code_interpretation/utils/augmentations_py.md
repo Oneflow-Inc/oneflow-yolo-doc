@@ -243,7 +243,7 @@ def replicate(img, labels):
     ) / 2  # side length (pixels)  [N] 得到N个gt的 (w+h)/2 用来衡量gt框的大小
     # 生成原标签个数一半的新标签   s.size返回ndarray的元素数量
     for i in s.argsort()[: round(s.size * 0.5)]:  # 返回较小(s较小)的一半gt框的index信息
-        x1b, y1b, x2b, y2b = boxes[i]  # 得到这一般较小gt框的坐标信息  左上角x1b y1b  右下角x2b y2b
+        x1b, y1b, x2b, y2b = boxes[i]  # 得到这一半较小gt框的坐标信息  左上角x1b y1b  右下角x2b y2b
         bh, bw = y2b - y1b, x2b - x1b  # 得到这一般较小gt框的高宽信息
         # 随机偏移标签中心点  y范围在[0, 图片高-gt框高]  x范围在[0, 图片宽-gt框宽]
         yc, xc = int(random.uniform(0, h - bh)), int(
