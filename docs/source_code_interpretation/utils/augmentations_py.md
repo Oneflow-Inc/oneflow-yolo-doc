@@ -134,8 +134,8 @@ def random_perspective(
             for i, segment in enumerate(segments):  # segment: [500, 2]  多边形的500个点坐标xy
                 xy = np.ones((len(segment), 3))  # [1, 1+1+1]
                 xy[:, :2] = segment  # [500, 2]
-                # 对该标签多边形的所有顶点坐标进行透视/仿射变换
-                xy = xy @ M.T  # transform
+                # 对该标签多边形的所有顶点坐标进行透视变换 或 仿射变换
+                xy = xy @ M.T  # transform  @表示矩阵乘法运算
                 xy = (
                     xy[:, :2] / xy[:, 2:3] if perspective else xy[:, :2]
                 )  # perspective rescale or affine
@@ -144,7 +144,7 @@ def random_perspective(
                 new[i] = segment2box(xy, width, height)  # xy [500, 2]
         # 不使用segments标签 使用正常的矩形的标签targets
         else:  # warp boxes
-            # 直接对box透视/仿射变换
+            # 直接对box透视变换 或 仿射变换
             # 由于有旋转，透视变换等操作，所以需要对四个角点都进行变换
             xy = np.ones((n * 4, 3))
             xy[:, :2] = targets[:, [1, 2, 3, 4, 1, 4, 3, 2]].reshape(
@@ -182,7 +182,7 @@ def random_perspective(
 
 ```
 
-这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：
+这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换 或 仿射变换：
 
 ![image](https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png)
 
