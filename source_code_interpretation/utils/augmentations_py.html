@@ -1209,10 +1209,10 @@
 <a id="__codelineno-0-161" name="__codelineno-0-161" href="#__codelineno-0-161"></a>
 <a id="__codelineno-0-162" name="__codelineno-0-162" href="#__codelineno-0-162"></a>    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">targets</span>
 </code></pre></div>
-<p>这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：
-<img alt="image" src="https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png" />
-这个函数的参数来自hyp中的5个参数
-<img alt="image" src="https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png" /></p>
+<p>这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png" /></p>
+<p>这个函数的参数来自hyp中的5个参数</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png" /></p>
 <h2 id="2-box_candidates">2. box_candidates</h2>
 <p>&emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。</p>
 <p>box_candidates模块代码：</p>
