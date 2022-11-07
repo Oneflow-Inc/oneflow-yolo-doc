@@ -81,6 +81,7 @@ nav:
     - 源码解读:
         - utils:
             - augmentations_py: source_code_interpretation/utils/augmentations_py.md
+            - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
 
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
