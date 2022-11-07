@@ -262,9 +262,9 @@ def replicate(img, labels):
 
 会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）
 
-## 4. letterbox
+## 4. [letterbox](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4)
 
-letterbox 的img转换部分
+[letterbox](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4) 的img转换部分
 
 &emsp;此时：auto=False（需要pad）, scale_fill=False, scale_up=False。
 
