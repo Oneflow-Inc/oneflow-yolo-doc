@@ -1274,8 +1274,8 @@
 <a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">labels</span>
 </code></pre></div>
 <p>会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）</p>
-<h2 id="4-letterbox">4. letterbox</h2>
-<p>letterbox 的img转换部分</p>
+<h2 id="4-letterbox">4. <a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4">letterbox</a></h2>
+<p><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4">letterbox</a> 的img转换部分</p>
 <p>&emsp;此时：auto=False（需要pad）, scale_fill=False, scale_up=False。</p>
 <p>&emsp;显然，这部分需要缩放，因为在这之前的load_image部分已经缩放过了（最长边等于指定大小，较短边等比例缩放），</p>
 <p>那么在letterbox只需要计算出较小边需要填充的pad, 再将较小边两边pad到相应大小（每个batch需要每张图片的大小，这个</p>
