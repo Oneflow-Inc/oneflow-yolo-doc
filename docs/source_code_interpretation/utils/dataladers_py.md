@@ -91,7 +91,8 @@ VID_FORMATS = (
     "wmv",
 )  # include video suffixes
 BAR_FORMAT = "{l_bar}{bar:10}{r_bar}{bar:-10b}"  # tqdm bar format
-LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  # https://pytorch.org/docs/stable/elastic/run.html
+LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  
+# https://oneflow.readthedocs.io/en/master/distributed.html?highlight=launch#launching-distributed-training 
 RANK = int(os.getenv("RANK", -1))
 ```
 
