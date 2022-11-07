@@ -183,8 +183,11 @@ def random_perspective(
 ```
 
 这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换/仿射变换：
+
 ![image](https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png)
+
 这个函数的参数来自hyp中的5个参数
+
 ![image](https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png)
 
 ## 2. box_candidates
