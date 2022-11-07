@@ -61,7 +61,7 @@ $\begin{array}{lcc}
 4. 更新簇的中心，计算每个簇中所有样本的均值（方法不唯一）作为新的簇中心。如下图（step 1）所示，两个黄色的小星星已经移动到对应簇的中心；
 5. 重复第3步到第4步直到簇中心不在变化或者簇中心变化很小满足给定终止条件。如下图（step2）所示，最终聚类结果。
 
-![image-3.png](autoanchor_imgs/picture_01.png)
+![image](https://user-images.githubusercontent.com/109639975/200206147-46531a06-5011-4020-ab7c-967ddf9c0df2.png)
 
 ### 什么是bpr?
 BPR（bpr best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904.01355).
