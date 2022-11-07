@@ -214,7 +214,8 @@ def create_dataloader(
     sampler = None if rank == -1 else distributed.DistributedSampler(dataset, shuffle=shuffle)
     # 使用InfiniteDataLoader和_RepeatSampler来对DataLoader进行封装, 代替原先的DataLoader, 能够永久持续的采样数据
     loader = DataLoader if image_weights else InfiniteDataLoader  # only DataLoader allows for attribute updates
-    generator = flow.Generator()
+    # 随机数生成器 https://oneflow.readthedocs.io/en/master/generated/oneflow.randint.html?highlight=flow.Generator#oneflow.randint
+    generator = flow.Generator() 
     generator.manual_seed(6148914691236517205 + RANK)
     return (
         loader(
@@ -283,8 +284,6 @@ class _RepeatSampler:
 
 ### 4.1 init
 这个函数的入口是上面的create_dataloader函数：
-<!-- ![image.png](dataladers_imgs/picture_00.png)
-![image-2.png](dataladers_imgs/picture_01.png)  -->
 ![image](https://user-images.githubusercontent.com/109639975/199916141-2ac22f90-abe0-4b0f-8654-282c857d5804.png)
 ![image](https://user-images.githubusercontent.com/109639975/199916291-e60a796a-2e77-4fa1-aa22-869cafb23969.png)
 
@@ -677,7 +676,8 @@ def cache_labels(self, path=Path('./labels.cache'), prefix=''):
 ```
 
 ### 4.4 collate_fn
-&emsp;很多人以为写完 __init__ 和 __getitem__ 函数数据增强就做完了，我们在分类任务中的确写完这两个函数就可以了，因为系统中是给我们写好了一个collate_fn函数的，但是在目标检测中我们却需要重写collate_fn函数，下面我会仔细的讲解这样做的原因（代码中注释）。
+
+&emsp;collate_fn 一般也可以叫调整函数,很多人以为写完 __init__ 和 __getitem__ 函数数据增强就做完了，我们在分类任务中的确写完这两个函数就可以了，因为系统中是给我们写好了一个collate_fn函数的，但是在目标检测中我们却需要重写collate_fn函数，下面我会仔细的讲解这样做的原因（代码中注释）。
 
 同样在create_dataloader中生成dataloader时调用：
 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/utils/dataloaders.py#L183-L195
