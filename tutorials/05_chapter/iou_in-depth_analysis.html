@@ -741,8 +741,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iougiou" class="md-nav__link">
-    IoU和GIoU损失比较
+  <a href="#diou-iougiou" class="md-nav__link">
+    DIoU 和 IoU/GIoU 损失比较
   </a>
   
 </li>
@@ -1226,8 +1226,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#iougiou" class="md-nav__link">
-    IoU和GIoU损失比较
+  <a href="#diou-iougiou" class="md-nav__link">
+    DIoU 和 IoU/GIoU 损失比较
   </a>
   
 </li>
@@ -1301,7 +1301,6 @@
                   <h1>5.2 IoU深入解析</h1>
                 
                 <h2 id="_1">📘摘要</h2>
-<p>来源:https://github.com/Zzh-tju/DIoU/blob/master/README.md#introduction</p>
 <p><strong>边界框回归是目标检测的关键步骤</strong>，在现有方法中，虽然<span class="arithmatex">\(\ell_n\)</span>-norm loss 被广泛用于边界框回归，但它不是针对评估指标量身定制的，即 Intersection over Union (IoU)。最近，已经提出了 IoU 损失和generalized IoU (GIoU) Loss作为评估IoU的指标 ，但仍然存在收敛速度慢和回归不准确的问题。在本文中，我们通过结合预测框和目标框之间的归一化距离来提出距离-IoU (DIoU) Loss，它在训练中的收敛速度比 IoU 和 GIoU Loss快得多。</p>
 <p><strong>此外，本文总结了边界框回归中的三个几何因素，即</strong></p>
 <p><strong>重叠面积（overlap area）、中心点距离（central point
@@ -1321,7 +1320,7 @@ et al. 2015; He et al. 2017),
 R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 同的检测框架，但边界框回归预测一个矩形框来定位目标对象仍然是其中关键步骤。</p>
 <h2 id="_2">前言</h2>
-<p>本文主要是结合论文<a href="https://arxiv.org/pdf/1911.08287.pdf">Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression</a> 进行对iou的解析学习。</p>
+<p>本文主要是结合论文Distance-IoU Loss: Faster and Better Learning for Bounding Box Regression(<code>https://arxiv.org/pdf/1911.08287.pdf</code>) 对 IoU 的解析学习。</p>
 <h2 id="iou">IoU</h2>
 <h3 id="iou_1">IoU介绍</h3>
 <p>Intersection over Union (IoU) </p>
@@ -1341,10 +1340,9 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <a style = "float:right">(2)</a>
 </center></p>
 <h3 id="iou-loss_1">IoU Loss 优缺点分析</h3>
-<p>有明显的缺陷 IoU loss只在边界框有重叠时才能工作, 对于不重
-叠的情况不会提供任何移动 ( <em>移动代表:预测框朝着目标框重叠的方向移动</em> ) 梯度。( <em>移动梯度,即无法衡量完全不相交的两个框所产生的的损失（iou固定为0），和两个不同形状的预测框可能产生相同的loss（相同的iou）分别如下图的左边和右边所示。</em>)</p>
+<p>有明显的缺陷 IoU loss只在边界框有重叠时才能工作, 对于不重叠的情况不会提供任何移动梯度 (移动代表预测框朝着目标框重叠的方向移动) 。移动梯度表示无法衡量完全不相交的两个框所产生的的损失（iou固定为0），和两个不同形状的预测框可能产生相同的loss（相同的iou）分别如下图的左边和右边所示。</p>
 <p align="center"> 
-<img src = "./iou_in-depth_analysis_imgs/iou_sum.png"> 
+<img src = "https://user-images.githubusercontent.com/35585791/201047336-535eba50-f1af-46b2-bcd5-e5184b6afde9.png"> 
 <br>
 </p>
 
@@ -1352,7 +1350,7 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <h3 id="giou_1">GIoU介绍</h3>
 <p>GIoU的设计初衷就是想解决IoU Loss存在的问题（预测框与真实框不相交时iou恒定为0），设计了一套Generalized Intersection over Union Loss。在IoU的基础上，GIoU还需要找到预测框和真实框的最小外接矩形，然后求出最小外接矩形减去两个预测框union的面积，具体算法流程如下：</p>
 <p align = "center">
-<img src = "iou_in-depth_analysis_imgs/GIOU.png">
+<img src = "https://user-images.githubusercontent.com/35585791/201037846-fbea6c1a-151e-4653-af73-f72202925b1e.png">
 </p>
 
 <h3 id="giou-loss">GIoU loss</h3>
@@ -1364,10 +1362,9 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <p><strong>其中 <span class="arithmatex">\(C\)</span>  是覆盖 <span class="arithmatex">\(B\)</span>  和 <span class="arithmatex">\(B^{g t}\)</span> 的最小方框</strong>,由于引入了<span class="arithmatex">\(C\)</span>，在不重叠的情况下，预测框也会向目标框移动。</p>
 <h3 id="giou_2">GIoU 优缺点分析</h3>
 <p>GIoU Loss解决了IoU Loss在不相交情况的问题，在所有性能指标中都可以作为IoU的适当替代品，在目标检测任务中能够得到更高的准确率。 </p>
-<p>缺点：虽然GIoU可以缓解重叠情况下的梯度消失问题,但它仍有一些局限性。
-(<em>即无法衡量有包含关系时的框回归损失，如下图，三个回归框具有相同的GIoU Loss，但是显然第三个框的回归效果更好。</em>)</p>
+<p>缺点：虽然GIoU可以缓解重叠情况下的梯度消失问题,但它仍有一些局限性。即无法衡量有包含关系时的框回归损失，如下图，三个回归框具有相同的GIoU Loss，但是显然第三个框的回归效果更好。</p>
 <p center = "center">
-    <img src = "./iou_in-depth_analysis_imgs//图片02.png">
+    <img src = "https://user-images.githubusercontent.com/35585791/201038208-3203e838-dd14-41e7-aa1c-8f128146c605.png">
 
  <caption>
 </p>
@@ -1376,16 +1373,16 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <p>首先，在本文上部分我们分析了关于原始的IoU损失和GIoU 损失的局限性。下面将通过模拟实验结果对边界框回归的过程进行进一步的解析。(补充说明: 为什么要进行模型实验?  因为仅仅从检测结果来分析边界框回归的过程很难，因为在不受控制的基准中的回归情况往往不全面比如：不同的距离(distances),不同的尺度(scales)和不同的长宽比(aspect ratios)。 相反，进行模拟实验，在实验中综合考虑回归情况，然后就可以很容易地分析给定损失函数的问题。)</p>
 <h3 id="_3">模拟实验</h3>
 <p center = "center">
-    <img src = "./iou_in-depth_analysis_imgs//图片01.png">
+    <img src = "https://user-images.githubusercontent.com/35585791/201038389-06b5faad-d4f1-414c-b2fa-d97d61af5659.png">
 </p>
 
-<p>在模拟实验中, 我们试图通过距离(distances), 尺度 (scales)和长宽比(aspect ratios)来覆盖边界框之间的大部分关系，如图3(a).所示。特别是, 我们选择7个单位框 (即每个框的面积为 1) ，具有不同的长宽比 (即 <span class="arithmatex">\(1: 4、1: 3、1: 2、1:1、2: 1、3:1 和  4: 1\)</span>)  作为目 标框。在不失一般性的情况下，7个目标框的中心点被固定在<span class="arithmatex">\((10,10)\)</span>。锚框均匀地分散在5000个点上。 </p>
+<p>在模拟实验中, 我们试图通过距离(distances), 尺度 (scales)和长宽比(aspect ratios)来覆盖边界框之间的大部分关系，如图3(a).所示。特别是, 我们选择7个单位框 (即每个框的面积为 1) ，具有不同的长宽比 (即 <span class="arithmatex">\(1: 4、1: 3、1: 2、1:1、2: 1、3:1 和  4: 1\)</span>)  作为目标框。在不失一般性的情况下，7个目标框的中心点被固定在<span class="arithmatex">\((10,10)\)</span>。锚框均匀地分散在5000个点上。 </p>
 <p><span class="arithmatex">\(({i})\)</span>  距离: 在以半径为 3 的 <span class="arithmatex">\((10、10)\)</span> 为中心的圆形区域内, 均匀选择5000个点, 放置7个尺度、7个长宽比的锚 框。在这些情况下，重叠和不重叠的方框都被包括。</p>
 <p><span class="arithmatex">\(({ii})\)</span> 尺度:对于每个点, 锚框的面积分别设置为
 <span class="arithmatex">\(0.5 、 0.67 、 0.75 、 1 、 1.33 、 1.5  和 2\)</span>。</p>
 <p><span class="arithmatex">\(({iii})\)</span> 长宽比: 对于给定的点和尺度, 采用 7 个长宽比, 即与目标框遵循相同的设置 (即 <span class="arithmatex">\(1: 4 、 1: 3 、 1: 2 、 1: 1 、 2: 1 、 3: 1  和 4: 1\)</span>) 。所有 <span class="arithmatex">\(5000 \times 7 \times 7\)</span>  锚箱都对应在每个目标框。综 上所述，总共有  <span class="arithmatex">\(1,715,000  =7 \times 7 \times 7 \times 5,000\)</span>  个回归案例。</p>
 <p><center></p>
-<p><img src="./iou_in-depth_analysis_imgs//图片03.png"></p>
+<p><img src="https://user-images.githubusercontent.com/35585791/201039837-7bf599a9-3426-4145-b0a5-b6ee92a34c65.png"></p>
 <p>图3: 仿真实验: (a) 通过考虑不同的距离、尺度和长宽比, 采用了171.5万个回归案例。(b)回归误差和（即:  <span class="arithmatex">\(\sum_{n} \mathbf{E}(t, n)\)</span>  ) 迭代次数为  <span class="arithmatex">\(\mathrm{t}\)</span>  时不同损失函数的曲线。</p>
 <p></center></p>
 <p>然后通过给定损失函数 <span class="arithmatex">\(\mathcal{L}\)</span> , 我们可以用梯度下降算法 来模拟每种情况下的边界框回归过程。对于预测框  <span class="arithmatex">\(B_{i}\)</span> , 当前的预测可以通过:
@@ -1394,11 +1391,11 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <a style="float:right">(4)</a>
 </center></p>
 <p>其中  <span class="arithmatex">\(B_{i}^{t}\)</span>  是迭代  <span class="arithmatex">\(t\)</span>  时的预测框,  <span class="arithmatex">\(\nabla B_{i}^{t-1}\)</span>
-表示损失的梯度  <span class="arithmatex">\(\mathcal{L}  w.r.t.  B_{i}\)</span>  迭代时  <span class="arithmatex">\(t-1\)</span> , 和  <span class="arithmatex">\(\eta\)</span>  是一个步 骤。值得注意的是，在我们的实现中，梯度乘以 <span class="arithmatex">\(2-I o U_{1}^{t-1}\)</span>  去加速收敛。
-边界盒回归的性能评估通过使用  <span class="arithmatex">\(\ell_{1} -norm.\)</span> 对于每个损失 函数, 仿真模拟实验当达到迭代  <span class="arithmatex">\(T=200\)</span>  时, 误差曲线如 <span class="arithmatex">\(图3(b).\)</span> 所示。</p>
+表示损失的梯度。<span class="arithmatex">\(\eta\)</span> 感觉可以理解为学习率。 值得注意的是，在我们的实现中，梯度乘以 <span class="arithmatex">\(2-I o U_{1}^{t-1}\)</span>  去加速收敛。
+边界框回归的性能评估通过使用  <span class="arithmatex">\(\ell_{1} -norm.\)</span> 对于每个损失 函数, 仿真模拟实验当达到迭代  <span class="arithmatex">\(T=200\)</span>  时, 误差曲线如 <span class="arithmatex">\(图3(b).\)</span> 所示。</p>
 <h3 id="iou-giou_1">IoU 和 GIoU 损失的限制</h3>
 <p center = "center">
-    <img src = "./iou_in-depth_analysis_imgs//图片04.png">
+    <img src = "https://user-images.githubusercontent.com/35585791/201040913-1af822bc-9ae4-45e9-91de-62c20c639d44.png">
 </p>
 <p>在图4中，我们可视化迭代T时对5000个分散点的最终回归误差。</p>
 <ul>
@@ -1407,10 +1404,11 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 </ul>
 <p><strong>综上所述，在非重叠情况下，IoU损失收敛是糟糕的解决方式，而GIoU损失收敛速度较慢，特别是对于水平和垂直方向的框。在目标检测流程中，IoU和GIoU的损失都不能保证回归的准确性。</strong></p>
 <h2 id="diou-ciou">DIoU &amp; CIoU</h2>
-<p>通过前面的IoU和GIoU的分析我们很自然会问以下问题：
-1. 第一，是否可以直接最小化预测框和目标框之间的归一化距离，以实现更快的收敛？
-2. 第二，当与目标框有重叠甚至包含时，如何使回归
-更准确、更快？</p>
+<p>通过前面的IoU和GIoU的分析我们很自然会问以下问题：</p>
+<ol>
+<li>第一，是否可以直接最小化预测框和目标框之间的归一化距离，以实现更快的收敛？</li>
+<li>第二，当与目标框有重叠甚至包含时，如何使回归更准确、更快？</li>
+</ol>
 <h3 id="diou-loss">DIoU loss</h3>
 <p>Distance-IoU 损失：更快更好的边界框回归损失,一般来说, <span class="arithmatex">\(IoU-based\)</span> 损失可以定义为
 <center></p>
@@ -1418,28 +1416,30 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <a style="float:right">(5)</a>
 </center></p>
 <p>其中  <span class="arithmatex">\(\large\mathcal{R}\left(B, B^{g t}\right)\)</span>  是 预测框  B  和目标框  <span class="arithmatex">\(B^{g t}\)</span>  的惩罚项。 通过设计适当的惩罚项, 在本节中, 我们提出了 DIoU 损失和CIoU损失来解答上述两个问题。</p>
-<p>为了回答第一个问题, 我们提出将两个边界框的中心点 之间的标准化距离最小化，惩罚项可以定义为
+<p>为了回答第一个问题, 我们提出将两个边界框的中心点之间的标准化距离最小化，惩罚项可以定义为
 <center></p>
 <p><span class="arithmatex">\(\large\mathcal{R}_{D I o U}=\frac{\rho^{2}\left(\mathbf{b}, \mathbf{b}^{g t}\right)}{c^{2}},\)</span>
 <a style ="float:right">(6)</a></p>
 <p></center></p>
-<p>其中  <span class="arithmatex">\(\mathbf{b}\)</span>  和  <span class="arithmatex">\(\mathbf{b}^{g t}\)</span>  分别代表  B  和  <span class="arithmatex">\(B^{g t}\)</span>  的中心点。  <span class="arithmatex">\(\rho(\cdot)\)</span>  为欧氏距离,  <span class="arithmatex">\(\mathrm{C}\)</span>  是覆盖两个盒框的最小封闭框的对角线长度。<span class="arithmatex">\(DIoU\)</span>损失函数可以定义为:
+<p>其中  <span class="arithmatex">\(\mathbf{b}\)</span>  和  <span class="arithmatex">\(\mathbf{b}^{g t}\)</span>  分别代表  B  和  <span class="arithmatex">\(B^{g t}\)</span>  的中心点。<span class="arithmatex">\(\rho(\cdot)\)</span>  为欧氏距离,  <span class="arithmatex">\(\mathrm{C}\)</span>  是覆盖两个盒框的最小封闭框的对角线长度。<span class="arithmatex">\(DIoU\)</span>损失函数可以定义为:
 <center></p>
 <p><span class="arithmatex">\(\large\mathcal{L}_{D I o U}=1-I o U+\frac{\rho^{2}\left(\mathbf{b}, \mathbf{b}^{g t}\right)}{c^{2}} .\)</span>
 <a style = "float:right"> (7)</a>
 </center></p>
 <p>如图5所示, <span class="arithmatex">\(DIoU\)</span>损失的惩罚项直接使两个中心点之间的距离最小化, 而  <span class="arithmatex">\(\mathrm{GIoU}\)</span>  损失的目的是减少  <span class="arithmatex">\(C-B \cup B^{g t}\)</span> 的面积。</p>
-<p><img alt="imgs" src="iou_in-depth_analysis_imgs/%E5%9B%BE%E7%89%8705.png" /></p>
-<h3 id="iougiou">IoU和GIoU损失比较</h3>
-<p><em>提出的DIoU损失 继承IoU和GIoU损失的一些属性</em>
-1. <span class="arithmatex">\(DIoU损失\)</span>对回归问题的尺度仍夗是不变的
-2. 与<span class="arithmatex">\(GIoU损失\)</span>类似, <span class="arithmatex">\(DIoU损失\)</span>可以在与目标框不重叠时为边界框提供移动方向。
-3. 当两个边界框完美匹配时, <span class="arithmatex">\(\mathcal{L}_{I o U}=\mathcal{L}_{G I o U}=\mathcal{L}_{D I o U}=0 .\)</span> 当两个框都很远时,  <span class="arithmatex">\(\mathcal{L}_{G I o U}=\mathcal{L}_{D I o U} \rightarrow 2 .\)</span></p>
-<p><span class="arithmatex">\(DIoU损失\)</span>比<span class="arithmatex">\(IoU损失\)</span>和<span class="arithmatex">\(GIoU损失\)</span>有几个优点, 可以通过仿真实验进行评估。
+<p><img alt="imgs" src="https://user-images.githubusercontent.com/35585791/201044862-b1dc3725-8d5e-4c13-87f4-e5687ec70417.png" /></p>
+<h3 id="diou-iougiou">DIoU 和 IoU/GIoU 损失比较</h3>
+<p>新提出的DIoU损失继承IoU和GIoU损失的一些属性</p>
+<ol>
+<li>DIoU损失对回归问题的尺度仍然是不变的</li>
+<li>与GIoU损失类似, DIoU损失可以在与目标框不重叠时为边界框提供移动方向。</li>
+<li>当两个边界框完美匹配时, <span class="arithmatex">\(\mathcal{L}_{I o U}=\mathcal{L}_{G I o U}=\mathcal{L}_{D I o U}=0 .\)</span> 当两个框都很远时,  <span class="arithmatex">\(\mathcal{L}_{G I o U}=\mathcal{L}_{D I o U} \rightarrow 2 .\)</span></li>
+</ol>
+<p>DIoU损失比IoU损失和GIoU损失有几个优点, 可以通过仿真实验进行评估。
 1. 如图1和图3所示, <span class="arithmatex">\(DIoU损失\)</span>可以直接最小化两个框的距离, 因此收敛速度比<span class="arithmatex">\(GIoU损失\)</span>要快得多。
-2. 对于两个框是包含关系的情况(<em>图2</em>), 或在水平和垂直方向的情况(<em>图6</em>)下, <span class="arithmatex">\(DIoU损矢\)</span>可以回归非常快, 而 <span class="arithmatex">\(\mathrm{GIoU}\)</span>  损失几乎退化为  <span class="arithmatex">\(\mathrm{IoU}损失\)</span>, 即 <span class="arithmatex">\(|C-A \cup B| \rightarrow 0 .\)</span></p>
+2. 对于两个框是包含关系的情况(图2), 或在水平和垂直方向的情况(图6)下, <span class="arithmatex">\(DIoU损矢\)</span>可以回归非常快, 而 <span class="arithmatex">\(\mathrm{GIoU}\)</span>  损失几乎退化为  <span class="arithmatex">\(\mathrm{IoU}损失\)</span>, 即 <span class="arithmatex">\(|C-A \cup B| \rightarrow 0 .\)</span></p>
 <p align = "center">
-    <img src = "./iou_in-depth_analysis_imgs//图片06.png">
+    <img src = "https://user-images.githubusercontent.com/35585791/201046151-3b59a367-dbd7-41c0-bffc-4ad7aa822c98.png">
 </p>
 
 <h3 id="complete-iou-loss">Complete IoU Loss</h3>
@@ -1478,7 +1478,7 @@ R-CNN (Cai and Vasconcelos 2018). 尽管存在这些不
 <h3 id="_4">介绍</h3>
 <p>NMS是大多数目标检测算法的最后一步，其中删除了冗余的检测框当它与最高分框的重叠超过一个阈值。 Soft-NMS (Bodla et al. 2017) 用连续函数w.r.t.惩罚相邻框的检测分数IoU，产生比原始NMS产生更柔和大和更强大的抑制。IoU-Net (Jiang et al. 2018) 提出了一个新的网络分支来预测定位置信度来指导NMS。最近，自适应NMS（Liu，Huang，和Wang 2019）和Softer-NMS（He et al. 2019）被提出分别研究适当的阈值策略和加权平均策略。 在本工作中，简单将DIoU作为原始NMS的标准, 在抑制冗余框时，同时考虑边界框的重叠面积和两个中心点之间的距离。</p>
 <h3 id="diou-nms">DioU-NMS</h3>
-<p><span class="arithmatex">\(Non-Maximum Suppression using DIoU\)</span></p>
+<p>Non-Maximum Suppression using DIoU</p>
 <p>在原始的NMS中, IoU指标用于抑制吕余的检测框, 其 中重叠区域是唯一的因素, 对于有遮挡的情况，往往会 产生错误的抑制。 我们在这项工作中建议 <span class="arithmatex">\(DIoU\)</span> 是 <span class="arithmatex">\(NMS\)</span> 的更好标准，因为在抑制标准中不仅应考虑重叠
 <span class="arithmatex">\(DIoU-NMS\)</span> 被正式定义为:</p>
 <p><center></p>
@@ -1496,12 +1496,9 @@ s_{i}, I o U-\mathcal{R}_{D I o U}\left(\mathcal{M}, B_{i}\right)&lt;\varepsilon
 此外<span class="arithmatex">\(CIoU损失\)</span>考虑了三个几何属性(即
 重叠区域、中心点距离 和 长宽比),促进了
 更快的收敛和更优的性能。</p>
-<p><a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
-快来给我Star呀😊~
-<img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
-</a></p>
 <h2 id="_6">参考文章</h2>
 <ul>
+<li>https://github.com/Zzh-tju/DIoU/blob/master/README.md#introduction</li>
 <li>https://github.com/Zzh-tju/DIoU/blob/master/README.md#introduction</li>
 <li>IoU: https://arxiv.org/pdf/1608.01471.pdf</li>
 <li>GIoU: https://giou.stanford.edu/GIoU.pdf</li>
