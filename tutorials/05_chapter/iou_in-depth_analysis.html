@@ -1300,11 +1300,19 @@
                 
                   <h1>5.2 IoU深入解析</h1>
                 
-                <h2 id="_1">📘摘要</h2>
+                <blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<h2 id="_1">📘摘要</h2>
 <p><strong>边界框回归是目标检测的关键步骤</strong>，在现有方法中，虽然<span class="arithmatex">\(\ell_n\)</span>-norm loss 被广泛用于边界框回归，但它不是针对评估指标量身定制的，即 Intersection over Union (IoU)。最近，已经提出了 IoU 损失和generalized IoU (GIoU) Loss作为评估IoU的指标 ，但仍然存在收敛速度慢和回归不准确的问题。在本文中，我们通过结合预测框和目标框之间的归一化距离来提出距离-IoU (DIoU) Loss，它在训练中的收敛速度比 IoU 和 GIoU Loss快得多。</p>
 <p><strong>此外，本文总结了边界框回归中的三个几何因素，即</strong></p>
 <p><strong>重叠面积（overlap area）、中心点距离（central point
-distance）和高宽比（aspect ratio）</strong>，在此基础上提出了完全 <span class="arithmatex">\(IoU (CIoU)\)</span> 损失，从而促进了更快的收敛和更优的性能。通过将 <span class="arithmatex">\(DIoU 和 CIoU 损失\)</span>结合到最先进的目标检测算法中，例如 YOLO v3、SSD 和 Faster RCNN，我们不仅在 IoU 指标方面而且在 GIoU 指标方面都获得了显着的性能提升。此外，DIoU 可以很容易地用于非最大抑制（NMS）作为标准，进一步促进性能提升。 <em>注释:这里IoU指标方面和GIoU指标方面指的是在：目标检测精度测量(mAP值),IoU损失计算稳定性等一些方面。</em></p>
+distance）和高宽比（aspect ratio）</strong>，在此基础上提出了完全 <span class="arithmatex">\(IoU (CIoU)\)</span> 损失，从而促进了更快的收敛和更优的性能。通过将 <span class="arithmatex">\(DIoU 和 CIoU 损失\)</span>结合到最先进的目标检测算法中，例如 YOLO v3、SSD 和 Faster RCNN，我们不仅在 IoU 指标方面而且在 GIoU 指标方面都获得了显着的性能提升。此外，DIoU 可以很容易地用于非最大抑制（NMS）作为标准，进一步促进性能提升。 <em>注释:这里IoU指标方面和GIoU指标方面指的是在：目标检测精度测量(mAP值
+),IoU损失计算稳定性等一些方面。</em></p>
 <p><strong>目标检测是计算机视觉任务中的关键问题之一</strong>，几十
 年来一直受到了广泛的研究关注 (Redmon et al. 2016;
 Redmon and Farhadi 2018; Ren et al. 2015; He et al. 2017;
