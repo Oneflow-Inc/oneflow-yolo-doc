@@ -1,3 +1,8 @@
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
 ##  📘摘要
 
@@ -7,7 +12,8 @@
 **此外，本文总结了边界框回归中的三个几何因素，即**
 
 **重叠面积（overlap area）、中心点距离（central point
-distance）和高宽比（aspect ratio）**，在此基础上提出了完全 $IoU (CIoU)$ 损失，从而促进了更快的收敛和更优的性能。通过将 $DIoU 和 CIoU 损失$结合到最先进的目标检测算法中，例如 YOLO v3、SSD 和 Faster RCNN，我们不仅在 IoU 指标方面而且在 GIoU 指标方面都获得了显着的性能提升。此外，DIoU 可以很容易地用于非最大抑制（NMS）作为标准，进一步促进性能提升。 *注释:这里IoU指标方面和GIoU指标方面指的是在：目标检测精度测量(mAP值),IoU损失计算稳定性等一些方面。*
+distance）和高宽比（aspect ratio）**，在此基础上提出了完全 $IoU (CIoU)$ 损失，从而促进了更快的收敛和更优的性能。通过将 $DIoU 和 CIoU 损失$结合到最先进的目标检测算法中，例如 YOLO v3、SSD 和 Faster RCNN，我们不仅在 IoU 指标方面而且在 GIoU 指标方面都获得了显着的性能提升。此外，DIoU 可以很容易地用于非最大抑制（NMS）作为标准，进一步促进性能提升。 *注释:这里IoU指标方面和GIoU指标方面指的是在：目标检测精度测量(mAP值
+),IoU损失计算稳定性等一些方面。*
 
 
 **目标检测是计算机视觉任务中的关键问题之一**，几十
