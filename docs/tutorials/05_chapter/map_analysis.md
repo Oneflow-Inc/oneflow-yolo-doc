@@ -1,5 +1,9 @@
 
-
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
 ## 指标评估(重要的一些定义)
 
@@ -21,7 +25,7 @@ $B_{g t}:真实回归框$
 
 下图可视化了真实回归框（绿色）和 预测回归框（红色）之间的IOU。
 
-<center> <img src="./map_analysis_imgs/iou.png"> </center>
+<center> <img src="https://user-images.githubusercontent.com/35585791/201063982-d966dcd1-0fbc-4c27-98df-3bfdaab9b375.png"> </center>
 
 图1.1 ; $IOU$ 的计算。绿色: $B_{g t}$ ， 红色:$B_{p}$
 
@@ -54,10 +58,6 @@ Precision 定义：模型识别相关目标的能力。分类正确的样本在�
 
 $Precision =\dfrac{TP}{TP+FP}=\dfrac{TP}{all \ detections}$
 
-
-
-
-
 ### Recall 
 
 Recall 定义：是模型找到真实回归框(*即标签标注的框*)的能力。计算公式如下：
@@ -72,7 +72,7 @@ $Recall = \dfrac{TP}{TP+FN}=\dfrac{TP}{all \ ground \ truths}$
 [Confidence](https://baike.baidu.com/item/%E7%BD%AE%E4%BF%A1%E5%BA%A6/7908802?fr=aladdin)
 (置信度):在统计学中，一个概率样本的置信区间（Confidence interval）是对这个样本的某个总体参数的区间估计。置信区间展现的是这个参数的真实值有一定概率落在测量结果的周围的程度。置信区间给出的是被测量参数测量值的可信程度范围，即前面所要求的“一定概率”。这个概率也被称为置信水平。 
 
-<img src="map_analysis_imgs/interpolated_precision_v2.png">
+<img src="https://user-images.githubusercontent.com/35585791/201064243-9aaaeee4-899a-4d8e-a4ce-498ebc6811ab.png">
 (红色曲线代表,人为的方式将PR曲线变成单调递减，使得计算面积更容易。)
 
 - AP（Average Percision）：AP为平均精度，指的是所有图片内的具体某一类的PR曲线下的面积(横轴为Recall，纵轴为Precision)。
