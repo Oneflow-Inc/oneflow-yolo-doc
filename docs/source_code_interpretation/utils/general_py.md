@@ -117,7 +117,7 @@ class timeout(contextlib.ContextDecorator):
 
 这两个函数是一些初始化操作。
 
-set_logging是对日志的设置(format、level)等进行初始化，init_seeds是进行一系列的随机数种子
+set_logging是对日志的设置(format、level)等进行初始化，init_seeds是设置一系列的随机数种子
 
 ### 3.1 set_logging
 这个函数是对日志的格式、等级等进行一个初始化，但是这个函数没用到。
