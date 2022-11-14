@@ -70,7 +70,7 @@ BPR（bpr best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904
 
 > BPR is defined as the ratio of the number of ground-truth boxes a detector can recall at the most divided by all ground-truth boxes. A ground-truth box is considered being recalled if the box is assigned to at least one sample (i.e., a location in FCOS or an anchor box in anchor-based detectors) during training.
 
-&emsp;bpr(best possible recall): 最多能被召回的gt框数量 / 所有gt框数量 最大值为1 越大越好 小于0.98就需要使用k-means + 遗传进化算法选择出与数据集更匹配的anchors框。
+&emsp;bpr(best possible recall): 最多能被召回的ground truth框数量 / 所有ground truth框数量 最大值为1 越大越好 小于0.98就需要使用k-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。
 
 ### 什么是白化操作whiten？
 &emsp;白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。
