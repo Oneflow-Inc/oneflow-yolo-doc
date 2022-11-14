@@ -133,7 +133,7 @@ def check_anchor_order(m):
 2. 将每张图片中wh的最大值等比例缩放到指定大小img_size，较小边也相应缩放
 3. 将bboxes从相对坐标改成绝对坐标（乘以缩放后的wh） 
 4. 筛选bboxes，保留wh都大于等于两个像素的bboxes
-5. 使用k-means聚类得到n个anchors（掉k-means包 涉及一个白化操作）
+5. 使用k-means聚类得到n个anchors（调用k-means包 涉及一个白化操作）
 6. 使用遗传算法随机对anchors的wh进行变异，如果变异后效果变得更好（使用anchor_fitness方法计算得到的fitness（适应度）进行评估）就将变异后的结果赋值给anchors，如果变异后效果变差就跳过，默认变异1000次
 > 不知道什么是遗传算法，可以看看这两个b站视频：[传算法超细致+透彻理解](https://www.bilibili.com/video/BV1zp4y1U7Ti?from=search&seid=3206758960880461786)
 和[霹雳吧啦Wz](https://www.bilibili.com/video/BV1Tv411T7qa?spm_id_from=333.851.dynamic.content.click)
