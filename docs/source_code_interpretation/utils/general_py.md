@@ -66,7 +66,7 @@ pd.options.display.max_columns = 10
 # 阻止opencv参与多线程(与 Pytorch的 Dataloader不兼容)
 cv2.setNumThreads(0)  # prevent OpenCV from multithreading (incompatible with PyTorch DataLoader)
 os.environ["NUMEXPR_MAX_THREADS"] = str(NUM_THREADS)  # NumExpr max threads
-os.environ["OMP_NUM_THREADS"] = "1" if platform.system() == "darwin" else str(NUM_THREADS)  # OpenMP (Pyflow and SciPy)
+os.environ["OMP_NUM_THREADS"] = "1" if platform.system() == "darwin" else str(NUM_THREADS)  # OpenMP (OneFlow and SciPy)
 ```
 
 ## 2. timeout（没用到）
