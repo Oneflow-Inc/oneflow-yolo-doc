@@ -1,3 +1,12 @@
+## 前言
+
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
+
 # YOLOv5 网络结构解析
 ## 引言
 
@@ -148,7 +157,7 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 如下面这张图： 
 
 <p align="center">
-  <img src="./yolov5_network_structure_analysis_imgs/model_comparison.png" >
+  <img src="https://user-images.githubusercontent.com/35585791/201064824-f97c82d5-6bba-4421-86d9-194e47842e35.png" >
   <caption> <u>图2.1</u>:yolov5 模型比较图 <br> 来源:https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data </caption>
 </p>
 
@@ -158,9 +167,8 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 下面是根据[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)绘制的网络整体结构简化版。
 
 <p align="center">
-  <!-- <img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/imgs/yolovs%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B.drawio.png" > -->
 
-  <img src = "./yolov5_network_structure_analysis_imgs/yolovs网络结构模型.drawio.png">
+  <img src = "https://user-images.githubusercontent.com/109639975/201299756-5d87c4f1-0fc3-417f-bdf5-6fcc1f011eba.png">
   <caption> <u>图2.2</u>:yolov5s 网络整体结构 <br> </caption>
 </p>
 
