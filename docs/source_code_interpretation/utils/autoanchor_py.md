@@ -63,7 +63,7 @@ $\begin{array}{lcc}
 
 ![image](https://user-images.githubusercontent.com/109639975/200206147-46531a06-5011-4020-ab7c-967ddf9c0df2.png)
 
-### 什么是bpr?
+### 什么是BPR?
 BPR（bpr best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904.01355).
 
 原论文解释：
