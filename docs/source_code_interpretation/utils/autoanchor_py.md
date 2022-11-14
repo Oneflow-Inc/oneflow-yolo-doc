@@ -177,7 +177,7 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
         # .min(2): value=[N, 9] 选出每个gt个和anchor的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)
         # [0] 返回value [N, 9] 每个gt个和anchor的宽比和高比最小的值 就是所有gt与anchor重合程度最低的
         x = flow.min(r, 1. / r).min(2)[0]  # ratio metric
-        # x = wh_iou(wh, torch.tensor(k))  # IoU metric
+        # x = wh_iou(wh, flow.tensor(k))  # IoU metric
         # x.max(1)[0]: [N] 返回每个gt和所有anchor(9个)中宽比/高比最大的值
         return x, x.max(1)[0]  # x, best_x
 
