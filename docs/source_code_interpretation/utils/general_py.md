@@ -1291,7 +1291,7 @@ def non_max_suppression(
     return output
 ```
 
-这个函数一般会用再detect.py或者val.py的模型前向推理结束之后。
+这个函数一般会用在detect.py或者val.py的模型前向推理结束之后。
 
 更多关于NMS函数流程和代码：[【YOLO-V3-SPP 源码解读】三、预测模块.](https://blog.csdn.net/qq_38253797/article/details/117920079)
 
