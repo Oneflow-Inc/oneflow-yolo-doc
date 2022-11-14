@@ -5,7 +5,7 @@
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
 如果对您有帮助，欢迎来给我Star呀😊~  </a>
 
-源码解读： [utils/autoanchor.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py)
+源码解读： [utils/general.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/general.py)
 
 >   这个文件是yolov5的通用工具类，写了一些通用的工具函数，用的很广，整个项目哪里都可能用到。
      这个文件的函数非常多，代码量也很大（上千行了），也都比较重要，希望大家看的时候多点耐心，都能掌握！
@@ -66,7 +66,7 @@ pd.options.display.max_columns = 10
 # 阻止opencv参与多线程(与 Pytorch的 Dataloader不兼容)
 cv2.setNumThreads(0)  # prevent OpenCV from multithreading (incompatible with PyTorch DataLoader)
 os.environ["NUMEXPR_MAX_THREADS"] = str(NUM_THREADS)  # NumExpr max threads
-os.environ["OMP_NUM_THREADS"] = "1" if platform.system() == "darwin" else str(NUM_THREADS)  # OpenMP (OneFlow and SciPy)
+os.environ["OMP_NUM_THREADS"] = "1" if platform.system() == "darwin" else str(NUM_THREADS)  # OpenMP (Pyflow and SciPy)
 ```
 
 ## 2. timeout（没用到）
@@ -120,7 +120,7 @@ class timeout(contextlib.ContextDecorator):
 set_logging是对日志的设置(format、level)等进行初始化，init_seeds是设置一系列的随机数种子
 
 ### 3.1 set_logging
-这个函数是对日志的格式、等级等进行一个初始化，但是这个函数没用到。
+这个函数是对日志的格式、等级等进行一个初始化。
 
 
 ```python
@@ -893,9 +893,7 @@ def labels_to_class_weights(labels, nc=80):
 
 ## 19.2 labels_to_image_weights
 
-这个函数是利用每张图片真实gt框的真实标签labels和上一步labels_to_class_weights得到的每个类别的权重得到数据集中每
-
-张图片对应的权重。
+这个函数是利用每张图片真实gt框的真实标签labels和上一步labels_to_class_weights得到的每个类别的权重得到数据集中每张图片对应的权重。
 
 labels_to_image_weights函数代码：
 
@@ -912,9 +910,9 @@ def labels_to_image_weights(labels, nc=80, class_weights=np.ones(80)):
     # class_counts: 每个类别出现的次数  [num_labels, nc]  每一行是当前这张图片每个类别出现的次数  num_labels=图片数量=label数量
     class_counts = np.array([np.bincount(x[:, 0].astype(np.int), minlength=nc) for x in labels])
     # [80] -> [1, 80]
-    # 整个数据集的每个类别权重[1, 80] *  每张图片的每个类别出现的次数[num_labels, 80] = 得到每一张图片每个类对应的权重[128, 80]
+    # 整个数据集的每个类别权重[1, 80] *  每张图片的每个类别出现的次数[num_labels, 80] = 得到每一张图片每个类对应的权重[num_labels, 80]
     # 另外注意: 这里不是矩阵相乘, 是元素相乘 [1, 80] 和每一行图片的每个类别出现的次数 [1, 80] 分别按元素相乘
-    # 再sum(1): 按行相加  得到最终image_weights: 得到每一张图片对应的采样权重[128]
+    # 再sum(1): 按行相加  得到最终image_weights: 得到每一张图片对应的采样权重[num_labels]
     return (class_weights.reshape(1, nc) * class_counts).sum(1)
 ```
 
@@ -984,7 +982,7 @@ scale_coords函数代码：
 
 ```python
 def scale_coords(img1_shape, coords, img0_shape, ratio_pad=None):
-    """用在detect.py和test.py中  将预测坐标从feature map映射回原图
+    """用在detect.py和val.py中  将预测坐标从feature map映射回img0
     将坐标coords(x1y1x2y2)从img1_shape缩放到img0_shape尺寸
     Rescale coords (xyxy) from img1_shape to img0_shape
     :params img1_shape: coords相对于的shape大小
