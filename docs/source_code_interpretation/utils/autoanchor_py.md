@@ -173,7 +173,7 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
         # 两者的重合程度越高 就越趋近于1 远离1(<1 或 >1)重合程度都越低
         r = wh[:, None] / k[None]
         # r=gt_height/anchor_height  gt_width / anchor_width  有可能大于1，也可能小于等于1
-        # torch.min(r, 1. / r): [N, 9, 2] 将所有的宽比和高比统一到<=1
+        # flow.min(r, 1. / r): [N, 9, 2] 将所有的宽比和高比统一到<=1
         # .min(2): value=[N, 9] 选出每个gt个和anchor的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)
         # [0] 返回value [N, 9] 每个gt个和anchor的宽比和高比最小的值 就是所有gt与anchor重合程度最低的
         x = flow.min(r, 1. / r).min(2)[0]  # ratio metric
