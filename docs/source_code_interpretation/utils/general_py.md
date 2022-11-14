@@ -943,7 +943,7 @@ def coco80_to_coco91_class():
 
 ```
 
-在val.py中定义：
+在 val.py 中使用：
 ![image](https://user-images.githubusercontent.com/109639975/199926030-7afba57f-21f8-4752-b0ae-952956b16a07.png)
 
 ## 21. clip_coords
