@@ -959,7 +959,7 @@ clip_coords函数代码：
 ```python
 def clip_coords(boxes, shape):
     """用在下面的xyxy2xywhn、save_one_boxd等函数中
-    将boxes的坐标(x1y1x2y2 左上角右下角)限定在图像的尺寸(img_shape hw)内
+    将boxes的坐标(x1y1x2y2 左上角右下角)限定在图像的尺寸内
     Clip bounding x1y1x2y2 bounding boxes to image shape (height, width)
     """
     # Clip bounding xyxy bounding boxes to image shape (height, width)
