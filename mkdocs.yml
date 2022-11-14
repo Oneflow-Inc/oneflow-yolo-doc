@@ -82,6 +82,7 @@ nav:
             - augmentations_py: source_code_interpretation/utils/augmentations_py.md
             - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
             - downloads_py: source_code_interpretation/utils/downloads_py.md
+            - geneal_py: source_code_interpretation/utils/general_py.md
 
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
