@@ -57,7 +57,7 @@ AUTOINSTALL = str(os.getenv("YOLOv5_AUTOINSTALL", True)).lower() == "true"  # gl
 VERBOSE = str(os.getenv("YOLOv5_VERBOSE", True)).lower() == "true"  # global verbose mode
 FONT = "Arial.ttf"  # https://ultralytics.com/assets/Arial.ttf
 # 设置运行相关的一些基本的配置  Settings
-# 控制print打印torch.tensor格式设置  tensor精度为5(小数点后5位)  每行字符数为320个  显示方法为long
+# 控制 print 打印 oneflow.tensor 格式设置  tensor 精度为5(小数点后5位)  每行字符数为320个  显示方法为long
 flow.set_printoptions(linewidth=320, precision=5, profile="long")
 # 控制print打印np.array格式设置  精度为5  每行字符数为320个  format short g, %precision=5
 np.set_printoptions(linewidth=320, formatter={"float_kind": "{:11.5g}".format})  # format short g, %precision=5
