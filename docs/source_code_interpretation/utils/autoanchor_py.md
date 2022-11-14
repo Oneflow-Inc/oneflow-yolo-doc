@@ -25,7 +25,7 @@ $d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centro
 
 </center>
 
-&emsp;我们用不同的 $k$ 值运行 $k-means$ 算法，并绘制最接近质心的平均 $Avg \ IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 $k = 5$ （*也就是5种anchor boxs*）簇的相对中心 与手工选取的 $anchor \ boxes$ 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。
+&emsp;我们用不同的 $k$ 值运行 $k-means$ 算法，并绘制最接近质心的平均 $Avg \ IoU$（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 $k = 5$ （*也就是5种anchor boxes*）簇的相对中心 与手工选取的 $anchor \ boxes$ 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。
 
 
 &emsp;表1中，我们将聚类策略得到的 $anchor \ boxes$ 和手工选取的 $anchor \ boxes$ 在最接近的 $Avg \ IoU$ 上进行比较。通过聚类策略得到的仅5种 $anchor \ boxes$ 中心的 $Avg \ IoU$ 为61.0，其性能类似于9个通过网络学习的 $anchor \ boxes$ 的60.9 (*即Avg IoU已经达到了Faster RCNN的水平*)。 而且使用9种 $anchor \ boxes$ 会得到更高的 $Avg \ IoU$ 。这表明使用 $k-means$ 生成 $anchor \ boxes$ 可以更好地表示模型并使其更容易学习。
