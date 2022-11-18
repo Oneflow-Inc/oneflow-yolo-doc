@@ -1028,8 +1028,15 @@
                 
                   <h1>5.4 计算mAP用到的numpy函数</h1>
                 
-                <h2 id="_1">引言</h2>
-<p>本文主要介绍在YOLOv5项目中 计算mAP用到的一些numpy操作，函数使用在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/734609fca9d844ac48749b132fb0a5777df34167/utils/metrics.py">utils/metrics.py</a>中。</p>
+                <blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<h2 id="_1">引言</h2>
+<p>本文主要介绍在 one-yolov5 项目中 计算mAP用到的一些numpy操作，函数使用在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/734609fca9d844ac48749b132fb0a5777df34167/utils/metrics.py">utils/metrics.py</a>中。</p>
 <p>用到的python/numpy的操作比如： np.cumsum()、np.interp()、np.maximum.accumulate()、np.trapz()等。接下来将在下面逐一介绍。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </code></pre></div>
@@ -1109,7 +1116,7 @@
 <a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="c1"># 画插值</span>
 <a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="Introduction_to_functions_used_in_metrics_imgs/output_9_0.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/202741207-1f915fba-30e6-4a99-b931-0dbe91f33724.png" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 插入一个序列</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1122,7 +1129,7 @@
 <a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="Introduction_to_functions_used_in_metrics_imgs/output_10_0.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/202741303-c335e5f4-94d4-45e8-88c1-698350aca99b.png" /></p>
 <h2 id="npmaximumaccumulate">np.maximum.accumulate</h2>
 <p>计算数组（或数组的特定轴）的累积最大值</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -1150,7 +1157,7 @@ c:
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>4.0
 </code></pre></div>
-<p><img alt="png" src="Introduction_to_functions_used_in_metrics_imgs/output_14_1.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/202741407-9e8a555e-4dd6-4aad-834a-8102829f2937.png" /></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> 
@@ -1161,7 +1168,7 @@ c:
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>8.0
 </code></pre></div>
-<p><img alt="png" src="Introduction_to_functions_used_in_metrics_imgs/output_15_1.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/202741531-63e51f69-d292-49b4-b7dc-ae38aa4c61ca.png" /></p>
 <h2 id="_2">参考文章</h2>
 <ul>
 <li>numpy API文档 CN： https://www.osgeo.cn/numpy/dev/index.html</li>
