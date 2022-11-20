@@ -2,9 +2,9 @@
 
 >🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
 欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
-<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果你有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
 <a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
-如果对您有帮助，欢迎来给我Star呀😊~  </a>
+如果对你有帮助，欢迎来给我Star呀😊~  </a>
 
 📢 声明:Model Train(以coco数据集为例) 
 
@@ -58,15 +58,15 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 
 
 ### 📌恢复训练
-如果您的训练进程中断了，您可以这样恢复先前的训练进程。
+如果你的训练进程中断了，你可以这样恢复先前的训练进程。
 ```shell
 # 多卡训练.
 python -m oneflow.distributed.launch --nproc_per_node 2 train.py --resume
 ```
-您也可以通过 --resume 参数指定要恢复的模型路径
+你也可以通过 --resume 参数指定要恢复的模型路径
 
 ```shell
-# 记得把 /path/to/your/checkpoint/path  替换为您要恢复训练的模型权重路径
+# 记得把 /path/to/your/checkpoint/path  替换为你要恢复训练的模型权重路径
 --resume /path/to/your/checkpoint/path
 ```
 
@@ -92,7 +92,7 @@ $ python val.py --weights yolov5x --data coco.yaml --img 640
 ```
 
 ## 推理 👍
-首先，下载一个训练好的模型权重文件，或选择您自己训练的模型；
+首先，下载一个训练好的模型权重文件，或选择你自己训练的模型；
 
 然后，
 通过 detect.py文件进行推理⚡。
@@ -163,7 +163,7 @@ python train.py --data custom.yaml --weights yolov5s
                                         
 ```
 
-- 从头开始训练的话，推荐用大的数据集(即 COCO、Objects365、OIv6 )在 `--cfg` 选项后传递您感兴趣的网络结构文件参数 以及空的` --weights ''` 参数：
+- 从头开始训练的话，推荐用大的数据集(即 COCO、Objects365、OIv6 )在 `--cfg` 选项后传递你感兴趣的网络结构文件参数 以及空的` --weights ''` 参数：
   
 ```python
 python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
@@ -183,7 +183,7 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
   
   <li> Batch Size: 使用更大的 --batch-size 。能够有效缓解小样本数产生的batchnorm统计的错误。</li>
 
-<li> Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的 <a href="https://github.com/ultralytics/yolov5/issues/607"> 《超参数演化教程》</a>。</li>
+<li> Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议你在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的 <a href="https://github.com/ultralytics/yolov5/issues/607"> 《超参数演化教程》</a>。</li>
 
 <li> ...更多训练的超参数配置请查看本文的附录。
 
@@ -197,7 +197,7 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
 
 在训练之前，确保所有机器上的文件都相同，数据集、代码库等。之后，确保机器可以相互通信。
 
-您必须选择一台主机器（其他机器将与之对话）。记下它的地址（master_addr）并选择一个端口（master-port）。对于下面的示例，将使用master_addr=192.168.1.1和master_ port=1234。
+你必须选择一台主机器（其他机器将与之对话）。记下它的地址（master_addr）并选择一个端口（master-port）。对于下面的示例，将使用master_addr=192.168.1.1和master_ port=1234。
 
 要使用它，可以执行以下指令：
 ```python
@@ -220,7 +220,7 @@ $ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank
 - oneflow目前不支持windows平台
 - --batch 必须是GPU数量的倍数。
 - GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
-- 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个训练程序。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
+- 如果你得到 **RuntimeError: Address already in use** ，可能是因为你一次正在运行多个训练程序。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
 ```python
 $ python -m oneflow.distributed.launch --master_port 1234 --nproc_per_node 2 ...
 ```
