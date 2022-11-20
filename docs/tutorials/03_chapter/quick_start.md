@@ -1,3 +1,11 @@
+## 前言
+
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
 📢 声明:Model Train(以coco数据集为例) 
 
 ## 项目结构预览 🏠 
@@ -141,7 +149,7 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 
 有关所有模型的完整比较，请参阅[详细表](https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9)
 
-![imgs]( https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.0.0/model_comparison.png)
+![imgs]( https://user-images.githubusercontent.com/35585791/201064824-f97c82d5-6bba-4421-86d9-194e47842e35.png)
 
 
 - 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/Oneflow-Inc/one-yolov5/releases) 下载 。
@@ -166,7 +174,7 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
 
 ### 📌训练配置
 
-在修改任何内容之前，首先使用默认设置进行训练，以建立性能基线。训练参数的完整列表,能够发现在train.py文件中。
+在修改任何内容之前，首先使用默认设置进行训练，以建立性能基线。训练参数的完整列表,能够在train.py文件中发现。
 <ul>
   
   <li> Epochs : 默认训练300个epochs。如果早期过拟合，则可以减少训练。如果在300个周期后未发生过拟合，则可以训练更长，比如600、1200个epochs。 </li>
@@ -176,6 +184,8 @@ python train.py --data custom.yaml --weights '' --cfg yolov5s.yaml
   <li> Batch Size: 使用更大的 --batch-size 。能够有效缓解小样本数产生的batchnorm统计的错误。</li>
 
 <li> Hyperparameters： 默认超参数在hyp.scratch-low.yaml文件中。我们建议您在考虑修改任何超参数之前，先使用默认超参数进行训练。一般来说，增加增强超参数将减少和延迟过度拟合，允许更长的训练和得到更高mAP值。减少损耗分量增益超参数，如hyp['obj']，将有助于减少这些特定损耗分量中的过度拟合。有关优化这些超参数的自动化方法，请参阅我们的 <a href="https://github.com/ultralytics/yolov5/issues/607"> 《超参数演化教程》</a>。</li>
+
+<li> ...更多训练的超参数配置请查看本文的附录。
 
 </ul>
 
@@ -210,14 +220,10 @@ $ python -m oneflow.distributed.launch --nproc_per_node G --nnodes N --node_rank
 - oneflow目前不支持windows平台
 - --batch 必须是GPU数量的倍数。
 - GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
-- 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个培训。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
+- 如果您得到 **RuntimeError: Address already in use** ，可能是因为您一次正在运行多个训练程序。要解决这个问题，只需通过添加--master_port来使用不同的端口号，如下所示
 ```python
 $ python -m oneflow.distributed.launch --master_port 1234 --nproc_per_node 2 ...
 ```
-#### 结果
-
-DDP 分析结果在[AWS EC2 P4d instance]( https://github.com/Oneflow-Inc/one-yolov5/wiki/AWS-Quickstart) with 8x A100 SXM4-40GB for YOLOv5l for 1 COCO epoch.
-
 ####  配置代码⚡
 ```python
 # prepare
@@ -232,12 +238,6 @@ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch-size 32
 python -m oneflow.distributed.launch --nproc_per_node 4 train.py --batch-size 64 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0,1,2,3  
 python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 128 --data coco_profile.yaml --weights yolov5l  --epochs 1 --device 0,1,2,3,4,5,6,7
 ```
-
-<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank"  >
-📢 快来给我Star呀😊~
-<img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/document/concluding_remarks.gif" align="center">
-</a>
-
 
 
 
