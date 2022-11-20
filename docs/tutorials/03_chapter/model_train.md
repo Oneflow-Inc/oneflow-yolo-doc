@@ -1,7 +1,3 @@
-📢 声明:Model Train(以coco数据集为例) 
-
-## 项目结构预览 🏠 
-![imgs](model_train_imgs/one-yolov5.png)
 
 ## 训练指令(使用coco数据集为🌰)
 
@@ -33,18 +29,6 @@ $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --
 ```
 $ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights '' --device 2,3
 ```
-###  📌使用SyncBatchNorm
-
-[SyncBatchNorm](https://oneflow.readthedocs.io/en/master/generated/oneflow.nn.SyncBatchNorm.html?highlight=SyncBatchNorm#oneflow.nn.SyncBatchNorm)可以提高多gpu训练的准确性，但会显著降低训练速度。它仅适用于多GPU DistributedDataParallel 训练。
-
-建议最好在每个GPU上的样本数量较小（*样本数量<=8*）时使用。
-
-要使用SyncBatchNorm，只需将添加 --sync-bn 参数选项，具体「案例🌰」如下:
-
-```Python
-$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --cfg yolov5s.yaml --weights '' --sync-bn
-```
-
 
 📢 更多参数解析详见  [附件表3.1](#table_31)。
 
