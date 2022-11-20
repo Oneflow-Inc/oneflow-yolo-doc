@@ -62,11 +62,10 @@ nav:
         - 第二章 训练模型的数据集:
             - 2.1. 如何准备YOLOv5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         - 第三章 模型训练: 
-            - 3.1. 快速开始: tutorials/03_chapter/quick_start.md
-            - 3.2. 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
-            - 3.3  模型训练: tutorials/03_chapter/model_train.md
-            - 3.4  测试时增强 (TTA): tutorials/03_chapter/TTA.md
-            - 3.5 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
+            - 3.1 快速开始: tutorials/03_chapter/quick_start.md
+            - 3.2 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
+            - 3.3 测试时增强 (TTA): tutorials/03_chapter/TTA.md
+            - 3.4 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
         - 第四章 数据组织与处理解读: 
             - 4.1 mosaic 解读:  tutorials/04_chapter/mosaic.md
         - 第五章 YOLOv5中IoU损失: 
