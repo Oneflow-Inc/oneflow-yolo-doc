@@ -1,9 +1,14 @@
 site_name: oneflow-yolo-doc
 use_directory_urls: false
 
+repo_name: OneYOLO-Doc
+repo_url: https://github.com/Oneflow-Inc/oneflow-yolo-doc/
+edit_uri: "blob/master/docs/"
+
 # Configuration
 theme:
   name: material
+  custom_dir: 'overrides/'
 
   # 404 page
   static_templates:
@@ -49,7 +54,8 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-
+extra:
+  disqus: true
 
 nav:
     - 首页🏠: index.md
