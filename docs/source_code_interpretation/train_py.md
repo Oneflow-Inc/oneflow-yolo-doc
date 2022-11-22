@@ -164,7 +164,7 @@ def main(opt, callbacks=Callbacks()):
 ## 3.2 [Resume](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L571-L603)
 > 判断是否使用断点续训resume, 读取参数
 
-使用断点续训 就从`path/to/last`中读取相关参数；不使用断点续训 就从文件中读取相关参数
+使用断点续训 就从`path/to/last`模型文件夹中读取相关参数；不使用断点续训 就从文件中读取相关参数
 
 
 ```python
