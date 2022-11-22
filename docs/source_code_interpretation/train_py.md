@@ -239,14 +239,11 @@ if LOCAL_RANK != -1:
 if not opt.evolve:
     # 如果不进行超参进化 那么就直接调用train()函数，开始训练
     train(opt.hyp, opt, device, callbacks)
-    # 如果是使用多卡训练, 那么销毁进程组
-    if WORLD_SIZE > 1 and RANK == 0:
-        LOGGER.info("Destroying process group... ")
-        dist.destroy_process_group()
+
 ```
 
 ### 3.5 Evolve hyperparameters (optional)
-> [传进化算法，边进化边训练](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L625-L713)
+> [遗传进化算法，边进化边训练](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L625-L713)
 
 
 
@@ -442,7 +439,6 @@ cuda = device.type != "cpu"
 
 init_seeds(opt.seed + 1 + RANK, deterministic=True)
 
-# with torch_distributed_zero_first(LOCAL_RANK): # 这个是上下文管理器
 data_dict = data_dict or check_dataset(data)  # check if None
 
 train_path, val_path = data_dict["train"], data_dict["val"]
