@@ -138,7 +138,7 @@ local_rank: rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu
 
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
-bbox_interval: 设置界框图像记录间隔 Set bounding-box image logging interval for W&B 默认-1   opt.epochs // 10
+bbox_interval: 设置带边界框图像记录间隔 Set bounding-box image logging interval for W&B 默认-1   opt.epochs // 10
 ```
 
 
