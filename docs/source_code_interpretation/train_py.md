@@ -484,7 +484,7 @@ amp = False
 
 # Freeze
 # 冻结权重层
-# 这里只是给了冻结权重层的一个例子, 但是作者并不建议冻结权重层, 训练全部层参数, 可以得到更好的性能, 当然也会更慢
+# 这里只是给了冻结权重层的一个例子, 但是作者并不建议冻结权重层, 训练全部层参数, 可以得到更好的性能, 不过也会更慢
 freeze = [f"model.{x}." for x in (freeze if len(freeze) > 1 else range(freeze[0]))]  # layers to freeze
 for k, v in model.named_parameters():
     v.requires_grad = True  # train all layers
