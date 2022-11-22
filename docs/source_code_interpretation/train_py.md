@@ -702,6 +702,9 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
         # 根据前面初始化的图片采样权重model.class_weights（每个类别的权重 频率高的权重小）以及maps配合每张图片包含的类别数
         # 通过rando.choices生成图片索引indices从而进行采用 （作者自己写的采样策略，效果不一定ok）
         cw = model.class_weights.cpu().numpy() * (1 - maps) ** 2 / nc  # class weights
+        # labels_to_image_weights: 这个函数是利用每张图片真实gt框的真实标签labels和开始训练前通过 labels_to_class_weights函数
+        # 得到的每个类别的权重得到数据集中每张图片对应的权重。
+        # https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/general_py.md#192-labels_to_image_weights
         iw = labels_to_image_weights(dataset.labels, nc=nc, class_weights=cw)  # image weights
         dataset.indices = random.choices(range(dataset.n), weights=iw, k=dataset.n)  # rand weighted idx
     # 初始化训练时打印的平均损失信息
@@ -761,8 +764,6 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
                 imgs = nn.functional.interpolate(imgs, size=ns, mode="bilinear", align_corners=False)
 
         # Forward
-        # imgs = flow.FloatTensor(np.ones([16,3,640,640])).cuda()
-
         pred = model(imgs)  # forward
 
         loss, loss_items = compute_loss(pred, targets.to(device))  # loss scaled by batch_size
@@ -910,7 +911,7 @@ return
 ```
 
 ## 4 run函数
-> 支持指令执行这个脚本   封装train接口
+> 封装train接口 支持函数调用执行这个train.py脚本 
 
 
 ```python
