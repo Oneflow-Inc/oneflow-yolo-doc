@@ -1,9 +1,14 @@
 site_name: oneflow-yolo-doc
 use_directory_urls: false
 
+repo_name: OneYOLO-Doc
+repo_url: https://github.com/Oneflow-Inc/oneflow-yolo-doc/
+edit_uri: "blob/master/docs/"
+
 # Configuration
 theme:
   name: material
+  custom_dir: 'overrides/'
 
   # 404 page
   static_templates:
@@ -49,7 +54,8 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-
+extra:
+  disqus: true
 
 nav:
     - 首页🏠: index.md
@@ -62,23 +68,28 @@ nav:
         - 第二章 训练模型的数据集:
             - 2.1. 如何准备YOLOv5模型训练数据: tutorials/02_chapter/how_to_prepare_yolov5_training_data.md
         - 第三章 模型训练: 
-            - 3.1. 快速开始: tutorials/03_chapter/quick_start.md
-            - 3.2. 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
-            - 3.3  模型训练: tutorials/03_chapter/model_train.md
-            - 3.4  测试时增强 (TTA): tutorials/03_chapter/TTA.md
-            - 3.5 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
+            - 3.1 快速开始: tutorials/03_chapter/quick_start.md
+            - 3.2 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
+            - 3.3 测试时增强 (TTA): tutorials/03_chapter/TTA.md
+            - 3.4 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
         - 第四章 数据组织与处理解读: 
             - 4.1 mosaic 解读:  tutorials/04_chapter/mosaic.md
         - 第五章 YOLOv5中IoU损失: 
             - 5.1 矩形推理: tutorials/05_chapter/rectangular_reasoning.md
             - 5.2 IoU深入解析: tutorials/05_chapter/iou_in-depth_analysis.md
             - 5.3 模型精确度评估: tutorials/05_chapter/map_analysis.md
+            - 5.4 计算mAP用到的numpy函数: tutorials/05_chapter/Introduction_to_functions_used_in_metrics.md
         - 第六章 模型导出和部署介绍:
             - 6.1 模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
 
-    - 源码详解:
+    - 源码解读:
         - utils:
+            - augmentations_py: source_code_interpretation/utils/augmentations_py.md
+            - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
+            - downloads_py: source_code_interpretation/utils/downloads_py.md
+            - geneal_py: source_code_interpretation/utils/general_py.md
             - autoanchor_py: source_code_interpretation/utils/autoanchor_py.md
+
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
         - YOLOv1 : thesis_interpretation/01_yolo.md

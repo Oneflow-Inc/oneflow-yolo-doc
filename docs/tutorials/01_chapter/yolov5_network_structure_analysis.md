@@ -1,3 +1,12 @@
+## 前言
+
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
+
 # YOLOv5 网络结构解析
 ## 引言
 
@@ -17,7 +26,8 @@ YOLOv5针对不同大小（n, s, m, l, x）的网络整体架构都是一样的�
 nc: 80  # number of classes 数据集中的类别数
 depth_multiple: 0.33  # model depth multiple  模型层数因子(用来调整网络的深度)
 width_multiple: 0.50  # layer channel multiple 模型通道数因子(用来调整网络的宽度)
-# 如何理解这个depth_multiple和width_multiple呢?它决定的是整个模型中的深度（层数）和宽度（通道数）,具体怎么调整的结合后面的backbone代码解释。
+# 如何理解这个depth_multiple和width_multiple呢?
+# 它决定的是整个模型中的深度（层数）和宽度（通道数）,具体怎么调整的结合后面的backbone代码解释。
 
 anchors: # 表示作用于当前特征图的Anchor大小为 xxx
 # 9个anchor，其中P表示特征图的层级，P3/8该层特征图缩放为1/8,是第3层特征
@@ -113,22 +123,22 @@ class Conv(nn.Module):
         return self.act(self.conv(x))
 ```
 
-比如上面把width_multiple设置为了0.5，那么第一个 [64, 6, 2, 2] 就会被解析为 [3,64*0.5=32,6,2,2]，其中第一个 3 为输入channel(因为输入)，32 为输出channel。 
+比如上面把width_multiple设置为了0.5，那么第一个 [64, 6, 2, 2] 就会被解析为 [3,64*0.5=32,6,2,2]，其中第一个 3 为输入channel(因为输入)，32 为输出channel。
 
 
 
 
 ### 关于调整网络大小的详解说明
 
-在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的256行 有对yaml 文件的nc,depth_multiple等参数读取，具体代码如下:
+在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的 286 行有对yaml 文件的nc,depth_multiple等参数读取，具体代码如下:
 
-```
-anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multiple']
+```python
+anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multiple'], d.get("activation")
 ```
 
 "width_multiple"参数的作用前面介绍args参数中已经介绍过了，那么"depth_multiple"又是什么作用呢？
 
-在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的257行有对参数的具体定义：
+在[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py)的 300 行有对参数的具体定义：
 
 ```python
  n = n_ = max(round(n * gd), 1) if n > 1 else n  # depth gain 暂且将这段代码当作公式(1)
@@ -147,7 +157,7 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 如下面这张图： 
 
 <p align="center">
-  <img src="./yolov5_network_structure_analysis_imgs/model_comparison.png" >
+  <img src="https://user-images.githubusercontent.com/35585791/201064824-f97c82d5-6bba-4421-86d9-194e47842e35.png" >
   <caption> <u>图2.1</u>:yolov5 模型比较图 <br> 来源:https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data </caption>
 </p>
 
@@ -157,9 +167,8 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 下面是根据[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)绘制的网络整体结构简化版。
 
 <p align="center">
-  <!-- <img src="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/imgs/yolovs%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9E%8B.drawio.png" > -->
 
-  <img src = "./yolov5_network_structure_analysis_imgs/yolovs网络结构模型.drawio.png">
+  <img src = "https://user-images.githubusercontent.com/109639975/201299756-5d87c4f1-0fc3-417f-bdf5-6fcc1f011eba.png">
   <caption> <u>图2.2</u>:yolov5s 网络整体结构 <br> </caption>
 </p>
 
@@ -169,7 +178,7 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 
 2. 模块组件右边参数 表示特征图的的形状，比如 在 第 一 层( Conv )输入 图片形状为 [ 3, 640, 640] ,关于这些参数，可以固定一张图片输入到网络并通过[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)的模型参数计算得到，并且可以在工程 models/[yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 通过代码进行print查看,详细数据可以参考附件表2.1。
 
-3. [1, 128, 80, 80],[1, 256, 40, 40],[1, 512, 20, 20] 作为输入经过Detect的forward, 接着flow.cat()函数拼接成为output: [1, 25200, 85]
+3. [1, 128, 80, 80],[1, 256, 40, 40],[1, 512, 20, 20] 作为输入经过Detect的forward, 接着flow.cat()函数拼接成为output: [1, 25200, 85]。
 
 ## [yolo.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolo.py) 解读
 
