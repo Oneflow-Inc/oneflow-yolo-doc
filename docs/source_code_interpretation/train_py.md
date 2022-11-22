@@ -731,7 +731,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
                 if "momentum" in x:
                     x["momentum"] = np.interp(ni, xi, [hyp["warmup_momentum"], hyp["momentum"]])
 
-        # Multi-scale
+        # Multi-scale 默认关闭
         # Multi-scale 多尺度训练   从[imgsz*0.5, imgsz*1.5+gs]间随机选取一个尺寸(32的倍数)作为当前batch的尺寸送入模型开始训练
         # imgsz: 默认训练尺寸   gs: 模型最大stride=32   [32 16 8]
         if opt.multi_scale:
