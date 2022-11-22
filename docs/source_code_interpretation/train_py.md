@@ -43,8 +43,7 @@ from models.experimental import attempt_load
 from models.yolo import Model
 from utils.autoanchor import check_anchors
 
-# from utils.autobatch import check_train_batch_size
-from utils.callbacks import Callbacks
+from utils.callbacks import Callbacks # 和日志相关的回调函数
 from utils.dataloaders import create_dataloader
 
 from utils.downloads import is_url  # , attempt_download
@@ -77,11 +76,11 @@ from utils.loss import ComputeLoss
 from utils.metrics import fitness
 from utils.oneflow_utils import EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer, smart_resume
 from utils.plots import plot_evolve, plot_labels
-# 这个 Worker 是这台机器上的第几个 Worker
+# LOCAL_RANK：当前进程对应的GPU号。
 LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  # https://pytorch.org/docs/stable/elastic/run.html
-# 这个 Worker 是全局第几个 Worker
+# RANK：当前进程的序号，用于进程间通讯，rank = 0 的主机为 master 节点。
 RANK = int(os.getenv("RANK", -1))
-# 总共有几个 Worker
+# WORLD_SIZE：总的进程数量 (原则上第一个process占用一个GPU是较优的)。
 WORLD_SIZE = int(os.getenv("WORLD_SIZE", 1))
 
 # Linux 下：
@@ -125,7 +124,6 @@ sync-bn: 是否使用跨卡同步bn操作,再DDP中使用  默认False
 linear-lr: 是否使用linear lr  线性学习率  默认False 使用cosine lr
 cache-image: 是否提前缓存图片到内存cache,以加速训练  默认False
 image-weights: 是否使用图片采用策略(selection img to training by class weights) 默认False 不使用
-bbox_iou_optim: 优化 compute_loss 中的 bbox_iou 函数
 
 bucket: 谷歌云盘bucket 一般用不到
 project: 训练结果保存的根目录 默认是runs/train
@@ -139,6 +137,7 @@ local_rank: rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
 bbox_interval: 设置带边界框图像记录间隔 Set bounding-box image logging interval for W&B 默认-1   opt.epochs // 10
+bbox_iou_optim: 这个参数代表启用oneflow针对bbox_iou部分的优化，使得训练速度更快
 ```
 
 
@@ -197,7 +196,6 @@ else:
         str(opt.project),
     )  # checks
     assert len(opt.cfg) or len(opt.weights), "either --cfg or --weights must be specified"
-    # 将opt.img_size扩展为[train_img_size, test_img_size]
     if opt.evolve:
         if opt.project == str(ROOT / "runs/train"):  # if default project name, rename to runs/evolve
             opt.project = str(ROOT / "runs/evolve")
@@ -217,7 +215,12 @@ else:
 
 ```python
 # 3、DDP mode设置
-# 选择设备  cpu/cuda:0
+
+"""select_device
+select_device 函数： 设置当前脚本的device，cpu或者cuda。
+并且当且仅当使用cuda时并且有多块gpu时可以使用ddp模式，否则抛出报错信息。batch_size需要整除总的进程数量。
+另外DDP模式不支持AutoBatch功能，使用DDP模式必须手动指定batch size。
+"""
 device = select_device(opt.device, batch_size=opt.batch_size)
 if LOCAL_RANK != -1:
     msg = "is not compatible with YOLOv5 Multi-GPU DDP training"
@@ -309,6 +312,7 @@ else:
     evolve.txt会记录每次进化之后的results+hyp
     每次进化时，hyp会根据之前的results进行从大到小的排序；
     再根据fitness函数计算之前每次进化得到的hyp的权重
+    (其中fitness是我们寻求最大化的值。在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权。)
     再确定哪一种进化方式，从而进行进化
     """
     for _ in range(opt.evolve):  # generations to evolve
@@ -317,6 +321,7 @@ else:
             parent = "single"  # parent selection method: 'single' or 'weighted'
             x = np.loadtxt(evolve_csv, ndmin=2, delimiter=",", skiprows=1)
             n = min(5, len(x))  # number of previous results to consider
+            # fitness是我们寻求最大化的值。在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权
             x = x[np.argsort(-fitness(x))][:n]  # top n mutations
             w = fitness(x) - fitness(x).min() + 1e-6  # weights (sum > 0)
             if parent == "single" or len(x) == 1:
@@ -402,9 +407,10 @@ last, best = w / "last", w / "best"
 
 
 ```python
+# 和日志相关的回调函数，记录当前代码执行的阶段
 callbacks.run("on_pretrain_routine_start")
 
-# Directories
+# Directories 目录设置
 w = save_dir / "weights"  # weights dir
 (w.parent if evolve else w).mkdir(parents=True, exist_ok=True)  # make dir
 last, best = w / "last", w / "best"
@@ -425,7 +431,9 @@ if not evolve:
 
 # Loggers
 data_dict = None
-if RANK in {-1, 0}:
+if RANK in {-1, 0}: 
+    # 初始化 Loggers 对象
+    # def __init__(self, save_dir=None, weights=None, opt=None, hyp=None, logger=None, include=LOGGERS):
     loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # loggers instance
 
     # Register actions
@@ -433,10 +441,11 @@ if RANK in {-1, 0}:
         callbacks.register_action(k, callback=getattr(loggers, k))
 
 # Config
-# 是否需要画图: 所有的labels信息、前三次迭代的barch、训练结果等
+# 是否需要画图： 所有的labels信息、迭代的epochs、训练结果等
 plots = not evolve and not opt.noplots  # create plots
 cuda = device.type != "cpu"
 
+# 初始化随机数种子
 init_seeds(opt.seed + 1 + RANK, deterministic=True)
 
 data_dict = data_dict or check_dataset(data)  # check if None
@@ -455,7 +464,10 @@ is_coco = isinstance(val_path, str) and val_path.endswith("coco/val2017.txt")  #
 
 
 ```python
-pretrained = os.path.exists(weights)
+# 检查权重命名合法性：
+# 合法：pretrained = True ;
+# 不合法: pretrained = False ;
+pretrained = check_wights(weights)
 # 载入模型
 if pretrained:
     # 使用预训练
@@ -479,6 +491,8 @@ if pretrained:
 else:
     # 不使用预训练
     model = Model(cfg, ch=3, nc=nc, anchors=hyp.get("anchors")).to(device)  # create
+
+# 注意一下： one-yolov5的amp训练还在开发调试中，暂时关闭，后续支持后打开。但half的推理目前我们是支持的
 # amp = check_amp(model)  # check AMP
 amp = False
 
@@ -563,7 +577,7 @@ if opt.sync_bn and cuda and RANK != -1:
 
 
 ```python
-# Trainloader
+# Trainloader https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/utils/dataladers_py.html
 train_loader, dataset = create_dataloader(
     train_path,
     imgsz,
@@ -611,6 +625,9 @@ if RANK in {-1, 0}:
         # 标签的高h宽w与anchor的高h_a宽h_b的比值 即h/h_a, w/w_a都要在(1/hyp['anchor_t'], hyp['anchor_t'])是可以接受的
         # 如果bpr小于98%，则根据k-mean算法聚类新的锚框
         if not opt.noautoanchor:
+            # check_anchors : 这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。
+            # bpr(best possible recall): 最多能被召回的ground truth框数量 / 所有ground truth框数量 最大值为1 越大越好
+            # 小于0.98就需要使用k-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。
             check_anchors(dataset, model=model, thr=hyp["anchor_t"], imgsz=imgsz)
         model.half().float()  # pre-reduce anchor precision
 
@@ -663,6 +680,7 @@ scheduler.last_epoch = start_epoch - 1  # do not move
 
 stopper, _ = EarlyStopping(patience=opt.patience), False
 # 初始化损失函数
+# 这里的bbox_iou_optim是one-yolov5扩展的一个参数，可以启用更快的bbox_iou函数，模型训练速度比PyTorch更快
 compute_loss = ComputeLoss(model, bbox_iou_optim=bbox_iou_optim)  # init loss class
 callbacks.run("on_train_start")
 # 打印日志信息
@@ -790,6 +808,13 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
         final_epoch = (epoch + 1 == epochs) or stopper.possible_stop
 
         if not noval or final_epoch:  # Calculate mAP
+            # 测试使用的是ema（指数移动平均 对模型的参数做平均）的模型              
+            # results: [1] Precision 所有类别的平均precision(最大f1时)
+            #          [1] Recall 所有类别的平均recall
+            #          [1] map@0.5 所有类别的平均mAP@0.5
+            #          [1] map@0.5:0.95 所有类别的平均mAP@0.5:0.95
+            #          [1] box_loss 验证集回归损失, obj_loss 验证集置信度损失, cls_loss 验证集分类损失
+            # maps: [80] 记录每一个类别的ap值
             results, maps, _ = val.run(
                 data_dict,
                 batch_size=batch_size // WORLD_SIZE * 2,
@@ -804,6 +829,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
                 compute_loss=compute_loss,
             )
         # Update best mAP
+        # fi 是我们寻求最大化的值。在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权。
         fi = fitness(np.array(results).reshape(1, -1))  # weighted combination of [P, R, mAP@.5, mAP@.5-.95]
         # stop = stopper(epoch=epoch, fitness=fi)  # early stop check
         if fi > best_fitness:
@@ -813,13 +839,6 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
 
         # Save model
         if (not nosave) or (final_epoch and not evolve):  # if save
-            # 测试使用的是ema（指数移动平均 对模型的参数做平均）的模型              
-            # results: [1] Precision 所有类别的平均precision(最大f1时)
-            #          [1] Recall 所有类别的平均recall
-            #          [1] map@0.5 所有类别的平均mAP@0.5
-            #          [1] map@0.5:0.95 所有类别的平均mAP@0.5:0.95
-            #          [1] box_loss 验证集回归损失, obj_loss 验证集置信度损失, cls_loss 验证集分类损失
-            # maps: [80] 所有类别的mAP@0.5:0.95
             ckpt = {
                 "epoch": epoch,
                 "best_fitness": best_fitness,
@@ -849,15 +868,15 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
 ```
 
 
-```python
+
 ### 4.13 End 
 
 打印一些信息
-(日志: 打印训练时间、plots可视化训练结果results1.png、confusion_matrix.png 以及(‘F1’, ‘PR’, ‘P’, ‘R’)曲线变化 、日志信息)
-+ coco评价(只在coco数据集才会运行) + 释放显存
-return 
 
-```
+1. 日志: 打印训练时间、plots可视化训练结果results1.png、confusion_matrix.png 以及(‘F1’, ‘PR’, ‘P’, ‘R’)曲线变化 、日志信息
+2. 通过调用val.run() 方法验证模型准确性在 coco数据集上 + 释放显存
+
+> Validate a model's accuracy on [COCO](https://cocodataset.org/#home) val or test-dev datasets.  Note that `pycocotools` metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.
 
 
 ```python
