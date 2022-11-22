@@ -1483,7 +1483,7 @@
 <blockquote>
 <p>判断是否使用断点续训resume, 读取参数</p>
 </blockquote>
-<p>使用断点续训 就从<code>path/to/last</code>中读取相关参数；不使用断点续训 就从文件中读取相关参数</p>
+<p>使用断点续训 就从<code>path/to/last</code>模型文件夹中读取相关参数；不使用断点续训 就从文件中读取相关参数</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 2、判断是否使用断点续训resume, 读取参数</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">resume</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">check_wandb_resume</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="ow">or</span> <span class="n">opt</span><span class="o">.</span><span class="n">evolve</span><span class="p">):</span>  <span class="c1"># resume from specified or most recent last</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="c1"># 使用断点续训 就从last.pt中读取相关参数</span>
