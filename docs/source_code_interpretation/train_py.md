@@ -690,7 +690,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
     mloss = flow.zeros(3, device=device)  # mean losses
 
     if RANK != -1:
-        # DDP模式打乱数据，并且dpp.sampler的随机采样数据是基于epoch+seed作为随机种子，每次epoch不同，随机种子不同
+        # DDP模式打乱数据，并且ddp.sampler的随机采样数据是基于epoch+seed作为随机种子，每次epoch不同，随机种子不同
         train_loader.sampler.set_epoch(epoch)
     
     # 进度条，方便展示信息
