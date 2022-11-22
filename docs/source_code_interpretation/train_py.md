@@ -582,7 +582,7 @@ train_loader, dataset = create_dataloader(
     shuffle=True,
 )
 labels = np.concatenate(dataset.labels, 0)
-# 获取标签中最大类别值，与类别数作比较，如果小于类别数则表示有问题
+# 获取标签中最大类别值，与类别数作比较，如果大于等于类别数则表示有问题
 mlc = int(labels[:, 0].max())  # max label class
 assert mlc < nc, f"Label class {mlc} exceeds nc={nc} in {data}. Possible class labels are 0-{nc - 1}"
 
