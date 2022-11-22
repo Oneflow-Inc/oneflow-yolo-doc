@@ -170,7 +170,7 @@ def main(opt, callbacks=Callbacks()):
 ```python
 # 2、判断是否使用断点续训resume, 读取参数
 if opt.resume and not (check_wandb_resume(opt) or opt.evolve):  # resume from specified or most recent last
-    # 使用断点续训 就从last.pt中读取相关参数
+    # 使用断点续训 就从last模型文件夹中读取相关参数
     # 如果resume是str，则表示传入的是模型的路径地址
     # 如果resume是True，则通过get_lastest_run()函数找到runs文件夹中最近的权重文件last
     last = Path(check_file(opt.resume) if isinstance(opt.resume, str) else get_latest_run())
