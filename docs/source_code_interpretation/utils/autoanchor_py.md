@@ -117,6 +117,8 @@ def check_anchor_order(m):
      # 计算最大anchor与最小anchor面积差
     da = a[-1] - a[0]  # delta a
     # 计算最大stride与最小stride差
+    # m.stride: model strides 
+    # https://github.com/Oneflow-Inc/one-yolov5/blob/bf8c66e011fcf5b8885068074ffc6b56c113a20c/models/yolo.py#L144-L152
     ds = m.stride[-1] - m.stride[0]  # delta s
     # flow.sign(x):当x大于/小于0时，返回1/-1
     # 如果这里anchor与stride顺序不一致，则重新调整顺序
