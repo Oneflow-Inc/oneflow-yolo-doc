@@ -1,9 +1,17 @@
+## 前言
+
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果你有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对你有帮助，欢迎来给我Star呀😊~  </a>
+
 ## 模型融合 (Model Ensembling)
 
 From https://www.sciencedirect.com/topics/computer-science/ensemble-modeling:
 >   Ensemble modeling is a process where multiple diverse models are created to predict an outcome, either by using many different modeling algorithms or using different training data sets. The ensemble model then aggregates the prediction of each base model and results in once final prediction for the unseen data. The motivation for using ensemble models is to reduce the generalization error of the prediction. As long as the base models are diverse and independent, the prediction error of the model decreases when the ensemble approach is used. The approach seeks the wisdom of crowds in making a prediction. Even though the ensemble model has multiple base models within the model, it acts and performs as a single model.
 
-📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用模型融合 (Model Ensembling)提高mAP和Recall 🚀
+📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用模型融合 (Model Ensembling)提高mAP和Recall 🚀 
 
 ### 📌开始之前
 克隆工程并在 [Python>3.7.0](https://www.python.org/) 的环境中安装 [requiresments.txt](https://github.com/Oneflow-Inc/one-yolov5/blob/main/requirements.txt) , OneFlow 请选择 [nightly 版本或者 >0.9 版本](https://github.com/Oneflow-Inc/oneflow#install-with-pip-package) 。[模型](https://github.com/Oneflow-Inc/one-yolov5/tree/main/models)和[数据](https://github.com/Oneflow-Inc/one-yolov5/tree/main/data)可以从源码中自动下载。
