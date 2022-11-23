@@ -530,6 +530,13 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     测试时数据增强 🚀
   </a>
   
@@ -537,14 +544,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     📌开始之前
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     📌普通测试
   </a>
   
@@ -577,7 +584,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     自定义
   </a>
   
@@ -585,7 +592,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     参考文章
   </a>
   
@@ -874,18 +881,6 @@
   
 
           
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../source_code_interpretation/utils/autoanchor_py.html" class="md-nav__link">
-        autoanchor_py
-      </a>
-    </li>
-  
-
-          
         </ul>
       </nav>
     </li>
@@ -1025,6 +1020,13 @@
       
         <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
     测试时数据增强 🚀
   </a>
   
@@ -1032,14 +1034,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     📌开始之前
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     📌普通测试
   </a>
   
@@ -1072,7 +1074,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     自定义
   </a>
   
@@ -1080,7 +1082,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     参考文章
   </a>
   
@@ -1108,17 +1110,25 @@
                   </a>
                 
                 
-                <h2 id="_1">测试时数据增强 🚀</h2>
+                <h2 id="_1">前言</h2>
+<blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果你有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对你有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<h2 id="_2">测试时数据增强 🚀</h2>
 <blockquote>
 <p>📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用 Test Time Augmentation (TTA) 提高mAP和Recall 🚀。</p>
 </blockquote>
-<h3 id="_2">📌开始之前</h3>
+<h3 id="_3">📌开始之前</h3>
 <p>克隆工程并在 <a href="https://www.python.org/">Python&gt;3.7.0</a> 的环境中安装 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/requirements.txt">requiresments.txt</a> , OneFlow 请选择 <a href="https://github.com/Oneflow-Inc/oneflow#install-with-pip-package">nightly 版本或者 &gt;0.9 版本</a> 。<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/models">模型</a>和<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/data">数据</a>可以从源码中自动下载。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone https://github.com/Oneflow-Inc/one-yolov5.git
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> one-yolov5
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
 </code></pre></div>
-<h3 id="_3">📌普通测试</h3>
+<h3 id="_4">📌普通测试</h3>
 <p>在尝试<code>TTA</code>之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <code>yolov5x</code> 是可用的最大并且最精确的模型。其它可用的是 <code>yolov5s</code>, <code>yolov5m</code>  和 <code>yolov5l</code>  或者 自己从数据集训练出的模型。<code>./weights/best</code>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">READEME table</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">$</span> <span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5x</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> <span class="o">--</span><span class="n">half</span>
 </code></pre></div>
@@ -1223,10 +1233,10 @@ detect.py 指令「案例🌰」:
 <a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1"># 结果</span>
 <a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="n">results</span><span class="o">.</span><span class="n">print</span><span class="p">()</span>  <span class="c1"># or .show(), .save(), .crop(), .pandas(), etc.</span>
 </code></pre></div></p>
-<h1 id="_4">自定义</h1>
+<h1 id="_5">自定义</h1>
 <p>我们可以自定义TTA操作在 YOLOv5 <strong>forward_augment()</strong> 方法中, 应用的TTA操作细节具体可见：</p>
 <p>https://github.com/Oneflow-Inc/one-yolov5/blob/bbdf286ad1b1d3fd2c82cecdfa4487db423d9cfe/models/yolo.py#L141-L153</p>
-<h3 id="_5">参考文章</h3>
+<h3 id="_6">参考文章</h3>
 <ul>
 <li>https://github.com/ultralytics/yolov5/issues/303</li>
 </ul>

@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#model-ensembling" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -541,6 +541,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#model-ensembling" class="md-nav__link">
     模型融合 (Model Ensembling)
   </a>
@@ -549,35 +556,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     📌开始之前
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     📌普通测试
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     📌 融合测试
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     📌融合推理
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     参考文章
   </a>
   
@@ -854,18 +861,6 @@
   
 
           
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../source_code_interpretation/utils/autoanchor_py.html" class="md-nav__link">
-        autoanchor_py
-      </a>
-    </li>
-  
-
-          
         </ul>
       </nav>
     </li>
@@ -1004,6 +999,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#model-ensembling" class="md-nav__link">
     模型融合 (Model Ensembling)
   </a>
@@ -1012,35 +1014,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     📌开始之前
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     📌普通测试
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     📌 融合测试
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     📌融合推理
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     参考文章
   </a>
   
@@ -1070,19 +1072,27 @@
                 
                   <h1>3.4 模型融合 (Model Ensembling)</h1>
                 
-                <h2 id="model-ensembling">模型融合 (Model Ensembling)</h2>
+                <h2 id="_1">前言</h2>
+<blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取 <a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" > 最新的动态。 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  > 如果你有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟 </a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对你有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<h2 id="model-ensembling">模型融合 (Model Ensembling)</h2>
 <p>From https://www.sciencedirect.com/topics/computer-science/ensemble-modeling:</p>
 <blockquote>
 <p>Ensemble modeling is a process where multiple diverse models are created to predict an outcome, either by using many different modeling algorithms or using different training data sets. The ensemble model then aggregates the prediction of each base model and results in once final prediction for the unseen data. The motivation for using ensemble models is to reduce the generalization error of the prediction. As long as the base models are diverse and independent, the prediction error of the model decreases when the ensemble approach is used. The approach seeks the wisdom of crowds in making a prediction. Even though the ensemble model has multiple base models within the model, it acts and performs as a single model.</p>
 </blockquote>
-<p>📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用模型融合 (Model Ensembling)提高mAP和Recall 🚀</p>
-<h3 id="_1">📌开始之前</h3>
+<p>📚 这个教程用来解释在YOLOv5模型的测试和推理中如何使用模型融合 (Model Ensembling)提高mAP和Recall 🚀 </p>
+<h3 id="_2">📌开始之前</h3>
 <p>克隆工程并在 <a href="https://www.python.org/">Python&gt;3.7.0</a> 的环境中安装 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/requirements.txt">requiresments.txt</a> , OneFlow 请选择 <a href="https://github.com/Oneflow-Inc/oneflow#install-with-pip-package">nightly 版本或者 &gt;0.9 版本</a> 。<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/models">模型</a>和<a href="https://github.com/Oneflow-Inc/one-yolov5/tree/main/data">数据</a>可以从源码中自动下载。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone https://github.com/Oneflow-Inc/one-yolov5.git
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> one-yolov5
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
 </code></pre></div>
-<h3 id="_2">📌普通测试</h3>
+<h3 id="_3">📌普通测试</h3>
 <p>在尝试<code>TTA</code>之前，我们希望建立一个基准能够进行比较。该命令在COCO val2017上以640像素的图像大小测试YOLOv5x。 <code>yolov5x</code> 是可用的最大并且最精确的模型。其它可用的模型是 <code>yolov5s</code>, <code>yolov5m</code>  和 <code>yolov5l</code>等  或者 自己从数据集训练出的模型 <code>./weights/best</code>。有关所有可用模型的详细信息，请参阅我们的 <a href="https://github.com/Oneflow-Inc/one-yolov5#%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A3%80%E6%9F%A5%E7%82%B9">READEME table</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">$</span> <span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="o">./</span><span class="n">yolov5x</span> <span class="o">--</span><span class="n">data</span> <span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> <span class="o">--</span><span class="n">half</span>
 </code></pre></div>
@@ -1112,7 +1122,7 @@
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a> Average Recall     <span class="o">(</span>AR<span class="o">)</span> @<span class="o">[</span> <span class="nv">IoU</span><span class="o">=</span><span class="m">0</span>.50:0.95 <span class="p">|</span> <span class="nv">area</span><span class="o">=</span>medium <span class="p">|</span> <span class="nv">maxDets</span><span class="o">=</span><span class="m">100</span> <span class="o">]</span> <span class="o">=</span> <span class="m">0</span>.730
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a> Average Recall     <span class="o">(</span>AR<span class="o">)</span> @<span class="o">[</span> <span class="nv">IoU</span><span class="o">=</span><span class="m">0</span>.50:0.95 <span class="p">|</span> <span class="nv">area</span><span class="o">=</span> large <span class="p">|</span> <span class="nv">maxDets</span><span class="o">=</span><span class="m">100</span> <span class="o">]</span> <span class="o">=</span> <span class="m">0</span>.826
 </code></pre></div></p>
-<h3 id="_3">📌 融合测试</h3>
+<h3 id="_4">📌 融合测试</h3>
 <p>通过在任何现有的 val.py或detect.py命令中的 <code>--weights</code> 参数后添加额外的模型，可以在测试和推理时将多个预训练模型融合在一起。</p>
 <p>📢 将 <code>yolov5x</code>,<code>yolov5l6</code> 两个模型的融合测试的指令如下：
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python val.py --weights ./yolov5x ./yolov5l6  --data data/coco.yaml --img 640 --half
@@ -1168,7 +1178,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="_4">📌融合推理</h3>
+<h3 id="_5">📌融合推理</h3>
 <p>附加额外的模型在 <code>--weights</code> 选项后自动启用融合推理：</p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python detect.py --weights ./yolov5x ./yolov5l6 --img 640 --source  data/images
 </code></pre></div>
@@ -1190,7 +1200,7 @@ Output:
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>0.6ms pre-process, 25.6ms inference, 2.4ms NMS per image at shape (1, 3, 640, 640)
 </code></pre></div></p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/202892132-f6d59244-1f5c-4175-927d-813ab2907ab1.png" /></p>
-<h3 id="_5">参考文章</h3>
+<h3 id="_6">参考文章</h3>
 <ul>
 <li>https://github.com/ultralytics/yolov5/issues/318</li>
 </ul>
