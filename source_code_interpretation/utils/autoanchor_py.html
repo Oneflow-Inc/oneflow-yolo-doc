@@ -1,0 +1,1643 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>autoanchor_py - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              autoanchor_py
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OneYOLO-Doc
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页🏠
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tutorials/00_chapter/overview.html" class="md-tabs__link">
+        YOLOv5教程📚
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../train_py.html" class="md-tabs__link md-tabs__link--active">
+        源码解读
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OneYOLO-Doc
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页🏠
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        YOLOv5教程📚
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="YOLOv5教程📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          YOLOv5教程📚
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        引言
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="引言" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          引言
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/00_chapter/overview.html" class="md-nav__link">
+        one-yolov5 特点解析
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        第一章 网络结构
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第一章 网络结构" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 网络结构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        1.1. YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        第二章 训练模型的数据集
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第二章 训练模型的数据集" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 训练模型的数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        2.1. 如何准备YOLOv5模型训练数据
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        第三章 模型训练
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第三章 模型训练" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          第三章 模型训练
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03_chapter/quick_start.html" class="md-nav__link">
+        3.1 快速开始
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03_chapter/loading_model_from_oneflowhub.html" class="md-nav__link">
+        3.2 从OneFlow Hub 加载YOLOv5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03_chapter/TTA.html" class="md-nav__link">
+        3.3 测试时增强 (TTA)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/03_chapter/model_ensembling.html" class="md-nav__link">
+        3.4 模型融合 (Model Ensembling)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        第四章 数据组织与处理解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第四章 数据组织与处理解读" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          第四章 数据组织与处理解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/04_chapter/mosaic.html" class="md-nav__link">
+        4.1 mosaic 解读
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+      
+      <label class="md-nav__link" for="__nav_2_6">
+        第五章 YOLOv5中IoU损失
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第五章 YOLOv5中IoU损失" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          第五章 YOLOv5中IoU损失
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/05_chapter/rectangular_reasoning.html" class="md-nav__link">
+        5.1 矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        5.2 IoU深入解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/05_chapter/map_analysis.html" class="md-nav__link">
+        5.3 模型精确度评估
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/05_chapter/Introduction_to_functions_used_in_metrics.html" class="md-nav__link">
+        5.4 计算mAP用到的numpy函数
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" type="checkbox" id="__nav_2_7" >
+      
+      <label class="md-nav__link" for="__nav_2_7">
+        第六章 模型导出和部署介绍
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第六章 模型导出和部署介绍" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          第六章 模型导出和部署介绍
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/06_chapter/export_onnx_tflite_tensorrt.html" class="md-nav__link">
+        6.1 模型导出
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        源码解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="源码解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          源码解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../train_py.html" class="md-nav__link">
+        train.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" checked>
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        utils
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="utils" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          utils
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="augmentations_py.html" class="md-nav__link">
+        augmentations_py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dataladers_py.html" class="md-nav__link">
+        dataladers_py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="downloads_py.html" class="md-nav__link">
+        downloads_py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="general_py.html" class="md-nav__link">
+        geneal_py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          autoanchor_py
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="autoanchor_py.html" class="md-nav__link md-nav__link--active">
+        autoanchor_py
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-means" class="md-nav__link">
+    什么是k-means?
+  </a>
+  
+    <nav class="md-nav" aria-label="什么是k-means?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-means_1" class="md-nav__link">
+    使用k-means时主要关注两点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k-means_2" class="md-nav__link">
+    k-means算法主要流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bpr" class="md-nav__link">
+    什么是BPR?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whiten" class="md-nav__link">
+    什么是白化操作whiten？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 导入需要的包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2check_anchor_order" class="md-nav__link">
+    2.check_anchor_order
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-kmean_anchors" class="md-nav__link">
+    3. kmean_anchors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-check_anchors" class="md-nav__link">
+    4. check_anchors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-nav__link">
+        history
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        YOLOv1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        YOLOv2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        YOLOv3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        YOLOv4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        YOLOv6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#k-means" class="md-nav__link">
+    什么是k-means?
+  </a>
+  
+    <nav class="md-nav" aria-label="什么是k-means?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#k-means_1" class="md-nav__link">
+    使用k-means时主要关注两点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#k-means_2" class="md-nav__link">
+    k-means算法主要流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bpr" class="md-nav__link">
+    什么是BPR?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whiten" class="md-nav__link">
+    什么是白化操作whiten？
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 导入需要的包
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2check_anchor_order" class="md-nav__link">
+    2.check_anchor_order
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-kmean_anchors" class="md-nav__link">
+    3. kmean_anchors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-check_anchors" class="md-nav__link">
+    4. check_anchors
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    Reference
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/autoanchor_py.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>autoanchor_py</h1>
+                
+                <h2 id="_1">前言</h2>
+<blockquote>
+<p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
+</blockquote>
+<p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py">utils/autoanchor.py</a></p>
+<h2 id="_2">摘要</h2>
+<p>&emsp;<strong>维度聚类</strong>（Dimension Clusters）。当把 YOLO 结合 <span class="arithmatex">\(anchor \ boxes\)</span> 使用时，我们会遇到两个问题： 首先 <span class="arithmatex">\(anchor \ boxes\)</span> 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整<span class="arithmatex">\(anchor \ boxes\)</span> 形状，但是如果我们从一开始就为网络选择更好的 <span class="arithmatex">\(anchor \ boxes\)</span> ，就可以让网络更容易学习到并获得更好的检测结果。</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199901435-76986df9-cc7b-4eac-97f1-fc905ed3d8d7.png" /></p>
+<p>图1：<span class="arithmatex">\(VOC\)</span> 和  <span class="arithmatex">\(COCO\)</span>  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 <span class="arithmatex">\(k-means\)</span> 聚类，以获得我们模型的良好初始 <span class="arithmatex">\(anchor \ boxes\)</span> 。左图显示了我们通过 k 的各种选择获得的 <span class="arithmatex">\(Avg \ IoU\)</span> 。我们发现 <span class="arithmatex">\(k = 5\)</span> 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 <span class="arithmatex">\(VOC\)</span> 和 <span class="arithmatex">\(COCO\)</span> 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 <span class="arithmatex">\(COCO\)</span> 的尺寸的变化比 <span class="arithmatex">\(VOC\)</span> 更大。</p>
+<p>&emsp;我们不用手工选择 <span class="arithmatex">\(anchor \ boxes\)</span>，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 因此对于距离度量我们使用:</p>
+<p><center></p>
+<p><span class="arithmatex">\(d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centroid })\)</span></p>
+<p></center></p>
+<p>&emsp;我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 <span class="arithmatex">\(k-means\)</span> 算法，并绘制最接近质心的平均 <span class="arithmatex">\(Avg \ IoU\)</span>（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 <span class="arithmatex">\(k = 5\)</span> （<em>也就是5种anchor boxes</em>）簇的相对中心 与手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。</p>
+<p>&emsp;表1中，我们将聚类策略得到的 <span class="arithmatex">\(anchor \ boxes\)</span> 和手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 在最接近的 <span class="arithmatex">\(Avg \ IoU\)</span> 上进行比较。通过聚类策略得到的仅5种 <span class="arithmatex">\(anchor \ boxes\)</span> 中心的 <span class="arithmatex">\(Avg \ IoU\)</span> 为61.0，其性能类似于9个通过网络学习的 <span class="arithmatex">\(anchor \ boxes\)</span> 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 <span class="arithmatex">\(anchor \ boxes\)</span> 会得到更高的 <span class="arithmatex">\(Avg \ IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成 <span class="arithmatex">\(anchor \ boxes\)</span> 可以更好地表示模型并使其更容易学习。</p>
+<p><span class="arithmatex">\(\begin{array}{lcc}
+\text { Box Generation } &amp; \# &amp; \text { Avg IoU } \\
+\hline \text { Cluster SSE } &amp; 5 &amp; 58.7 \\
+\text { Cluster IoU } &amp; 5 &amp; 61.0 \\
+\text { Anchor Boxes [15] } &amp; 9 &amp; 60.9 \\
+\text { Cluster IoU } &amp; 9 &amp; 67.2
+\end{array}\)</span></p>
+<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的 <span class="arithmatex">\(Avg \ IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的<span class="arithmatex">\(Avg \ IoU\)</span>与其最接近的，未经修改的使用不同生成方法的目标之间的 <span class="arithmatex">\(Avg \ IoU\)</span> 。聚类得结果比使用手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 结果要好得多。 </p>
+<h2 id="k-means">什么是k-means?</h2>
+<p>&emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
+<p>在One-YOLOv5项目中使用K-means
+  1. train.py的parse_opt下的参数noautoanchor必须为False 
+  2. hpy.scratch.yaml下的anchors参数注释掉。</p>
+<h3 id="k-means_1">使用k-means时主要关注两点</h3>
+<ol>
+<li>如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IoU。</li>
+<li>分为几类，这个也是需要根据应用场景取选择的，也是一个超参数。</li>
+</ol>
+<h3 id="k-means_2">k-means算法主要流程</h3>
+<ol>
+<li>手动设定簇的个数k，假设k=2；</li>
+<li>在所有样本中随机选取k个样本作为簇的初始中心，如下图（random clusters）中两个黄色的小星星代表随机初始化的两个簇中心；</li>
+<li>计算每个样本离每个簇中心的距离（这里以欧式距离为例），然后将样本划分到离它最近的簇中。如下图（step 0）用不同的颜色区分不同的簇；</li>
+<li>更新簇的中心，计算每个簇中所有样本的均值（方法不唯一）作为新的簇中心。如下图（step 1）所示，两个黄色的小星星已经移动到对应簇的中心；</li>
+<li>重复第3步到第4步直到簇中心不在变化或者簇中心变化很小满足给定终止条件。如下图（step2）所示，最终聚类结果。</li>
+</ol>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/200206147-46531a06-5011-4020-ab7c-967ddf9c0df2.png" /></p>
+<h3 id="bpr">什么是BPR?</h3>
+<p>BPR（bpr best possible recall来源于论文: <a href="https://arxiv.org/abs/1904.01355">FCOS</a>.</p>
+<p>原论文解释：</p>
+<blockquote>
+<p>BPR is defined as the ratio of the number of ground-truth boxes a detector can recall at the most divided by all ground-truth boxes. A ground-truth box is considered being recalled if the box is assigned to at least one sample (i.e., a location in FCOS or an anchor box in anchor-based detectors) during training.</p>
+</blockquote>
+<p>&emsp;bpr(best possible recall): 最多能被召回的ground truth框数量 / 所有ground truth框数量 最大值为1 越大越好 小于0.98就需要使用k-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。</p>
+<h3 id="whiten">什么是白化操作whiten？</h3>
+<p>&emsp;白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。</p>
+<p>输入数据集X，经过白化处理后，新的数据X’满足两个性质：</p>
+<ol>
+<li>特征之间相关性较低；</li>
+<li>所有特征具有相同的方差=1</li>
+</ol>
+<p>&emsp;常见的作法是：对每一个数据做一个标准差归一化处理（除以标准差）。scipy.cluster.vq.kmeans() 函数输入的数据就是必须是白化后的数据。相应的输出的<a href="https://so.csdn.net/so/search?q=anchor&amp;spm=1001.2101.3001.7020">anchor</a> k也是白化后的anchor，所以需要将anchor k 都乘以标准差恢复。</p>
+<h2 id="1">1. 导入需要的包</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>      <span class="c1"># numpy矩阵操作模块</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span>  <span class="c1"># OneFlow深度学习模块</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">yaml</span>             <span class="c1"># 操作yaml文件模块</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>   <span class="c1"># Python进度条模块</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span> <span class="nn">utils.general</span> <span class="kn">import</span> <span class="n">LOGGER</span><span class="p">,</span> <span class="n">colorstr</span> <span class="c1"># 日志模块</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">PREFIX</span> <span class="o">=</span> <span class="n">colorstr</span><span class="p">(</span><span class="s2">&quot;AutoAnchor: &quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="2check_anchor_order">2.check_anchor_order</h2>
+<p>这个函数用于确认当前anchors和stride的顺序是否是一致的，因为我们的m.anchors是相对各个feature map</p>
+<p>（每个feature map的感受野不同 检测的目标大小也不同 适合的anchor大小也不同）所以必须要顺序一致 否则效果会很不好。</p>
+<p>这个函数一般用于check_anchors最后阶段。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">check_anchor_order</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="sd">&quot;&quot;&quot;用在check_anchors最后 确定anchors和stride的顺序是一致的</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="sd">    Check anchor order against stride order for YOLOv5 Detect() module m, and correct if necessary</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    :params m: model中的最后一层 Detect层</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="c1"># Check anchor order against stride order for YOLOv5 Detect() module m, and correct if necessary</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># 计算anchor的面积 anchor area [9]</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># mean anchor area per output layer</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>     <span class="c1"># 计算最大anchor与最小anchor面积差</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">da</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># delta a</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># 计算最大stride与最小stride差</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="c1"># m.stride: model strides </span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="c1"># https://github.com/Oneflow-Inc/one-yolov5/blob/bf8c66e011fcf5b8885068074ffc6b56c113a20c/models/yolo.py#L144-L152</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># delta s</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># flow.sign(x):当x大于/小于0时，返回1/-1</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># 如果这里anchor与stride顺序不一致，则重新调整顺序</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="k">if</span> <span class="n">da</span> <span class="ow">and</span> <span class="p">(</span><span class="n">da</span><span class="o">.</span><span class="n">sign</span><span class="p">()</span> <span class="o">!=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sign</span><span class="p">()):</span>  <span class="c1"># same order</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">Reversing anchor order&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="3-kmean_anchors">3. kmean_anchors</h2>
+<p>&emsp;这个函数才是这个这个文件的核心函数，功能：使用K-means + 遗传算法 算出更符合当前数据集的anchors。</p>
+<p>&emsp;这里不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：</p>
+<ol>
+<li>载入数据集，得到数据集中所有数据的wh</li>
+<li>将每张图片中wh的最大值等比例缩放到指定大小img_size，较小边也相应缩放</li>
+<li>将bboxes从相对坐标改成绝对坐标（乘以缩放后的wh） </li>
+<li>筛选bboxes，保留wh都大于等于两个像素的bboxes</li>
+<li>使用k-means聚类得到n个anchors（调用k-means包 涉及一个白化操作）</li>
+<li>使用遗传算法随机对anchors的wh进行变异，如果变异后效果变得更好（使用anchor_fitness方法计算得到的fitness（适应度）进行评估）就将变异后的结果赋值给anchors，如果变异后效果变差就跳过，默认变异1000次<blockquote>
+<p>不知道什么是遗传算法，可以看看这两个b站视频：<a href="https://www.bilibili.com/video/BV1zp4y1U7Ti?from=search&amp;seid=3206758960880461786">传算法超细致+透彻理解</a>
+和<a href="https://www.bilibili.com/video/BV1Tv411T7qa?spm_id_from=333.851.dynamic.content.click">霹雳吧啦Wz</a></p>
+</blockquote>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">kmean_anchors</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;./data/coco128.yaml&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="mi">640</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">gen</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="sd">&quot;&quot;&quot;在check_anchors中调用</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    使用K-means + 遗传算法 算出更符合当前数据集的anchors</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Creates kmeans-evolved anchors from training dataset</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    :params path: 数据集的路径/数据集本身</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    :params n: anchor框的个数</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    :params img_size: 数据集图片约定的大小</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    :params thr: 阈值 由hyp[&#39;anchor_t&#39;]参数控制</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="sd">    :params gen: 遗传算法进化迭代的次数(突变 + 选择)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="sd">    :params verbose: 是否打印所有的进化(成功的)结果 默认传入是Fasle的 只打印最佳的进化结果即可</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sd">    :return k: k-means + 遗传算法进化 后的anchors</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="kn">from</span> <span class="nn">scipy.cluster.vq</span> <span class="kn">import</span> <span class="n">kmeans</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="c1"># 注意一下下面的thr不是传入的thr，而是1/thr, 所以在计算指标这方面还是和check_anchor一样</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="n">thr</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">thr</span>  <span class="c1"># 0.25</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="n">prefix</span> <span class="o">=</span> <span class="n">colorstr</span><span class="p">(</span><span class="s1">&#39;autoanchor: &#39;</span><span class="p">)</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="k">def</span> <span class="nf">metric</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">wh</span><span class="p">):</span>  <span class="c1"># compute metrics</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="sd">&quot;&quot;&quot;用于print_results函数和anchor_fitness函数</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="sd">        计算ratio metric: 整个数据集的gt框与anchor对应宽比和高比即:gt_w/k_w,gt_h/k_h + x + best_x  用于后续计算bpr+aat</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="sd">        注意我们这里选择的metric是gt框与anchor对应宽比和高比 而不是常用的iou 这点也与nms的筛选条件对应 是yolov5中使用的新方法</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="sd">        :params k: anchor框</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="sd">        :params wh: 整个数据集的wh [N, 2]</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="sd">        :return x: [N, 9] N个gt框与所有anchor框的宽比或高比(两者之中较小者)</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="sd">        :return x.max(1)[0]: [N] N个gt框与所有anchor框中的最大宽比或高比(两者之中较小者)</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="c1"># [N, 1, 2] / [1, 9, 2] = [N, 9, 2]  N个gt_wh和9个anchor的k_wh宽比和高比</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="c1"># 两者的重合程度越高 就越趋近于1 远离1(&lt;1 或 &gt;1)重合程度都越低</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>        <span class="c1"># r=gt_height/anchor_height  gt_width / anchor_width  有可能大于1，也可能小于等于1</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>        <span class="c1"># flow.min(r, 1. / r): [N, 9, 2] 将所有的宽比和高比统一到&lt;=1</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>        <span class="c1"># .min(2): value=[N, 9] 选出每个gt个和anchor的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>        <span class="c1"># [0] 返回value [N, 9] 每个gt个和anchor的宽比和高比最小的值 就是所有gt与anchor重合程度最低的</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># ratio metric</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>        <span class="c1"># x = wh_iou(wh, flow.tensor(k))  # IoU metric</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>        <span class="c1"># x.max(1)[0]: [N] 返回每个gt和所有anchor(9个)中宽比/高比最大的值</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># x, best_x</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="k">def</span> <span class="nf">anchor_fitness</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>   <span class="c1"># mutation fitness</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>        <span class="sd">&quot;&quot;&quot;用于kmean_anchors函数</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="sd">        适应度计算 优胜劣汰 用于遗传算法中衡量突变是否有效的标注 如果有效就进行选择操作 没效就继续下一轮的突变</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="sd">        :params k: [9, 2] k-means生成的9个anchors     wh: [N, 2]: 数据集的所有gt框的宽高</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="sd">        :return (best * (best &gt; thr).float()).mean()=适应度计算公式 [1] 注意和bpr有区别 这里是自定义的一种适应度公式</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="sd">                返回的是输入此时anchor k 对应的适应度</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">wh</span><span class="p">)</span>
+<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">best</span> <span class="o">*</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># fitness</span>
+<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>
+<a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>    <span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>        <span class="sd">&quot;&quot;&quot;用于kmean_anchors函数中打印k-means计算相关信息</span>
+<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="sd">        计算bpr、aat=&gt;打印信息: 阈值+bpr+aat  anchor个数+图片大小+metric_all+best_mean+past_mean+Kmeans聚类出来的anchor框(四舍五入)</span>
+<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="sd">        :params k: k-means得到的anchor k</span>
+<a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="sd">        :return k: input</span>
+<a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>        <span class="c1"># 将k-means得到的anchor k按面积从小到大啊排序</span>
+<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="mi">1</span><span class="p">))]</span>
+<a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>        <span class="c1"># x: [N, 9] N个gt框与所有anchor框的宽比或高比(两者之中较小者)</span>
+<a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>        <span class="c1"># best: [N] N个gt框与所有anchor框中的最大 宽比或高比(两者之中较小者)</span>
+<a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">wh0</span><span class="p">)</span>
+<a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>        <span class="c1"># (best &gt; thr).float(): True=&gt;1.  False-&gt;0.  .mean(): 求均值</span>
+<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="c1"># bpr(best possible recall): 最多能被召回(通过thr)的gt框数量 / 所有gt框数量  [1] 0.96223  小于0.98 才会用k-means计算anchor</span>
+<a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>        <span class="c1"># aat(anchors above threshold): [1] 3.54360 每个target平均有多少个anchors</span>
+<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">n</span>  <span class="c1"># best possible recall, anch &gt; thr</span>
+<a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>        <span class="n">f</span> <span class="o">=</span> <span class="n">anchor_fitness</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>        <span class="c1"># print(f&#39;{prefix}thr={thr:.2f}: {bpr:.4f} best possible recall, {aat:.2f} anchors past thr&#39;)</span>
+<a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="c1"># print(f&#39;{prefix}n={n}, img_size={img_size}, metric_all={x.mean():.3f}/{best.mean():.3f}-mean/best, &#39;</span>
+<a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="c1">#       f&#39;past_thr={x[x &gt; thr].mean():.3f}-mean: &#39;, end=&#39;&#39;)</span>
+<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aat: </span><span class="si">{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, fitness: </span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, best possible recall: </span><span class="si">{</span><span class="n">bpr</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%i</span><span class="s1">,</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;,  &#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># use in *.cfg</span>
+<a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>
+<a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>        <span class="k">return</span> <span class="n">k</span>
+<a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>
+<a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>
+<a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>    <span class="c1"># 载入数据集</span>
+<a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>  <span class="c1"># *.yaml file</span>
+<a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>            <span class="n">data_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  <span class="c1"># model dict</span>
+<a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>        <span class="kn">from</span> <span class="nn">utils.datasets</span> <span class="kn">import</span> <span class="n">LoadImagesAndLabels</span>
+<a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>        <span class="n">dataset</span> <span class="o">=</span> <span class="n">LoadImagesAndLabels</span><span class="p">(</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">],</span> <span class="n">augment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>        <span class="n">dataset</span> <span class="o">=</span> <span class="n">path</span>  <span class="c1"># dataset</span>
+<a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>
+<a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>    <span class="c1"># 得到数据集中所有数据的wh</span>
+<a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>    <span class="c1"># 将数据集图片的最长边缩放到img_size, 较小边相应缩放</span>
+<a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>    <span class="n">shapes</span> <span class="o">=</span> <span class="n">img_size</span> <span class="o">*</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span> <span class="o">/</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>    <span class="c1"># 将原本数据集中gt boxes归一化的wh缩放到shapes尺度</span>
+<a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>    <span class="n">wh0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">l</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shapes</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">labels</span><span class="p">)])</span>
+<a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>
+<a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>    <span class="c1"># 统计gt boxes中宽或者高小于3个像素的个数, 目标太小 发出警告</span>
+<a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>    <span class="n">i</span> <span class="o">=</span> <span class="p">(</span><span class="n">wh0</span> <span class="o">&lt;</span> <span class="mf">3.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>    <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
+<a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">WARNING: Extremely small objects found. </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1"> of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">wh0</span><span class="p">)</span><span class="si">}</span><span class="s1"> labels are &lt; 3 pixels in size.&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>
+<a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>    <span class="c1"># 筛选出label大于2个像素的框拿来聚类,[...]内的相当于一个筛选器,为True的留下</span>
+<a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>    <span class="n">wh</span> <span class="o">=</span> <span class="n">wh0</span><span class="p">[(</span><span class="n">wh0</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>  <span class="c1"># filter &gt; 2 pixels</span>
+<a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>    <span class="c1"># wh = wh * (np.random.rand(wh.shape[0], 1) * 0.9 + 0.1)  # multiply by random scale 0-1</span>
+<a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>
+<a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>    <span class="c1"># Kmeans聚类方法: 使用欧式距离来进行聚类</span>
+<a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">Running kmeans for </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> anchors on </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">wh</span><span class="p">)</span><span class="si">}</span><span class="s1"> gt boxes...&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a>    <span class="c1"># 计算宽和高的标准差-&gt;[w_std,h_std]</span>
+<a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">wh</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># sigmas for whitening</span>
+<a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a>    <span class="c1"># 开始聚类,仍然是聚成n类,返回聚类后的anchors k(这个anchor k是白化后数据的anchor框)</span>
+<a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>    <span class="c1"># 另外还要注意的是这里的kmeans使用欧式距离来计算的</span>
+<a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>    <span class="c1"># 运行k-means的次数为30次  obs: 传入的数据必须先白化处理 &#39;whiten operation&#39;</span>
+<a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>    <span class="c1"># 白化处理: 新数据的标准差=1 降低数据之间的相关度，不同数据所蕴含的信息之间的重复性就会降低，网络的训练效率就会提高</span>
+<a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>    <span class="c1"># 白化操作博客: https://blog.csdn.net/weixin_37872766/article/details/102957235</span>
+<a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>    <span class="n">k</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">wh</span> <span class="o">/</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># points, mean distance</span>
+<a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span><span class="p">,</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">ERROR: scipy.cluster.vq.kmeans requested </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> points but returned only </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a>    <span class="n">k</span> <span class="o">*=</span> <span class="n">s</span>  <span class="c1"># k*s 得到原来数据(白化前)的anchor框</span>
+<a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a>
+<a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a>    <span class="n">wh</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">wh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">flow</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># filtered wh</span>
+<a id="__codelineno-2-115" name="__codelineno-2-115" href="#__codelineno-2-115"></a>    <span class="n">wh0</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">wh0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">flow</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>  <span class="c1"># unfiltered wh0</span>
+<a id="__codelineno-2-116" name="__codelineno-2-116" href="#__codelineno-2-116"></a>
+<a id="__codelineno-2-117" name="__codelineno-2-117" href="#__codelineno-2-117"></a>    <span class="c1"># 输出新算的anchors k 相关的信息</span>
+<a id="__codelineno-2-118" name="__codelineno-2-118" href="#__codelineno-2-118"></a>    <span class="n">k</span> <span class="o">=</span> <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-2-119" name="__codelineno-2-119" href="#__codelineno-2-119"></a>
+<a id="__codelineno-2-120" name="__codelineno-2-120" href="#__codelineno-2-120"></a>    <span class="c1"># Plot wh</span>
+<a id="__codelineno-2-121" name="__codelineno-2-121" href="#__codelineno-2-121"></a>    <span class="c1"># k, d = [None] * 20, [None] * 20</span>
+<a id="__codelineno-2-122" name="__codelineno-2-122" href="#__codelineno-2-122"></a>    <span class="c1"># for i in tqdm(range(1, 21)):</span>
+<a id="__codelineno-2-123" name="__codelineno-2-123" href="#__codelineno-2-123"></a>    <span class="c1">#     k[i-1], d[i-1] = kmeans(wh / s, i)  # points, mean distance</span>
+<a id="__codelineno-2-124" name="__codelineno-2-124" href="#__codelineno-2-124"></a>    <span class="c1"># fig, ax = plt.subplots(1, 2, figsize=(14, 7), tight_layout=True)</span>
+<a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a>    <span class="c1"># ax = ax.ravel()</span>
+<a id="__codelineno-2-126" name="__codelineno-2-126" href="#__codelineno-2-126"></a>    <span class="c1"># ax[0].plot(np.arange(1, 21), np.array(d) ** 2, marker=&#39;.&#39;)</span>
+<a id="__codelineno-2-127" name="__codelineno-2-127" href="#__codelineno-2-127"></a>    <span class="c1"># fig, ax = plt.subplots(1, 2, figsize=(14, 7))  # plot wh</span>
+<a id="__codelineno-2-128" name="__codelineno-2-128" href="#__codelineno-2-128"></a>    <span class="c1"># ax[0].hist(wh[wh[:, 0]&lt;100, 0], 400)</span>
+<a id="__codelineno-2-129" name="__codelineno-2-129" href="#__codelineno-2-129"></a>    <span class="c1"># ax[1].hist(wh[wh[:, 1]&lt;100, 1], 400)</span>
+<a id="__codelineno-2-130" name="__codelineno-2-130" href="#__codelineno-2-130"></a>    <span class="c1"># fig.savefig(&#39;wh.png&#39;, dpi=200)</span>
+<a id="__codelineno-2-131" name="__codelineno-2-131" href="#__codelineno-2-131"></a>
+<a id="__codelineno-2-132" name="__codelineno-2-132" href="#__codelineno-2-132"></a>    <span class="c1"># Evolve 类似遗传/进化算法  变异操作</span>
+<a id="__codelineno-2-133" name="__codelineno-2-133" href="#__codelineno-2-133"></a>    <span class="n">npr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span>   <span class="c1"># 随机工具</span>
+<a id="__codelineno-2-134" name="__codelineno-2-134" href="#__codelineno-2-134"></a>    <span class="c1"># f: fitness 0.62690</span>
+<a id="__codelineno-2-135" name="__codelineno-2-135" href="#__codelineno-2-135"></a>    <span class="c1"># sh: (9,2)</span>
+<a id="__codelineno-2-136" name="__codelineno-2-136" href="#__codelineno-2-136"></a>    <span class="c1"># mp: 突变比例mutation prob=0.9   s: sigma=0.1</span>
+<a id="__codelineno-2-137" name="__codelineno-2-137" href="#__codelineno-2-137"></a>    <span class="n">f</span><span class="p">,</span> <span class="n">sh</span><span class="p">,</span> <span class="n">mp</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">anchor_fitness</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">k</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span>  <span class="c1"># fitness, generations, mutation prob, sigma</span>
+<a id="__codelineno-2-138" name="__codelineno-2-138" href="#__codelineno-2-138"></a>    <span class="n">pbar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">gen</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">Evolving anchors with Genetic Algorithm:&#39;</span><span class="p">)</span>  <span class="c1"># progress bar</span>
+<a id="__codelineno-2-139" name="__codelineno-2-139" href="#__codelineno-2-139"></a>    <span class="c1"># 根据聚类出来的n个点采用遗传算法生成新的anchor</span>
+<a id="__codelineno-2-140" name="__codelineno-2-140" href="#__codelineno-2-140"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">pbar</span><span class="p">:</span>
+<a id="__codelineno-2-141" name="__codelineno-2-141" href="#__codelineno-2-141"></a>        <span class="c1"># 重复1000次突变+选择 选择出1000次突变里的最佳anchor k和最佳适应度f</span>
+<a id="__codelineno-2-142" name="__codelineno-2-142" href="#__codelineno-2-142"></a>        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">sh</span><span class="p">)</span>  <span class="c1"># v [9, 2] 全是1</span>
+<a id="__codelineno-2-143" name="__codelineno-2-143" href="#__codelineno-2-143"></a>        <span class="k">while</span> <span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+<a id="__codelineno-2-144" name="__codelineno-2-144" href="#__codelineno-2-144"></a>            <span class="c1"># 产生变异规则 mutate until a change occurs (prevent duplicates)</span>
+<a id="__codelineno-2-145" name="__codelineno-2-145" href="#__codelineno-2-145"></a>            <span class="c1"># npr.random(sh) &lt; mp: 让v以90%的比例进行变异  选到变异的就为1  没有选到变异的就为0</span>
+<a id="__codelineno-2-146" name="__codelineno-2-146" href="#__codelineno-2-146"></a>            <span class="n">v</span> <span class="o">=</span> <span class="p">((</span><span class="n">npr</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">sh</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">mp</span><span class="p">)</span> <span class="o">*</span> <span class="n">npr</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="n">npr</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<a id="__codelineno-2-147" name="__codelineno-2-147" href="#__codelineno-2-147"></a>        <span class="c1"># 变异(改变这一时刻之前的最佳适应度对应的anchor k)</span>
+<a id="__codelineno-2-148" name="__codelineno-2-148" href="#__codelineno-2-148"></a>        <span class="n">kg</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<a id="__codelineno-2-149" name="__codelineno-2-149" href="#__codelineno-2-149"></a>        <span class="c1"># 计算变异后的anchor kg的适应度</span>
+<a id="__codelineno-2-150" name="__codelineno-2-150" href="#__codelineno-2-150"></a>        <span class="n">fg</span> <span class="o">=</span> <span class="n">anchor_fitness</span><span class="p">(</span><span class="n">kg</span><span class="p">)</span>
+<a id="__codelineno-2-151" name="__codelineno-2-151" href="#__codelineno-2-151"></a>        <span class="c1"># 如果变异后的anchor kg的适应度&gt;最佳适应度k 就进行选择操作</span>
+<a id="__codelineno-2-152" name="__codelineno-2-152" href="#__codelineno-2-152"></a>        <span class="k">if</span> <span class="n">fg</span> <span class="o">&gt;</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-2-153" name="__codelineno-2-153" href="#__codelineno-2-153"></a>            <span class="c1"># 选择变异后的anchor kg为最佳的anchor k 变异后的适应度fg为最佳适应度f</span>
+<a id="__codelineno-2-154" name="__codelineno-2-154" href="#__codelineno-2-154"></a>            <span class="n">f</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">fg</span><span class="p">,</span> <span class="n">kg</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<a id="__codelineno-2-155" name="__codelineno-2-155" href="#__codelineno-2-155"></a>
+<a id="__codelineno-2-156" name="__codelineno-2-156" href="#__codelineno-2-156"></a>            <span class="c1"># 打印信息</span>
+<a id="__codelineno-2-157" name="__codelineno-2-157" href="#__codelineno-2-157"></a>            <span class="n">pbar</span><span class="o">.</span><span class="n">desc</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">Evolving anchors with Genetic Algorithm: fitness = </span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-2-158" name="__codelineno-2-158" href="#__codelineno-2-158"></a>            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+<a id="__codelineno-2-159" name="__codelineno-2-159" href="#__codelineno-2-159"></a>                <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<a id="__codelineno-2-160" name="__codelineno-2-160" href="#__codelineno-2-160"></a>    <span class="k">return</span> <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="4-check_anchors">4. check_anchors</h2>
+<p>这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">check_anchors</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Check anchor fit to data, recompute if necessary  </span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="sd">&quot;&quot;&quot;用于train.py中</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">    通过bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    Check anchor fit to data, recompute if necessary</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">    :params dataset: 自定义数据集LoadImagesAndLabels返回的数据集</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">    :params model: 初始化的模型</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">    :params thr: 超参中得到  界定anchor与label匹配程度的阈值</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sd">    :params imgsz: 图片尺寸 默认640</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="c1"># 从model中取出最后一层(Detect)</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;module&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">model</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Detect()</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="c1"># dataset.shapes.max(1, keepdims=True) = 每张图片的较长边</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="c1"># shapes: 将数据集图片的最长边缩放到img_size, 较小边相应缩放 得到新的所有数据集图片的宽高 [N, 2]</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">shapes</span> <span class="o">=</span> <span class="n">imgsz</span> <span class="o">*</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span> <span class="o">/</span> <span class="n">dataset</span><span class="o">.</span><span class="n">shapes</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>    <span class="c1"># 产生随机数scale [img_size, 1]</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">shapes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># augment scale</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="c1"># [6301, 2]  所有target(6301个)的wh   基于原图大小    shapes * scale: 随机化尺度变化</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="n">wh</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">l</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">shapes</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">labels</span><span class="p">)]))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>  <span class="c1"># wh</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="k">def</span> <span class="nf">metric</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>  <span class="c1"># compute metric</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="sd">&quot;&quot;&quot;用在check_anchors函数中  compute metric</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="sd">        根据数据集的所有图片的wh和当前所有anchors k计算 bpr(best possible recall) 和 aat(anchors above threshold)</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="sd">        :params k: anchors [9, 2]  wh: [N, 2]</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="sd">        :return bpr: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用k-means计算anchor</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="sd">        :return aat: anchors above threshold 每个target平均有多少个anchors</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="c1"># None添加维度  所有target(gt)的wh wh[:, None] [6301, 2]-&gt;[6301, 1, 2]</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>        <span class="c1">#             所有anchor的wh k[None] [9, 2]-&gt;[1, 9, 2]</span>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="c1"># r: target的高h宽w与anchor的高h_a宽w_a的比值，即h/h_a, w/w_a  [6301, 9, 2]  有可能大于1，也可能小于等于1</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">wh</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">/</span> <span class="n">k</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>        <span class="c1"># x 高宽比和宽高比的最小值 无论r大于1，还是小于等于1最后统一结果都要小于1   [6301, 9]</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># ratio metric</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="c1"># best [6301] 为每个gt框选择匹配所有anchors宽高比例值最好的那一个比值</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">best</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># best_x</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        <span class="c1"># aat(anchors above threshold)  每个target平均有多少个anchors</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>        <span class="n">aat</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># anchors above threshold</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="c1"># bpr(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用k-means计算anchor</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="n">bpr</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># best possible recall</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>        <span class="k">return</span> <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="n">stride</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># model strides</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>    <span class="c1"># anchors: [N,2]  所有anchors的宽高   基于缩放后的图片大小(较长边为640 较小边相应缩放)</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    <span class="n">anchors</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span> <span class="o">*</span> <span class="n">stride</span>  <span class="c1"># current anchors</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>    <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> anchors/target, </span><span class="si">{</span><span class="n">bpr</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Best Possible Recall (BPR). &quot;</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="c1"># 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果bpr&lt;0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据k-means算法重新聚类新的anchor</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="k">if</span> <span class="n">bpr</span> <span class="o">&gt;</span> <span class="mf">0.98</span><span class="p">:</span>  <span class="c1"># threshold to recompute</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">Current anchors are a good fit to dataset ✅&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">Anchors are a poor fit to dataset ⚠️, attempting to improve...&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="n">na</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># number of anchors</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>        <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>            <span class="c1"># 如果bpr&lt;0.98(最大为1 越大越好) 使用k-means + 遗传进化算法选择出与数据集更匹配的anchors框  [9, 2]</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>            <span class="n">anchors</span> <span class="o">=</span> <span class="n">kmean_anchors</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">na</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="n">thr</span><span class="p">,</span> <span class="n">gen</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">ERROR: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>        <span class="c1"># 计算新的anchors的new_bpr</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>        <span class="n">new_bpr</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>        <span class="c1"># 比较 k-means + 遗传进化算法进化后的anchors的new_bpr和原始anchors的bpr</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>        <span class="c1"># 注意: 这里并不一定进化后的bpr必大于原始anchors的bpr, 因为两者的衡量标注是不一样的  进化算法的衡量标准是适应度 而这里比的是bpr</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>        <span class="k">if</span> <span class="n">new_bpr</span> <span class="o">&gt;</span> <span class="n">bpr</span><span class="p">:</span>  <span class="c1"># replace anchors</span>
+<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>            <span class="n">anchors</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">type_as</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">)</span>
+<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>            <span class="c1"># 替换m的anchor_grid                      [9, 2] -&gt; [3, 1, 3, 1, 1, 2]</span>
+<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>            <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">anchors</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">view_as</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">)</span>
+<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>            <span class="c1"># 检查anchor顺序和stride顺序是否一致 不一致就调整</span>
+<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>            <span class="c1"># 因为我们的m.anchors是相对各个 feature map 所以必须要顺序一致 否则效果会很不好</span>
+<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>            <span class="n">check_anchor_order</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>  <span class="c1"># must be in pixel-space (not grid-space)</span>
+<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>            <span class="n">m</span><span class="o">.</span><span class="n">anchors</span> <span class="o">/=</span> <span class="n">stride</span>
+<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>            <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">Done ✅ (optional: update model *.yaml to use these anchors in the future)&quot;</span>
+<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>            <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">Done ⚠️ (original anchors better than new anchors, proceeding with original anchors)&quot;</span>
+<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+<p>这个函数会在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253">train.py中调用：</a></p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199909323-103aaf2f-cdcd-4601-9faf-4618d08d3558.png" /></p>
+<h2 id="_3">总结</h2>
+<p>k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></li>
+<li>【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706</li>
+<li>CSDN 霹雳吧啦Wz : <a href="https://blog.csdn.net/qq_37541097/article/details/119647026?spm=1001.2014.3001.5501">使用k-means聚类anchors</a></li>
+<li>Bilibili 霹雳吧啦Wz : <a href="https://www.bilibili.com/video/BV1Tv411T7qa">如何使用k-means聚类得到anchors以及需要注意的坑.</a></li>
+<li>CSDN 恩泽君 : <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">YOLOV3中k-means聚类获得anchor boxes过程详解.</a></li>
+<li>Github 恩泽君: <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">Laughing-q/yolov5_annotations.</a></li>
+<li>CSDN 昌山小屋: 【玩转yolov5】<a href="https://blog.csdn.net/ChuiGeDaQiQiu/article/details/113487612?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162899414216780265433994%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=162899414216780265433994&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-6-113487612.pc_search_result_control_group&amp;utm_term=best+possible+recall&amp;spm=1018.2226.3001.4187">请看代码之自动anchor计算.</a></li>
+<li>CSDN TheOldManAndTheSea: <a href="https://flyfish.blog.csdn.net/article/details/117594265">目标检测 YOLOv5 anchor设置</a></li>
+<li>Bilibili 我家公子Q: <a href="https://www.bilibili.com/video/BV1zp4y1U7Ti?from=search&amp;seid=3206758960880461786">遗传算法超细致+透彻理解</a></li>
+</ul>
+                
+              
+              
+                
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="Oneflow-Inc/oneflow-yolo-doc"
+        data-repo-id="R_kgDOIGN7Xw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOIGN7X84CSq90"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="general_py.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: geneal_py" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              geneal_py
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../thesis_interpretation/00_yolo_history.html" class="md-footer__link md-footer__link--next" aria-label="下一页: history" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              history
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
