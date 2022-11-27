@@ -83,11 +83,14 @@ nav:
             - 6.1 模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
 
     - 源码解读:
+        - train.py : source_code_interpretation/train_py.md 
         - utils:
             - augmentations_py: source_code_interpretation/utils/augmentations_py.md
             - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
             - downloads_py: source_code_interpretation/utils/downloads_py.md
             - geneal_py: source_code_interpretation/utils/general_py.md
+            - autoanchor_py: source_code_interpretation/utils/autoanchor_py.md
+
 
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
@@ -97,3 +100,4 @@ nav:
         - YOLOv4 : thesis_interpretation/04_yolo.md
         - YOLOv6 : thesis_interpretation/06_yolo.md
 
+    
