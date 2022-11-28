@@ -227,7 +227,7 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         BCEcls = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["cls_pw"]], device=device))
         BCEobj = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["obj_pw"]], device=device))
         # 标签平滑  eps=0代表不做标签平滑-> cp=1 cn=0  eps!=0代表做标签平滑 
-        # cp代表positive的标签值 cn代表negative的标签值
+        # cp代表正样本的标签值 cn代表负样本的标签值
         # Class label smoothing https://arxiv.org/pdf/1902.04103.pdf eqn 3
         self.cp, self.cn = smooth_BCE(eps=h.get("label_smoothing", 0.0))  # positive, negative BCE targets
 
