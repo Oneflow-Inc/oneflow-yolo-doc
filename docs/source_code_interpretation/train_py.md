@@ -9,9 +9,23 @@
 
 源码解读： [train.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/train.py)
 
-> 这个文件是yolov5的训练脚本。总体上代码流程比较简单的，抓住 数据 + 模型 + 学习率 + 优化器 + 训练这五步即可。
+> 这个文件是yolov5的训练脚本。
+总体上代码流程
 
+准备工作：  [数据](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L210-L247) + [模型](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L146-L159) + [学习率](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L183-L193) + [优化器](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L177-L181)
 
+训练过程:
+
+一个训练过程(不包括数据准备)，会轮询多次训练集，每次称为一个epoch，每个epoch又分为多个batch来训练。
+流程先后拆解成:
+
+- 开始训练
+- 训练一个epoch前
+- 训练一个batch前
+- 训练一个batch后
+- 训练一个epoch后。
+- 评估验证集
+- 结束训练
 
 
 
@@ -43,10 +57,15 @@ from models.experimental import attempt_load
 from models.yolo import Model
 from utils.autoanchor import check_anchors
 
-from utils.callbacks import Callbacks # 和日志相关的回调函数
-from utils.dataloaders import create_dataloader
+#  Callbacks https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
+from utils.callbacks import Callbacks # 和日志相关的回调函数 
+#  dataloaders https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/dataladers_py.md
+from utils.dataloaders import create_dataloader # 加载数据集的函数
 
+# downloads https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/downloads_py.md
 from utils.downloads import is_url  # , attempt_download
+
+# general https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/general_py.md
 from utils.general import check_img_size  # check_suffix,
 from utils.general import (
     LOGGER,
@@ -73,7 +92,10 @@ from utils.general import (
 from utils.loggers import Loggers
 from utils.loggers.wandb.wandb_utils import check_wandb_resume
 from utils.loss import ComputeLoss
+
+# 在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权
 from utils.metrics import fitness
+
 from utils.oneflow_utils import EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer, smart_resume
 from utils.plots import plot_evolve, plot_labels
 # LOCAL_RANK：当前进程对应的GPU号。
@@ -132,7 +154,7 @@ exist-ok: 如果文件存在就ok不存在就新建或increment name  默认Fals
 quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
 save_period: Log model after every "save_period" epoch    默认-1 不需要log model 信息
 artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-local_rank: rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu使用DataParallel模式
+local_rank: rank为进程编号  -1且gpu=1时不进行分布式  
 
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
@@ -350,6 +372,7 @@ else:
 
         # Train mutation
         results = train(hyp.copy(), opt, device, callbacks)
+        # callbacks https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
         callbacks = Callbacks()
         # Write mutation results
         print_mutation(results, hyp.copy(), save_dir, opt.bucket)
@@ -373,6 +396,7 @@ else:
 :params hyp: data/hyps/hyp.scratch.yaml   hyp dictionary
 :params opt: main中opt参数
 :params device: 当前设备
+:params callbacks: 和日志相关的回调函数https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
 """
 def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictionary
     (save_dir, epochs, batch_size, weights, single_cls, evolve, data, cfg, resume, noval, nosave, workers, freeze, bbox_iou_optim) = (
@@ -437,7 +461,7 @@ if RANK in {-1, 0}:
     loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # loggers instance
 
     # Register actions
-    for k in methods(loggers):
+    for k in methods(loggers):# 注册钩子 https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/callbacks.py
         callbacks.register_action(k, callback=getattr(loggers, k))
 
 # Config
@@ -875,7 +899,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
 打印一些信息
 
 1. 日志: 打印训练时间、plots可视化训练结果results1.png、confusion_matrix.png 以及(‘F1’, ‘PR’, ‘P’, ‘R’)曲线变化 、日志信息
-2. 通过调用val.run() 方法验证模型准确性在 coco数据集上 + 释放显存
+2. 通过调用val.run() 方法验证在  coco数据集上 模型准确性 +  释放显存 
 
 > Validate a model's accuracy on [COCO](https://cocodataset.org/#home) val or test-dev datasets.  Note that `pycocotools` metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.
 
@@ -919,7 +943,7 @@ def run(**kwargs):
     # Usage: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m')
     opt = parse_opt(True)
     for k, v in kwargs.items():
-        setattr(opt, k, v)
+        setattr(opt, k, v) # 给opt添加属性
     main(opt)
     return opt
 ```
