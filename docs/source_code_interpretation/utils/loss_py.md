@@ -239,7 +239,7 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         # m: 返回的是模型的3个检测头分别对应产生的3个输出feature map
         m = de_parallel(model).model[-1]  # Detect() module
         self.balance = {3: [4.0, 1.0, 0.4]}.get(m.nl, [4.0, 1.0, 0.25, 0.06, 0.02])  # P3-P7
-        # 三个预测头的下采样率m .stride: [8, 16, 32]  .index(16): 求出下采样率stride=16的索引
+        # 三个预测头的下采样率m.stride: [8, 16, 32]  .index(16): 求出下采样率stride=16的索引
         # 这个参数会用来自动计算更新3个feature map的置信度损失系数self.balance
         self.ssi = list(m.stride).index(16) if autobalance else 0  # stride 16 index
         self.BCEcls, self.BCEobj, self.gr, self.hyp, self.autobalance = (
