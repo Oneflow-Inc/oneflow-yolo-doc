@@ -9,7 +9,7 @@
 
 源码解读： [callbacks.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/callbacks.py)
 
-> 这个文件是yolov5的训练脚本。
+> 这个文件是yolov5的Callback utils
 
 
 
