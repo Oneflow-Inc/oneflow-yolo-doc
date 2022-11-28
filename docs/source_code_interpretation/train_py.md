@@ -9,9 +9,23 @@
 
 源码解读： [train.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/train.py)
 
-> 这个文件是yolov5的训练脚本。总体上代码流程比较简单的，抓住 数据 + 模型 + 学习率 + 优化器 + 训练这五步即可。
+> 这个文件是yolov5的训练脚本。
+总体上代码流程
 
+准备工作：  [数据](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L210-L247) + [模型](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L146-L159) + [学习率](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L183-L193) + [优化器](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L177-L181)
 
+训练过程:
+
+一个训练过程(不包括数据准备)，会轮询多次训练集，每次称为一个epoch，每个epoch又分为多个batch来训练。
+流程先后拆解成:
+
+- 开始训练
+- 训练一个epoch前
+- 训练一个batch前
+- 训练一个batch后
+- 训练一个epoch后。
+- 评估验证集
+- 结束训练
 
 
 
@@ -132,7 +146,7 @@ exist-ok: 如果文件存在就ok不存在就新建或increment name  默认Fals
 quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
 save_period: Log model after every "save_period" epoch    默认-1 不需要log model 信息
 artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-local_rank: rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu使用DataParallel模式
+local_rank: rank为进程编号  -1且gpu=1时不进行分布式  
 
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
@@ -437,7 +451,7 @@ if RANK in {-1, 0}:
     loggers = Loggers(save_dir, weights, opt, hyp, LOGGER)  # loggers instance
 
     # Register actions
-    for k in methods(loggers):
+    for k in methods(loggers):# 注册钩子 https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/callbacks.py
         callbacks.register_action(k, callback=getattr(loggers, k))
 
 # Config
