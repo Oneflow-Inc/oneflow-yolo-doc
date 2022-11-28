@@ -224,7 +224,6 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         device = next(model.parameters()).device  # get model device
         h = model.hyp  # hyperparameters
         # Define criteria 定义分类损失和置信度损失
-        # Define criteria
         BCEcls = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["cls_pw"]], device=device))
         BCEobj = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["obj_pw"]], device=device))
         # 标签平滑  eps=0代表不做标签平滑-> cp=1 cn=0  eps!=0代表做标签平滑 
