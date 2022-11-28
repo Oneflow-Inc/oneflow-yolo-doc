@@ -232,7 +232,7 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         self.cp, self.cn = smooth_BCE(eps=h.get("label_smoothing", 0.0))  # positive, negative BCE targets
 
         # Focal loss
-        g = h["fl_gamma"]  # focal loss gamma
+        g = h["fl_gamma"]  # Focal Loss 的超参数 gamma
         if g > 0:
             # g>0 将分类损失和置信度损失(BCE)都换成focalloss损失函数
             BCEcls, BCEobj = FocalLoss(BCEcls, g), FocalLoss(BCEobj, g)
