@@ -1251,7 +1251,7 @@ blank="targent">  <img alt="image" src="https://user-images.githubusercontent.co
 <p>进而确定这个gt在这层哪个grid cell进行检测。</p>
 <p>做到这一步也就做到了为每个gt匹配anchor正样本的目的。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>    <span class="c1"># ---------------------------------------------------------</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="c1"># build_tangets函数用于获得在训练时计算loss函数所需要的目标框，即被认为是正样本与yolov3/v4的不同:yolov5支持跨网格预测</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="c1"># build_targets函数用于获得在训练时计算loss函数所需要的目标框，也即正样本。与yolov3/v4的不同，yolov5支持跨网格预测。</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="c1"># 对于任何一个GT bbox，三个预测特征层上都可能有先验框anchors匹配，所以该函数输出的正样本框比传入的targets （GT框）数目多</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="c1"># 具体处理过程:</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="c1"># (1)对于每一个检测特征层都计算当前bbox和当前层 anchors 的匹配程度，这里不采用iou，而是shape比例来计算。如果anchor和bbox的宽高比差距大于4，则认为不匹配，此时忽略相应的bbox，即当做背景;</span>
