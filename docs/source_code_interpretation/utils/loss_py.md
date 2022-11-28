@@ -251,7 +251,7 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         )
         self.na = m.na  # number of anchors  每个grid_cell的anchor数量 = 3
         self.nc = m.nc  # number of classes  数据集的总类别 = 80
-        self.nl = m.nl  # number of layers  Detect的个数 = 3
+        self.nl = m.nl  # number of layers  检测头的个数 = 3
         # anchors: [3, 3, 2]  3个feature map 每个feature map上有3个anchor(w,h)
         # 这里的anchor尺寸是相对feature map的
         self.anchors = m.anchors 
