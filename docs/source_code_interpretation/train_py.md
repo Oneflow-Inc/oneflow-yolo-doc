@@ -57,10 +57,15 @@ from models.experimental import attempt_load
 from models.yolo import Model
 from utils.autoanchor import check_anchors
 
-from utils.callbacks import Callbacks # 和日志相关的回调函数
-from utils.dataloaders import create_dataloader
+#  Callbacks https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
+from utils.callbacks import Callbacks # 和日志相关的回调函数 
+#  dataloaders https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/dataladers_py.md
+from utils.dataloaders import create_dataloader # 加载数据集的函数
 
+# downloads https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/downloads_py.md
 from utils.downloads import is_url  # , attempt_download
+
+# general https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/general_py.md
 from utils.general import check_img_size  # check_suffix,
 from utils.general import (
     LOGGER,
@@ -87,7 +92,10 @@ from utils.general import (
 from utils.loggers import Loggers
 from utils.loggers.wandb.wandb_utils import check_wandb_resume
 from utils.loss import ComputeLoss
+
+# 在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权
 from utils.metrics import fitness
+
 from utils.oneflow_utils import EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer, smart_resume
 from utils.plots import plot_evolve, plot_labels
 # LOCAL_RANK：当前进程对应的GPU号。
@@ -364,6 +372,7 @@ else:
 
         # Train mutation
         results = train(hyp.copy(), opt, device, callbacks)
+        # callbacks https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
         callbacks = Callbacks()
         # Write mutation results
         print_mutation(results, hyp.copy(), save_dir, opt.bucket)
