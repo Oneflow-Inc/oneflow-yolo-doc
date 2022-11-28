@@ -1721,24 +1721,25 @@
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="sd">:params hyp: data/hyps/hyp.scratch.yaml   hyp dictionary</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="sd">:params opt: main中opt参数</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="sd">:params device: 当前设备</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">hyp</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">):</span>  <span class="c1"># hyp is path/to/hyp.yaml or hyp dictionary</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">single_cls</span><span class="p">,</span> <span class="n">evolve</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">resume</span><span class="p">,</span> <span class="n">noval</span><span class="p">,</span> <span class="n">nosave</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">freeze</span><span class="p">,</span> <span class="n">bbox_iou_optim</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        <span class="n">Path</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">save_dir</span><span class="p">),</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">epochs</span><span class="p">,</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">single_cls</span><span class="p">,</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">evolve</span><span class="p">,</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">cfg</span><span class="p">,</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">resume</span><span class="p">,</span>
-<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">noval</span><span class="p">,</span>
-<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">nosave</span><span class="p">,</span>
-<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">workers</span><span class="p">,</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">freeze</span><span class="p">,</span>
-<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">bbox_iou_optim</span><span class="p">,</span>
-<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="sd">:params callbacks: 和日志相关的回调函数https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">hyp</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">callbacks</span><span class="p">):</span>  <span class="c1"># hyp is path/to/hyp.yaml or hyp dictionary</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">single_cls</span><span class="p">,</span> <span class="n">evolve</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">cfg</span><span class="p">,</span> <span class="n">resume</span><span class="p">,</span> <span class="n">noval</span><span class="p">,</span> <span class="n">nosave</span><span class="p">,</span> <span class="n">workers</span><span class="p">,</span> <span class="n">freeze</span><span class="p">,</span> <span class="n">bbox_iou_optim</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">Path</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">save_dir</span><span class="p">),</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">epochs</span><span class="p">,</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">batch_size</span><span class="p">,</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">weights</span><span class="p">,</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">single_cls</span><span class="p">,</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">evolve</span><span class="p">,</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">cfg</span><span class="p">,</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">resume</span><span class="p">,</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">noval</span><span class="p">,</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">nosave</span><span class="p">,</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">workers</span><span class="p">,</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">freeze</span><span class="p">,</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>        <span class="n">opt</span><span class="o">.</span><span class="n">bbox_iou_optim</span><span class="p">,</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>    <span class="p">)</span>
 </code></pre></div>
 <h3 id="42">4.2 初始化参数和配置信息</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 保存权重路径 如runs/train/exp18/weights</span>
@@ -2173,7 +2174,7 @@
 <p>打印一些信息</p>
 <ol>
 <li>日志: 打印训练时间、plots可视化训练结果results1.png、confusion_matrix.png 以及(‘F1’, ‘PR’, ‘P’, ‘R’)曲线变化 、日志信息</li>
-<li>通过调用val.run() 方法验证模型准确性在 coco数据集上 + 释放显存</li>
+<li>通过调用val.run() 方法验证在  coco数据集上 模型准确性 +  释放显存 </li>
 </ol>
 <blockquote>
 <p>Validate a model's accuracy on <a href="https://cocodataset.org/#home">COCO</a> val or test-dev datasets.  Note that <code>pycocotools</code> metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.</p>
@@ -2214,7 +2215,7 @@
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="c1"># Usage: import train; train.run(data=&#39;coco128.yaml&#39;, imgsz=320, weights=&#39;yolov5m&#39;)</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="n">opt</span> <span class="o">=</span> <span class="n">parse_opt</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>        <span class="nb">setattr</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>        <span class="nb">setattr</span><span class="p">(</span><span class="n">opt</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="c1"># 给opt添加属性</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="n">main</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
 <a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    <span class="k">return</span> <span class="n">opt</span>
 </code></pre></div>
