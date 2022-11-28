@@ -1373,22 +1373,8 @@
 </blockquote>
 <p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/train.py">train.py</a></p>
 <blockquote>
-<p>这个文件是yolov5的训练脚本。
-总体上代码流程</p>
+<p>这个文件是yolov5的训练脚本。总体上代码流程比较简单的，抓住 数据 + 模型 + 学习率 + 优化器 + 训练这五步即可。</p>
 </blockquote>
-<p>准备工作：  <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L210-L247">数据</a> + <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L146-L159">模型</a> + <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L183-L193">学习率</a> + <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L177-L181">优化器</a></p>
-<p>训练过程:</p>
-<p>一个训练过程(不包括数据准备)，会轮询多次训练集，每次称为一个epoch，每个epoch又分为多个batch来训练。
-流程先后拆解成:</p>
-<ul>
-<li>开始训练</li>
-<li>训练一个epoch前</li>
-<li>训练一个batch前</li>
-<li>训练一个batch后</li>
-<li>训练一个epoch后。</li>
-<li>评估验证集</li>
-<li>结束训练</li>
-</ul>
 <h2 id="1">1. 导入需要的包和基本配置</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">argparse</span>       <span class="c1"># 解析命令行参数模块</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">math</span>           <span class="c1"># 数学公式模块</span>
@@ -1498,7 +1484,7 @@
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>save_period: Log model after every &quot;save_period&quot; epoch    默认-1 不需要log model 信息
 <a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>local_rank: rank为进程编号  -1且gpu=1时不进行分布式  
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>local_rank: rank为进程编号  -1且gpu=1时不进行分布式  -1且多块gpu使用DataParallel模式
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>entity: wandb entity 默认None
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
@@ -1767,7 +1753,7 @@
 <a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>    <span class="n">loggers</span> <span class="o">=</span> <span class="n">Loggers</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">hyp</span><span class="p">,</span> <span class="n">LOGGER</span><span class="p">)</span>  <span class="c1"># loggers instance</span>
 <a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a>
 <a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a>    <span class="c1"># Register actions</span>
-<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">(</span><span class="n">loggers</span><span class="p">):</span><span class="c1"># 注册钩子 https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/callbacks.py</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a>    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">(</span><span class="n">loggers</span><span class="p">):</span>
 <a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>        <span class="n">callbacks</span><span class="o">.</span><span class="n">register_action</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">loggers</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
 <a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a>
 <a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="c1"># Config</span>
