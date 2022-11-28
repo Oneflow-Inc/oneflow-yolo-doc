@@ -236,7 +236,7 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         if g > 0:
             # g>0 将分类损失和置信度损失(BCE)都换成focalloss损失函数
             BCEcls, BCEobj = FocalLoss(BCEcls, g), FocalLoss(BCEobj, g)
-        # m: 返回的是模型的检测头 Detector 3个 分别对应产生三个输出feature map
+        # m: 返回的是模型的3个检测头分别对应产生的3个输出feature map
         m = de_parallel(model).model[-1]  # Detect() module
         self.balance = {3: [4.0, 1.0, 0.4]}.get(m.nl, [4.0, 1.0, 0.25, 0.06, 0.02])  # P3-P7
         # 三个预测头的下采样率m .stride: [8, 16, 32]  .index(16): 求出下采样率stride=16的索引
