@@ -289,7 +289,7 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
     # build_tangets函数用于获得在训练时计算loss函数所需要的目标框，即被认为是正样本与yolov3/v4的不同:yolov5支持跨网格预测
     # 对于任何一个GT bbox，三个预测特征层上都可能有先验框anchors匹配，所以该函数输出的正样本框比传入的targets （GT框）数目多
     # 具体处理过程:
-    # (1)对于任何一层计算当前bbox和当前层anchor的匹配程度，不采用iou，而是shape比例;如果anchor和bbox的宽高比差距大于4，则认为不匹配，此时忽略相应的bbox，即当做背景;
+    # (1)对于每一个检测特征层都计算当前bbox和当前层 anchors 的匹配程度，这里不采用iou，而是shape比例来计算。如果anchor和bbox的宽高比差距大于4，则认为不匹配，此时忽略相应的bbox，即当做背景;
     # (2)然后对bbox计算落在的网格所有anchors都计算loss(并不是直接和GT框比较计算loss)
     # 注意此时落在网格不再是一个，而是附近的多个，这样就增加了正样本数，可能存在有些bbox在三个不同尺度的特征层都预测的情况另外，
     # yolov5也没有conf分支忽略阈值(ignore_thresh)的操作，而yoloy3/v4有。
