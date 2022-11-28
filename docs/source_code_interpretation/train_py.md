@@ -396,6 +396,7 @@ else:
 :params hyp: data/hyps/hyp.scratch.yaml   hyp dictionary
 :params opt: main中opt参数
 :params device: 当前设备
+:params callbacks: 和日志相关的回调函数https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
 """
 def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictionary
     (save_dir, epochs, batch_size, weights, single_cls, evolve, data, cfg, resume, noval, nosave, workers, freeze, bbox_iou_optim) = (
@@ -898,7 +899,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
 打印一些信息
 
 1. 日志: 打印训练时间、plots可视化训练结果results1.png、confusion_matrix.png 以及(‘F1’, ‘PR’, ‘P’, ‘R’)曲线变化 、日志信息
-2. 通过调用val.run() 方法验证模型准确性在 coco数据集上 + 释放显存
+2. 通过调用val.run() 方法验证在  coco数据集上 模型准确性 +  释放显存 
 
 > Validate a model's accuracy on [COCO](https://cocodataset.org/#home) val or test-dev datasets.  Note that `pycocotools` metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.
 
@@ -942,7 +943,7 @@ def run(**kwargs):
     # Usage: import train; train.run(data='coco128.yaml', imgsz=320, weights='yolov5m')
     opt = parse_opt(True)
     for k, v in kwargs.items():
-        setattr(opt, k, v)
+        setattr(opt, k, v) # 给opt添加属性
     main(opt)
     return opt
 ```
