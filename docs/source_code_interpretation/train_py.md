@@ -930,7 +930,7 @@ flow.cuda.empty_cache()
 return 
 ```
 
-## 4 run函数
+## 5 run函数
 > 封装train接口 支持函数调用执行这个train.py脚本 
 
 
@@ -944,7 +944,12 @@ def run(**kwargs):
     return opt
 ```
 
-## Reference
+## 6 启动训练时效果展示
+
+<img width="647" alt="图片" src="https://user-images.githubusercontent.com/35585791/204492018-ecb2f322-878a-441e-b6cc-5d92a1e139b3.png">
+
+
+## 7 参考
 
 - [【YOLOV5-5.x 源码解读】train.py](https://blog.csdn.net/qq_38253797/article/details/119733964)
 
