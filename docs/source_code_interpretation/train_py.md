@@ -10,7 +10,7 @@
 源码解读： [train.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/train.py)
 
 > 这个文件是yolov5的训练脚本。
-总体上代码流程
+总体代码流程：
 
 准备工作：  [数据](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L210-L247) + [模型](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L146-L159) + [学习率](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L183-L193) + [优化器](https://github.com/Oneflow-Inc/one-yolov5/blob/88864544cd9fa9ddcbe35a28a0bcf2c674daeb97/train.py#L177-L181)
 
@@ -37,25 +37,25 @@
 import argparse       # 解析命令行参数模块
 import math           # 数学公式模块
 import os             # 与操作系统进行交互的模块 包含文件路径操作和解析
-import random         # 生成随机数模块
+import random         # 生成随机数的模块
 import sys            # sys系统模块 包含了与Python解释器和它的环境有关的函数
 import time           # 时间模块 更底层
-from copy import deepcopy # 深度拷贝模块
-from datetime import datetime
-from pathlib import Path # Path将str转换为Path对象 使字符串路径易于操作的模块
+from copy import deepcopy # 深拷贝模块
+from datetime import datetime # 基本日期和时间类型模块
+from pathlib import Path # Path模块将str转换为Path对象 使字符串路径易于操作
 
 import numpy as np       # numpy数组操作模块
-import oneflow as flow   # OneFlow框架
+import oneflow as flow   # OneFlow深度学习框架
 import oneflow.distributed as dist # 分布式训练模块
 import oneflow.nn as nn  # 对oneflow.nn.functional的类的封装 有很多和oneflow.nn.functional相同的函数
 import yaml              # 操作yaml文件模块
 from oneflow.optim import lr_scheduler  # 学习率模块
 from tqdm import tqdm   # 进度条模块
 
-import val  # for end-of-epoch mAP
-from models.experimental import attempt_load
-from models.yolo import Model
-from utils.autoanchor import check_anchors
+import val  # 导入val.py, for end-of-epoch mAP
+from models.experimental import attempt_load # 导入在线下载模块
+from models.yolo import Model # 导入YOLOv5的模型定义
+from utils.autoanchor import check_anchors # 导入检查anchors合法性的函数
 
 #  Callbacks https://start.oneflow.org/oneflow-yolo-doc/source_code_interpretation/callbacks_py.html
 from utils.callbacks import Callbacks # 和日志相关的回调函数 
@@ -63,7 +63,7 @@ from utils.callbacks import Callbacks # 和日志相关的回调函数
 from utils.dataloaders import create_dataloader # 加载数据集的函数
 
 # downloads https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/downloads_py.md
-from utils.downloads import is_url  # , attempt_download
+from utils.downloads import is_url  # 判断当前字符串是否是链接
 
 # general https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/source_code_interpretation/utils/general_py.md
 from utils.general import check_img_size  # check_suffix,
@@ -89,14 +89,14 @@ from utils.general import (
     yaml_save,
     model_save,
 )
-from utils.loggers import Loggers
+from utils.loggers import Loggers # 导入日志管理模块
 from utils.loggers.wandb.wandb_utils import check_wandb_resume
-from utils.loss import ComputeLoss
+from utils.loss import ComputeLoss # 导入计算Loss的模块
 
 # 在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权
 from utils.metrics import fitness
 
-from utils.oneflow_utils import EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer, smart_resume
+from utils.oneflow_utils import EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer, smart_resume # 导入早停机制模块，模型滑动平均更新模块，解分布式模块，智能选择设备，智能优化器以及智能断点续训模块等
 from utils.plots import plot_evolve, plot_labels
 # LOCAL_RANK：当前进程对应的GPU号。
 LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  # https://pytorch.org/docs/stable/elastic/run.html
@@ -136,25 +136,25 @@ workers: dataloader中的最大work数（线程个数）
 device: 训练的设备
 single-cls: 数据集是否只有一个类别 默认False
 
-rect: 训练集是否采用矩形训练  默认False
+rect: 训练集是否采用矩形训练  默认False 可以参考：https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html
 noautoanchor: 不自动调整anchor 默认False(自动调整anchor)
 evolve: 是否进行超参进化 默认False
 multi-scale: 是否使用多尺度训练 默认False
 label-smoothing: 标签平滑增强 默认0.0不增强  要增强一般就设为0.1
 adam: 是否使用adam优化器 默认False(使用SGD)
-sync-bn: 是否使用跨卡同步bn操作,再DDP中使用  默认False
+sync-bn: 是否使用跨卡同步BN操作, 在DDP中使用  默认False
 linear-lr: 是否使用linear lr  线性学习率  默认False 使用cosine lr
 cache-image: 是否提前缓存图片到内存cache,以加速训练  默认False
-image-weights: 是否使用图片采用策略(selection img to training by class weights) 默认False 不使用
+image-weights: 是否使用图片加权选择策略(selection img to training by class weights) 默认False 不使用
 
 bucket: 谷歌云盘bucket 一般用不到
-project: 训练结果保存的根目录 默认是runs/train
+project: 训练结果保存的根目录 默认是 runs/train
 name: 训练结果保存的目录 默认是exp  最终: runs/train/exp
 exist-ok: 如果文件存在就ok不存在就新建或increment name  默认False(默认文件都是不存在的)
 quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
-save_period: Log model after every "save_period" epoch    默认-1 不需要log model 信息
+save_period: Log model after every "save_period" epoch, 默认-1 不需要log model 信息
 artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-local_rank: rank为进程编号  -1且gpu=1时不进行分布式  
+local_rank: 当前进程对应的GPU号。  -1且gpu=1时不进行分布式  
 
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
@@ -198,7 +198,7 @@ if opt.resume and not (check_wandb_resume(opt) or opt.evolve):  # resume from sp
     opt_yaml = last.parent.parent / "opt.yaml"  # train options yaml
     opt_data = opt.data  # original dataset
     if opt_yaml.is_file():
-        # 相关的opt参数也要替换成last.pt中的opt参数
+        # 相关的opt参数也要替换成last中的opt参数
         with open(opt_yaml, errors="ignore") as f:
             d = yaml.safe_load(f)
     else:
@@ -236,10 +236,10 @@ else:
 
 
 ```python
-# 3、DDP mode设置
+# 3、DDP模式的设置
 
 """select_device
-select_device 函数： 设置当前脚本的device，cpu或者cuda。
+select_device 函数： 设置当前脚本的device：cpu或者cuda。
 并且当且仅当使用cuda时并且有多块gpu时可以使用ddp模式，否则抛出报错信息。batch_size需要整除总的进程数量。
 另外DDP模式不支持AutoBatch功能，使用DDP模式必须手动指定batch size。
 """
@@ -268,7 +268,7 @@ if not opt.evolve:
 ```
 
 ### 3.5 Evolve hyperparameters (optional)
-> [遗传进化算法，边进化边训练](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L625-L713)
+> [遗传进化算法，先进化出最佳超参后训练](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L625-L713)
 
 
 
@@ -326,16 +326,15 @@ else:
     
     """
     使用遗传算法进行参数进化 默认是进化300代
-    这里的进化算法是：根据之前训练时的hyp来确定一个base hyp再进行突变；
-    如何根据？通过之前每次进化得到的results来确定之前每个hyp的权重
-    有了每个hyp和每个hyp的权重之后有两种进化方式；
+    这里的进化算法原理为：根据之前训练时的hyp来确定一个base hyp再进行突变，具体是通过之前每次进化得到的results来确定之前每个hyp的权重，有了每个hyp和每个hyp的权重之后有两种进化方式；
     1.根据每个hyp的权重随机选择一个之前的hyp作为base hyp，random.choices(range(n), weights=w)
     2.根据每个hyp的权重对之前所有的hyp进行融合获得一个base hyp，(x * w.reshape(n, 1)).sum(0) / w.sum()
     evolve.txt会记录每次进化之后的results+hyp
     每次进化时，hyp会根据之前的results进行从大到小的排序；
     再根据fitness函数计算之前每次进化得到的hyp的权重
     (其中fitness是我们寻求最大化的值。在YOLOv5中，fitness函数实现对 [P, R, mAP@.5, mAP@.5-.95] 指标进行加权。)
-    再确定哪一种进化方式，从而进行进化
+    再确定哪一种进化方式，从而进行进化。
+    这部分代码其实不是很重要并且也比较难理解，大家如果没有特殊必要的话可以忽略，因为正常训练也不会用到超参数进化。
     """
     for _ in range(opt.evolve):  # generations to evolve
         if evolve_csv.exists():  # if evolve.csv exists: select best hyps and mutate
@@ -420,21 +419,16 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
 
 ### 4.2 初始化参数和配置信息
 
+下面输出超参数的时候截图如下：
 
-
-```python
-# 保存权重路径 如runs/train/exp18/weights
-w = save_dir / "weights"  # weights dir
-(w.parent if evolve else w).mkdir(parents=True, exist_ok=True)  # make dir
-last, best = w / "last", w / "best"
-```
+<img width="540" alt="图片" src="https://user-images.githubusercontent.com/35585791/204418328-92cddae3-43a2-424c-ba79-d6565545bd4f.png">
 
 
 ```python
 # 和日志相关的回调函数，记录当前代码执行的阶段
 callbacks.run("on_pretrain_routine_start")
 
-# Directories 目录设置
+# 保存权重路径 如runs/train/exp18/weights
 w = save_dir / "weights"  # weights dir
 (w.parent if evolve else w).mkdir(parents=True, exist_ok=True)  # make dir
 last, best = w / "last", w / "best"
@@ -448,7 +442,7 @@ if isinstance(hyp, str):
 LOGGER.info(colorstr("hyperparameters: ") + ", ".join(f"{k}={v}" for k, v in hyp.items()))
 opt.hyp = hyp.copy()  # for saving hyps to checkpoints
 
-# Save run settings
+# 保存运行时的参数配置
 if not evolve:
     yaml_save(save_dir / "hyp.yaml", hyp)
     yaml_save(save_dir / "opt.yaml", vars(opt))
@@ -477,6 +471,7 @@ data_dict = data_dict or check_dataset(data)  # check if None
 train_path, val_path = data_dict["train"], data_dict["val"]
 # nc: number of classes  数据集有多少种类别
 nc = 1 if single_cls else int(data_dict["nc"])  # number of classes
+# 如果只有一个类别并且data_dict里没有names这个key的话，我们将names设置为["item"]代表目标
 names = ["item"] if single_cls and len(data_dict["names"]) != 1 else data_dict["names"]  # class names
 assert len(names) == nc, f"{len(names)} names found for nc={nc} dataset in {data}"  # check
 # 当前数据集是否是coco数据集(80个类别) 
@@ -576,6 +571,7 @@ ema = ModelEMA(model) if RANK in {-1, 0} else None
 
 ### 4.7 Resume
 
+断点续训
 
 ```python
 # Resume
@@ -691,7 +687,7 @@ model.names = names # 获取类别名
 # Start training
 t0 = time.time()
 nb = len(train_loader)  # number of batches
-# 获取热身迭代的次数iterations  # number of warmup iterations, max(3 epochs, 1k iterations)
+# 获取预热迭代的次数iterations  # number of warmup iterations, max(3 epochs, 1k iterations)
 nw = max(round(hyp["warmup_epochs"] * nb), 100)  # number of warmup iterations, max(3 epochs, 100 iterations)
 # nw = min(nw, (epochs - start_epoch) / 2 * nb)  # limit warmup to < 1/2 of training
 last_opt_step = -1
@@ -700,11 +696,11 @@ maps = np.zeros(nc)  # mAP per class
 results = (0, 0, 0, 0, 0, 0, 0)  # P, R, mAP@.5, mAP@.5-.95, val_loss(box, obj, cls)
 # 设置学习率衰减所进行到的轮次，即使打断训练，使用resume接着训练也能正常衔接之前的训练进行学习率衰减
 scheduler.last_epoch = start_epoch - 1  # do not move
-# scaler = flow.cuda.amp.GradScaler(enabled=amp)
+# scaler = flow.cuda.amp.GradScaler(enabled=amp) 这个是和amp相关的loss缩放模块，后续one-yolv5支持好amp训练后会打开
 
 stopper, _ = EarlyStopping(patience=opt.patience), False
 # 初始化损失函数
-# 这里的bbox_iou_optim是one-yolov5扩展的一个参数，可以启用更快的bbox_iou函数，模型训练速度比PyTorch更快
+# 这里的bbox_iou_optim是one-yolov5扩展的一个参数，可以启用更快的bbox_iou函数，模型训练速度比PyTorch更快。
 compute_loss = ComputeLoss(model, bbox_iou_optim=bbox_iou_optim)  # init loss class
 callbacks.run("on_train_start")
 # 打印日志信息
@@ -741,7 +737,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
     # 进度条，方便展示信息
     pbar = enumerate(train_loader)
 
-    LOGGER.info(("\n" + "%10s" * 7) % ("Epoch", "gpu_mem", "box", "obj", "cls", "labels", "img_size"))
+    LOGGER.info(('\n' + '%11s' * 7) % ('Epoch', 'GPU_mem', 'box_loss', 'obj_loss', 'cls_loss', 'Instances', 'Size'))
     if RANK in {-1, 0}:
         # 创建进度条
         pbar = tqdm(pbar, total=nb, bar_format="{l_bar}{bar:10}{r_bar}{bar:-10b}")  # progress bar
@@ -761,7 +757,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
         imgs = imgs.to(device).float() / 255  # uint8 to float32, 0-255 to 0.0-1.0
 
         # Warmup
-        # 热身训练（前nw次迭代）热身训练迭代的次数iteration范围[1:nw]  选取较小的accumulate，学习率以及momentum,慢慢的训练
+        # 预热训练（前nw次迭代）热身训练迭代的次数iteration范围[1:nw]  选取较小的accumulate，学习率以及momentum,慢慢的训练
         if ni <= nw:
             xi = [0, nw]  # x interp
             # compute_loss.gr = np.interp(ni, xi, [0.0, 1.0])  # iou loss ratio (obj_loss = 1.0 or iou)
@@ -818,7 +814,7 @@ for epoch in range(start_epoch, epochs):  # epoch ------------------------------
         # 打印Print一些信息 包括当前epoch、显存、损失(box、obj、cls、total)、当前batch的target的数量和图片的size等信息
         if RANK in {-1, 0}:
             mloss = (mloss * i + loss_items) / (i + 1)  # update mean losses
-            pbar.set_description(("%10s" * 1 + "%10.4g" * 5) % (f"{epoch}/{epochs - 1}", *mloss, targets.shape[0], imgs.shape[-1]))
+            pbar.set_description(("%11s" + "%11.4g" * 5) % (f"{epoch}/{epochs - 1}", *mloss, targets.shape[0], imgs.shape[-1]))
 
         # end batch ----------------------------------------------------------------
 
