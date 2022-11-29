@@ -85,11 +85,11 @@ nav:
     - 源码解读:
         - train.py : source_code_interpretation/train_py.md 
         - utils:
-            - augmentations_py: source_code_interpretation/utils/augmentations_py.md
-            - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
-            - downloads_py: source_code_interpretation/utils/downloads_py.md
-            - geneal_py: source_code_interpretation/utils/general_py.md
-            - autoanchor_py: source_code_interpretation/utils/autoanchor_py.md
+            - augmentations.py: source_code_interpretation/utils/augmentations_py.md
+            - dataloaders.py:  source_code_interpretation/utils/dataloaders_py.md
+            - downloads.py: source_code_interpretation/utils/downloads_py.md
+            - geneal.py: source_code_interpretation/utils/general_py.md
+            - autoanchor.py: source_code_interpretation/utils/autoanchor_py.md
 
 
     - 论文解读:
