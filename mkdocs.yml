@@ -72,6 +72,7 @@ nav:
             - 3.2 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
             - 3.3 测试时增强 (TTA): tutorials/03_chapter/TTA.md
             - 3.4 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
+            - 3.5 Weights & Biases : tutorials/03_chapter/intro_to_wandb.md
         - 第四章 数据组织与处理解读: 
             - 4.1 mosaic 解读:  tutorials/04_chapter/mosaic.md
         - 第五章 YOLOv5中IoU损失: 
