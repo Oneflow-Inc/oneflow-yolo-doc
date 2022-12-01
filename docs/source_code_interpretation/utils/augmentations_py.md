@@ -15,12 +15,28 @@
 
 并resize为输入大小img_size。
 
+
+> 仿射变换：`平移、旋转、放缩、剪切、反射`
+
+> 仿射变换包括如下所有变换，以及这些变换任意次序次数的组合：
+
+![image](https://user-images.githubusercontent.com/109639975/204688876-10105f39-1c95-4597-9323-63c77c9861cd.png)
+图片来源于:[https://www.cnblogs.com/shine-lee/p/10950963.html](https://www.cnblogs.com/shine-lee/p/10950963.html)
+
+`平移`（translation）和 `旋转`（rotation）顾名思义，两者的组合称之为欧式变换（Euclidean transformation）或刚体变换（rigid transformation）；
+
+`放缩`（scaling）可进一步分为uniform scaling和non-uniform scaling，前者每个坐标轴放缩系数相同（各向同性），后者不同；如果放缩系数为负，则会叠加上反射（reflection）——reflection可以看成是特殊的scaling；
+
+`刚体变换+uniform scaling` 称之为，相似变换（similarity transformation），即平移+旋转+各向同性的放缩；
+
+`剪切变换`（shear mapping）将所有点沿某一指定方向成比例地平移，语言描述不如上面图示直观。
+
 random_perspective函数代码：
 
 
 ```python
 def random_perspective(
-    img,
+    img, 
     targets=(),
     segments=(),
     degrees=10,
@@ -46,25 +62,38 @@ def random_perspective(
     一般等于[-img_size//2, -img_size//2] 那么最后输出的图片大小为 [img_size, img_size]
     :return img: 通过透视变换/仿射变换后的img [img_size, img_size] 
     :return targets: 通过透视变换/仿射变换后的img对应的标签 [n, cls+x1y1x2y2]  (通过筛选后的)
+    OpenCV中的坐标系定义，如下图所示:
+   (0,0)o_________width______________x
+        |                            |
+        height                       |
+        |                            |
+        |                            |
+        |                            |
+        y____________________________o(w,h)
     """
     # 设定输出图片的 H W
     # border=-s // 2  所以最后图片的大小直接减半 [img_size, img_size, 3]
+    # 图片高宽（加上border边框）
     height = img.shape[0] + border[0] * 2  # # 最终输出图像的H
     width = img.shape[1] + border[1] * 2  # 最终输出图像的W
 
     # ============================ 开始变换 =============================
     # 需要注意的是，其实opencv是实现了仿射变换的, 不过我们要先生成仿射变换矩阵M
-    # Center 设置中心平移矩阵
-    C = np.eye(3)
+    # Center 计算中心点
+    C = np.eye(3) # 生成3*3的对角为1的对角矩阵
+    # x 方向的中心
     C[0, 2] = -img.shape[1] / 2  # x translation (pixels)
+    # y 方向的中心
     C[1, 2] = -img.shape[0] / 2  # y translation (pixels)
 
     # Perspective  设置透视变换矩阵
-    P = np.eye(3)
+    P = np.eye(3) # 生成3*3的对角为1的对角矩阵
+    # 随机生成x，y方向上的透视值
     P[2, 0] = random.uniform(-perspective, perspective)  # x perspective (about y)
     P[2, 1] = random.uniform(-perspective, perspective)  # y perspective (about x)
 
-    # Rotation and Scale  设置旋转和缩放矩阵
+    # Rotation and Scale  
+    # 旋转和缩放
     R = np.eye(3)  # 初始化R = [[1,0,0], [0,1,0], [0,0,1]]    (3, 3)
     # a: 随机生成旋转角度 范围在(-degrees, degrees)
     # a += random.choice([-180, -90, 0, 90])  # add 90deg rotations to small rotations
@@ -72,6 +101,7 @@ def random_perspective(
     # a += random.choice([-180, -90, 0, 90])  # add 90deg rotations to small rotations
     # s: 随机生成旋转后图像的缩放比例 范围在(1 - scale, 1 + scale)
     # s = 2 ** random.uniform(-scale, scale)
+    # 随机生成缩放比例
     s = random.uniform(1 - scale, 1 + scale)
     # s = 2 ** random.uniform(-scale, scale)
     # cv2.getRotationMatrix2D: 二维旋转缩放函数
@@ -79,6 +109,7 @@ def random_perspective(
     R[:2] = cv2.getRotationMatrix2D(angle=a, center=(0, 0), scale=s)
 
     # Shear  设置剪切矩阵
+    # 弯曲角度
     S = np.eye(3)  # 初始化T = [[1,0,0], [0,1,0], [0,0,1]]
     S[0, 1] = math.tan(random.uniform(-shear, shear) * math.pi / 180)  # x shear (deg)
     S[1, 0] = math.tan(random.uniform(-shear, shear) * math.pi / 180)  # y shear (deg)
@@ -169,6 +200,7 @@ def random_perspective(
             new[:, [1, 3]] = new[:, [1, 3]].clip(0, height)
 
         # filter candidates  过滤target 筛选box
+        # 计算候选框并返回
         # 长和宽必须大于wh_thr个像素 裁剪过小的框(面积小于裁剪前的area_thr)  长宽比范围在(1/ar_thr, ar_thr)之间的限制
         # 筛选结果 [n] 全是True或False   使用比如: box1[i]即可得到i中所有等于True的矩形框 False的矩形框全部删除
         i = box_candidates(
@@ -193,14 +225,18 @@ def random_perspective(
 ![image](https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png)
 
 ## 2. box_candidates
+
+>  官方作者介绍[Question about function box_candidates() in datasets.py](https://github.com/ultralytics/yolov5/issues/2442)
+
 &emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。
 
-box_candidates模块代码：
+box_candidates 模块代码：
 
 
 ```python
 def box_candidates(box1, box2, wh_thr=2, ar_thr=20, area_thr=0.1, eps=1e-16):
-    """用在random_perspective中 对透视变换后的图片label进行筛选
+    """box_candidates() is used to filter the labels and reject poor label candidates:
+    用在random_perspective中 对透视变换后的图片label进行筛选
     去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制
     Compute candidate boxes: box1 before augment, box2 after augment, wh_thr (pixels), aspect_ratio_thr, area_ratio
     :params box1: [4, n]
@@ -268,6 +304,8 @@ def replicate(img, labels):
 会用在load_mosaicload_mosaic里在mosaic操作之后 random_perspective操作之前（一般会关闭 具体还要看个人实验）
 
 ## 4. [letterbox](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4)
+> YOLOV5中的自适应图片缩放[letterbox](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4) 保持图片的宽高比例，剩下的部分用灰色填充。
+
 
 [letterbox](https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html#_4) 的img转换部分
 
@@ -297,7 +335,7 @@ def letterbox(
     将图片缩放调整到指定大小
     Resize and pad image while meeting stride-multiple constraints
     https://github.com/ultralytics/yolov3/issues/232
-    :param img: 原图 hwc
+    :param img: 原图 hwc (形状是 (h,w,c)  高、宽、通道（RGB）  像素值范围是0-255 )
     :param new_shape: 缩放后的最长边大小
     :param color: pad的颜色
     :param auto: True 保证缩放后的图片保持原图的比例 即 将原图最长边缩放到指定大小，再将原图较短边按原图比例缩放（不会失真）
@@ -305,7 +343,7 @@ def letterbox(
     :param scale_fill: True 简单粗暴的将原图resize到指定的大小 相当于就是resize 没有pad操作（失真）
     :param scale_up: True  对于小于new_shape的原图进行缩放,大于的不变
                      False 对于大于new_shape的原图进行缩放,小于的不变
-    :return: img: letterbox后的图片 HWC
+    :return: img: letterbox后的图片 hwc
              ratio: wh ratios
              (dw, dh): w和h的pad
     """
@@ -370,11 +408,25 @@ def letterbox(
 
 
 ## 5. cutout
+> 图片上的随机裁剪像素块
+
 &emsp; cutout数据增强，给图片随机添加随机大小的方块噪声 ，目的是提高泛化能力和鲁棒性。源自论文： [Improved Regularization of Convolutional Neural Networks with Cutout](https://arxiv.org/abs/1708.04552) 。
 
 &emsp;更多原理细节请参阅：[mosaic 解读](https://start.oneflow.org/oneflow-yolo-doc/tutorials/04_chapter/mosaic.html) , [【YOLO v4】【trick 8】Data augmentation: MixUp、Random Erasing、CutOut、CutMix、Mosic。](https://blog.csdn.net/qq_38253797/article/details/116668074)
 
-&emsp; 具体要不要使用，概率是多少可以自己实验。
+
+示例:
+```python
+image_path = "one-yolo/data/images/bus.jpg"
+img = cv2.imread(str(image_path))
+h, w = img.shape[:2]
+labels = np.array([[0, 0, 0, 800, 800]])
+print("原图宽高:\nw1={}\nh1={}".format(w, h)) #  810, 1800
+lb = cutout(im=img, labels=labels, p=1000.0)
+cv2.imwrite("./00.jpg",img)
+```
+![image](https://user-images.githubusercontent.com/109639975/204717108-5e4cb777-569e-4320-be25-b7102726d745.png)
+
 
 cutout模块代码：
 
@@ -445,17 +497,30 @@ def cutout(image, labels):
 ```
 
 注意：
-1. 在LoadImagesAndLabels模块中的__getitem__函数进行cutout增强：
 
-2. mixup增强由超参hyp[‘mixup’]控制，0则关闭 默认为1则100%打开（自己实验判断）：
+- 在LoadImagesAndLabels模块中的__getitem__函数进行cutout增强：
+
 
 
 ## 6. mixup
 &emsp;这个函数是进行mixup数据增强：按比例融合两张图片。论文：[https://arxiv.org/pdf/1710.09412.pdf](https://arxiv.org/pdf/1710.09412.pdf)。
 
 &emsp;更多原理细节请看博客：[【YOLO v4】【trick 8】Data augmentation: MixUp、Random Erasing、CutOut、CutMix、Mosic](https://blog.csdn.net/qq_38253797/article/details/116668074)
-。
-&emsp;具体要不要使用，概率是多少可以自己实验。
+
+
+示例:
+```python
+img1 = cv2.imread("one-yolo/data/images/bus.jpg")
+img2 = cv2.imread("one-yolo/data/images/zidane.jpg")
+img2 = cv2.resize(img2,(810,1080))        
+labels1 = np.array([[0, 0, 0, 800, 800]])
+labels2 = np.array([[0, 800, 800, 1080, 810]])
+img, labels = mixup(img1, labels1, img2, labels2)
+cv2.imwrite("./00.jpg", img)
+```
+
+![image](https://user-images.githubusercontent.com/109639975/204719701-108dddbc-cdd8-4b76-a07d-0c9cab28855b.png)
+
 
 mixup模块代码：
 
@@ -482,9 +547,10 @@ def mixup(im, labels, im2, labels2):
 ```
 
 注意:
-- 在LoadImagesAndLabels模块中的__getitem__函数进行mixup增强：
-- mixup增强由超参hyp["mixup"]控制，0则关闭 默认为1则100%打开（自己实验判断）
-        
+
+- 在LoadImagesAndLabels模块中的__getitem__函数进行mixup增强。
+- mixup增强由超参hyp[‘mixup’]控制，0则关闭 默认为1(表示100%打开)。
+
 
 ## 7. hist_equalize
 &emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到按这个函数，学习了解下就好，不是重点。
@@ -516,4 +582,7 @@ def hist_equalize(img, clahe=True, bgr=False):
 ```
 
 ## Reference
-- 【YOLOV5-5.x 源码解读】[atasets.py](https://blog.csdn.net/qq_38253797/article/details/119904518)
+- [Question about function box_candidates() in datasets.py](https://github.com/ultralytics/yolov5/issues/2442)
+- 【YOLOV5-5.x 源码解读】[datasets.py](https://blog.csdn.net/qq_38253797/article/details/119904518)
+- [yolov5数据增强引发的思考——透视变换矩阵的创建](https://www.cnblogs.com/shuimuqingyang/p/14595210.html)
+- [仿射变换及其变换矩阵的理解](https://www.cnblogs.com/shine-lee/p/10950963.html)
