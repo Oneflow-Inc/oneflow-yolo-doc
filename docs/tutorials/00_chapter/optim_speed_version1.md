@@ -1,6 +1,6 @@
 **消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时。**
 
-# 0x0. 前言
+## 0x0. 前言
 大家好，很高兴又可以为大家带来One-YOLOv5的最新进展，在[One-YOLOv5 发布，一个训得更快的YOLOv5](https://mp.weixin.qq.com/s/tZ7swUd0biz7G3CiRkHHfw) 发布后收到了很多算法行业朋友的关注，十分感谢。但可能大家都在思考一个问题，虽然OneFlow的兼容性做得很好，可以很方便的移植YOLOv5并使用OneFlow后端来进行训练，但我为什么要用你呢？能帮我缩短模型开发周期吗？帮我解决了任何痛点吗？本篇文章将尝试回答这几个问题。
 
 也许熟悉我的朋友知道我在来一流科技之前也是一名算法工程师，我之前的开发机器也只有两张GTX 3090消费级显卡而已。但实际上公司大多数由我上线的检测产品基本上也就是靠这1张或者2张GTX 3090完成的。由于成本问题，很多中小公司没有组一个A100集群或者直接上数十张卡来训练检测模型的实力，所以这个时候在单卡或者2卡上将目标检测模型做快就尤为重要了。把模型训练做快之后是真的可以降本增效，提高模型生产率的。
@@ -15,7 +15,7 @@
 
 对 One-YOLOv5 感兴趣的伙伴可以添加 bbuf23333 进入 One-YOLOv5 微信交流群。
 
-# 0x1. 结果展示
+## 0x1. 结果展示
 
 我们展示一下分别使用One-YOLOv5以及 ultralytics/yolov5 在GTX 3090单卡上使用YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：
 
@@ -31,11 +31,11 @@
 
 在DDP模式下的性能提升幅度没有单卡这么多，猜测可能是通信部分的开销比较大，后续我们会再研究一下。
 
-# 0x2. 优化手段
+## 0x2. 优化手段
 
 我们在这一节完成技术揭秘。我们深度分析了PyTorch的YOLOv5的执行序列，我们发现当前YOLOv5主要存在3个优化点。第一个就是对于Upsample算子的改进，由于YOLOv5使用上采样是规整的最近邻2倍插值，所以我们可以实现一个特殊Kernel降低计算量并提升带宽。第二个就是在YOLOv5中存在一个滑动更新模型参数的操作，这个操作启动了很多碎的CUDA Kernel，而每个CUDA Kernel的执行时间都非常短，所以启动开销不能忽略。我们使用水平并行CUDA Kernel的方式（MultiTensor）对其完成了优化，基于这个优化One-YOLOv5获得了9%的加速。第三个优化点来源于对YOLOv5 nsys执行序列的观察，我们发现在ComputeLoss部分出现的bbox_iou是整个Loss计算部分一个比较大的瓶颈，我们在bbox_iou函数部分完成了多个垂直的Kernel Fuse，使得它的开销从最初的3.xms降低到了几百个us。接下来我们分别详细阐述这几种优化：
 
-## 0x2.1 对UpsampleNearest2D的特化改进
+### 0x2.1 对UpsampleNearest2D的特化改进
 
 为了不写得啰嗦，我这里直接展示我们对UpsampleNearest2D进行调优的技术总结，大家可以结合下面的 pr 链接来对应下面的知识点总结。我们在A100 40G上测试 UpsampleNearest2D 算子的性能表现。这块卡的峰值带宽在1555Gb/s , 我们使用的CUDA版本为11.8。
 
@@ -90,7 +90,7 @@ https://github.com/Oneflow-Inc/oneflow/pull/9415 & https://github.com/Oneflow-In
 
 对这个 Kernel 进行特化是优化的第一步，基于这个优化可以给 YOLOv5 的单卡 PipLine 带来1%的提升。
 
-## 0x2.2 对bbox_iou函数进行优化 (垂直Fuse优化)
+### 0x2.2 对bbox_iou函数进行优化 (垂直Fuse优化)
 
 通过对nsys的分析，我们发现无论是one-yolov5还是ultralytics/yolov5，在计算Loss的阶段都有一个耗时比较严重的bbox_iou函数，我们这里先贴一下bbox_iou部分的代码：
 
@@ -159,7 +159,7 @@ def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, eps=1e-7
 
 然后我们在one-yolov5的train.py中扩展了一个 `--bbox_iou_optim` 选项，只要训练的时候带上这个选项就会自动调用上面的fuse kernel来对bbox_iou函数进行优化了，具体请看：https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L224-L284 。对bbox_iou这个函数的一系列垂直Fuse优化使得YOLOv5整体的训练速度提升了8%左右，是一个十分有效的优化。
 
-## 0x2.3 对模型滑动平均更新进行优化（水平Fuse优化）
+### 0x2.3 对模型滑动平均更新进行优化（水平Fuse优化）
 
 在 YOLOv5 中会使用EMA（指数移动平均）对模型的参数做平均, 一种给予近期数据更高权重的平均方法, 以求提高测试指标并增加模型鲁棒。这里的核心操作如下代码所示：
 
@@ -194,7 +194,7 @@ def update(self, model):
 关于MultiTensor这个知识可以看 zzk 的这篇文章：https://zhuanlan.zhihu.com/p/566595789。zzk 在 OneFlow 中也实现了一套 MultiTensor 方案，上面的 PR 9498 也是基于这套 MultiTensor 方案实现的。介于篇幅原因我们就不展开这个 MultiTensor 的代码实现了，感兴趣的可以留言后续单独讲解。
 
 
-# 0x3. 使用方法
+## 0x3. 使用方法
 
 上面已经提到所有的优化都集中于 `bbox_iou_optim` 和 `multi_tensor_optimizer` 这两个扩展的Flag，只要我们训练的时候打开这两个Flag就可以享受到上述优化了。其他的运行命令和One-YOLOv5没有变化，以One-YOLOv5在GTX 3090上训练yolov5s为例，命令为：
 
@@ -202,14 +202,14 @@ def update(self, model):
 python train.py --batch 16 --cfg models/yolov5s.yaml --weights '' --data coco.yaml --img 640 --device 0 --epoch 1 --bbox_iou_optim --multi_tensor_optimizer
 ```
 
-# 0x4. 总结
+## 0x4. 总结
 
 
 目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3090上（这里指定BatchSize为16时）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5
 
 One-YOLOv5的优化工作实际上不仅包含性能，我们目前也付出了很多心血在文档和源码解读上，后续会继续放出《YOLOv5全面解析教程》的其他文章，并将尽快 Relase 新版本。请期待后续发展...
 
-# 0x5. 致谢
+## 0x5. 致谢
 
 感谢柳俊丞同事在这次调优中提供的 idea 和技术支持，感谢胡伽魁同学实现的一些fuse kernel，感谢郑泽康的 MultiTensorUpdate 实现，感谢冯文的精度验证工作以及文档支持，以及姚迟和小糖对 One-YOLOv5 的推广帮助。最后也要感谢 GiantPandaCV 平台对本项目的支持以及OneFlow其他帮助本项目发展的工程师们如赵露阳，梁德澎等等。
 
