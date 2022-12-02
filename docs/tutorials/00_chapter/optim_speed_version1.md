@@ -19,14 +19,14 @@
 
 我们展示一下分别使用One-YOLOv5以及 ultralytics/yolov5 在GTX 3090单卡上使用YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：
 
-![图片](https://user-images.githubusercontent.com/35585791/205191889-13fc98fc-14af-4c20-900e-57483f003d9a.png)
+![图片](https://user-images.githubusercontent.com/35585791/205231190-6eeec259-1e0d-4344-b21a-d26939eddc8b.png)
+
 
 可以看到在单卡模式下，经过我们的优化相比于 ultralytics/yolov5 的训练速度，我们提升了 20% 左右。
 
 然后我们再展示一下2卡DDP模式YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：
 
-
-![图片](https://user-images.githubusercontent.com/35585791/205193275-362445de-4bbc-458c-9eb9-789dfad92c16.png)
+![图片](https://user-images.githubusercontent.com/35585791/205231435-b6466179-ff0a-490d-b980-2e8bbf213cea.png)
 
 
 在DDP模式下的性能提升幅度没有单卡这么多，猜测可能是通信部分的开销比较大，后续我们会再研究一下。
