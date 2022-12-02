@@ -21,6 +21,15 @@ pip install -r requirements.txt  # install
 ```
 ## 训练 🚀
 
+注意⚠️:
+
+- oneflow目前不支持windows平台
+
+- --batch 必须是GPU数量的倍数。
+
+- GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。
+
+
 ###  📌两种训练方式  
 1. 带权重训练 🚀
 ```
