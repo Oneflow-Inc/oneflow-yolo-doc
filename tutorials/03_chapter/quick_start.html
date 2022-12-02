@@ -1376,6 +1376,18 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
 </code></pre></div>
 <h2 id="_4">训练 🚀</h2>
+<p>注意⚠️:</p>
+<ul>
+<li>
+<p>oneflow目前不支持windows平台</p>
+</li>
+<li>
+<p>--batch 必须是GPU数量的倍数。</p>
+</li>
+<li>
+<p>GPU 0 将比其他GPU占用略多的内存，因为它维护EMA并负责检查点等。</p>
+</li>
+</ul>
 <h3 id="_5">📌两种训练方式</h3>
 <ol>
 <li>带权重训练 🚀
