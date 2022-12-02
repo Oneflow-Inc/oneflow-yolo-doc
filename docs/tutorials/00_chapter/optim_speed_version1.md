@@ -205,7 +205,7 @@ python train.py --batch 16 --cfg models/yolov5s.yaml --weights '' --data coco.ya
 # 0x4. 总结
 
 
-目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3080 Ti上（单卡支持的最大BatchSize即为16）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5
+目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3090上（单卡支持的最大BatchSize即为16）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5
 
 One-YOLOv5的优化工作实际上不仅包含性能，我们目前也付出了很多心血在文档和源码解读上，后续会继续放出《YOLOv5全面解析教程》的其他文章，并将尽快 Relase 新版本。请期待后续发展...
 
