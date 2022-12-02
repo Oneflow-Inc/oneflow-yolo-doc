@@ -63,6 +63,7 @@ nav:
     - YOLOv5教程📚:
         - 引言:
             - one-yolov5 特点解析: tutorials/00_chapter/overview.md
+            - 消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时: tutorials/00_chapter/optim_speed_version1.md
         - 第一章 网络结构: 
             - 1.1. YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         - 第二章 训练模型的数据集:
