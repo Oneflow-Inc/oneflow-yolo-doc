@@ -1,0 +1,1306 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时 - oneflow-yolo-doc</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4051b5">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#0x0" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-header__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            oneflow-yolo-doc
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OneYOLO-Doc
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../index.html" class="md-tabs__link">
+      首页🏠
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="overview.html" class="md-tabs__link md-tabs__link--active">
+        YOLOv5教程📚
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../source_code_interpretation/train_py.html" class="md-tabs__link">
+        源码解读
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-tabs__link">
+        论文解读
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="oneflow-yolo-doc" class="md-nav__button md-logo" aria-label="oneflow-yolo-doc" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    oneflow-yolo-doc
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/" title="前往 GitHub 仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OneYOLO-Doc
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        首页🏠
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        YOLOv5教程📚
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="YOLOv5教程📚" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          YOLOv5教程📚
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+      
+      <label class="md-nav__link" for="__nav_2_1">
+        引言
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="引言" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          引言
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        one-yolov5 特点解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="optim_speed_version1.html" class="md-nav__link md-nav__link--active">
+        消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时
+      </a>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        第一章 网络结构
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第一章 网络结构" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          第一章 网络结构
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-nav__link">
+        1.1. YOLOv5 网络结构解析
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        第二章 训练模型的数据集
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第二章 训练模型的数据集" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          第二章 训练模型的数据集
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02_chapter/how_to_prepare_yolov5_training_data.html" class="md-nav__link">
+        2.1. 如何准备YOLOv5模型训练数据
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        第三章 模型训练
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第三章 模型训练" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          第三章 模型训练
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/quick_start.html" class="md-nav__link">
+        3.1 快速开始
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/loading_model_from_oneflowhub.html" class="md-nav__link">
+        3.2 从OneFlow Hub 加载YOLOv5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/TTA.html" class="md-nav__link">
+        3.3 测试时增强 (TTA)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_chapter/model_ensembling.html" class="md-nav__link">
+        3.4 模型融合 (Model Ensembling)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        第四章 数据组织与处理解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第四章 数据组织与处理解读" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          第四章 数据组织与处理解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04_chapter/mosaic.html" class="md-nav__link">
+        4.1 mosaic 解读
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_6" type="checkbox" id="__nav_2_6" >
+      
+      <label class="md-nav__link" for="__nav_2_6">
+        第五章 YOLOv5中IoU损失
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第五章 YOLOv5中IoU损失" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          第五章 YOLOv5中IoU损失
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/rectangular_reasoning.html" class="md-nav__link">
+        5.1 矩形推理
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/iou_in-depth_analysis.html" class="md-nav__link">
+        5.2 IoU深入解析
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/map_analysis.html" class="md-nav__link">
+        5.3 模型精确度评估
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05_chapter/Introduction_to_functions_used_in_metrics.html" class="md-nav__link">
+        5.4 计算mAP用到的numpy函数
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_7" type="checkbox" id="__nav_2_7" >
+      
+      <label class="md-nav__link" for="__nav_2_7">
+        第六章 模型导出和部署介绍
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="第六章 模型导出和部署介绍" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          第六章 模型导出和部署介绍
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06_chapter/export_onnx_tflite_tensorrt.html" class="md-nav__link">
+        6.1 模型导出
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        源码解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="源码解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          源码解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/train_py.html" class="md-nav__link">
+        train.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        utils
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="utils" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          utils
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/utils/augmentations_py.html" class="md-nav__link">
+        augmentations.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/utils/dataloaders_py.html" class="md-nav__link">
+        dataloaders.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/utils/downloads_py.html" class="md-nav__link">
+        downloads.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/utils/general_py.html" class="md-nav__link">
+        geneal.py
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../source_code_interpretation/utils/autoanchor_py.html" class="md-nav__link">
+        autoanchor.py
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        论文解读
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="论文解读" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          论文解读
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/00_yolo_history.html" class="md-nav__link">
+        history
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/01_yolo.html" class="md-nav__link">
+        YOLOv1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/02_yolo.html" class="md-nav__link">
+        YOLOv2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/03_yolo.html" class="md-nav__link">
+        YOLOv3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/04_yolo.html" class="md-nav__link">
+        YOLOv4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../thesis_interpretation/06_yolo.html" class="md-nav__link">
+        YOLOv6
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/tutorials/00_chapter/optim_speed_version1.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <p><strong>消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时。</strong></p>
+<h1 id="0x0">0x0. 前言</h1>
+<p>大家好，很高兴又可以为大家带来One-YOLOv5的最新进展，在<a href="https://mp.weixin.qq.com/s/tZ7swUd0biz7G3CiRkHHfw">One-YOLOv5 发布，一个训得更快的YOLOv5</a> 发布后收到了很多算法行业朋友的关注，十分感谢。但可能大家都在思考一个问题，虽然OneFlow的兼容性做得很好，可以很方便的移植YOLOv5并使用OneFlow后端来进行训练，但我为什么要用你呢？能帮我缩短模型开发周期吗？帮我解决了任何痛点吗？本篇文章将尝试回答这几个问题。</p>
+<p>也许熟悉我的朋友知道我在来一流科技之前也是一名算法工程师，我之前的开发机器也只有两张GTX 3090消费级显卡而已。但实际上公司大多数由我上线的检测产品基本上也就是靠这1张或者2张GTX 3090完成的。由于成本问题，很多中小公司没有组一个A100集群或者直接上数十张卡来训练检测模型的实力，所以这个时候在单卡或者2卡上将目标检测模型做快就尤为重要了。把模型训练做快之后是真的可以降本增效，提高模型生产率的。</p>
+<p>所以，近期我和实习生小伙伴一起做了这么一件事情，我们在单卡上凭借对YOLOv5的性能分析以及几个简单的优化将GTX 3090 FP32 YOLOv5s的训练速度提升了近20%。对于需要迭代300个Epoch的COCO数据集来说相比 ultralytics/yolov5 我们缩短了11.35个小时的训练时间。我们决定在本文分享我们的所有优化技术，如果你是一名PyTorch和OneFlow的爱好者，特别的如果你是一名日常和检测模型打交道但资源相对受限，那么本文的优化方法将对你产生一定影响。</p>
+<p>最后，如果本文帮助到了你，请一定给我们点个star，我们也会有更多的技术文章来回馈大家。疫情期间大家都经历了重重压力，但无论是我个人还是OneFlow一直在做技术分享，这个的确是不容易的。</p>
+<ul>
+<li>one-yolov5链接：https://github.com/Oneflow-Inc/one-yolov5</li>
+<li>oneflow链接：https://github.com/Oneflow-Inc/oneflow</li>
+<li>one-yolov5文档链接：https://github.com/Oneflow-Inc/oneflow-yolo-doc</li>
+</ul>
+<p>对 One-YOLOv5 感兴趣的伙伴可以添加 bbuf23333 进入 One-YOLOv5 微信交流群。</p>
+<h1 id="0x1">0x1. 结果展示</h1>
+<p>我们展示一下分别使用One-YOLOv5以及 ultralytics/yolov5 在GTX 3090单卡上使用YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：</p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205191889-13fc98fc-14af-4c20-900e-57483f003d9a.png" /></p>
+<p>可以看到在单卡模式下，经过我们的优化相比于 ultralytics/yolov5 的训练速度，我们提升了 20% 左右。</p>
+<p>然后我们再展示一下2卡DDP模式YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：</p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205193275-362445de-4bbc-458c-9eb9-789dfad92c16.png" /></p>
+<p>在DDP模式下的性能提升幅度没有单卡这么多，猜测可能是通信部分的开销比较大，后续我们会再研究一下。</p>
+<h1 id="0x2">0x2. 优化手段</h1>
+<p>我们在这一节完成技术揭秘。我们深度分析了PyTorch的YOLOv5的执行序列，我们发现当前YOLOv5主要存在3个优化点。第一个就是对于Upsample算子的改进，由于YOLOv5使用上采样是规整的最近邻2倍插值，所以我们可以实现一个特殊Kernel降低计算量并提升带宽。第二个就是在YOLOv5中存在一个滑动更新模型参数的操作，这个操作启动了很多碎的CUDA Kernel，而每个CUDA Kernel的执行时间都非常短，所以启动开销不能忽略。我们使用水平并行CUDA Kernel的方式（MultiTensor）对其完成了优化，基于这个优化One-YOLOv5获得了9%的加速。第三个优化点来源于对YOLOv5 nsys执行序列的观察，我们发现在ComputeLoss部分出现的bbox_iou是整个Loss计算部分一个比较大的瓶颈，我们在bbox_iou函数部分完成了多个垂直的Kernel Fuse，使得它的开销从最初的3.xms降低到了几百个us。接下来我们分别详细阐述这几种优化：</p>
+<h2 id="0x21-upsamplenearest2d">0x2.1 对UpsampleNearest2D的特化改进</h2>
+<p>为了不写得啰嗦，我这里直接展示我们对UpsampleNearest2D进行调优的技术总结，大家可以结合下面的 pr 链接来对应下面的知识点总结。我们在A100 40G上测试 UpsampleNearest2D 算子的性能表现。这块卡的峰值带宽在1555Gb/s , 我们使用的CUDA版本为11.8。</p>
+<p>进行 Profile 的程序如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">flow</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">m</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</code></pre></div>
+<p>https://github.com/Oneflow-Inc/oneflow/pull/9415 &amp; https://github.com/Oneflow-Inc/oneflow/pull/9424 这两个 PR 分别针对 UpsampleNearest2D 这个算子（这个算子是 YOLO 系列算法大量使用的）的前后向进行了调优，下面展示了在 A100 上调优前后的带宽占用和计算时间比较：</p>
+<table>
+<thead>
+<tr>
+<th>框架</th>
+<th>数据类型</th>
+<th>Op类型</th>
+<th>带宽利用率</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PyTorch</td>
+<td>Float32</td>
+<td>UpsampleNearest2D forward</td>
+<td>28.30%</td>
+<td>111.42us</td>
+</tr>
+<tr>
+<td>PyTorch</td>
+<td>Float32</td>
+<td>UpsampleNearest2D backward</td>
+<td>60.16%</td>
+<td>65.12us</td>
+</tr>
+<tr>
+<td>OneFlow 未优化</td>
+<td>Float32</td>
+<td>UpsampleNearest2D forward</td>
+<td>12.54%</td>
+<td>265.82us</td>
+</tr>
+<tr>
+<td>OneFlow 未优化</td>
+<td>Float32</td>
+<td>UpsampleNearest2D backward</td>
+<td>18.4%</td>
+<td>260.22us</td>
+</tr>
+<tr>
+<td>OneFlow 优化后</td>
+<td>Float32</td>
+<td>UpsampleNearest2D forward</td>
+<td>52.18%</td>
+<td>61.44us</td>
+</tr>
+<tr>
+<td>OneFlow 优化后</td>
+<td>Float32</td>
+<td>UpsampleNearest2D backward</td>
+<td>77.66%</td>
+<td>50.56us</td>
+</tr>
+<tr>
+<td>PyTorch</td>
+<td>Float16</td>
+<td>UpsampleNearest2D forward</td>
+<td>16.99%</td>
+<td>100.38us</td>
+</tr>
+<tr>
+<td>PyTorch</td>
+<td>Float16</td>
+<td>UpsampleNearest2D backward</td>
+<td>31.56%</td>
+<td>57.38us</td>
+</tr>
+<tr>
+<td>OneFlow 未优化</td>
+<td>Float16</td>
+<td>UpsampleNearest2D forward</td>
+<td>7.07%</td>
+<td>262.82us</td>
+</tr>
+<tr>
+<td>OneFlow 未优化</td>
+<td>Float16</td>
+<td>UpsampleNearest2D backward</td>
+<td>41.04%</td>
+<td>558.88us</td>
+</tr>
+<tr>
+<td>OneFlow 优化后</td>
+<td>Float16</td>
+<td>UpsampleNearest2D forward</td>
+<td>43.26%</td>
+<td>35.36us</td>
+</tr>
+<tr>
+<td>OneFlow 优化后</td>
+<td>Float16</td>
+<td>UpsampleNearest2D backward</td>
+<td>44.82%</td>
+<td>40.26us</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>上述结果使用 <code>/usr/local/cuda/bin/ncu -o torch_upsample /home/python3  debug.py</code> 得到profile文件后使用Nsight Compute打开记录。</li>
+</ul>
+<p>基于上述对 UpsampleNearest2D 的优化，OneFlow 在 FP32 和 FP16 情况下的性能和带宽都大幅超越之前未经优化的版本，并且相比于 PyTorch 也有较大幅度的领先。</p>
+<p>本次优化涉及到的 <strong>知识点总结</strong> 如下（by OneFlow 柳俊丞）：</p>
+<ul>
+<li>为常见的情况写特例，比如这里就是为采样倍数为2的Nearest插值写特例，避免使用NdIndexHelper带来的额外计算开销，不用追求再一个kernel实现中同时拥有通用型和高效性；</li>
+<li>整数除法开销大（但是编译器有的时候会优化掉一些除法），nchw中的nc不需要分开，合并在一起计算减少计算量；</li>
+<li>int64_t 除法的开销更大，用int32满足大部分需求，其实这里还有一个快速整数除法的问题；</li>
+<li>反向 Kernel 计算过程中循环 dx 相比 循环 dy ，实际上将坐标换算的开销减少到原来的 1/4；</li>
+<li>CUDA GMEM 的开销的也比较大，虽然编译器有可能做优化，但是显式的使用局部变量更好；</li>
+<li>一次 Memset 的开销也很大，和写一次一样，所以反向 Kernel 中对 dx 使用Memset 清零的时机需要注意；</li>
+<li>atomicAdd 开销很大，即使抛开为了实现原子性可能需要的锁总线等，atomicAdd 需要把原来的值先读出来，再写回去；另外，half的atomicAdd 巨慢无比，慢到如果一个算法需要用到 atomicAdd，那么相比于用 half ，转成 float ，再atomicAdd，再转回去还要慢很多；</li>
+<li>向量化访存；</li>
+</ul>
+<p>对这个 Kernel 进行特化是优化的第一步，基于这个优化可以给 YOLOv5 的单卡 PipLine 带来1%的提升。</p>
+<h2 id="0x22-bbox_iou-fuse">0x2.2 对bbox_iou函数进行优化 (垂直Fuse优化)</h2>
+<p>通过对nsys的分析，我们发现无论是one-yolov5还是ultralytics/yolov5，在计算Loss的阶段都有一个耗时比较严重的bbox_iou函数，我们这里先贴一下bbox_iou部分的代码：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">bbox_iou</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="n">box2</span><span class="p">,</span> <span class="n">xywh</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">GIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">DIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">CIoU</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># Returns Intersection over Union (IoU) of box1(1,4) to box2(n,4)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="c1"># Get the coordinates of bounding boxes</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">if</span> <span class="n">xywh</span><span class="p">:</span>  <span class="c1"># transform from xywh to xyxy</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">h1</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="o">=</span> <span class="n">box1</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">box2</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">w1_</span><span class="p">,</span> <span class="n">h1_</span><span class="p">,</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">h2_</span> <span class="o">=</span> <span class="n">w1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">h1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">h2</span> <span class="o">/</span> <span class="mi">2</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="n">b1_x1</span><span class="p">,</span> <span class="n">b1_x2</span><span class="p">,</span> <span class="n">b1_y1</span><span class="p">,</span> <span class="n">b1_y2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">w1_</span><span class="p">,</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">w1_</span><span class="p">,</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">h1_</span><span class="p">,</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">h1_</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">b2_x1</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">,</span> <span class="n">b2_y2</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">-</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">w2_</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">h2_</span><span class="p">,</span> <span class="n">y2</span> <span class="o">+</span> <span class="n">h2_</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># x1, y1, x2, y2 = box1</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">b1_x1</span><span class="p">,</span> <span class="n">b1_y1</span><span class="p">,</span> <span class="n">b1_x2</span><span class="p">,</span> <span class="n">b1_y2</span> <span class="o">=</span> <span class="n">box1</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">b2_x1</span><span class="p">,</span> <span class="n">b2_y1</span><span class="p">,</span> <span class="n">b2_x2</span><span class="p">,</span> <span class="n">b2_y2</span> <span class="o">=</span> <span class="n">box2</span><span class="o">.</span><span class="n">chunk</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">w1</span><span class="p">,</span> <span class="n">h1</span> <span class="o">=</span> <span class="n">b1_x2</span> <span class="o">-</span> <span class="n">b1_x1</span><span class="p">,</span> <span class="p">(</span><span class="n">b1_y2</span> <span class="o">-</span> <span class="n">b1_y1</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="n">w2</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">b2_x2</span> <span class="o">-</span> <span class="n">b2_x1</span><span class="p">,</span> <span class="p">(</span><span class="n">b2_y2</span> <span class="o">-</span> <span class="n">b2_y1</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># Intersection area</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="n">inter</span> <span class="o">=</span> <span class="p">(</span><span class="n">b1_x2</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">b2_x2</span><span class="p">)</span> <span class="o">-</span> <span class="n">b1_x1</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b2_x1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> \
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="p">(</span><span class="n">b1_y2</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">b2_y2</span><span class="p">)</span> <span class="o">-</span> <span class="n">b1_y1</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b2_y1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="c1"># Union Area</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="n">union</span> <span class="o">=</span> <span class="n">w1</span> <span class="o">*</span> <span class="n">h1</span> <span class="o">+</span> <span class="n">w2</span> <span class="o">*</span> <span class="n">h2</span> <span class="o">-</span> <span class="n">inter</span> <span class="o">+</span> <span class="n">eps</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="c1"># IoU</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="n">iou</span> <span class="o">=</span> <span class="n">inter</span> <span class="o">/</span> <span class="n">union</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">if</span> <span class="n">CIoU</span> <span class="ow">or</span> <span class="n">DIoU</span> <span class="ow">or</span> <span class="n">GIoU</span><span class="p">:</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="n">cw</span> <span class="o">=</span> <span class="n">b1_x2</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b2_x2</span><span class="p">)</span> <span class="o">-</span> <span class="n">b1_x1</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">b2_x1</span><span class="p">)</span>  <span class="c1"># convex (smallest enclosing box) width</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">ch</span> <span class="o">=</span> <span class="n">b1_y2</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">b2_y2</span><span class="p">)</span> <span class="o">-</span> <span class="n">b1_y1</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">b2_y1</span><span class="p">)</span>  <span class="c1"># convex height</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="k">if</span> <span class="n">CIoU</span> <span class="ow">or</span> <span class="n">DIoU</span><span class="p">:</span>  <span class="c1"># Distance or Complete IoU https://arxiv.org/abs/1911.08287v1</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>            <span class="n">c2</span> <span class="o">=</span> <span class="n">cw</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">eps</span>  <span class="c1"># convex diagonal squared</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            <span class="n">rho2</span> <span class="o">=</span> <span class="p">((</span><span class="n">b2_x1</span> <span class="o">+</span> <span class="n">b2_x2</span> <span class="o">-</span> <span class="n">b1_x1</span> <span class="o">-</span> <span class="n">b1_x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">b2_y1</span> <span class="o">+</span> <span class="n">b2_y2</span> <span class="o">-</span> <span class="n">b1_y1</span> <span class="o">-</span> <span class="n">b1_y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>  <span class="c1"># center dist ** 2</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="k">if</span> <span class="n">CIoU</span><span class="p">:</span>  <span class="c1"># https://github.com/Zzh-tju/DIoU-SSD-pytorch/blob/master/utils/box/box_utils.py#L47</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>                <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">w2</span> <span class="o">/</span> <span class="n">h2</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">w1</span> <span class="o">/</span> <span class="n">h1</span><span class="p">))</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>                <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>                    <span class="n">alpha</span> <span class="o">=</span> <span class="n">v</span> <span class="o">/</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">iou</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>                <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="p">(</span><span class="n">rho2</span> <span class="o">/</span> <span class="n">c2</span> <span class="o">+</span> <span class="n">v</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">)</span>  <span class="c1"># CIoU</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="n">rho2</span> <span class="o">/</span> <span class="n">c2</span>  <span class="c1"># DIoU</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>        <span class="n">c_area</span> <span class="o">=</span> <span class="n">cw</span> <span class="o">*</span> <span class="n">ch</span> <span class="o">+</span> <span class="n">eps</span>  <span class="c1"># convex area</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>        <span class="k">return</span> <span class="n">iou</span> <span class="o">-</span> <span class="p">(</span><span class="n">c_area</span> <span class="o">-</span> <span class="n">union</span><span class="p">)</span> <span class="o">/</span> <span class="n">c_area</span>  <span class="c1"># GIoU https://arxiv.org/pdf/1902.09630.pdf</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="k">return</span> <span class="n">iou</span>  <span class="c1"># IoU</span>
+</code></pre></div>
+<p>以one-yolov5的原始执行序列图为例，我们发现bbox_iou函数这部分每一次运行都需要花2.6ms左右。并且我们可以看到这里有大量的小的Kernel被调度，虽然每个小Kernel计算很快，但访问Global Memory以及多次Kernel Launch的开销也是比较大的，所以我们做了几个fuse来降低Kernel Launch的开销以及减少访问Global Memrory来提升带宽。</p>
+<p><img alt="" src="https://user-images.githubusercontent.com/35585791/205198754-bd631415-7cb6-4666-a1dc-5fa9844df87d.png" /></p>
+<p>然后经过我们的Kernel Fuse之后的耗时只需要600+us。</p>
+<p><img alt="" src="https://user-images.githubusercontent.com/35585791/205199769-0118d9eb-821e-48fc-bd93-e8c6421aa6a7.png" /></p>
+<p>具体来说我们这里做了如下的几个fuse：</p>
+<ul>
+<li>fused_get_boundding_boxes_coord：https://github.com/Oneflow-Inc/oneflow/pull/9433</li>
+<li>fused_get_intersection_area: https://github.com/Oneflow-Inc/oneflow/pull/9485</li>
+<li>fused_get_iou: https://github.com/Oneflow-Inc/oneflow/pull/9475</li>
+<li>fused_get_convex_diagonal_squared: https://github.com/Oneflow-Inc/oneflow/pull/9481</li>
+<li>fused_get_center_dist: https://github.com/Oneflow-Inc/oneflow/pull/9446</li>
+<li>fused_get_ciou_diagonal_angle: https://github.com/Oneflow-Inc/oneflow/pull/9465</li>
+<li>fused_get_ciou_result: https://github.com/Oneflow-Inc/oneflow/pull/9462</li>
+</ul>
+<p>然后我们在one-yolov5的train.py中扩展了一个 <code>--bbox_iou_optim</code> 选项，只要训练的时候带上这个选项就会自动调用上面的fuse kernel来对bbox_iou函数进行优化了，具体请看：https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/metrics.py#L224-L284 。对bbox_iou这个函数的一系列垂直Fuse优化使得YOLOv5整体的训练速度提升了8%左右，是一个十分有效的优化。</p>
+<h2 id="0x23-fuse">0x2.3 对模型滑动平均更新进行优化（水平Fuse优化）</h2>
+<p>在 YOLOv5 中会使用EMA（指数移动平均）对模型的参数做平均, 一种给予近期数据更高权重的平均方法, 以求提高测试指标并增加模型鲁棒。这里的核心操作如下代码所示：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        <span class="c1"># Update EMA parameters</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">updates</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decay</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">updates</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">msd</span> <span class="o">=</span> <span class="n">de_parallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>  <span class="c1"># model state_dict</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ema</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">is_floating_point</span><span class="p">:</span>  <span class="c1"># true for FP16 and FP32</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>                <span class="n">v</span> <span class="o">*=</span> <span class="n">d</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>                <span class="n">v</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="o">*</span> <span class="n">msd</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="c1"># assert v.dtype == msd[k].dtype == flow.float32, f&#39;{k}: EMA {v.dtype} and model {msd[k].dtype} must be FP32&#39;</span>
+</code></pre></div>
+<p>以下是未优化前的这个函数的时序图：</p>
+<p><img alt="" src="https://user-images.githubusercontent.com/35585791/205203527-aef53f6f-1988-48e9-9273-e9f2edfa97ee.png" /></p>
+<p>这部分的cuda kernel的执行速度大概为7.4ms，而经过我们水平Fuse优化（即MultiTensor），这部分的耗时情况降低为了127us。</p>
+<p><img alt="" src="https://user-images.githubusercontent.com/35585791/205204157-6a80c8ba-6760-47b3-b026-6a17439c1c5a.png" /></p>
+<p>并且水平方向的Kernel Fuse也同样降低了Kernel Launch的开销，使得前后2个Iter的间隙也进一步缩短了。最终这个优化为YOLOv5的整体训练速度提升了10%左右。本优化实现的pr如下：https://github.com/Oneflow-Inc/oneflow/pull/9498</p>
+<p>此外，对于Optimizer部分同样可以水平并行，所以我们在 one-yolov5 里面设置了一个<code>multi_tensor_optimizer</code>标志，打开这个标志就可以让 optimizer 以及 EMA 的 update以水平并行的方式运行了。</p>
+<p>关于MultiTensor这个知识可以看 zzk 的这篇文章：https://zhuanlan.zhihu.com/p/566595789。zzk 在 OneFlow 中也实现了一套 MultiTensor 方案，上面的 PR 9498 也是基于这套 MultiTensor 方案实现的。介于篇幅原因我们就不展开这个 MultiTensor 的代码实现了，感兴趣的可以留言后续单独讲解。</p>
+<h1 id="0x3">0x3. 使用方法</h1>
+<p>上面已经提到所有的优化都集中于 <code>bbox_iou_optim</code> 和 <code>multi_tensor_optimizer</code> 这两个扩展的Flag，只要我们训练的时候打开这两个Flag就可以享受到上述优化了。其他的运行命令和One-YOLOv5没有变化，以One-YOLOv5在GTX 3090上训练yolov5s为例，命令为：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python train.py --batch <span class="m">16</span> --cfg models/yolov5s.yaml --weights <span class="s1">&#39;&#39;</span> --data coco.yaml --img <span class="m">640</span> --device <span class="m">0</span> --epoch <span class="m">1</span> --bbox_iou_optim --multi_tensor_optimizer
+</code></pre></div>
+<h1 id="0x4">0x4. 总结</h1>
+<p>目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3080 Ti上（单卡支持的最大BatchSize即为16）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5</p>
+<p>One-YOLOv5的优化工作实际上不仅包含性能，我们目前也付出了很多心血在文档和源码解读上，后续会继续放出《YOLOv5全面解析教程》的其他文章，并将尽快 Relase 新版本。请期待后续发展...</p>
+<h1 id="0x5">0x5. 致谢</h1>
+<p>感谢柳俊丞同事在这次调优中提供的 idea 和技术支持，感谢胡伽魁同学实现的一些fuse kernel，感谢郑泽康的 MultiTensorUpdate 实现，感谢冯文的精度验证工作以及文档支持，以及姚迟和小糖对 One-YOLOv5 的推广帮助。最后也要感谢 GiantPandaCV 平台对本项目的支持以及OneFlow其他帮助本项目发展的工程师们如赵露阳，梁德澎等等。</p>
+                
+              
+              
+                
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="Oneflow-Inc/oneflow-yolo-doc"
+        data-repo-id="R_kgDOIGN7Xw"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOIGN7X84CSq90"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="overview.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: one-yolov5 特点解析" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              one-yolov5 特点解析
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../01_chapter/yolov5_network_structure_analysis.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 1.1. YOLOv5 网络结构解析" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              1.1. YOLOv5 网络结构解析
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.top", "instant"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
