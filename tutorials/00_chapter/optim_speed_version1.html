@@ -1195,7 +1195,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python train.py --batch <span class="m">16</span> --cfg models/yolov5s.yaml --weights <span class="s1">&#39;&#39;</span> --data coco.yaml --img <span class="m">640</span> --device <span class="m">0</span> --epoch <span class="m">1</span> --bbox_iou_optim --multi_tensor_optimizer
 </code></pre></div>
 <h1 id="0x4">0x4. 总结</h1>
-<p>目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3090上（单卡支持的最大BatchSize即为16）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5</p>
+<p>目前，yolov5s网络当以BatchSize=16的配置在GeForce RTX 3090上（这里指定BatchSize为16时）训练COCO数据集时，OneFlow相比PyTorch可以节省 11.35 个小时。我们相信这篇文章提到的优化技巧也可以对更多的从事目标检测的学生或者工程师带来启发。欢迎大家star one-yolov5项目：https://github.com/Oneflow-Inc/one-yolov5</p>
 <p>One-YOLOv5的优化工作实际上不仅包含性能，我们目前也付出了很多心血在文档和源码解读上，后续会继续放出《YOLOv5全面解析教程》的其他文章，并将尽快 Relase 新版本。请期待后续发展...</p>
 <h1 id="0x5">0x5. 致谢</h1>
 <p>感谢柳俊丞同事在这次调优中提供的 idea 和技术支持，感谢胡伽魁同学实现的一些fuse kernel，感谢郑泽康的 MultiTensorUpdate 实现，感谢冯文的精度验证工作以及文档支持，以及姚迟和小糖对 One-YOLOv5 的推广帮助。最后也要感谢 GiantPandaCV 平台对本项目的支持以及OneFlow其他帮助本项目发展的工程师们如赵露阳，梁德澎等等。</p>
