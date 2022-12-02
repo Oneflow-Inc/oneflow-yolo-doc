@@ -978,10 +978,10 @@
 <p>对 One-YOLOv5 感兴趣的伙伴可以添加 bbuf23333 进入 One-YOLOv5 微信交流群。</p>
 <h1 id="0x1">0x1. 结果展示</h1>
 <p>我们展示一下分别使用One-YOLOv5以及 ultralytics/yolov5 在GTX 3090单卡上使用YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：</p>
-<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205191889-13fc98fc-14af-4c20-900e-57483f003d9a.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205231190-6eeec259-1e0d-4344-b21a-d26939eddc8b.png" /></p>
 <p>可以看到在单卡模式下，经过我们的优化相比于 ultralytics/yolov5 的训练速度，我们提升了 20% 左右。</p>
 <p>然后我们再展示一下2卡DDP模式YOLOv5s FP32模型训练COCO数据集一个Epoch所需的耗时：</p>
-<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205193275-362445de-4bbc-458c-9eb9-789dfad92c16.png" /></p>
+<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/205231435-b6466179-ff0a-490d-b980-2e8bbf213cea.png" /></p>
 <p>在DDP模式下的性能提升幅度没有单卡这么多，猜测可能是通信部分的开销比较大，后续我们会再研究一下。</p>
 <h1 id="0x2">0x2. 优化手段</h1>
 <p>我们在这一节完成技术揭秘。我们深度分析了PyTorch的YOLOv5的执行序列，我们发现当前YOLOv5主要存在3个优化点。第一个就是对于Upsample算子的改进，由于YOLOv5使用上采样是规整的最近邻2倍插值，所以我们可以实现一个特殊Kernel降低计算量并提升带宽。第二个就是在YOLOv5中存在一个滑动更新模型参数的操作，这个操作启动了很多碎的CUDA Kernel，而每个CUDA Kernel的执行时间都非常短，所以启动开销不能忽略。我们使用水平并行CUDA Kernel的方式（MultiTensor）对其完成了优化，基于这个优化One-YOLOv5获得了9%的加速。第三个优化点来源于对YOLOv5 nsys执行序列的观察，我们发现在ComputeLoss部分出现的bbox_iou是整个Loss计算部分一个比较大的瓶颈，我们在bbox_iou函数部分完成了多个垂直的Kernel Fuse，使得它的开销从最初的3.xms降低到了几百个us。接下来我们分别详细阐述这几种优化：</p>
