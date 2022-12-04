@@ -319,6 +319,7 @@ def replicate(img, labels):
 
 也可以结合下面画的流程图来理解下面的letterbox代码：
 ![image](https://user-images.githubusercontent.com/109639975/199886935-f1eb92fa-4965-48de-9d2a-e130cd2ae695.png)
+图片来源于: https://blog.csdn.net/qq_38253797/article/details/119904518
 
 
 ```python
