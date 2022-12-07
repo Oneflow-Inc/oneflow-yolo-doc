@@ -50,7 +50,7 @@ pip install wandb
 ```shell 
 wandb login
 ```
-终端输入后粘贴copy的key 输入回车确认 ，大工告成。
+终端输入后粘贴copy的key 输入回车确认 ，大功告成。
 
 ## 验证
 
