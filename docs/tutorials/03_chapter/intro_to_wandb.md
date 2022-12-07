@@ -29,7 +29,7 @@ Wandb非常重视安全问题，Wandb的云控制仪表盘进行工业级的加�
 下载所有数据并导出到其他工具也很容易，例如，使用Jupyter笔记本进行自定义分析。细节请查阅Wandb的[API](https://docs.wandb.com/library/api)。
 
 
-## **Weights & Biases** (W&B) with YOLOv5
+## **Weights & Biases** (W&B) with One-YOLOv5
 
 > 简单二步即可开始记录机器学习实验。
 
