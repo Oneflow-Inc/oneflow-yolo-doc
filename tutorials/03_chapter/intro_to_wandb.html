@@ -1150,7 +1150,7 @@
 </blockquote>
 <p><img src="https://user-images.githubusercontent.com/109639975/205025624-f1f767f0-efce-4018-82ce-e35777b5c61a.png" width="400" alt="Weights & Biases" /></p>
 <h2 id="_1">引言</h2>
-<p>我们可以使用 Weights &amp; Biases 来进行机器学习的实验跟踪、数据集版本控制和协作。</p>
+<p>我们可以使用 Weights &amp; Biases(W&amp;B) 来进行机器学习的实验跟踪、数据集版本控制和协作。</p>
 <div><img /></div>
 
 <p><img src="https://user-images.githubusercontent.com/109639975/205025761-f1bb0aea-3b43-484e-9259-7e5966fa8689.png" width="650" alt="Weights & Biases" /></p>
@@ -1158,12 +1158,12 @@
 
 <h2 id="_2">仪表盘示例</h2>
 <blockquote>
-<p>下面是W&amp;B中交互式仪表盘的一个示例</p>
+<p>下面是 W&amp;B 中交互式仪表盘的一个示例</p>
 </blockquote>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/205029427-ae42bb53-926a-49bd-8728-d45de5b954b8.png" /></p>
 <h2 id="_3">数据 &amp; 隐私</h2>
-<p>Wandb非常重视安全问题，Wandb的云控制仪表盘进行工业级的加密。如果您正在使用无法离开您的企业集群的数据集，我们有<a href="https://docs.wandb.com/self-hosted">on-prem</a>可用。</p>
-<p>下载所有数据并导出到其他工具也很容易，例如，使用Jupyter笔记本进行自定义分析。细节请查阅Wandb的<a href="https://docs.wandb.com/library/api">API</a>。</p>
+<p>W&amp;B 对其云控制仪表盘进行了工业级别的加密。如果您的数据集位于较敏感的环境（如您的企业内部集群），我们推荐使用<a href="https://docs.wandb.com/self-hosted">on-prem</a>。</p>
+<p>下载所有数据并导出到其他工具也很容易，例如，使用Jupyter笔记本进行自定义分析。细节请查阅 W&amp;B 的<a href="https://docs.wandb.com/library/api">API</a>。</p>
 <h2 id="weights-biases-wb-with-one-yolov5"><strong>Weights &amp; Biases</strong> (W&amp;B) with One-YOLOv5</h2>
 <blockquote>
 <p>简单两步即可开始记录机器学习实验。</p>
@@ -1180,19 +1180,20 @@
 终端输入后粘贴copy的key 输入回车确认 ，大功告成。</p>
 <h2 id="_4">验证</h2>
 <blockquote>
-<p><a href="https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart">使用coco128数据集 对 wandb 集成可视化测试结果</a></p>
+<p><a href="https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart">使用coco128数据集 对 wandb 集成可视化测试结果示例</a></p>
+<p>在one-yolov5仓库的根目录下</p>
 </blockquote>
 <p>使用指令 <code>python train.py --weights ' ' --data data/coco128.yaml --cfg models/yolov5s.yaml</code>
 成功运行示例如下:</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/204806938-58fe5e40-b82a-4584-b764-8ea4f2107091.png" /></p>
-<p>通过wandb: 🚀 View run at：xxx链接即可查看 使用wandb可视化的结果。</p>
+<p>通过W&amp;B: 🚀 View run at：xxx链接即可查看 W&amp;B可视化的结果。</p>
 <p>结果报告示例:<a href="https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart">使用coco128数据集 对 wandb 集成可视化测试结果</a></p>
 <h2 id="_5">其他示例</h2>
 <blockquote>
 <p>使用jupyter-notebook</p>
 </blockquote>
 <p><a href="wandb.ai">创建账户</a>, 
-接着运行以下代码安装"wandb"并登录。</p>
+接着运行以下代码安装"wandb" 包并登录。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">wandb</span> <span class="c1"># 安装</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span> <span class="nn">wandb</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">wandb</span><span class="o">.</span><span class="n">login</span><span class="p">()</span> <span class="c1"># 登陆</span>
