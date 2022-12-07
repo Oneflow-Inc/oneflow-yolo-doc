@@ -9,7 +9,7 @@
 
 
 ## 引言
-我们可以使用 Weights & Biases 来进行机器学习的实验跟踪、数据集版本控制和协作。
+我们可以使用 Weights & Biases(W&B) 来进行机器学习的实验跟踪、数据集版本控制和协作。
 
 <div><img /></div>
 
@@ -18,15 +18,16 @@
 <div><img /></div>
 
 ##  仪表盘示例
-> 下面是W&B中交互式仪表盘的一个示例
+> 下面是 W&B 中交互式仪表盘的一个示例
 
 ![image](https://user-images.githubusercontent.com/109639975/205029427-ae42bb53-926a-49bd-8728-d45de5b954b8.png)
 
 
 ## 数据 & 隐私
-Wandb非常重视安全问题，Wandb的云控制仪表盘进行工业级的加密。如果您正在使用无法离开您的企业集群的数据集，我们有[on-prem](https://docs.wandb.com/self-hosted)可用。
 
-下载所有数据并导出到其他工具也很容易，例如，使用Jupyter笔记本进行自定义分析。细节请查阅Wandb的[API](https://docs.wandb.com/library/api)。
+W&B 对其云控制仪表盘进行了工业级别的加密。如果您的数据集位于较敏感的环境（如您的企业内部集群），我们推荐使用[on-prem](https://docs.wandb.com/self-hosted)。
+
+下载所有数据并导出到其他工具也很容易，例如，使用Jupyter笔记本进行自定义分析。细节请查阅 W&B 的[API](https://docs.wandb.com/library/api)。
 
 
 ## **Weights & Biases** (W&B) with One-YOLOv5
@@ -54,15 +55,16 @@ wandb login
 
 ## 验证
 
-> [使用coco128数据集 对 wandb 集成可视化测试结果](https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart)
+> [使用coco128数据集 对 wandb 集成可视化测试结果示例](https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart)
 
+> 在one-yolov5仓库的根目录下
 
 使用指令 ` python train.py --weights ' ' --data data/coco128.yaml --cfg models/yolov5s.yaml `
 成功运行示例如下:
 
 ![image](https://user-images.githubusercontent.com/109639975/204806938-58fe5e40-b82a-4584-b764-8ea4f2107091.png)
 
-通过wandb: 🚀 View run at：xxx链接即可查看 使用wandb可视化的结果。
+通过W&B: 🚀 View run at：xxx链接即可查看 W&B可视化的结果。
 
 结果报告示例:[使用coco128数据集 对 wandb 集成可视化测试结果](https://wandb.ai/wearmheart/YOLOv5/runs/3si719qd?workspace=user-wearmheart)
 
@@ -71,7 +73,7 @@ wandb login
 > 使用jupyter-notebook
 
 [创建账户](wandb.ai), 
-接着运行以下代码安装"wandb"并登录。
+接着运行以下代码安装"wandb" 包并登录。
 
 
 ```python
