@@ -1142,9 +1142,9 @@
 <p>&emsp;这个函数是对mosaic整合后的图片进行随机旋转、缩放、平移、裁剪，透视变换，</p>
 <p>并resize为输入大小img_size。</p>
 <blockquote>
-<p>仿射变换：<code>平移、旋转、放缩、剪切、反射</code></p>
-<p>仿射变换包括如下所有变换，以及这些变换任意次序次数的组合：</p>
+<p>仿射变换包含：<code>平移、旋转、放缩、剪切、反射</code></p>
 </blockquote>
+<p>仿射变换包括如下所有变换，以及这些变换任意次序次数的组合：</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/204688876-10105f39-1c95-4597-9323-63c77c9861cd.png" />
 图片来源于:<a href="https://www.cnblogs.com/shine-lee/p/10950963.html">https://www.cnblogs.com/shine-lee/p/10950963.html</a></p>
 <p><code>平移</code>（translation）和 <code>旋转</code>（rotation）顾名思义，两者的组合称之为欧式变换（Euclidean transformation）或刚体变换（rigid transformation）；</p>
@@ -1331,16 +1331,16 @@
 <a id="__codelineno-0-177" name="__codelineno-0-177" href="#__codelineno-0-177"></a>
 <a id="__codelineno-0-178" name="__codelineno-0-178" href="#__codelineno-0-178"></a>    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">targets</span>
 </code></pre></div>
-<p>这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换 或 仿射变换：</p>
+<p>这个函数会用于load_mosaic中的mosaic操作之后进行透视变换 或 仿射变换：</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png" /></p>
-<p>这个函数的参数来自hyp中的5个参数</p>
+<p>这个函数的参数来自 hyp.yaml 中的下面5个参数：</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png" /></p>
 <h2 id="2-box_candidates">2. box_candidates</h2>
 <blockquote>
 <p>官方作者介绍<a href="https://github.com/ultralytics/yolov5/issues/2442">Question about function box_candidates() in datasets.py</a></p>
 </blockquote>
-<p>&emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。</p>
-<p>box_candidates 模块代码：</p>
+<p>&emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 并且保留下来的框的长宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间。</p>
+<p>box_candidates 函数代码：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">box_candidates</span><span class="p">(</span><span class="n">box1</span><span class="p">,</span> <span class="n">box2</span><span class="p">,</span> <span class="n">wh_thr</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ar_thr</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">area_thr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-16</span><span class="p">):</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="sd">&quot;&quot;&quot;box_candidates() is used to filter the labels and reject poor label candidates:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="sd">    用在random_perspective中 对透视变换后的图片label进行筛选</span>
@@ -1366,7 +1366,7 @@
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="p">)</span>  <span class="c1"># candidates</span>
 </code></pre></div>
 <h2 id="3-replicate">3. replicate</h2>
-<p>&emsp;这个函数是随机偏移标签中心，生成新的标签与原标签结合。可以用在load_mosaic里在mosaic操作之后 random_perspective操作之前， 作者默认是关闭的， 自己可以实验一下效果。</p>
+<p>&emsp;这个函数是随机偏移标签中心，生成新的标签与原标签结合。可以用在load_mosaic里的mosaic操作之后 以及random_perspective操作之前， 作者默认是关闭的， 自己可以实验一下效果。</p>
 <p>replicate模块代码：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">replicate</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="sd">&quot;&quot;&quot;可以用在load_mosaic里在mosaic操作之后 random_perspective操作之前  作者默认是关闭的 自己可以实验一下效果</span>
@@ -1488,7 +1488,7 @@
 <a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>    <span class="c1"># img: (384, 512, 3) ratio=(1.0,1.0) 这里没有缩放操作  (dw,dh)=(0.0, 20.5)</span>
 <a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>    <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="p">(</span><span class="n">dw</span><span class="p">,</span> <span class="n">dh</span><span class="p">)</span>
 </code></pre></div>
-<p>总结下在val时这里主要是做了三件事：</p>
+<p>总结下在val.py数据加载部分主要是做了三件事：</p>
 <ol>
 <li>load_image将图片从文件中加载出来，并resize到相应的尺寸（最长边等于我们需要的尺寸，最短边等比例缩放）；</li>
 <li>letterbox将之前resize后的图片再pad到我们所需要的放到dataloader中（collate_fn函数）的尺寸（矩形训练要求同一个 batch中的图片的尺寸必须保持一致）；</li>
@@ -1616,7 +1616,7 @@
 <li>mixup增强由超参hyp[‘mixup’]控制，0则关闭 默认为1(表示100%打开)。</li>
 </ul>
 <h2 id="7-hist_equalize">7. hist_equalize</h2>
-<p>&emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到按这个函数，学习了解下就好，不是重点。</p>
+<p>&emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到这个函数，学习了解下就好，不是重点。</p>
 <p>hist_equalize模块代码:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span> <span class="nf">hist_equalize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">clahe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bgr</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="sd">&quot;&quot;&quot;yolov5并没有使用直方图均衡化的增强操作  可以自己试试</span>
