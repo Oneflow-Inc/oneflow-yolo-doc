@@ -16,9 +16,9 @@
 并resize为输入大小img_size。
 
 
-> 仿射变换：`平移、旋转、放缩、剪切、反射`
+> 仿射变换包含：`平移、旋转、放缩、剪切、反射`
 
-> 仿射变换包括如下所有变换，以及这些变换任意次序次数的组合：
+仿射变换包括如下所有变换，以及这些变换任意次序次数的组合：
 
 ![image](https://user-images.githubusercontent.com/109639975/204688876-10105f39-1c95-4597-9323-63c77c9861cd.png)
 图片来源于:[https://www.cnblogs.com/shine-lee/p/10950963.html](https://www.cnblogs.com/shine-lee/p/10950963.html)
@@ -216,11 +216,11 @@ def random_perspective(
 
 ```
 
-这个函数会用于load_mosaic中用在mosaic操作之后进行透视变换 或 仿射变换：
+这个函数会用于load_mosaic中的mosaic操作之后进行透视变换 或 仿射变换：
 
 ![image](https://user-images.githubusercontent.com/109639975/199886156-3adfa134-b3c5-425b-b41a-5704b54e6673.png)
 
-这个函数的参数来自hyp中的5个参数
+这个函数的参数来自 hyp.yaml 中的下面5个参数：
 
 ![image](https://user-images.githubusercontent.com/109639975/199886270-6a06134b-50dc-4718-8220-e7436d3f86e9.png)
 
@@ -228,9 +228,9 @@ def random_perspective(
 
 >  官方作者介绍[Question about function box_candidates() in datasets.py](https://github.com/ultralytics/yolov5/issues/2442)
 
-&emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 还有长和宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间的限制。
+&emsp;这个函数用在random_perspective中，是对透视变换后的图片label进行筛选，去除被裁剪过小的框(面积小于裁剪前的area_thr) 并且保留下来的框的长宽必须大于wh_thr个像素，且长宽比范围在(1/ar_thr, ar_thr)之间。
 
-box_candidates 模块代码：
+box_candidates 函数代码：
 
 
 ```python
@@ -261,7 +261,7 @@ def box_candidates(box1, box2, wh_thr=2, ar_thr=20, area_thr=0.1, eps=1e-16):
 ```
 
 ## 3. replicate
-&emsp;这个函数是随机偏移标签中心，生成新的标签与原标签结合。可以用在load_mosaic里在mosaic操作之后 random_perspective操作之前， 作者默认是关闭的， 自己可以实验一下效果。
+&emsp;这个函数是随机偏移标签中心，生成新的标签与原标签结合。可以用在load_mosaic里的mosaic操作之后 以及random_perspective操作之前， 作者默认是关闭的， 自己可以实验一下效果。
 
 replicate模块代码：
 
@@ -401,7 +401,7 @@ def letterbox(
 
 ```
 
-总结下在val时这里主要是做了三件事：
+总结下在val.py数据加载部分主要是做了三件事：
 
 1. load_image将图片从文件中加载出来，并resize到相应的尺寸（最长边等于我们需要的尺寸，最短边等比例缩放）；
 2. letterbox将之前resize后的图片再pad到我们所需要的放到dataloader中（collate_fn函数）的尺寸（矩形训练要求同一个 batch中的图片的尺寸必须保持一致）；
@@ -554,7 +554,7 @@ def mixup(im, labels, im2, labels2):
 
 
 ## 7. hist_equalize
-&emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到按这个函数，学习了解下就好，不是重点。
+&emsp;这个函数是用于对图片进行直方图均衡化处理，但是在yolov5中并没有用到这个函数，学习了解下就好，不是重点。
 
 hist_equalize模块代码:
 
