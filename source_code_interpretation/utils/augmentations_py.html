@@ -1409,8 +1409,8 @@
 <p>&emsp;显然，这部分需要缩放，因为在这之前的load_image部分已经缩放过了（最长边等于指定大小，较短边等比例缩放），</p>
 <p>那么在letterbox只需要计算出较小边需要填充的pad, 再将较小边两边pad到相应大小（每个batch需要每张图片的大小，这个</p>
 <p>大小是不相同的）即可。</p>
-<p>也可以结合下面画的流程图来理解下面的letterbox代码：
-<img alt="image" src="https://user-images.githubusercontent.com/109639975/199886935-f1eb92fa-4965-48de-9d2a-e130cd2ae695.png" />
+<p>也可以结合下面画的流程图来理解下面的letterbox代码：</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199886935-f1eb92fa-4965-48de-9d2a-e130cd2ae695.png" />
 图片来源于: https://blog.csdn.net/qq_38253797/article/details/119904518</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">letterbox</span><span class="p">(</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">img</span><span class="p">,</span>
@@ -1508,8 +1508,8 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原图宽高:</span><span class="se">\n</span><span class="s2">w1=</span><span class="si">{}</span><span class="se">\n</span><span class="s2">h1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="c1">#  810, 1800</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">lb</span> <span class="o">=</span> <span class="n">cutout</span><span class="p">(</span><span class="n">im</span><span class="o">=</span><span class="n">img</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1000.0</span><span class="p">)</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;./00.jpg&quot;</span><span class="p">,</span><span class="n">img</span><span class="p">)</span>
-</code></pre></div>
-<img alt="image" src="https://user-images.githubusercontent.com/109639975/204717108-5e4cb777-569e-4320-be25-b7102726d745.png" /></p>
+</code></pre></div></p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/109639975/204717108-5e4cb777-569e-4320-be25-b7102726d745.png" /></p>
 <p>cutout模块代码：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span> <span class="nf">cutout</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="sd">&quot;&quot;&quot;用在LoadImagesAndLabels模块中的__getitem__函数进行cutout增强  v5源码作者默认是没用用这个的 感兴趣的可以测试一下</span>
