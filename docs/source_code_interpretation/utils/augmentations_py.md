@@ -318,6 +318,7 @@ def replicate(img, labels):
 大小是不相同的）即可。
 
 也可以结合下面画的流程图来理解下面的letterbox代码：
+
 ![image](https://user-images.githubusercontent.com/109639975/199886935-f1eb92fa-4965-48de-9d2a-e130cd2ae695.png)
 图片来源于: https://blog.csdn.net/qq_38253797/article/details/119904518
 
@@ -409,6 +410,7 @@ def letterbox(
 
 
 ## 5. cutout
+
 > 图片上的随机裁剪像素块
 
 &emsp; cutout数据增强，给图片随机添加随机大小的方块噪声 ，目的是提高泛化能力和鲁棒性。源自论文： [Improved Regularization of Convolutional Neural Networks with Cutout](https://arxiv.org/abs/1708.04552) 。
@@ -426,6 +428,7 @@ print("原图宽高:\nw1={}\nh1={}".format(w, h)) #  810, 1800
 lb = cutout(im=img, labels=labels, p=1000.0)
 cv2.imwrite("./00.jpg",img)
 ```
+
 ![image](https://user-images.githubusercontent.com/109639975/204717108-5e4cb777-569e-4320-be25-b7102726d745.png)
 
 
