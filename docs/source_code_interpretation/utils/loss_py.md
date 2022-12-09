@@ -362,7 +362,7 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
             # t = [3, 63, 7]  将target中的xywh的归一化尺度放缩到相对当前feature map的坐标尺度
             #    [3, 63, image_index+class+xywh+anchor_index]
             t = targets * gain  # shape(3,n,7)
-            if nt: # 开始匹配
+            if nt: # 如果有目标就开始匹配
                 # Matches
                 # 所有的gt与当前层的三个anchor的宽高比(w/w  h/h)
                 r = t[..., 4:6] / anchors[:, None]  # wh ratio              
