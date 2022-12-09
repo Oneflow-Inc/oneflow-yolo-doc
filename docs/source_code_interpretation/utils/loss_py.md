@@ -216,8 +216,8 @@ class QFocalLoss(nn.Module):
             return loss
 ```
 
-使用直接在ComputeLoss时代替FocalLoss即可：
-    
+使用 `QFolcalLoss` 直接在 ComputeLoss 类中使用 `QFolcalLoss`替换掉  `FocalLoss` 即可：
+(也就是说用 `QFolcalLoss` 替换如下图代码处的`FocalLoss` )
 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/utils/loss.py#L110-L111"
 blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/199945719-b458bd18-cedb-45bd-badc-dc5abc07ab30.png)
 </a>
