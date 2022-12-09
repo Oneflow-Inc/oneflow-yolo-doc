@@ -124,7 +124,7 @@ class FocalLoss(nn.Module):
         self.loss_fcn = loss_fcn  # must be nn.BCEWithLogitsLoss()  定义为多分类交叉熵损失函数
         self.gamma = gamma # 参数gamma  用于削弱简单样本对loss的贡献程度
         self.alpha = alpha # 参数alpha  用于平衡正负样本个数不均衡的问题
-        self.reduction = loss_fcn.reduction  # self.reduction: 控制FocalLoss损失输出模式 sum/mean/none  默认是Mea
+        self.reduction = loss_fcn.reduction  # self.reduction: 控制FocalLoss损失输出模式 sum/mean/none  默认是Mean
         # focalloss中的BCE函数的reduction='None'  BCE不使用Sum或者Mean 
         # 需要将Focal loss应用于每一个样本之中
         self.loss_fcn.reduction = "none"  # required to apply FL to each element
