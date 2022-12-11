@@ -1204,6 +1204,11 @@
 如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
 </blockquote>
 <p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/loss.py">loss.py</a></p>
+<p>其中一些常见的损失函数包括：</p>
+<p>分类损失(cls_loss)：该损失用于判断模型是否能够准确地识别出图像中的对象，并将其分类到正确的类别中。</p>
+<p>置信度损失(obj_loss)：该损失用于衡量模型预测的框（即包含对象的矩形）与真实框之间的差异。</p>
+<p>边界框损失(box_loss)：该损失用于衡量模型预测的边界框与真实边界框之间的差异，这有助于确保模型能够准确地定位对象。</p>
+<p>这些损失函数在训练模型时被组合使用，以优化模型的性能。通过使用这些损失函数，YOLOv5可以准确地识别图像中的对象，并将其定位到图像中的具体位置。</p>
 <h2 id="1">1. 导入需要的包</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">oneflow.nn</span> <span class="k">as</span> <span class="nn">nn</span>
