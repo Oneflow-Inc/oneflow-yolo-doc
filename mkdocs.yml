@@ -89,6 +89,7 @@ nav:
     - 源码解读:
         - train.py : source_code_interpretation/train_py.md 
         - utils:
+            - loss.py: source_code_interpretation/utils/loss_py.md
             - augmentations.py: source_code_interpretation/utils/augmentations_py.md
             - dataloaders.py:  source_code_interpretation/utils/dataloaders_py.md
             - downloads.py: source_code_interpretation/utils/downloads_py.md
