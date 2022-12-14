@@ -233,26 +233,28 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
     # Compute losses
     def __init__(self, model, autobalance=False):
         # 获取模型所在的设备
-        device = next(model.parameters()).device  # get model device
-        h = model.hyp  # hyperparameters
-        # Define criteria 定义分类损失和置信度损失
+        device = next(model.parameters()).device
+        # 获取模型的超参数
+        h = model.hyp 
+        # 定义分类损失和置信度损失
         BCEcls = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["cls_pw"]], device=device))
         BCEobj = nn.BCEWithLogitsLoss(pos_weight=flow.tensor([h["obj_pw"]], device=device))
-        # 标签平滑  eps=0代表不做标签平滑-> cp=1 cn=0  eps!=0代表做标签平滑 
+        # 标签平滑  eps=0代表不做标签平滑-> cp=1 cn=0 /  eps!=0代表做标签平滑 
         # cp代表正样本的标签值 cn代表负样本的标签值
-        # Class label smoothing https://arxiv.org/pdf/1902.04103.pdf eqn 3
+        # 请参考：Class label smoothing https://arxiv.org/pdf/1902.04103.pdf eqn 3
         self.cp, self.cn = smooth_BCE(eps=h.get("label_smoothing", 0.0))  # positive, negative BCE targets
 
         # Focal loss
         g = h["fl_gamma"]  # Focal Loss 的超参数 gamma
         if g > 0:
-            # g>0 将分类损失和置信度损失(BCE)都换成focalloss损失函数
+            # 如果 g>0 将分类损失和置信度损失(BCE)都换成 FocalLoss 损失函数
             BCEcls, BCEobj = FocalLoss(BCEcls, g), FocalLoss(BCEobj, g)
-        # m: 返回的是模型的3个检测头分别对应产生的3个输出feature map
+        # m: 返回的是模型的3个检测头分别对应产生的3个输出特征图
         m = de_parallel(model).model[-1]  # Detect() module
 
         """self.balance  用来实现obj,box,cls loss之间权重的平衡
-        {3: [4.0, 1.0, 0.4]} 表示有三个layer的输出，第一个layer的weight是4.0，第二个1.0，第三个以此类推。如果有5个layer的输出才
+        {3: [4.0, 1.0, 0.4]} 表示有三个layer的输出，第一个layer的weight是4.0，第二个1.0，第三个以此类推。
+        如果有5个layer的输出，那么权重分别是[4.0, 1.0, 0.25, 0.06, 0.02]
         """
         self.balance = {3: [4.0, 1.0, 0.4]}.get(m.nl, [4.0, 1.0, 0.25, 0.06, 0.02])  # P3-P7
         # 三个检测头的下采样率m.stride: [8, 16, 32]  .index(16): 求出下采样率stride=16的索引
@@ -268,8 +270,8 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
         self.na = m.na  # number of anchors  每个grid_cell的anchor数量 = 3
         self.nc = m.nc  # number of classes  数据集的总类别 = 80
         self.nl = m.nl  # number of layers  检测头的个数 = 3
-        # anchors: [3, 3, 2]  3个feature map 每个feature map上有3个anchor(w,h)
-        # 这里的anchor尺寸是相对feature map的
+        # anchors: 形状 [3, 3, 2]  代表 3 个 feature map 每个 feature map 上有 3 个 anchor(w,h)
+        # 这里的 anchors 尺寸是相对 feature map 的
         self.anchors = m.anchors 
         self.device = device
 
@@ -280,35 +282,35 @@ blank="targent">  ![image](https://user-images.githubusercontent.com/109639975/1
 
 筛选条件是比较GT和anchor的宽比和高比，大于一定的阈值就是负样本，反之正样本。
 
-筛选到的正样本信息（image_index, anchor_index, gridy, gridx），传入__call__函数，
+筛选到的正样本信息（image_index, anchor_index, gridy, gridx），传入 `__call__` 函数，
 
-通过这个信息去筛选pred每个grid预测得到的信息，保留对应grid_cell上的正样本。
+通过这个信息去筛选 pred 里每个 grid 预测得到的信息，保留对应 grid_cell 上的正样本。
 
-通过build_targets筛选的GT中的正样本和pred筛选出的对应位置的预测样本进行计算损失。
+通过 build_targets 筛选的 GT 中的正样本和 pred 筛选出的对应位置的预测样本 进行计算损失。
 
 补充理解：
 
-这个函数的目的是为了每个gt匹配相应的高质量anchor正样本参与损失计算，
+这个函数的目的是为了每个 GT 匹配对应的高质量 Anchor 正样本参与损失计算，
 
-j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了将gt分配到不同层上去检测，
+j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"] 这步的比较是为了将 GT 分配到不同层上去检测，(详细解释请看下面的逐行代码注释)
 
-后面的步骤是为了将确定在这层检测的gt中心坐标，
+后面的步骤是为了确定在这层检测的 GT 中心坐标，
 
-进而确定这个gt在这层哪个grid cell进行检测。
+进而确定这个 GT 在这层哪个 grid cell 进行检测。
 
-做到这一步也就做到了为每个gt匹配anchor正样本的目的。
+做到这一步也就做到了为每个 GT 匹配 Anchor 正样本的目的。
 
 
 
 ```python
     # ---------------------------------------------------------
-    # build_targets函数用于获得在训练时计算loss函数所需要的目标框，也即正样本。与yolov3/v4的不同，yolov5支持跨网格预测。
-    # 对于任何一个GT bbox，三个预测特征层上都可能有先验框anchors匹配，所以该函数输出的正样本框比传入的targets （GT框）数目多
+    # build_targets 函数用于获得在训练时计算 loss 所需要的目标框，也即正样本。与yolov3/v4的不同，yolov5支持跨网格预测。
+    # 对于任何一个 GT bbox，三个预测特征层上都可能有先验框匹配，所以该函数输出的正样本框比传入的 targets （GT框）数目多
     # 具体处理过程:
-    # (1)首先通过bbox与当前层anchor做一遍过滤。对于任何一层计算当前bbox与当前层anchor的匹配程度，不采用IoU，而采用shape比例。如果anchor与bbox的宽高比差距大于4，则认为不匹配，此时忽略相应的bbox，即当做背景;
-    # (2)根据留下的bbox，在上下左右四个网格四个方向扩增采样（即对bbox计算落在的网格所有anchors都计算loss(并不是直接和GT框比较计算loss) )
+    # (1)首先通过 bbox 与当前层 anchor 做一遍过滤。对于任何一层计算当前 bbox 与当前层 anchor 的匹配程度，不采用IoU，而采用shape比例。如果anchor与bbox的宽高比差距大于4，则认为不匹配，此时忽略相应的bbox，即当做背景;
+    # (2)根据留下的bbox，在上下左右四个网格四个方向扩增采样（即对 bbox 计算落在的网格所有 anchors 都计算 loss(并不是直接和 GT 框比较计算 loss) )
     # 注意此时落在网格不再是一个，而是附近的多个，这样就增加了正样本数。
-    # yolov5也没有conf分支忽略阈值(ignore_thresh)的操作，而yoloy3/v4有。
+    # yolov5 没有 conf 分支忽略阈值(ignore_thresh)的操作，而yoloy3/v4有。
     # --------------------------------------------------------
 
     def build_targets(self, p, targets):
@@ -403,8 +405,7 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
                 # 知道当前gt的坐标 属于哪张图片 正样本对应的idx 也就得到了当前gt的正样本anchor
                 # t: [3, 314, 7] -> [555, 7]  [num_Positive_sample, image_index+class+xywh+anchor_index]
                 t = t[j]  # filter
-                # Offsets
-                # Offsets 筛选当前格子周围格子 找到2个离target中心最近的两个格子  
+                # Offsets 筛选当前格子周围格子 找到 2 个离target中心最近的两个格子  
                 # 可能周围的格子也预测到了高质量的样本 我们也要把这部分的预测信息加入正样本中
                 # 除了target所在的当前格子外, 还有2个格子对目标进行检测(计算损失) 
                 # 也就是说一个目标需要3个格子去预测(计算损失)
@@ -417,19 +418,19 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
                 # inverse  得到target中心点相对于右下角的坐标  gain[[2, 3]]为当前feature map的wh
                 # gxi.shape = [555, 2]
                 gxi = gain[[2, 3]] - gxy  # inverse
-                # 筛选中心坐标 距离当前grid_cell的左、上方偏移小于g=0.5 
+                # 筛选中心坐标距离当前grid_cell的左、上方偏移小于g=0.5 
                 # 且 中心坐标必须大于1(坐标不能在边上 此时就没有4个格子了)
                 # j: [555] bool 如果是True表示当前target中心点所在的格子的左边格子也对该target进行回归(后续进行计算损失)
                 # k: [555] bool 如果是True表示当前target中心点所在的格子的上边格子也对该target进行回归(后续进行计算损失)
                 j, k = ((gxy % 1 < g) & (gxy > 1)).T
-                # 筛选中心坐标 距离当前grid_cell的右、下方偏移小于g=0.5 且 中心坐标必须大于1(坐标不能在边上 此时就没有4个格子了)
+                # 筛选中心坐标距离当前grid_cell的右、下方偏移小于g=0.5 且 中心坐标必须大于1(坐标不能在边上 此时就没有4个格子了)
                 # l: [555] bool 如果是True表示当前target中心点所在的格子的右边格子也对该target进行回归(后续进行计算损失)
                 # m: [555] bool 如果是True表示当前target中心点所在的格子的下边格子也对该target进行回归(后续进行计算损失)
                 l, m = ((gxi % 1 < g) & (gxi > 1)).T
                 # j.shape=[5, 555]
                 j = flow.stack((flow.ones_like(j), j, k, l, m))
                 # 得到筛选后所有格子的正样本 格子数<=3*555 都不在边上等号成立
-                # t: [555, 7] -> 复制5份target[5, 555, 7]  分别对应当前格子和左上右下格子5个格子
+                # t: [555, 7] -> 复制 5 份target[5, 555, 7]  分别对应当前格子和左上右下格子5个格子
                 # j: [5, 555] + t: [5, 555, 7] => t: [378, 7] 理论上是小于等于3倍的126 当且仅当没有边界的格子等号成立
                 t = t.repeat((5, 1, 1))[j]
                  # flow.zeros_like(gxy)[None]: [1, 555, 2]   off[:, None]: [5, 1, 2]  => [5, 555, 2]
@@ -480,7 +481,8 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
 ```
 
 ### 6.3 __call__函数
-这个函数相当于forward函数，在这个函数中进行损失函数的前向传播。
+
+这个函数相当于 forward 函数，在这个函数中进行损失函数的前向传播。
 
 
 ```python
@@ -489,16 +491,16 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
         这里通过输入
         p       : list([16, 3, 80, 80, 85], [16, 3, 40, 40, 85],[16, 3, 20, 20, 85])
         targets : targets.shape[314, 6] 
-        解析__call__函数
+        为例解析 __call__ 函数
 
-        :params p:  预测框 由模型构建中的三个检测头Detector返回的三个yolo层的输出
+        :params p:  预测框 由模型构建中的 Detect 层返回的三个yolo层的输出（注意是训练模式才返回三个yolo层的输出）
                     tensor格式 list列表 存放三个tensor 对应的是三个yolo层的输出
                     如: ([16, 3, 80, 80, 85], [16, 3, 40, 40, 85],[16, 3, 20, 20, 85])
                     [bs, anchor_num, grid_h, grid_w, xywh+class+classes]
-                    可以看出来这里的预测值p是三个yolo层每个grid_cell
-                    (每个grid_cell有三个预测值)的预测值,后面肯定要进行正样本筛选
+                    可以看出来这里的预测值 p 是三个yolo层每个 grid_cell
+                    的预测值(每个 grid_cell 有三个预测值), 后面要进行正样本筛选
         :params targets: 数据增强后的真实框 [314, 6] [num_object,  batch_index+class+xywh]
-        :params loss * bs: 整个batch的总损失  进行反向传播
+        :params loss * bs: 整个batch的总损失（一个列表）  进行反向传播
         :params flow.cat((lbox, lobj, lcls, loss)).detach():
         回归损失、置信度损失、分类损失和总损失 这个参数只用来可视化参数或保存信息
         """
@@ -509,8 +511,8 @@ j = flow.max(r, 1. / r).max(2)[0] < self.hyp["anchor_t"]这步的比较是为了
         lbox = flow.zeros(1, device=self.device)  # box loss
         # lobj.shape = [1]
         lobj = flow.zeros(1, device=self.device)  # object loss
-        # 获得标签分类,边框,索引，anchors
-        # 每一个都是append的 有feature map个 
+        # 获得标签分类, 边框, 索引， anchors
+        # 每一个都是列表， 有 feature map 个 
         # 都是当前这个feature map中3个anchor筛选出的所有的target(3个grid_cell进行预测)
         # tcls: 表示这个target所属的class index
         # tbox: xywh 其中xy为这个target对当前grid_cell左上角的偏移量
