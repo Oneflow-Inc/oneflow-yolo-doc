@@ -115,6 +115,9 @@ python path/to/detect.py --weights yolov5s --source 0              # webcam
                                                     'https://youtu.be/Zgi9g1ksQHc'  # YouTube
                                                     'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
 ```
+注意⚠️:
+- 检测单个图片 使用示例 `python path/to/detect.py --weights yolov5s --source path/to/imgs/hello.jpg` 
+- 想批量检测 `path/to/imgs/`路径下的图片, **使用示例** `python path/to/detect.py --weights yolov5s --source path/to/imgs/`，注意不要用`python path/to/detect.py --weights yolov5s --source path/to/imgs/*.jpg` 。
 
 ## 训练结果🌟
 ### 📌本地日志
