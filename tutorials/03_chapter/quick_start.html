@@ -1468,7 +1468,7 @@
 <p>首先，下载一个训练好的模型权重文件，或选择你自己训练的模型；</p>
 <p>然后，
 通过 detect.py文件进行推理⚡。</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span> <span class="o">--</span><span class="n">source</span> <span class="mi">0</span>              <span class="c1"># webcam</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span> <span class="o">--</span><span class="n">source</span> <span class="mi">0</span>              <span class="c1"># webcam</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>                                                    <span class="n">img</span><span class="o">.</span><span class="n">jpg</span>        <span class="c1"># image</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>                                                    <span class="n">vid</span><span class="o">.</span><span class="n">mp4</span>        <span class="c1"># video</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>                                                    <span class="n">path</span><span class="o">/</span>          <span class="c1"># directory</span>
@@ -1476,6 +1476,9 @@
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>                                                    <span class="s1">&#39;https://youtu.be/Zgi9g1ksQHc&#39;</span>  <span class="c1"># YouTube</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>                                                    <span class="s1">&#39;rtsp://example.com/media.mp4&#39;</span>  <span class="c1"># RTSP, RTMP, HTTP stream</span>
 </code></pre></div>
+注意⚠️:
+- 检测单个图片 使用示例 <code>python path/to/detect.py --weights yolov5s --source path/to/imgs/hello.jpg</code> 
+- 想批量检测 <code>path/to/imgs/</code>路径下的图片, <strong>使用示例</strong> <code>python path/to/detect.py --weights yolov5s --source path/to/imgs/</code>，注意不要用<code>python path/to/detect.py --weights yolov5s --source path/to/imgs/*.jpg</code> 。</p>
 <h2 id="_9">训练结果🌟</h2>
 <h3 id="_10">📌本地日志</h3>
 <p>默认情况下，所有结果都记录为runs/train，并为每个新训练创建一个新的训练结果目录，如runs/train/exp2、runs/train/exp3等。查看训练和测试JPG以查看 mosaics, labels, predictions and augmentation 效果。
