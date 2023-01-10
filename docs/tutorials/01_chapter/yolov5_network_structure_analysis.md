@@ -167,8 +167,7 @@ anchors, nc, gd, gw = d['anchors'], d['nc'], d['depth_multiple'], d['width_multi
 下面是根据[yolov5s.yaml](https://github.com/Oneflow-Inc/one-yolov5/blob/main/models/yolov5s.yaml)绘制的网络整体结构简化版。
 
 <p align="center">
-
-  <img src = "https://user-images.githubusercontent.com/109639975/201299756-5d87c4f1-0fc3-417f-bdf5-6fcc1f011eba.png">
+  <img src = "https://user-images.githubusercontent.com/109639975/210925930-44d913a5-7062-4446-a03f-026169cc56f3.png">
   <caption> <u>图2.2</u>:yolov5s 网络整体结构 <br> </caption>
 </p>
 
