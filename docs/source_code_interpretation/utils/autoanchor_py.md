@@ -71,7 +71,7 @@ BPR（BPR best possible recall来源于论文: [FCOS](https://arxiv.org/abs/1904
 
 > BPR is defined as the ratio of the number of ground-truth boxes a detector can recall at the most divided by all ground-truth boxes. A ground-truth box is considered being recalled if the box is assigned to at least one sample (i.e., a location in FCOS or an anchor box in anchor-based detectors) during training.
 
-BPR (best possible recall): 最多能被召回的 ground truth 框数量 / 所有 ground truth 框数量。最大值为1 越大越好 小于0.98就需要使用K-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。
+BPR (best possible recall): 最多能被召回的  ground truth 框数量 / 所有  ground truth 框数量。最大值为1 越大越好 小于0.98就需要使用K-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。
 
 ### 什么是白化操作whiten？
 白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。
@@ -149,12 +149,12 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
     使用K-means + 遗传算法 算出更符合当前数据集的anchors
     Creates kmeans-evolved anchors from training dataset
     :params path: 数据集的路径/数据集本身
-    :params n: anchor框的个数
+    :params n: anchors 的个数
     :params img_size: 数据集图片约定的大小
-    :params thr: 阈值 由hyp['anchor_t']参数控制
+    :params thr: 阈值 由 hyp['anchor_t'] 参数控制
     :params gen: 遗传算法进化迭代的次数(突变 + 选择)
-    :params verbose: 是否打印所有的进化(成功的)结果 默认传入是Fasle的 只打印最佳的进化结果即可
-    :return k: K-means + 遗传算法进化 后的anchors
+    :params verbose: 是否打印所有的进化(成功的)结果 默认传入是False, 只打印最佳的进化结果
+    :return k: K-means + 遗传算法进化后的anchors
     """
     from scipy.cluster.vq import kmeans
 
@@ -164,49 +164,49 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
     prefix = colorstr('autoanchor: ')
 
     def metric(k, wh):  # compute metrics
-        """用于print_results函数和anchor_fitness函数
-        计算ratio metric: 整个数据集的gt框与anchor对应宽比和高比即:gt_w/k_w,gt_h/k_h + x + best_x  用于后续计算BPR+aat
-        注意我们这里选择的metric是gt框与anchor对应宽比和高比 而不是常用的iou 这点也与nms的筛选条件对应 是yolov5中使用的新方法
+        """用于 print_results 函数和 anchor_fitness 函数
+        计算ratio metric: 整个数据集的  ground truth 框与 anchor 对应宽比和高比即:gt_w/k_w,gt_h/k_h + x + best_x  用于后续计算BPR+aat
+        注意我们这里选择的metric是 ground truth 框与anchor对应宽比和高比 而不是常用的iou 这点也与nms的筛选条件对应 是yolov5中使用的新方法
         :params k: anchor框
-        :params wh: 整个数据集的wh [N, 2]
-        :return x: [N, 9] N个gt框与所有anchor框的宽比或高比(两者之中较小者)
-        :return x.max(1)[0]: [N] N个gt框与所有anchor框中的最大宽比或高比(两者之中较小者)
+        :params wh: 整个数据集的 wh [N, 2]
+        :return x: [N, 9] N 个 ground truth 框与所有 anchor 框的宽比或高比(两者之中较小者)
+        :return x.max(1)[0]: [N] N个 ground truth 框与所有 anchor 框中的最大宽比或高比(两者之中较小者)
         """
         # [N, 1, 2] / [1, 9, 2] = [N, 9, 2]  N个gt_wh和9个anchor的k_wh宽比和高比
         # 两者的重合程度越高 就越趋近于1 远离1(<1 或 >1)重合程度都越低
         r = wh[:, None] / k[None]
         # r=gt_height/anchor_height  gt_width / anchor_width  有可能大于1，也可能小于等于1
-        # flow.min(r, 1. / r): [N, 9, 2] 将所有的宽比和高比统一到<=1
-        # .min(2): value=[N, 9] 选出每个gt个和anchor的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)
-        # [0] 返回value [N, 9] 每个gt个和anchor的宽比和高比最小的值 就是所有gt与anchor重合程度最低的
+        # flow.min(r, 1. / r): [N, 9, 2] 将所有的宽比和高比统一到 <=1
+        # .min(2): value=[N, 9] 选出每个 ground truth 个和 anchor 的宽比和高比最小的值   index: [N, 9] 这个最小值是宽比(0)还是高比(1)
+        # [0] 返回 value [N, 9]  每个 ground truth 个和 anchor 的宽比和高比最小的值 就是所有 ground truth 与 anchor 重合程度最低的
         x = flow.min(r, 1. / r).min(2)[0]  # ratio metric
         # x = wh_iou(wh, flow.tensor(k))  # IoU metric
-        # x.max(1)[0]: [N] 返回每个gt和所有anchor(9个)中宽比/高比最大的值
+        # x.max(1)[0]: [N] 返回每个 ground truth 和所有 anchor(9个) 中宽比/高比最大的值
         return x, x.max(1)[0]  # x, best_x
 
     def anchor_fitness(k):   # mutation fitness
-        """用于kmean_anchors函数
-        适应度计算 优胜劣汰 用于遗传算法中衡量突变是否有效的标注 如果有效就进行选择操作 没效就继续下一轮的突变
-        :params k: [9, 2] K-means生成的9个anchors     wh: [N, 2]: 数据集的所有gt框的宽高
+        """用于 kmean_anchors 函数
+        适应度计算 优胜劣汰 用于遗传算法中衡量突变是否有效的标注 如果有效就进行选择操作，无效就继续下一轮的突变
+        :params k: [9, 2] K-means生成的 9 个anchors     wh: [N, 2]: 数据集的所有 ground truth 框的宽高
         :return (best * (best > thr).float()).mean()=适应度计算公式 [1] 注意和BPR有区别 这里是自定义的一种适应度公式
                 返回的是输入此时anchor k 对应的适应度
         """
-        _, best = metric(torch.tensor(k, dtype=torch.float32), wh)
+        _, best = metric(flow.tensor(k, dtype=flow.float32), wh)
         return (best * (best > thr).float()).mean()  # fitness
 
     def print_results(k):
-        """用于kmean_anchors函数中打印K-means计算相关信息
+        """用于 kmean_anchors 函数中打印K-means计算相关信息
         计算BPR、aat=>打印信息: 阈值+BPR+aat  anchor个数+图片大小+metric_all+best_mean+past_mean+Kmeans聚类出来的anchor框(四舍五入)
         :params k: K-means得到的anchor k
         :return k: input
         """
-        # 将K-means得到的anchor k按面积从小到大啊排序
+        # 将K-means得到的anchor k按面积从小到大排序
         k = k[np.argsort(k.prod(1))]
-        # x: [N, 9] N个gt框与所有anchor框的宽比或高比(两者之中较小者)
-        # best: [N] N个gt框与所有anchor框中的最大 宽比或高比(两者之中较小者)
+        # x: [N, 9] N个 ground truth 框与所有anchor框的宽比或高比(两者之中较小者)
+        # best: [N] N个 ground truth 框与所有anchor框中的最大宽比或高比(两者之中较小者)
         x, best = metric(k, wh0)
         # (best > thr).float(): True=>1.  False->0.  .mean(): 求均值
-        # BPR(best possible recall): 最多能被召回(通过thr)的gt框数量 / 所有gt框数量  [1] 0.96223  小于0.98 才会用K-means计算anchor
+        # BPR(best possible recall): 最多能被召回(通过thr)的 ground truth 框数量 / 所有 ground truth 框数量  [1] 0.96223  小于0.98 才会用K-means计算anchor
         # aat(anchors above threshold): [1] 3.54360 每个target平均有多少个anchors
         BPR, aat = (best > thr).float().mean(), (x > thr).float().mean() * n  # best possible recall, anch > thr
         f = anchor_fitness(k)
@@ -229,18 +229,18 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
     else:
         dataset = path  # dataset
 
-    # 得到数据集中所有数据的wh
-    # 将数据集图片的最长边缩放到img_size, 较小边相应缩放
+    # 得到数据集中所有数据的 wh
+    # 将数据集图片的最长边缩放到 img_size, 较小边相应缩放
     shapes = img_size * dataset.shapes / dataset.shapes.max(1, keepdims=True)
     # 将原本数据集中gt boxes归一化的wh缩放到shapes尺度
     wh0 = np.concatenate([l[:, 3:5] * s for s, l in zip(shapes, dataset.labels)])
 
-    # 统计gt boxes中宽或者高小于3个像素的个数, 目标太小 发出警告
+    # 统计gt boxes中宽或者高小于 3 个像素的个数, 目标太小 发出警告
     i = (wh0 < 3.0).any(1).sum()
     if i:
         print(f'{prefix}WARNING: Extremely small objects found. {i} of {len(wh0)} labels are < 3 pixels in size.')
 
-    # 筛选出label大于2个像素的框拿来聚类,[...]内的相当于一个筛选器,为True的留下
+    # 筛选出 label 大于 2 个像素的框拿来聚类, [...]内的相当于一个筛选器, 为True的留下
     wh = wh0[(wh0 >= 2.0).any(1)]  # filter > 2 pixels
     # wh = wh * (np.random.rand(wh.shape[0], 1) * 0.9 + 0.1)  # multiply by random scale 0-1
 
@@ -248,14 +248,14 @@ def kmean_anchors(path='./data/coco128.yaml', n=9, img_size=640, thr=4.0, gen=10
     print(f'{prefix}Running kmeans for {n} anchors on {len(wh)} gt boxes...')
     # 计算宽和高的标准差->[w_std,h_std]
     s = wh.std(0)  # sigmas for whitening
-    # 开始聚类,仍然是聚成n类,返回聚类后的anchors k(这个anchor k是白化后数据的anchor框)
+    # 开始聚类,仍然是聚成 n 类,返回聚类后的anchors k(这个anchors k是白化后数据的anchor框s)
     # 另外还要注意的是这里的kmeans使用欧式距离来计算的
     # 运行K-means的次数为30次  obs: 传入的数据必须先白化处理 'whiten operation'
     # 白化处理: 新数据的标准差=1 降低数据之间的相关度，不同数据所蕴含的信息之间的重复性就会降低，网络的训练效率就会提高
-    # 白化操作博客: https://blog.csdn.net/weixin_37872766/article/details/102957235
+    # 白化操作参考博客: https://blog.csdn.net/weixin_37872766/article/details/102957235
     k, dist = kmeans(wh / s, n, iter=30)  # points, mean distance
     assert len(k) == n, print(f'{prefix}ERROR: scipy.cluster.vq.kmeans requested {n} points but returned only {len(k)}')
-    k *= s  # k*s 得到原来数据(白化前)的anchor框
+    k *= s  # k*s 得到原来数据(白化前)的 anchor 框
 
     wh = flow.tensor(wh, dtype=flow.float32)  # filtered wh
     wh0 = flow.tensor(wh0, dtype=flow.float32)  # unfiltered wh0
@@ -336,7 +336,7 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
         """用在check_anchors函数中  compute metric
         根据数据集的所有图片的wh和当前所有anchors k计算 BPR(best possible recall) 和 aat(anchors above threshold)
         :params k: anchors [9, 2]  wh: [N, 2]
-        :return BPR: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用K-means计算anchor
+        :return BPR: best possible recall 最多能被召回(通过thr)的 ground truth 框数量 / 所有 ground truth 框数量小于0.98 才会用K-means计算anchor
         :return aat: anchors above threshold 每个target平均有多少个anchors
         """
         # None添加维度  所有target(gt)的wh wh[:, None] [6301, 2]->[6301, 1, 2]
@@ -345,11 +345,11 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
         r = wh[:, None] / k[None]
         # x 高宽比和宽高比的最小值 无论r大于1，还是小于等于1最后统一结果都要小于1   [6301, 9]
         x = flow.min(r, 1 / r).min(2)[0]  # ratio metric
-        # best [6301] 为每个gt框选择匹配所有anchors宽高比例值最好的那一个比值
+        # best [6301] 为每个 ground truth 框选择匹配所有anchors宽高比例值最好的那一个比值
         best = x.max(1)[0]  # best_x
         # aat(anchors above threshold)  每个target平均有多少个anchors
         aat = (x > 1 / thr).float().sum(1).mean()  # anchors above threshold
-        # BPR(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用K-means计算anchor
+        # BPR(best possible recall) = 最多能被召回(通过thr)的 ground truth 框数量 / 所有 ground truth 框数量   小于0.98 才会用K-means计算anchor
         BPR = (best > 1 / thr).float().mean()  # best possible recall
         return BPR, aat
 
@@ -358,7 +358,7 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
     anchors = m.anchors.clone() * stride  # current anchors
     BPR, aat = metric(anchors.cpu().view(-1, 2))
     s = f"\n{PREFIX}{aat:.2f} anchors/target, {BPR:.3f} Best Possible Recall (BPR). "
-    # 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果BPR<0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据K-means算法重新聚类新的anchor
+    # 考虑这9类anchor的宽高和 ground truth 框的宽高之间的差距, 如果BPR<0.98(说明当前anchor不能很好的匹配数据集 ground truth 框)就会根据K-means算法重新聚类新的anchor
     if BPR > 0.98:  # threshold to recompute
         LOGGER.info(f"{s}Current anchors are a good fit to dataset ✅")
     else:
@@ -388,10 +388,6 @@ def check_anchors(dataset, model, thr=4.0, imgsz=640):
 ```
 
 这个函数会在[train.py中调用：](https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253)
-
-![image](https://user-images.githubusercontent.com/109639975/199909323-103aaf2f-cdcd-4601-9faf-4618d08d3558.png)
-
-
 
 ## 总结
 K-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。
