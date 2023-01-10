@@ -867,22 +867,22 @@
       
         <li class="md-nav__item">
   <a href="#k-means" class="md-nav__link">
-    什么是k-means?
+    什么是K-means?
   </a>
   
-    <nav class="md-nav" aria-label="什么是k-means?">
+    <nav class="md-nav" aria-label="什么是K-means?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#k-means_1" class="md-nav__link">
-    使用k-means时主要关注两点
+    使用K-means时主要关注两点
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#k-means_2" class="md-nav__link">
-    k-means算法主要流程
+    K-means算法主要流程
   </a>
   
 </li>
@@ -907,44 +907,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#yolov5-autoanchorpy" class="md-nav__link">
+    YOLOv5 中的 autoanchor.py 代码解析
+  </a>
+  
+    <nav class="md-nav" aria-label="YOLOv5 中的 autoanchor.py 代码解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     1. 导入需要的包
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#2check_anchor_order" class="md-nav__link">
     2.check_anchor_order
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#3-kmean_anchors" class="md-nav__link">
     3. kmean_anchors
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#4-check_anchors" class="md-nav__link">
     4. check_anchors
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     总结
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#reference" class="md-nav__link">
     Reference
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1109,22 +1122,22 @@
       
         <li class="md-nav__item">
   <a href="#k-means" class="md-nav__link">
-    什么是k-means?
+    什么是K-means?
   </a>
   
-    <nav class="md-nav" aria-label="什么是k-means?">
+    <nav class="md-nav" aria-label="什么是K-means?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#k-means_1" class="md-nav__link">
-    使用k-means时主要关注两点
+    使用K-means时主要关注两点
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#k-means_2" class="md-nav__link">
-    k-means算法主要流程
+    K-means算法主要流程
   </a>
   
 </li>
@@ -1149,44 +1162,57 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#yolov5-autoanchorpy" class="md-nav__link">
+    YOLOv5 中的 autoanchor.py 代码解析
+  </a>
+  
+    <nav class="md-nav" aria-label="YOLOv5 中的 autoanchor.py 代码解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#1" class="md-nav__link">
     1. 导入需要的包
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#2check_anchor_order" class="md-nav__link">
     2.check_anchor_order
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#3-kmean_anchors" class="md-nav__link">
     3. kmean_anchors
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#4-check_anchors" class="md-nav__link">
     4. check_anchors
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     总结
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#reference" class="md-nav__link">
     Reference
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1207,8 +1233,6 @@
                   </a>
                 
                 
-                  <h1>autoanchor.py</h1>
-                
                 <h2 id="_1">前言</h2>
 <blockquote>
 <p>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
@@ -1219,15 +1243,15 @@
 </blockquote>
 <p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/utils/autoanchor.py">utils/autoanchor.py</a></p>
 <h2 id="_2">摘要</h2>
-<p>&emsp;<strong>维度聚类</strong>（Dimension Clusters）。当把 YOLO 结合 <span class="arithmatex">\(anchor \ boxes\)</span> 使用时，我们会遇到两个问题： 首先 <span class="arithmatex">\(anchor \ boxes\)</span> 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整<span class="arithmatex">\(anchor \ boxes\)</span> 形状，但是如果我们从一开始就为网络选择更好的 <span class="arithmatex">\(anchor \ boxes\)</span> ，就可以让网络更容易学习到并获得更好的检测结果。</p>
+<p><strong>维度聚类</strong>（Dimension Clusters）。当把 YOLO 结合 anchor boxes 使用时，我们会遇到两个问题： 首先 anchor boxes 的尺寸是手工挑选的。虽然网络可以通过学习适当地调整 anchor boxes 形状，但是如果我们从一开始就为网络选择更好的 anchor boxes ，就可以让网络更容易学习并获得更好的检测结果。</p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199901435-76986df9-cc7b-4eac-97f1-fc905ed3d8d7.png" /></p>
-<p>图1：<span class="arithmatex">\(VOC\)</span> 和  <span class="arithmatex">\(COCO\)</span>  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 <span class="arithmatex">\(k-means\)</span> 聚类，以获得我们模型的良好初始 <span class="arithmatex">\(anchor \ boxes\)</span> 。左图显示了我们通过 k 的各种选择获得的 <span class="arithmatex">\(Avg \ IoU\)</span> 。我们发现 <span class="arithmatex">\(k = 5\)</span> 为召回与模型的复杂性提供了良好的折中。The right image shows the relative centroids for VOC and COCO. (右图显示了在 <span class="arithmatex">\(VOC\)</span> 和 <span class="arithmatex">\(COCO\)</span> 上簇的相对中心),并且这两种方案都喜欢更稀疏的，更高的框，此外在 <span class="arithmatex">\(COCO\)</span> 的尺寸的变化比 <span class="arithmatex">\(VOC\)</span> 更大。</p>
-<p>&emsp;我们不用手工选择 <span class="arithmatex">\(anchor \ boxes\)</span>，而是在训练集的边界框上的维度上运行 k-means聚类算法，自动找到良好的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 如果我们使用具有欧几里得距离的标准 <span class="arithmatex">\(k-means\)</span> ，那么较大的框比较小的框产生更多的误差。 然而，我们真正想要的是独立于框的大小的，能获得良好的 <span class="arithmatex">\(IoU\)</span> 分数的 <span class="arithmatex">\(anchor \ boxes\)</span> 。 因此对于距离度量我们使用:</p>
+<p>图1：VOC 和  COCO  上的聚类框尺寸。我们在边界框的维度(dimensions of bounding boxes) 上运行 K-means聚类，以获得我们模型良好的初始 anchor boxes 。左图显示了我们通过 k 的各种选择获得的 Avg IoU 。我们发现 k = 5 为召回与模型的复杂性提供了良好的折中。 右图显示了在 VOC 和 COCO 上聚类簇的相对中心, 并且这两种不同的 k 对应方案都喜欢更稀疏的，更高的框，此外在 COCO 的尺寸的变化比 VOC 更大。</p>
+<p>我们不用手工选择 anchor boxes，而是在训练集的边界框上的维度上运行 K-means 聚类算法，自动找到良好的 anchor boxes 。 如果我们使用具有欧几里得距离的标准 K-means，那么较大的框会比较小的框产生更多的误差。 但我们真正想要的是独立于框的大小的，能获得良好的 IoU 分数的 anchor boxes 。 因此对于距离的度量方式我们使用:</p>
 <p><center></p>
 <p><span class="arithmatex">\(d(\text { box, centroid }) = 1-\operatorname{IoU}(\text { box }, \text { centroid })\)</span></p>
 <p></center></p>
-<p>&emsp;我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 <span class="arithmatex">\(k-means\)</span> 算法，并绘制最接近质心的平均 <span class="arithmatex">\(Avg \ IoU\)</span>（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 <span class="arithmatex">\(k = 5\)</span> （<em>也就是5种anchor boxes</em>）簇的相对中心 与手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。</p>
-<p>&emsp;表1中，我们将聚类策略得到的 <span class="arithmatex">\(anchor \ boxes\)</span> 和手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 在最接近的 <span class="arithmatex">\(Avg \ IoU\)</span> 上进行比较。通过聚类策略得到的仅5种 <span class="arithmatex">\(anchor \ boxes\)</span> 中心的 <span class="arithmatex">\(Avg \ IoU\)</span> 为61.0，其性能类似于9个通过网络学习的 <span class="arithmatex">\(anchor \ boxes\)</span> 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 <span class="arithmatex">\(anchor \ boxes\)</span> 会得到更高的 <span class="arithmatex">\(Avg \ IoU\)</span> 。这表明使用 <span class="arithmatex">\(k-means\)</span> 生成 <span class="arithmatex">\(anchor \ boxes\)</span> 可以更好地表示模型并使其更容易学习。</p>
+<p>我们用不同的 <span class="arithmatex">\(k\)</span> 值运行 K-means算法，并绘制最接近聚类中心的平均 Avg IoU（见图1）。为了在模型复杂度和高召回率之间的良好折中，我们选择 k = 5 （也就是5种anchor boxes）簇的相对中心 与手工选取的 anchor boxes 显着不同，它有更少的短且宽的框，并且有更多既长又窄的框。</p>
+<p>表1中，我们将聚类策略得到的 anchor boxes 和手工选取的 anchor boxes 在最接近的 Avg IoU 上进行比较。通过聚类策略得到的仅5种 anchor boxes 的 Avg IoU 为61.0，其性能类似于9个通过网络学习的 anchor boxes 的60.9 (<em>即Avg IoU已经达到了Faster RCNN的水平</em>)。 而且使用9种 anchor boxes 会得到更高的 Avg IoU 。这表明使用 K-means生成 anchor boxes 可以更好地表示模型并使其更容易学习。</p>
 <p><span class="arithmatex">\(\begin{array}{lcc}
 \text { Box Generation } &amp; \# &amp; \text { Avg IoU } \\
 \hline \text { Cluster SSE } &amp; 5 &amp; 58.7 \\
@@ -1235,18 +1259,18 @@
 \text { Anchor Boxes [15] } &amp; 9 &amp; 60.9 \\
 \text { Cluster IoU } &amp; 9 &amp; 67.2
 \end{array}\)</span></p>
-<p>表1： <span class="arithmatex">\(VOC \  2007\)</span> 最接近先验的框的 <span class="arithmatex">\(Avg \ IoU\)</span>。 <span class="arithmatex">\(VOC \  2007\)</span> 上的目标的<span class="arithmatex">\(Avg \ IoU\)</span>与其最接近的，未经修改的使用不同生成方法的目标之间的 <span class="arithmatex">\(Avg \ IoU\)</span> 。聚类得结果比使用手工选取的 <span class="arithmatex">\(anchor \ boxes\)</span> 结果要好得多。 </p>
-<h2 id="k-means">什么是k-means?</h2>
-<p>&emsp;k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
-<p>在One-YOLOv5项目中使用K-means
+<p>表1： VOC 2007 上聚类得结果比使用手工选取的 anchor boxes 结果要好得多。 </p>
+<h2 id="k-means">什么是K-means?</h2>
+<p>K-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
+<p>在 yolov5/one-yolov5 项目中使用 K-means 必须满足下面的条件：
   1. train.py的parse_opt下的参数noautoanchor必须为False 
   2. hpy.scratch.yaml下的anchors参数注释掉。</p>
-<h3 id="k-means_1">使用k-means时主要关注两点</h3>
+<h3 id="k-means_1">使用K-means时主要关注两点</h3>
 <ol>
 <li>如何表示样本与样本之间的距离（核心问题），这个一般需要根据具体场景去设计，不同的方法聚类效果也不同，最常见的就是欧式距离，在目标检测领域常见的是IoU。</li>
 <li>分为几类，这个也是需要根据应用场景取选择的，也是一个超参数。</li>
 </ol>
-<h3 id="k-means_2">k-means算法主要流程</h3>
+<h3 id="k-means_2">K-means算法主要流程</h3>
 <ol>
 <li>手动设定簇的个数k，假设k=2；</li>
 <li>在所有样本中随机选取k个样本作为簇的初始中心，如下图（random clusters）中两个黄色的小星星代表随机初始化的两个簇中心；</li>
@@ -1256,20 +1280,21 @@
 </ol>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/200206147-46531a06-5011-4020-ab7c-967ddf9c0df2.png" /></p>
 <h3 id="bpr">什么是BPR?</h3>
-<p>BPR（bpr best possible recall来源于论文: <a href="https://arxiv.org/abs/1904.01355">FCOS</a>.</p>
+<p>BPR（BPR best possible recall来源于论文: <a href="https://arxiv.org/abs/1904.01355">FCOS</a>.</p>
 <p>原论文解释：</p>
 <blockquote>
 <p>BPR is defined as the ratio of the number of ground-truth boxes a detector can recall at the most divided by all ground-truth boxes. A ground-truth box is considered being recalled if the box is assigned to at least one sample (i.e., a location in FCOS or an anchor box in anchor-based detectors) during training.</p>
 </blockquote>
-<p>&emsp;bpr(best possible recall): 最多能被召回的ground truth框数量 / 所有ground truth框数量 最大值为1 越大越好 小于0.98就需要使用k-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。</p>
+<p>BPR (best possible recall): 最多能被召回的 ground truth 框数量 / 所有 ground truth 框数量。最大值为1 越大越好 小于0.98就需要使用K-means + 遗传进化算法选择出与数据集更匹配的anchor boxes框。</p>
 <h3 id="whiten">什么是白化操作whiten？</h3>
-<p>&emsp;白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。</p>
+<p>白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。</p>
 <p>输入数据集X，经过白化处理后，新的数据X’满足两个性质：</p>
 <ol>
 <li>特征之间相关性较低；</li>
 <li>所有特征具有相同的方差=1</li>
 </ol>
-<p>&emsp;常见的作法是：对每一个数据做一个标准差归一化处理（除以标准差）。scipy.cluster.vq.kmeans() 函数输入的数据就是必须是白化后的数据。相应的输出的<a href="https://so.csdn.net/so/search?q=anchor&amp;spm=1001.2101.3001.7020">anchor</a> k也是白化后的anchor，所以需要将anchor k 都乘以标准差恢复。</p>
+<p>常见的作法是：对每一个数据做一个标准差归一化处理（除以标准差）。scipy.cluster.vq.kmeans() 函数输入的数据就是必须是白化后的数据。相应输出的 anchor boxes 也是白化后的anchor，所以需要将anchor boxes 都乘以标准差恢复到原始图像尺度。</p>
+<h1 id="yolov5-autoanchorpy">YOLOv5 中的 autoanchor.py 代码解析</h1>
 <h2 id="1">1. 导入需要的包</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>      <span class="c1"># numpy矩阵操作模块</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span>  <span class="c1"># OneFlow深度学习模块</span>
@@ -1285,34 +1310,34 @@
 <p>（每个feature map的感受野不同 检测的目标大小也不同 适合的anchor大小也不同）所以必须要顺序一致 否则效果会很不好。</p>
 <p>这个函数一般用于check_anchors最后阶段。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">check_anchor_order</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="sd">&quot;&quot;&quot;用在check_anchors最后 确定anchors和stride的顺序是一致的</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="sd">&quot;&quot;&quot;用在check_anchors函数的最后 确定 anchors 和 stride 的顺序是一致的</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="sd">    Check anchor order against stride order for YOLOv5 Detect() module m, and correct if necessary</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    :params m: model中的最后一层 Detect层</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="c1"># Check anchor order against stride order for YOLOv5 Detect() module m, and correct if necessary</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># 计算anchor的面积 anchor area [9]</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># mean anchor area per output layer</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>     <span class="c1"># 计算最大anchor与最小anchor面积差</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="c1"># 计算最大anchor与最小anchor面积差</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">da</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># delta a</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># 计算最大stride与最小stride差</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="c1"># m.stride: model strides </span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="c1"># https://github.com/Oneflow-Inc/one-yolov5/blob/bf8c66e011fcf5b8885068074ffc6b56c113a20c/models/yolo.py#L144-L152</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">ds</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># delta s</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># flow.sign(x):当x大于/小于0时，返回1/-1</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># 如果这里anchor与stride顺序不一致，则重新调整顺序</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="c1"># 如果这里anchor与stride顺序不一致，则重新调整顺序，但注意这里要抛出warning</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="k">if</span> <span class="n">da</span> <span class="ow">and</span> <span class="p">(</span><span class="n">da</span><span class="o">.</span><span class="n">sign</span><span class="p">()</span> <span class="o">!=</span> <span class="n">ds</span><span class="o">.</span><span class="n">sign</span><span class="p">()):</span>  <span class="c1"># same order</span>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">Reversing anchor order&quot;</span><span class="p">)</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="3-kmean_anchors">3. kmean_anchors</h2>
-<p>&emsp;这个函数才是这个这个文件的核心函数，功能：使用K-means + 遗传算法 算出更符合当前数据集的anchors。</p>
-<p>&emsp;这里不仅仅使用了k-means聚类，还使用了Genetic Algorithm遗传算法，在k-means聚类的结果上进行mutation变异。接下来简单介绍下代码流程：</p>
+<p>这个函数才是这个这个文件的核心函数。功能：使用 K-means + 遗传算法 算出更符合当前数据集的anchors。</p>
+<p>这里不仅仅使用了 K-means 聚类，还使用了 Genetic Algorithm 遗传算法，在 K-means 聚类的结果上进行 mutation（变异）。接下来简单介绍下代码流程：</p>
 <ol>
 <li>载入数据集，得到数据集中所有数据的wh</li>
 <li>将每张图片中wh的最大值等比例缩放到指定大小img_size，较小边也相应缩放</li>
 <li>将bboxes从相对坐标改成绝对坐标（乘以缩放后的wh） </li>
 <li>筛选bboxes，保留wh都大于等于两个像素的bboxes</li>
-<li>使用k-means聚类得到n个anchors（调用k-means包 涉及一个白化操作）</li>
+<li>使用K-means聚类得到n个anchors（调用K-means包 涉及一个白化操作）</li>
 <li>使用遗传算法随机对anchors的wh进行变异，如果变异后效果变得更好（使用anchor_fitness方法计算得到的fitness（适应度）进行评估）就将变异后的结果赋值给anchors，如果变异后效果变差就跳过，默认变异1000次<blockquote>
 <p>不知道什么是遗传算法，可以看看这两个b站视频：<a href="https://www.bilibili.com/video/BV1zp4y1U7Ti?from=search&amp;seid=3206758960880461786">传算法超细致+透彻理解</a>
 和<a href="https://www.bilibili.com/video/BV1Tv411T7qa?spm_id_from=333.851.dynamic.content.click">霹雳吧啦Wz</a></p>
@@ -1329,7 +1354,7 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    :params thr: 阈值 由hyp[&#39;anchor_t&#39;]参数控制</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="sd">    :params gen: 遗传算法进化迭代的次数(突变 + 选择)</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="sd">    :params verbose: 是否打印所有的进化(成功的)结果 默认传入是Fasle的 只打印最佳的进化结果即可</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sd">    :return k: k-means + 遗传算法进化 后的anchors</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sd">    :return k: K-means + 遗传算法进化 后的anchors</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="kn">from</span> <span class="nn">scipy.cluster.vq</span> <span class="kn">import</span> <span class="n">kmeans</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
@@ -1340,7 +1365,7 @@
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="k">def</span> <span class="nf">metric</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">wh</span><span class="p">):</span>  <span class="c1"># compute metrics</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="sd">&quot;&quot;&quot;用于print_results函数和anchor_fitness函数</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="sd">        计算ratio metric: 整个数据集的gt框与anchor对应宽比和高比即:gt_w/k_w,gt_h/k_h + x + best_x  用于后续计算bpr+aat</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="sd">        计算ratio metric: 整个数据集的gt框与anchor对应宽比和高比即:gt_w/k_w,gt_h/k_h + x + best_x  用于后续计算BPR+aat</span>
 <a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="sd">        注意我们这里选择的metric是gt框与anchor对应宽比和高比 而不是常用的iou 这点也与nms的筛选条件对应 是yolov5中使用的新方法</span>
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="sd">        :params k: anchor框</span>
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="sd">        :params wh: 整个数据集的wh [N, 2]</span>
@@ -1362,33 +1387,33 @@
 <a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="k">def</span> <span class="nf">anchor_fitness</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>   <span class="c1"># mutation fitness</span>
 <a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>        <span class="sd">&quot;&quot;&quot;用于kmean_anchors函数</span>
 <a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="sd">        适应度计算 优胜劣汰 用于遗传算法中衡量突变是否有效的标注 如果有效就进行选择操作 没效就继续下一轮的突变</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="sd">        :params k: [9, 2] k-means生成的9个anchors     wh: [N, 2]: 数据集的所有gt框的宽高</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="sd">        :return (best * (best &gt; thr).float()).mean()=适应度计算公式 [1] 注意和bpr有区别 这里是自定义的一种适应度公式</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="sd">        :params k: [9, 2] K-means生成的9个anchors     wh: [N, 2]: 数据集的所有gt框的宽高</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="sd">        :return (best * (best &gt; thr).float()).mean()=适应度计算公式 [1] 注意和BPR有区别 这里是自定义的一种适应度公式</span>
 <a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a><span class="sd">                返回的是输入此时anchor k 对应的适应度</span>
 <a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">),</span> <span class="n">wh</span><span class="p">)</span>
 <a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">best</span> <span class="o">*</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">())</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># fitness</span>
 <a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>
 <a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>    <span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>        <span class="sd">&quot;&quot;&quot;用于kmean_anchors函数中打印k-means计算相关信息</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="sd">        计算bpr、aat=&gt;打印信息: 阈值+bpr+aat  anchor个数+图片大小+metric_all+best_mean+past_mean+Kmeans聚类出来的anchor框(四舍五入)</span>
-<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="sd">        :params k: k-means得到的anchor k</span>
+<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>        <span class="sd">&quot;&quot;&quot;用于kmean_anchors函数中打印K-means计算相关信息</span>
+<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="sd">        计算BPR、aat=&gt;打印信息: 阈值+BPR+aat  anchor个数+图片大小+metric_all+best_mean+past_mean+Kmeans聚类出来的anchor框(四舍五入)</span>
+<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="sd">        :params k: K-means得到的anchor k</span>
 <a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="sd">        :return k: input</span>
 <a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>        <span class="c1"># 将k-means得到的anchor k按面积从小到大啊排序</span>
+<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>        <span class="c1"># 将K-means得到的anchor k按面积从小到大啊排序</span>
 <a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="mi">1</span><span class="p">))]</span>
 <a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>        <span class="c1"># x: [N, 9] N个gt框与所有anchor框的宽比或高比(两者之中较小者)</span>
 <a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>        <span class="c1"># best: [N] N个gt框与所有anchor框中的最大 宽比或高比(两者之中较小者)</span>
 <a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>        <span class="n">x</span><span class="p">,</span> <span class="n">best</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">wh0</span><span class="p">)</span>
 <a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>        <span class="c1"># (best &gt; thr).float(): True=&gt;1.  False-&gt;0.  .mean(): 求均值</span>
-<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="c1"># bpr(best possible recall): 最多能被召回(通过thr)的gt框数量 / 所有gt框数量  [1] 0.96223  小于0.98 才会用k-means计算anchor</span>
+<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="c1"># BPR(best possible recall): 最多能被召回(通过thr)的gt框数量 / 所有gt框数量  [1] 0.96223  小于0.98 才会用K-means计算anchor</span>
 <a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>        <span class="c1"># aat(anchors above threshold): [1] 3.54360 每个target平均有多少个anchors</span>
-<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">n</span>  <span class="c1"># best possible recall, anch &gt; thr</span>
+<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="n">BPR</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="n">n</span>  <span class="c1"># best possible recall, anch &gt; thr</span>
 <a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>        <span class="n">f</span> <span class="o">=</span> <span class="n">anchor_fitness</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>        <span class="c1"># print(f&#39;{prefix}thr={thr:.2f}: {bpr:.4f} best possible recall, {aat:.2f} anchors past thr&#39;)</span>
+<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>        <span class="c1"># print(f&#39;{prefix}thr={thr:.2f}: {BPR:.4f} best possible recall, {aat:.2f} anchors past thr&#39;)</span>
 <a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="c1"># print(f&#39;{prefix}n={n}, img_size={img_size}, metric_all={x.mean():.3f}/{best.mean():.3f}-mean/best, &#39;</span>
 <a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="c1">#       f&#39;past_thr={x[x &gt; thr].mean():.3f}-mean: &#39;, end=&#39;&#39;)</span>
-<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aat: </span><span class="si">{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, fitness: </span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, best possible recall: </span><span class="si">{</span><span class="n">bpr</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;aat: </span><span class="si">{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, fitness: </span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, best possible recall: </span><span class="si">{</span><span class="n">BPR</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
 <a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%i</span><span class="s1">,</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;,  &#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># use in *.cfg</span>
 <a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>
@@ -1425,7 +1450,7 @@
 <a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">wh</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># sigmas for whitening</span>
 <a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a>    <span class="c1"># 开始聚类,仍然是聚成n类,返回聚类后的anchors k(这个anchor k是白化后数据的anchor框)</span>
 <a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>    <span class="c1"># 另外还要注意的是这里的kmeans使用欧式距离来计算的</span>
-<a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>    <span class="c1"># 运行k-means的次数为30次  obs: 传入的数据必须先白化处理 &#39;whiten operation&#39;</span>
+<a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>    <span class="c1"># 运行K-means的次数为30次  obs: 传入的数据必须先白化处理 &#39;whiten operation&#39;</span>
 <a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>    <span class="c1"># 白化处理: 新数据的标准差=1 降低数据之间的相关度，不同数据所蕴含的信息之间的重复性就会降低，网络的训练效率就会提高</span>
 <a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>    <span class="c1"># 白化操作博客: https://blog.csdn.net/weixin_37872766/article/details/102957235</span>
 <a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>    <span class="n">k</span><span class="p">,</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">kmeans</span><span class="p">(</span><span class="n">wh</span> <span class="o">/</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="nb">iter</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># points, mean distance</span>
@@ -1481,11 +1506,11 @@
 <a id="__codelineno-2-160" name="__codelineno-2-160" href="#__codelineno-2-160"></a>    <span class="k">return</span> <span class="n">print_results</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="4-check_anchors">4. check_anchors</h2>
-<p>这个函数是通过计算bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors。</p>
+<p>这个函数是通过计算BPR确定是否需要改变anchors 需要就调用K-means重新计算anchors。</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">check_anchors</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="mi">640</span><span class="p">):</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Check anchor fit to data, recompute if necessary  </span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="sd">&quot;&quot;&quot;用于train.py中</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">    通过bpr确定是否需要改变anchors 需要就调用k-means重新计算anchors</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">    通过BPR确定是否需要改变anchors 需要就调用K-means重新计算anchors</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    Check anchor fit to data, recompute if necessary</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">    :params dataset: 自定义数据集LoadImagesAndLabels返回的数据集</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">    :params model: 初始化的模型</span>
@@ -1504,9 +1529,9 @@
 <a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="k">def</span> <span class="nf">metric</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>  <span class="c1"># compute metric</span>
 <a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="sd">&quot;&quot;&quot;用在check_anchors函数中  compute metric</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="sd">        根据数据集的所有图片的wh和当前所有anchors k计算 bpr(best possible recall) 和 aat(anchors above threshold)</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="sd">        根据数据集的所有图片的wh和当前所有anchors k计算 BPR(best possible recall) 和 aat(anchors above threshold)</span>
 <a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="sd">        :params k: anchors [9, 2]  wh: [N, 2]</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="sd">        :return bpr: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用k-means计算anchor</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="sd">        :return BPR: best possible recall 最多能被召回(通过thr)的gt框数量 / 所有gt框数量小于0.98 才会用K-means计算anchor</span>
 <a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="sd">        :return aat: anchors above threshold 每个target平均有多少个anchors</span>
 <a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="c1"># None添加维度  所有target(gt)的wh wh[:, None] [6301, 2]-&gt;[6301, 1, 2]</span>
@@ -1519,31 +1544,31 @@
 <a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">best</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># best_x</span>
 <a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        <span class="c1"># aat(anchors above threshold)  每个target平均有多少个anchors</span>
 <a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>        <span class="n">aat</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># anchors above threshold</span>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="c1"># bpr(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用k-means计算anchor</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="n">bpr</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># best possible recall</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>        <span class="k">return</span> <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="c1"># BPR(best possible recall) = 最多能被召回(通过thr)的gt框数量 / 所有gt框数量   小于0.98 才会用K-means计算anchor</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="n">BPR</span> <span class="o">=</span> <span class="p">(</span><span class="n">best</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># best possible recall</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>        <span class="k">return</span> <span class="n">BPR</span><span class="p">,</span> <span class="n">aat</span>
 <a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
 <a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="n">stride</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">stride</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># model strides</span>
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>    <span class="c1"># anchors: [N,2]  所有anchors的宽高   基于缩放后的图片大小(较长边为640 较小边相应缩放)</span>
 <a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    <span class="n">anchors</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span> <span class="o">*</span> <span class="n">stride</span>  <span class="c1"># current anchors</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="n">bpr</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>    <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> anchors/target, </span><span class="si">{</span><span class="n">bpr</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Best Possible Recall (BPR). &quot;</span>
-<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="c1"># 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果bpr&lt;0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据k-means算法重新聚类新的anchor</span>
-<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="k">if</span> <span class="n">bpr</span> <span class="o">&gt;</span> <span class="mf">0.98</span><span class="p">:</span>  <span class="c1"># threshold to recompute</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="n">BPR</span><span class="p">,</span> <span class="n">aat</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>    <span class="n">s</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}{</span><span class="n">aat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> anchors/target, </span><span class="si">{</span><span class="n">BPR</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> Best Possible Recall (BPR). &quot;</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="c1"># 考虑这9类anchor的宽高和gt框的宽高之间的差距, 如果BPR&lt;0.98(说明当前anchor不能很好的匹配数据集gt框)就会根据K-means算法重新聚类新的anchor</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="k">if</span> <span class="n">BPR</span> <span class="o">&gt;</span> <span class="mf">0.98</span><span class="p">:</span>  <span class="c1"># threshold to recompute</span>
 <a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">Current anchors are a good fit to dataset ✅&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>    <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">Anchors are a poor fit to dataset ⚠️, attempting to improve...&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>        <span class="n">na</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># number of anchors</span>
 <a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>        <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>            <span class="c1"># 如果bpr&lt;0.98(最大为1 越大越好) 使用k-means + 遗传进化算法选择出与数据集更匹配的anchors框  [9, 2]</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>            <span class="c1"># 如果BPR&lt;0.98(最大为1 越大越好) 使用K-means + 遗传进化算法选择出与数据集更匹配的anchors框  [9, 2]</span>
 <a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>            <span class="n">anchors</span> <span class="o">=</span> <span class="n">kmean_anchors</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">na</span><span class="p">,</span> <span class="n">img_size</span><span class="o">=</span><span class="n">imgsz</span><span class="p">,</span> <span class="n">thr</span><span class="o">=</span><span class="n">thr</span><span class="p">,</span> <span class="n">gen</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">PREFIX</span><span class="si">}</span><span class="s2">ERROR: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>        <span class="c1"># 计算新的anchors的new_bpr</span>
-<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>        <span class="n">new_bpr</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>        <span class="c1"># 比较 k-means + 遗传进化算法进化后的anchors的new_bpr和原始anchors的bpr</span>
-<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>        <span class="c1"># 注意: 这里并不一定进化后的bpr必大于原始anchors的bpr, 因为两者的衡量标注是不一样的  进化算法的衡量标准是适应度 而这里比的是bpr</span>
-<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>        <span class="k">if</span> <span class="n">new_bpr</span> <span class="o">&gt;</span> <span class="n">bpr</span><span class="p">:</span>  <span class="c1"># replace anchors</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>        <span class="c1"># 计算新的anchors的new_BPR</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>        <span class="n">new_BPR</span> <span class="o">=</span> <span class="n">metric</span><span class="p">(</span><span class="n">anchors</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>        <span class="c1"># 比较 K-means + 遗传进化算法进化后的anchors的new_BPR和原始anchors的BPR</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>        <span class="c1"># 注意: 这里并不一定进化后的BPR必大于原始anchors的BPR, 因为两者的衡量标注是不一样的  进化算法的衡量标准是适应度 而这里比的是BPR</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>        <span class="k">if</span> <span class="n">new_BPR</span> <span class="o">&gt;</span> <span class="n">BPR</span><span class="p">:</span>  <span class="c1"># replace anchors</span>
 <a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>            <span class="n">anchors</span> <span class="o">=</span> <span class="n">flow</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">anchors</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="o">.</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">type_as</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">)</span>
 <a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>            <span class="c1"># 替换m的anchor_grid                      [9, 2] -&gt; [3, 1, 3, 1, 1, 2]</span>
 <a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>            <span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">anchors</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">view_as</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">anchors</span><span class="p">)</span>
@@ -1559,14 +1584,14 @@
 <p>这个函数会在<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/640ac163ee26a8b13bb2e94f348fb3752a250886/train.py#L252-L253">train.py中调用：</a></p>
 <p><img alt="image" src="https://user-images.githubusercontent.com/109639975/199909323-103aaf2f-cdcd-4601-9faf-4618d08d3558.png" /></p>
 <h2 id="_3">总结</h2>
-<p>k-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
+<p>K-means是非常经典且有效的聚类方法，通过计算样本之间的距离（相似程度）将较近的样本聚为同一类别（簇）。</p>
 <h2 id="reference">Reference</h2>
 <ul>
 <li><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></li>
 <li>【YOLOV5-5.x 源码解读】[autoanchor.py] https://blog.csdn.net/qq_38253797/article/details/119713706</li>
-<li>CSDN 霹雳吧啦Wz : <a href="https://blog.csdn.net/qq_37541097/article/details/119647026?spm=1001.2014.3001.5501">使用k-means聚类anchors</a></li>
-<li>Bilibili 霹雳吧啦Wz : <a href="https://www.bilibili.com/video/BV1Tv411T7qa">如何使用k-means聚类得到anchors以及需要注意的坑.</a></li>
-<li>CSDN 恩泽君 : <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">YOLOV3中k-means聚类获得anchor boxes过程详解.</a></li>
+<li>CSDN 霹雳吧啦Wz : <a href="https://blog.csdn.net/qq_37541097/article/details/119647026?spm=1001.2014.3001.5501">使用K-means聚类anchors</a></li>
+<li>Bilibili 霹雳吧啦Wz : <a href="https://www.bilibili.com/video/BV1Tv411T7qa">如何使用K-means聚类得到anchors以及需要注意的坑.</a></li>
+<li>CSDN 恩泽君 : <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">YOLOV3中K-means聚类获得anchor boxes过程详解.</a></li>
 <li>Github 恩泽君: <a href="https://github.com/Laughing-q/yolov5_annotations/blob/master/utils/autoanchor.py">Laughing-q/yolov5_annotations.</a></li>
 <li>CSDN 昌山小屋: 【玩转yolov5】<a href="https://blog.csdn.net/ChuiGeDaQiQiu/article/details/113487612?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522162899414216780265433994%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=162899414216780265433994&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v29-6-113487612.pc_search_result_control_group&amp;utm_term=best+possible+recall&amp;spm=1018.2226.3001.4187">请看代码之自动anchor计算.</a></li>
 <li>CSDN TheOldManAndTheSea: <a href="https://flyfish.blog.csdn.net/article/details/117594265">目标检测 YOLOv5 anchor设置</a></li>
