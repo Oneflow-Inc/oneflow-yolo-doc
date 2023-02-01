@@ -101,7 +101,7 @@ class Colors:
 
 # 初始化Colors对象 下面调用colors的时候会调用 __call__函数 (https://www.jianshu.com/p/33d6688246a6)
 # __call__: https://docs.python.org/3/reference/datamodel.html?highlight=__call__#emulating-callable-objects
-colors = Colors()  # create instance for 'from utils.plots import colors'
+colors = Colors()  # 为 'from utils.plots import colors' 创建实例
 ```
 
 ## 2.save_one_box
