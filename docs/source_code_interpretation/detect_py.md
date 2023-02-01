@@ -173,7 +173,7 @@ def run(
         t3 = time_sync()
         dt[1] += t3 - t2
 
-        # NMS 去掉detection任务重复的检测框。跟多请参阅 https://blog.csdn.net/yql_617540298/article/details/89474226
+        # NMS 去掉detection任务重复的检测框。更多请参阅 https://blog.csdn.net/yql_617540298/article/details/89474226
         pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
         dt[2] += time_sync() - t3
 
