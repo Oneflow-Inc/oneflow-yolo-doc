@@ -364,6 +364,13 @@ dt[1] += time_sync() - t2
 
 ```python
 # Loss
+"""
+分类损失(cls_loss)：该损失用于判断模型是否能够准确地识别出图像中的对象，并将其分类到正确的类别中。
+
+置信度损失(obj_loss)：该损失用于衡量模型预测的框（即包含对象的矩形）与真实框之间的差异。
+
+边界框损失(box_loss)：该损失用于衡量模型预测的边界框与真实边界框之间的差异，这有助于确保模型能够准确地定位对象。
+"""
 if compute_loss:
     loss += compute_loss([x.float() for x in train_out], targets)[1]  # box, obj, cls
 ```
@@ -511,7 +518,18 @@ if save_json and len(jdict):
     LOGGER.info(f"\nEvaluating pycocotools mAP... saving {pred_json}...")
     with open(pred_json, "w") as f:
         json.dump(jdict, f)
-
+    # try-catch，会有哪些error
+    """
+    pycocotools介绍:
+        https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoEvalDemo.ipynb
+    尝试:
+        使用pycocotools工具计算loss
+        COCO API - http://cocodataset.org/
+    失败error:
+        直接打印抛出的异常
+        1. 可能没有安装 pycocotools，但是网络有问题，无法实现自动下载。
+        2. pycocotools包版本有问题
+    """
     try:  # https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoEvalDemo.ipynb
         check_requirements(["pycocotools"])
         from pycocotools.coco import COCO
