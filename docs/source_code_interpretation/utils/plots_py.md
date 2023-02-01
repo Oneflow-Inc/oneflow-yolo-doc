@@ -112,7 +112,7 @@ colors = Colors()  # create instance for 'from utils.plots import colors'
 def save_one_box(
     xyxy, im, file=Path("im.jpg"), gain=1.02, pad=10, square=False, BGR=False, save=True
 ):
-    """用在detect.py文件中  由opt的save-crop参数控制 执不执行
+    """用在detect.py文件中  由opt的save-crop参数控制是否执行
     将预测到的目标从原图中扣出来 剪切好 并保存 会在 runs/detect/expn 下生成crops文件, 将剪切的图片保存在里面
     Save image crop as {file} with crop size multiple {gain} and {pad} pixels. Save and/or return crop
     :params xyxy: 预测到的目标框信息 list 4个tensor x1 y1 x2 y2 左上角 + 右下角
