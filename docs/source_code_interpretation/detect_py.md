@@ -145,7 +145,7 @@ def run(
     # Dataloader
     if webcam:  # 一般不会使用webcam模式从网页中获取数据
         view_img = check_imshow()
-        cudnn.benchmark = True  # set True to speed up constant image size inference
+        cudnn.benchmark = True  # 设置为True，使用CUDNN以加快恒定图像尺寸推断的速度
         dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=of)
         bs = len(dataset)  # batch_size
     else: # 一般是直接从source文件目录下直接读取图片或者视频数据
