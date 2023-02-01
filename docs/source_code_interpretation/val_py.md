@@ -110,6 +110,8 @@ def main(opt):
                     list(range(256, 1536 + 128, 128)),
                     [],
                 )  # x axis (image sizes), y axis
+                # "study": 模型在各个尺度下的指标并可视化，
+                # 上面list(range(256, 1536 + 128, 128)),代表 img-size 的各个尺度, 具体代码如下：
                 for opt.imgsz in x:  # img-size
                     LOGGER.info(f"\nRunning {f} --imgsz {opt.imgsz}...")
                     r, _, t = run(**vars(opt), plots=False)
