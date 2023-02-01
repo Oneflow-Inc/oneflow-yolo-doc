@@ -1,3 +1,9 @@
+>🎉代码仓库地址：<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank">https://github.com/Oneflow-Inc/one-yolov5</a>
+欢迎star [one-yolov5项目](https://github.com/Oneflow-Inc/one-yolov5) 获取<a href="https://github.com/Oneflow-Inc/one-yolov5/tags" target="blank" >最新的动态。</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5/issues/new"  target="blank"  >如果您有问题，欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</a>
+<a href="https://github.com/Oneflow-Inc/one-yolov5" target="blank" >
+如果对您有帮助，欢迎来给我Star呀😊~  </a>
+
 ## 引言
 $YOLOv5$ 在训练模型的时候使用🚀图像空间和色彩空间的数据增强(*在验证模型的时候没有使用*)，通过训练时采用数据增强 从而使得每次加载都是新的和唯一的图像（*即原始图像+3个随机图像*）如下图所示。
 

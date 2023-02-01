@@ -63,6 +63,7 @@ nav:
     - YOLOv5教程📚:
         - 引言:
             - one-yolov5 特点解析: tutorials/00_chapter/overview.md
+            - 消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时: tutorials/00_chapter/optim_speed_version1.md
         - 第一章 网络结构: 
             - 1.1. YOLOv5 网络结构解析: tutorials/01_chapter/yolov5_network_structure_analysis.md
         - 第二章 训练模型的数据集:
@@ -72,6 +73,7 @@ nav:
             - 3.2 从OneFlow Hub 加载YOLOv5: tutorials/03_chapter/loading_model_from_oneflowhub.md
             - 3.3 测试时增强 (TTA): tutorials/03_chapter/TTA.md
             - 3.4 模型融合 (Model Ensembling): tutorials/03_chapter/model_ensembling.md
+            - 3.5 Weights & Biases : tutorials/03_chapter/intro_to_wandb.md
         - 第四章 数据组织与处理解读: 
             - 4.1 mosaic 解读:  tutorials/04_chapter/mosaic.md
         - 第五章 YOLOv5中IoU损失: 
@@ -82,13 +84,20 @@ nav:
         - 第六章 模型导出和部署介绍:
             - 6.1 模型导出: tutorials/06_chapter/export_onnx_tflite_tensorrt.md
 
+
+
     - 源码解读:
         - val.py : source_code_interpretation/val_py.md
+        - train.py : source_code_interpretation/train_py.md 
         - utils:
-            - augmentations_py: source_code_interpretation/utils/augmentations_py.md
-            - dataladers_py:    source_code_interpretation/utils/dataladers_py.md
-            - downloads_py: source_code_interpretation/utils/downloads_py.md
-            - geneal_py: source_code_interpretation/utils/general_py.md
+            - loss.py: source_code_interpretation/utils/loss_py.md
+            - augmentations.py: source_code_interpretation/utils/augmentations_py.md
+            - dataloaders.py:  source_code_interpretation/utils/dataloaders_py.md
+            - downloads.py: source_code_interpretation/utils/downloads_py.md
+            - geneal.py: source_code_interpretation/utils/general_py.md
+            - autoanchor.py: source_code_interpretation/utils/autoanchor_py.md
+
+
 
     - 论文解读:
         - history: thesis_interpretation/00_yolo_history.md
@@ -98,3 +107,4 @@ nav:
         - YOLOv4 : thesis_interpretation/04_yolo.md
         - YOLOv6 : thesis_interpretation/06_yolo.md
 
+    
