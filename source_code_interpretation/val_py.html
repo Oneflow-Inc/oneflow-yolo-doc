@@ -801,7 +801,7 @@
         
           <li class="md-nav__item">
   <a href="#32-initializeload-model-and-set-device" class="md-nav__link">
-    3.2 Initialize/load model and set device
+    3.2 Initialize/load model and set device（初始化/加载模型以及设置设备）
   </a>
   
 </li>
@@ -1229,7 +1229,7 @@
         
           <li class="md-nav__item">
   <a href="#32-initializeload-model-and-set-device" class="md-nav__link">
-    3.2 Initialize/load model and set device
+    3.2 Initialize/load model and set device（初始化/加载模型以及设置设备）
   </a>
   
 </li>
@@ -1378,9 +1378,9 @@
 如果对您有帮助，欢迎来给我Star呀😊~  </a></p>
 </blockquote>
 <p>源码解读： <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/main/val.py">val.py</a></p>
-<p>Ultralytics 官方给的介绍</p>
+<p>Ultralytics YOLOv5 官方给的介绍:</p>
 <blockquote>
-<p>Validate a model's accuracy on <a href="https://cocodataset.org/#home">COCO</a> val or test-dev datasets. Models are downloaded automatically from the <a href="https://github.com/ultralytics/yolov5/releases">latest YOLOv5 release</a>. To show results by class use the <code>--verbose</code> flag. Note that <code>pycocotools</code> metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.</p>
+<p>Validate a model's accuracy on <a href="https://cocodataset.org/#home">COCO</a> val or test-dev datasets. Models are downloaded automatically from the <a href="https://github.com/Oneflow-Inc/one-yolov5/releases">latest YOLOv5 release</a>. To show results by class use the <code>--verbose</code> flag. Note that <code>pycocotools</code> metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.</p>
 </blockquote>
 <h2 id="1">1.导入需要的包和基本配置</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">argparse</span> <span class="c1"># 解析命令行参数模块</span>
@@ -1393,7 +1393,7 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">import</span> <span class="nn">oneflow</span> <span class="k">as</span> <span class="nn">flow</span> <span class="c1"># OneFlow 深度学习框架</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span> <span class="c1"># 进度条模块</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="kn">from</span> <span class="nn">models.common</span> <span class="kn">import</span> <span class="n">DetectMultiBackend</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="kn">from</span> <span class="nn">models.common</span> <span class="kn">import</span> <span class="n">DetectMultiBackend</span> <span class="c1"># 下面都是 one-yolov5 定义的模块，在本系列的其它文章都有涉及</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="kn">from</span> <span class="nn">utils.callbacks</span> <span class="kn">import</span> <span class="n">Callbacks</span>
 <a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="kn">from</span> <span class="nn">utils.dataloaders</span> <span class="kn">import</span> <span class="n">create_dataloader</span>
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="kn">from</span> <span class="nn">utils.general</span> <span class="kn">import</span> <span class="p">(</span>
@@ -1488,7 +1488,7 @@
 <tr>
 <td>save-hybrid</td>
 <td>save label+prediction hybrid results to *.txt</td>
-<td>保存label+prediction hybrid 到对应.txt 默认False</td>
+<td>保存label+prediction 杂交结果到对应.txt 默认False</td>
 </tr>
 <tr>
 <td>save-conf</td>
@@ -1513,7 +1513,7 @@
 <tr>
 <td>exist-ok</td>
 <td>existing project/name ok, do not increment</td>
-<td>否存在当前文件 默认False</td>
+<td>是否保存在当前文件，不新增 默认False</td>
 </tr>
 <tr>
 <td>half</td>
@@ -1523,7 +1523,7 @@
 <tr>
 <td>dnn</td>
 <td>use OpenCV DNN for ONNX inference</td>
-<td>是否使用 <code>OpenCV DNN</code> 对于 <code>ONNX</code> 推理</td>
+<td>是否使用 <code>OpenCV DNN</code> 对 <code>ONNX</code> 模型推理</td>
 </tr>
 </tbody>
 </table>
@@ -1607,13 +1607,13 @@
 <a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>    <span class="n">compute_loss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1"># 损失函数 运行val.py传入默认None 运行train.py则传入compute_loss(train)</span>
 <a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="p">):</span>
 </code></pre></div>
-<h3 id="32-initializeload-model-and-set-device">3.2 Initialize/load model and set device</h3>
+<h3 id="32-initializeload-model-and-set-device">3.2 Initialize/load model and set device（初始化/加载模型以及设置设备）</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>  <span class="k">if</span> <span class="n">training</span><span class="p">:</span>  <span class="c1"># called by train.py 通过train.py调用的run函数</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="n">device</span><span class="p">,</span> <span class="n">of</span><span class="p">,</span> <span class="n">engine</span> <span class="o">=</span> <span class="p">(</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>            <span class="nb">next</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>            <span class="kc">True</span><span class="p">,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="kc">False</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="p">)</span>  <span class="c1"># get model device, PyTorch model</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="p">)</span>  <span class="c1"># get model device, OneFlow model</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">half</span> <span class="o">&amp;=</span> <span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;cpu&quot;</span>  <span class="c1"># half precision only supported on CUDA</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="n">model</span><span class="o">.</span><span class="n">half</span><span class="p">()</span> <span class="k">if</span> <span class="n">half</span> <span class="k">else</span> <span class="n">model</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">else</span><span class="p">:</span>  <span class="c1"># called directly 通过val.py 调用的run函数</span>
