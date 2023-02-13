@@ -9,8 +9,9 @@
 
 源码解读： [val.py](https://github.com/Oneflow-Inc/one-yolov5/blob/main/val.py)
 
-Ultralytics 官方给的介绍
-> Validate a model's accuracy on [COCO](https://cocodataset.org/#home) val or test-dev datasets. Models are downloaded automatically from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases). To show results by class use the `--verbose` flag. Note that `pycocotools` metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.
+Ultralytics YOLOv5 官方给的介绍:
+
+> Validate a model's accuracy on [COCO](https://cocodataset.org/#home) val or test-dev datasets. Models are downloaded automatically from the [latest YOLOv5 release](https://github.com/Oneflow-Inc/one-yolov5/releases). To show results by class use the `--verbose` flag. Note that `pycocotools` metrics may be ~1% better than the equivalent repo metrics, as is visible below, due to slight differences in mAP computation.
 
 
 
@@ -28,7 +29,7 @@ import numpy as np # NumPy（Numerical Python）是Python的一种开源的数�
 import oneflow as flow # OneFlow 深度学习框架
 from tqdm import tqdm # 进度条模块
  
-from models.common import DetectMultiBackend
+from models.common import DetectMultiBackend # 下面都是 one-yolov5 定义的模块，在本系列的其它文章都有涉及
 from utils.callbacks import Callbacks
 from utils.dataloaders import create_dataloader
 from utils.general import (
@@ -67,14 +68,14 @@ from utils.plots import output_to_target, plot_images, plot_val_study
 | single-cls  | treat as single-class dataset                                                                   | 数据集是否只用一个类别 默认False                                    |
 | augment     | [augmented inference](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/TTA.html) | 测试是否使用TTA Test Time Augment 默认False                         |
 | verbose     | report mAP by class                                                                             | 是否打印出每个类别的mAP 默认False                                   |
-| save-hybrid | save label+prediction hybrid results to *.txt                                                   | 保存label+prediction hybrid 到对应.txt 默认False                    |
+| save-hybrid | save label+prediction hybrid results to *.txt                                                   | 保存label+prediction 杂交结果到对应.txt 默认False                    |
 | save-conf   | save confidences in --save-txt labels                                                           |                                                                     |
 | save-json   | save a COCO-JSON results file                                                                   | 是否按照coco的json格式保存结果       默认False                      |
 | project     | save to project/name                                                                            | 测试保存的源文件 默认`runs/val`                                     |
 | name        | save to project/name                                                                            | 测试保存的文件地址名 默认`exp`  保存在`runs/val/exp`下              |
-| exist-ok    | existing project/name ok, do not increment                                                      | 否存在当前文件 默认False                                            |
+| exist-ok    | existing project/name ok, do not increment                                                      | 是否保存在当前文件，不新增 默认False                                            |
 | half        | use FP16 half-precision inference                                                               | 是否使用半精度推理 默认False                                        |
-| dnn         | use OpenCV DNN for ONNX inference                                                               | 是否使用 `OpenCV DNN` 对于 `ONNX` 推理                              |
+| dnn         | use OpenCV DNN for ONNX inference                                                               | 是否使用 `OpenCV DNN` 对 `ONNX` 模型推理                              |
 
 ## 3.[main函数](https://github.com/Oneflow-Inc/one-yolov5/blob/bf8c66e011fcf5b8885068074ffc6b56c113a20c/val.py#L443)
 
@@ -162,7 +163,7 @@ def run(
 ):
 ```
 
-### 3.2 Initialize/load model and set device
+### 3.2 Initialize/load model and set device（初始化/加载模型以及设置设备）
 
 
 ```python
@@ -171,7 +172,7 @@ def run(
             next(model.parameters()).device,
             True,
             False,
-        )  # get model device, PyTorch model
+        )  # get model device, OneFlow model
         half &= device.type != "cpu"  # half precision only supported on CUDA
         model.half() if half else model.float()
     else:  # called directly 通过val.py 调用的run函数
