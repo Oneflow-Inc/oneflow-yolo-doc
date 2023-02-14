@@ -1532,7 +1532,7 @@
 <a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="n">LOCAL_RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;LOCAL_RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># https://pytorch.org/docs/stable/elastic/run.html</span>
 <a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="c1"># RANK：当前进程的序号，用于进程间通讯，rank = 0 的主机为 master 节点。</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a><span class="n">RANK</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;RANK&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="c1"># WORLD_SIZE：总的进程数量 (原则上第一个process占用一个GPU是较优的)。</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="c1"># WORLD_SIZE：总的进程数量 (原则上一个进程占用一个GPU是较优的)。</span>
 <a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a><span class="n">WORLD_SIZE</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>
 <a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a><span class="c1"># Linux 下：</span>
@@ -1556,14 +1556,14 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>batch-size: 训练批次大小
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>img-size: 输入网络的图片分辨率大小
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>resume: 断点续训, 从上次打断的训练结果处接着训练  默认False
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>nosave: 不保存模型  默认False(保存)      True: only test final epoch
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>nosave: 不保存模型  默认False(保存)      True: 不保存模型
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>notest: 是否只测试最后一轮 默认False  True: 只测试最后一轮   False: 每轮训练完都测试mAP
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>workers: dataloader中的最大work数（线程个数）
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>workers: dataloader中的最大 worker 数（线程个数）
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>device: 训练的设备
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>single-cls: 数据集是否只有一个类别 默认False
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>rect: 训练集是否采用矩形训练  默认False 可以参考：https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>noautoanchor: 不自动调整anchor 默认False(自动调整anchor)
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>rect: 训练集是否采用矩形训练  默认False 关于矩形训练可以参考：https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>noautoanchor: 不自动调整anchor 默认False
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>evolve: 是否进行超参进化 默认False
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>multi-scale: 是否使用多尺度训练 默认False
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>label-smoothing: 标签平滑增强 默认0.0不增强  要增强一般就设为0.1
@@ -1576,16 +1576,17 @@
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>bucket: 谷歌云盘bucket 一般用不到
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>project: 训练结果保存的根目录 默认是 runs/train
 <a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>name: 训练结果保存的目录 默认是exp  最终: runs/train/exp
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>exist-ok: 如果文件存在就ok不存在就新建或increment name  默认False(默认文件都是不存在的)
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>exist-ok: 如果文件存在就increment name，不存在就新建  默认False(默认文件都是不存在的)
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>save_period: Log model after every &quot;save_period&quot; epoch, 默认-1 不需要log model 信息
 <a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>local_rank: 当前进程对应的GPU号。  -1且gpu=1时不进行分布式  
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>local_rank: 当前进程对应的GPU号。  -1且指定GPU数量为1时不进行分布式  
 <a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
 <a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>entity: wandb entity 默认None
 <a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>bbox_interval: 设置带边界框图像记录间隔 Set bounding-box image logging interval for W&amp;B 默认-1   opt.epochs // 10
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>bbox_iou_optim: 这个参数代表启用oneflow针对bbox_iou部分的优化，使得训练速度更快
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>multi_tensor_optimizer: 这个参数代表针对模型滑动平均和参数更新部分启动 multi_tensor 优化，提升训练性能
 </code></pre></div>
 <p>更多细节<a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/quick_start.html#_18">请点这</a></p>
 <h2 id="3-main">3 main函数</h2>
@@ -1597,14 +1598,14 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">print_args</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">opt</span><span class="p">))</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="c1"># 检查代码版本是否是最新的  github: ...</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">check_git_status</span><span class="p">()</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="c1"># 检查requirements.txt所需包是否都满足 requirements: ...</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="c1"># 检查 requirements.txt 所需包是否都满足 requirements: ...</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">check_requirements</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;thop&quot;</span><span class="p">])</span>
 </code></pre></div>
 <h2 id="32-resume">3.2 <a href="https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L571-L603">Resume</a></h2>
 <blockquote>
 <p>判断是否使用断点续训resume, 读取参数</p>
 </blockquote>
-<p>使用断点续训 就从<code>path/to/last</code>模型文件夹中读取相关参数；不使用断点续训 就从文件中读取相关参数</p>
+<p>使用断点续训 就从<code>path/to/last</code>模型文件夹中 (最新版本的onelow已经支持把模型保存为一个文件，和PyTorch完全对齐)读取相关参数；不使用断点续训 就从文件中读取相关参数</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 2、判断是否使用断点续训resume, 读取参数</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">resume</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">check_wandb_resume</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span> <span class="ow">or</span> <span class="n">opt</span><span class="o">.</span><span class="n">evolve</span><span class="p">):</span>  <span class="c1"># resume from specified or most recent last</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="c1"># 使用断点续训 就从last模型文件夹中读取相关参数</span>
