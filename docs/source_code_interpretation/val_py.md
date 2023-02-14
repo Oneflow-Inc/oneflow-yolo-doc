@@ -420,11 +420,11 @@ dt[2] += time_sync() - t3
 # out: list{bs}  [300, 6] [42, 6] [300, 6] [300, 6]  [:, image_index+class+xywh]
 for si, pred in enumerate(out):
     # 获取第 si 张图片的 gt 标签信息 包括 class, x, y, w, h    target[:, 0]为标签属于哪张图片的编号
-    labels = targets[targets[:, 0] == si, 1:]
+    labels = targets[targets[:, 0] == si, 1:] # [:, class+xywh]
     nl, npr = labels.shape[0], pred.shape[0]  # number of labels, predictions
     path, shape = Path(paths[si]), shapes[si][0]
     correct = flow.zeros(npr, niou, dtype=flow.bool, device=device)  # init
-    seen += 1 # 图片数量 +1
+    seen += 1 # 统计测试图片数量 +1
 
     if npr == 0:# 如果预测为空，则添加空的信息到stats里
         if nl:
@@ -450,6 +450,7 @@ for si, pred in enumerate(out):
         stats.append((correct, pred[:, 4], pred[:, 5], labels[:, 0]))  # (correct, conf, pcls, tcls)
 
         # Save/log
+        # 保存预测信息到txt文件  runs\val\exp7\labels\image_name.txt
         if save_txt:
             save_one_txt(
                 predn,
