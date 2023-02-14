@@ -97,14 +97,14 @@ def main(opt):
         opt.half = True  # FP16 for fastest results
         if opt.task == "speed":  # speed benchmarks
             # python val.py --task speed --data coco.yaml
-            #                --batch 1 --weights yolov5n.pt yolov5s.pt...
+            #                --batch 1 --weights yolov5n/ yolov5s/ ...
             opt.conf_thres, opt.iou_thres, opt.save_json = 0.25, 0.45, False
             for opt.weights in weights:
                 run(**vars(opt), plots=False)
 
         elif opt.task == "study":  # speed vs mAP benchmarks
             # python val.py --task study --data coco.yaml
-            #                --iou 0.7 --weights yolov5n.pt yolov5s.pt...
+            #                --iou 0.7 --weights yolov5n/ yolov5s/...
             for opt.weights in weights:
                 f = f"study_{Path(opt.data).stem}_{Path(opt.weights).stem}.txt"
                 x, y = (
@@ -133,31 +133,32 @@ def main(opt):
 # 不参与反向传播
 @flow.no_grad() 
 def run(
-    data,
-    weights=None,  # model.pt path(s)
-    batch_size=32,  # batch size
-    imgsz=640,  # inference size (pixels)
-    conf_thres=0.001,  # confidence threshold
-    iou_thres=0.6,  # NMS IoU threshold
-    task="val",  # train, val, test, speed or study
-    device="",  # cuda device, i.e. 0 or 0,1,2,3 or cpu
-    workers=8,  # max dataloader workers (per RANK in DDP mode)
-    single_cls=False,  # treat as single-class dataset
-    augment=False,  # augmented inference
-    verbose=False,  # verbose output
-    save_txt=False,  # save results to *.txt
-    save_hybrid=False,  # save label+prediction hybrid results to *.txt
-    save_conf=False,  # save confidences in --save-txt labels
-    save_json=False,  # save a COCO-JSON results file
-    project=ROOT / "runs/val",  # save to project/name
-    name="exp",   # save to project/name
-    exist_ok=False,  # existing project/name ok, do not increment
-    half=True,    # use FP16 half-precision inference
-    dnn=False,    # use OpenCV DNN for ONNX inference
-    model=None,   # 模型 如果执行val.py就为None 如果执行train.py就会传入( model=attempt_load(f, device).half() )
+    data, # 数据集配置文件地址 包含数据集的路径、类别个数、类名、下载地址等信息 train.py时传入data_dict
+    weights=None,  # 模型的权重文件地址 运行train.py=None 运行test.py=默认weights/yolov5s
+    batch_size=32,  # 前向传播的批次大小 运行test.py传入默认32 运行train.py则传入batch_size // WORLD_SIZE * 2
+    imgsz=640,  # 输入网络的图片分辨率 运行test.py传入默认640 运行train.py则传入imgsz_test
+    conf_thres=0.001,  # object置信度阈值 默认0.001
+    iou_thres=0.6,  # 进行NMS时IOU的阈值 默认0.6
+    task="val",  # 设置测试的类型 有train, val, test, speed or study几种 默认val
+    device="",  # 执行 val.py 所在的设备 cuda device, i.e. 0 or 0,1,2,3 or cpu
+    workers=8,  # dataloader中的最大 worker 数（线程个数）
+    single_cls=False,  # 数据集是否只有一个类别 默认False
+    augment=False,  # 测试时增强，详细请看我们的教程：https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/TTA.html
+    verbose=False,  # 是否打印出每个类别的mAP 运行test.py传入默认Fasle 运行train.py则传入nc < 50 and final_epoch
+    save_txt=False,  # 是否以txt文件的形式保存模型预测框的坐标 默认True
+    save_hybrid=False,  # 是否save label+prediction hybrid results to *.txt  默认False
+    save_conf=False,  # 是否保存预测每个目标的置信度到预测txt文件中 默认True
+    save_json=False,  # 是否按照coco的json格式保存预测框，并且使用cocoapi做评估（需要同样coco的json格式的标签）,
+                      #运行test.py传入默认Fasle 运行train.py则传入is_coco and final_epoch(一般也是False)
+    project=ROOT / "runs/val",  # 验证结果保存的根目录 默认是 runs/val
+    name="exp",   # 验证结果保存的目录 默认是exp  最终: runs/val/exp
+    exist_ok=False,  # 如果文件存在就increment name，不存在就新建  默认False(默认文件都是不存在的)
+    half=True,    # 使用 FP16 的半精度推理
+    dnn=False,    # 在 ONNX 推理时使用 OpenCV DNN 后段端
+    model=None,   # 如果执行val.py就为None 如果执行train.py就会传入( model=attempt_load(f, device).half() )
     dataloader=None,   # 数据加载器 如果执行val.py就为None 如果执行train.py就会传入testloader
     save_dir=Path(""), # 文件保存路径 如果执行val.py就为‘’ , 如果执行train.py就会传入save_dir(runs/train/expn)
-    plots=True,  # 是否可视化 运行val.py传入默认True 
+    plots=True,  # 是否可视化 运行val.py传入，默认True 
     callbacks=Callbacks(), 
     compute_loss=None, # 损失函数 运行val.py传入默认None 运行train.py则传入compute_loss(train)
 ):
@@ -167,7 +168,7 @@ def run(
 
 
 ```python
-  if training:  # called by train.py 通过train.py调用的run函数
+  if training:  # 通过 train.py 调用的run函数
         device, of, engine = (
             next(model.parameters()).device,
             True,
@@ -175,18 +176,18 @@ def run(
         )  # get model device, OneFlow model
         half &= device.type != "cpu"  # half precision only supported on CUDA
         model.half() if half else model.float()
-    else:  # called directly 通过val.py 调用的run函数
+    else:  # 直接通过 val.py 调用 run 函数
         device = select_device(device, batch_size=batch_size)
 
-        # Directories  生成save_dir文件路径  run/test/expn
+        # Directories  生成 save_dir 文件路径  run/val/expn
         save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
         (save_dir / "labels" if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
-        # Load model 加载模型 
+        # 加载模型 只在运行 val.py 才需要自己加载model
         model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
         
         stride, of, engine = model.stride, model.of, model.engine
-        # 检测输入图片的分辨率imgsz是否能被gs整除 
+        # 检测输入图片的分辨率 imgsz 是否能被 stride 整除 
         imgsz = check_img_size(imgsz, s=stride)  # check image size
         half = model.fp16  # FP16 supported on limited backends with CUDA
         if engine:
@@ -208,19 +209,23 @@ def run(
 # 配置
 model.eval() # 启动模型验证模式
 cuda = device.type != "cpu"
-is_coco = isinstance(data.get("val"), str) and data["val"].endswith(f"coco{os.sep}val2017.txt")  # COCO dataset
+is_coco = isinstance(data.get("val"), str) and data["val"].endswith(f"coco{os.sep}val2017.txt")  # 通过 COCO 数据集的文件夹组织结构判断当前数据集是否为 COCO 数据集
 nc = 1 if single_cls else int(data["nc"])  # number of classes
+# 设置iou阈值 从0.5-0.95取10个(0.05间隔)   iou vector for mAP@0.5:0.95
 # iouv: [0.50000, 0.55000, 0.60000, 0.65000, 0.70000, 0.75000, 0.80000, 0.85000, 0.90000, 0.95000]
 iouv = flow.linspace(0.5, 0.95, 10, device=device)  # iou vector for mAP@0.5:0.95
-niou = iouv.numel() # 示例 mAP@0.5:0.95 iou个数=10个
+niou = iouv.numel() # 示例 mAP@0.5:0.95 iou阈值个数=10个，计算 mAP 的详细教程可以在 https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/map_analysis.html 这里查看
 ```
 
 ### 3.4 Dataloader
-> 通过train.py调用run函数会传入一个Dataloader，而通过val.py需要加载测试数据集
+
+> 通过 train.py 调用 run 函数会传入一个 Dataloader，而通过 val.py 需要加载测试数据集
 
 
 ```python
 # Dataloader
+# 如果不是训练(执行val.py脚本调用run函数)就调用create_dataloader生成dataloader
+# 如果是训练(执行train.py调用run函数)就不需要生成dataloader 可以直接从参数中传过来testloader
 if not training: # 加载val数据集
     if of and not single_cls:  # check --weights are trained on --data
         ncm = model.model.nc
@@ -254,7 +259,7 @@ seen = 0
 # 初始化混淆矩阵
 confusion_matrix = ConfusionMatrix(nc=nc)
 
-#  获取数据集所有类别的类名
+#  获取数据集所有目标类别的类名
 names = dict(enumerate(model.names if hasattr(model, "names") else model.module.names))
 
 # coco80_to_coco91_class :  converts 80-index (val2014) to 91-index (paper) 
@@ -270,7 +275,7 @@ s = ("%20s" + "%11s" * 6) % (
     "mAP@.5",
     "mAP@.5:.95",
 )
-# 初始化时间dt[t0, t1, t2] 和 p, r, f1, mp, mr, map50, map指标
+# 初始化时间 dt[t0（预处理的时间）, t1（推理的时间）, t2（后处理的时间）] 和 p, r, f1, mp, mr, map50, map指标
 dt, p, r, f1, mp, mr, map50, map = (
     [0.0, 0.0, 0.0],
     0.0,
@@ -283,14 +288,14 @@ dt, p, r, f1, mp, mr, map50, map = (
 )
 #  初始化验证集的损失
 loss = flow.zeros(3, device=device)
-#  初始化json文件中的字典 统计信息 ap ap_class 
+#  初始化 json 文件中的字典， 统计信息， ap， ap_class 
 jdict, stats, ap, ap_class = [], [], [], []
 callbacks.run("on_val_start")
-# 初始化tqdm 进度条模块
+# 初始化 tqdm 进度条模块
 pbar = tqdm(dataloader, desc=s, bar_format="{l_bar}{bar:10}{r_bar}{bar:-10b}")
 ```
 <details open>
-<summary>示例输出 </summary>
+<summary> 示例输出 </summary>
 
 ```python
 val: data=data/coco.yaml, weights=['yolov5x'], batch_size=32, imgsz=640, conf_thres=0.001, iou_thres=0.6, task=val, 
@@ -383,9 +388,11 @@ if compute_loss:
 
 ```python
 # NMS
-# 将真实框target的xywh(因为target是在labelimg中做了归一化的)映射到img(test)尺寸
+# 将真实框 target的 xywh (因为 target 是在 labelimg 中做了归一化的)映射到真实的图像 (test) 尺寸
 targets[:, 2:] *= flow.tensor((width, height, width, height), device=device)  # to pixels
-# 对应
+# 在 NMS 之前将数据集标签 targets 添加到模型预测中，这允许在数据集中自动标记(for autolabelling)其它对象(在pred中混入gt) 并且mAP反映了新的混合标签
+# targets: [num_target, img_index+class_index+xywh] = [31, 6]
+# lb: {list: bs} 第一张图片的target[17, 5] 第二张[1, 5] 第三张[7, 5] 第四张[6, 5]
 lb = [targets[targets[:, 0] == i, 1:] for i in range(nb)] if save_hybrid else []  # for autolabelling
 t3 = time_sync()
 """non_max_suppression (非最大值抑制)
@@ -393,7 +400,7 @@ Non-Maximum Suppression (NMS) on inference results to reject overlapping boundin
 该算法的原理：
 先假设有6个矩形框，根据分类器的类别分类概率大小排序，假设从小到大属于车辆(被检测的目标)的概率分别为：A、B、C、D、E、F
 （1）从最大概率 矩形框F开始，分别判断A~E与F的重叠度IOU是否大于某个指定的阀值；
-（2）假设B、D与F的重叠度大于指定的阀值，则丢弃B、D，并标记第一个矩形框 F，使我们要保留的
+（2）假设B、D与F的重叠度大于指定的阀值，则丢弃B、D，并标记第一个矩形框 F，是我们要保留的
 （3）从剩下的矩形框A、C、E中，选择最大概率，假设为E，然后判断A、C与E的重叠度是否大于指定的阀值，
      假如大于就丢弃A、C，并标记E，是我们保留下来的第二个矩形框
 一直重复上述过程，找到所有被保留的矩形框
@@ -409,8 +416,10 @@ dt[2] += time_sync() - t3
 
 
 ```python
-# Metrics
+# 为每张图片做统计，写入预测信息到txt文件，生成json文件字典，统计tp等
+# out: list{bs}  [300, 6] [42, 6] [300, 6] [300, 6]  [:, image_index+class+xywh]
 for si, pred in enumerate(out):
+    # 获取第 si 张图片的 gt 标签信息 包括 class, x, y, w, h    target[:, 0]为标签属于哪张图片的编号
     labels = targets[targets[:, 0] == si, 1:]
     nl, npr = labels.shape[0], pred.shape[0]  # number of labels, predictions
     path, shape = Path(paths[si]), shapes[si][0]
@@ -453,7 +462,8 @@ for si, pred in enumerate(out):
         callbacks.run("on_val_image_end", pred, predn, path, names, im[si])
 ```
 
-### 3.6.6 画出前三个batch图片的gt和pred框
+### 3.6.6 画出前三个batch图片的 gt 和 pred 框
+
 > gt : 真实框，Ground truth box, 是人工标注的位置，存放在标注文件中
 
 > pred : 预测框，Prediction box， 是由目标检测模型计算输出的框
@@ -475,6 +485,7 @@ callbacks.run("on_val_batch_end")
 ```
 
 ### 3.7 计算指标
+
 > 指标名字在代码中体现
 
 
@@ -504,7 +515,7 @@ shape = (batch_size, 3, imgsz, imgsz)
 LOGGER.info(f"Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {shape}" % t)
 ```
 
-### 3.9保存验证结果
+### 3.9 保存验证结果
 
 
 ```python

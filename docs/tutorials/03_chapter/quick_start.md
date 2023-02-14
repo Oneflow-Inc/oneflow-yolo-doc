@@ -298,6 +298,8 @@ python -m oneflow.distributed.launch --nproc_per_node 8 train.py --batch-size 12
 | --save-period     | Save checkpoint every x epochs (disabled if < 1)    | 用于记录训练日志信息，int 型，默认 -1                                                              |
 | --seed            | Global training seed                                | 随机数种子设置                                                                                       |
 | --local_rank      | Automatic DDP Multi-GPU argument, do not modify     | 自动单机多卡训练 一般不改动                                                                      |
+| --bbox_iou_optim  | Optimize compute loss process in one-yolov5      | 优化 one-yolov5 的损失计算部分
+| --multi_tensor_optimizer | Optimize the parameter update part of one-yolov5 | 优化 one-yolov5 的参数更新部分
 
 
 

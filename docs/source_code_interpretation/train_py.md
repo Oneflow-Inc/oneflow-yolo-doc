@@ -102,7 +102,7 @@ from utils.plots import plot_evolve, plot_labels
 LOCAL_RANK = int(os.getenv("LOCAL_RANK", -1))  # https://pytorch.org/docs/stable/elastic/run.html
 # RANK：当前进程的序号，用于进程间通讯，rank = 0 的主机为 master 节点。
 RANK = int(os.getenv("RANK", -1))
-# WORLD_SIZE：总的进程数量 (原则上第一个process占用一个GPU是较优的)。
+# WORLD_SIZE：总的进程数量 (原则上一个进程占用一个GPU是较优的)。
 WORLD_SIZE = int(os.getenv("WORLD_SIZE", 1))
 
 # Linux 下：
@@ -130,14 +130,14 @@ epochs: 训练轮次
 batch-size: 训练批次大小
 img-size: 输入网络的图片分辨率大小
 resume: 断点续训, 从上次打断的训练结果处接着训练  默认False
-nosave: 不保存模型  默认False(保存)      True: only test final epoch
+nosave: 不保存模型  默认False(保存)      True: 不保存模型
 notest: 是否只测试最后一轮 默认False  True: 只测试最后一轮   False: 每轮训练完都测试mAP
-workers: dataloader中的最大work数（线程个数）
+workers: dataloader中的最大 worker 数（线程个数）
 device: 训练的设备
 single-cls: 数据集是否只有一个类别 默认False
 
-rect: 训练集是否采用矩形训练  默认False 可以参考：https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html
-noautoanchor: 不自动调整anchor 默认False(自动调整anchor)
+rect: 训练集是否采用矩形训练  默认False 关于矩形训练可以参考：https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html
+noautoanchor: 不自动调整anchor 默认False
 evolve: 是否进行超参进化 默认False
 multi-scale: 是否使用多尺度训练 默认False
 label-smoothing: 标签平滑增强 默认0.0不增强  要增强一般就设为0.1
@@ -150,16 +150,17 @@ image-weights: 是否使用图片加权选择策略(selection img to training by
 bucket: 谷歌云盘bucket 一般用不到
 project: 训练结果保存的根目录 默认是 runs/train
 name: 训练结果保存的目录 默认是exp  最终: runs/train/exp
-exist-ok: 如果文件存在就ok不存在就新建或increment name  默认False(默认文件都是不存在的)
+exist-ok: 如果文件存在就increment name，不存在就新建  默认False(默认文件都是不存在的)
 quad: dataloader取数据时, 是否使用collate_fn4代替collate_fn  默认False
 save_period: Log model after every "save_period" epoch, 默认-1 不需要log model 信息
 artifact_alias: which version of dataset artifact to be stripped  默认lastest  貌似没用到这个参数？
-local_rank: 当前进程对应的GPU号。  -1且gpu=1时不进行分布式  
+local_rank: 当前进程对应的GPU号。  -1且指定GPU数量为1时不进行分布式  
 
 entity: wandb entity 默认None
 upload_dataset: 是否上传dataset到wandb tabel(将数据集作为交互式 dsviz表 在浏览器中查看、查询、筛选和分析数据集) 默认False
 bbox_interval: 设置带边界框图像记录间隔 Set bounding-box image logging interval for W&B 默认-1   opt.epochs // 10
 bbox_iou_optim: 这个参数代表启用oneflow针对bbox_iou部分的优化，使得训练速度更快
+multi_tensor_optimizer: 这个参数代表针对模型滑动平均和参数更新部分启动 multi_tensor 优化，提升训练性能
 ```
 
 
@@ -178,14 +179,14 @@ def main(opt, callbacks=Callbacks()):
         print_args(vars(opt))
         # 检查代码版本是否是最新的  github: ...
         check_git_status()
-        # 检查requirements.txt所需包是否都满足 requirements: ...
+        # 检查 requirements.txt 所需包是否都满足 requirements: ...
         check_requirements(exclude=["thop"])
 ```
 
 ## 3.2 [Resume](https://github.com/Oneflow-Inc/one-yolov5/blob/a681bd5ce5853027d366451861241bb09ef6eabd/train.py#L571-L603)
 > 判断是否使用断点续训resume, 读取参数
 
-使用断点续训 就从`path/to/last`模型文件夹中读取相关参数；不使用断点续训 就从文件中读取相关参数
+使用断点续训 就从`path/to/last`模型文件夹中 (最新版本的onelow已经支持把模型保存为一个文件，和PyTorch完全对齐)读取相关参数；不使用断点续训 就从文件中读取相关参数
 
 
 ```python
