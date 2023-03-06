@@ -14,7 +14,7 @@
     
     
       
-        <title>one-yolov5 特点解析 - oneflow-yolo-doc</title>
+        <title>3.2 分割和分类模型训练示例 - oneflow-yolo-doc</title>
       
     
     
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#0x0" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              one-yolov5 特点解析
+              3.2 分割和分类模型训练示例
             
           </span>
         </div>
@@ -193,7 +193,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="overview.html" class="md-tabs__link md-tabs__link--active">
+      <a href="../00_chapter/overview.html" class="md-tabs__link md-tabs__link--active">
         YOLOv5教程📚
       </a>
     </li>
@@ -327,14 +327,12 @@
             
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_1" type="checkbox" id="__nav_2_1" >
       
       <label class="md-nav__link" for="__nav_2_1">
         引言
@@ -350,21 +348,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="overview.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../00_chapter/overview.html" class="md-nav__link">
         one-yolov5 特点解析
       </a>
-      
     </li>
   
 
@@ -374,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="optim_speed_version1.html" class="md-nav__link">
+      <a href="../00_chapter/optim_speed_version1.html" class="md-nav__link">
         消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时
       </a>
     </li>
@@ -468,12 +456,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" checked>
       
       <label class="md-nav__link" for="__nav_2_4">
         第三章 模型训练
@@ -491,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_chapter/quick_start.html" class="md-nav__link">
+      <a href="quick_start.html" class="md-nav__link">
         3.1 快速开始
       </a>
     </li>
@@ -501,11 +491,122 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../03_chapter/model_train.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3.2 分割和分类模型训练示例
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="model_train.html" class="md-nav__link md-nav__link--active">
         3.2 分割和分类模型训练示例
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实例分割
+  </a>
+  
+    <nav class="md-nav" aria-label="实例分割">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train" class="md-nav__link">
+    Train
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#val" class="md-nav__link">
+    val
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predict" class="md-nav__link">
+    Predict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    分类
+  </a>
+  
+    <nav class="md-nav" aria-label="分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train_1" class="md-nav__link">
+    Train
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#val_1" class="md-nav__link">
+    val
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predict_1" class="md-nav__link">
+    Predict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export_1" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -515,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_chapter/loading_model_from_oneflowhub.html" class="md-nav__link">
+      <a href="loading_model_from_oneflowhub.html" class="md-nav__link">
         3.3 从OneFlow Hub 加载YOLOv5
       </a>
     </li>
@@ -527,7 +628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_chapter/TTA.html" class="md-nav__link">
+      <a href="TTA.html" class="md-nav__link">
         3.4 测试时增强 (TTA)
       </a>
     </li>
@@ -539,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_chapter/model_ensembling.html" class="md-nav__link">
+      <a href="model_ensembling.html" class="md-nav__link">
         3.5 模型融合 (Model Ensembling)
       </a>
     </li>
@@ -551,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_chapter/intro_to_wandb.html" class="md-nav__link">
+      <a href="intro_to_wandb.html" class="md-nav__link">
         3.6 Weights & Biases
       </a>
     </li>
@@ -1018,8 +1119,96 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实例分割
+  </a>
+  
+    <nav class="md-nav" aria-label="实例分割">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train" class="md-nav__link">
+    Train
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#val" class="md-nav__link">
+    val
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predict" class="md-nav__link">
+    Predict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    分类
+  </a>
+  
+    <nav class="md-nav" aria-label="分类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#train_1" class="md-nav__link">
+    Train
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#val_1" class="md-nav__link">
+    val
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predict_1" class="md-nav__link">
+    Predict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export_1" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1031,85 +1220,72 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/tutorials/00_chapter/overview.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/Oneflow-Inc/oneflow-yolo-doc/blob/master/docs/tutorials/03_chapter/model_train.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="0x0">0x0 动机</h1>
-<p>为了说明使用 OneFlow 训练目标检测模型的可行性以及性能的优越性，最近我们将 ultralytics 版 YOLOv5（https://github.com/ultralytics/yolov5）通过import oneflow as torch的方式迁移为了OneFlow后端（对应YOLOv5的commit号为：<code>48a85314bc80d8023c99bfb114cea98d71dd0591</code>）。并对 YOLOv5 中相关的教程进行了汉化，添加了一系列详细的代码解读，原理讲解以及部署教程，希望使得 YOLOv5 项目对用户更加透明化。另外我们也将在性能这个角度进行深入探索，本次我们发布的OneFlow后端的YOLOv5只是一个基础版本，没有用上任何的优化技巧。目前我们在小 Batch 进行训练时相比于 PyTorch 有5%-10%左右的性能优势，而对于大 Batch 则性能和 PyTorch 持平。相信在后续的一些定制化的性能优化技巧下（比如nn.Graph加持，算子的优化），我们可以继续提升YOLOv5在COCO等数据集的训练速度，更有效缩短目标检测模型的训练时间。</p>
-<ul>
-<li>🎉代码仓库地址：https://github.com/Oneflow-Inc/one-yolov5</li>
-<li>🎉文档网站地址：https://start.oneflow.org/oneflow-yolo-doc/index.html</li>
-<li>OneFlow 安装方法：https://github.com/Oneflow-Inc/oneflow#install-oneflow</li>
-</ul>
-<p>不过即使你对 OneFlow 带来的性能提升不太感兴趣，我们相信<a href="https://start.oneflow.org/oneflow-yolo-doc/index.html">文档网站</a>中对 YOLOv5 教程的汉化以及源码剖析也会是从零开始深入学习 YOLOv5 一份不错的资料。欢迎在仓库给我们提出宝贵的意见。🌟🌟🌟</p>
-<p>欢迎star <a href="https://github.com/Oneflow-Inc/one-yolov5">one-yolov5项目</a> 获取最新的动态。</p>
-<h1 id="0x1">0x1. 差异</h1>
-<p>我们将 YOLOv5 的后端从 PyTorch 换成 OneFlow 之后除了性能优势外还做了一些差异化的内容，其中一些内容已经完成，还有一些正在进行中，下面简单展示一下：</p>
-<p><img alt="" src="https://user-images.githubusercontent.com/35585791/196579121-76c6246e-5793-491e-bf96-86dd5ce06290.png" /></p>
-<ul>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/01_chapter/yolov5_network_structure_analysis.html">1. YOLOv5 网络结构解析</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/02_chapter/how_to_prepare_yolov5_training_data.html">2. 如何准备yolov5模型训练数据</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/quick_start.html">3. 快速开始</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html">4. 模型训练</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/TTA.html">5. 测试时增强 (TTA)</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_ensembling.html">6. 模型融合 (Model Ensembling)</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/loading_model_from_oneflowhub.html">7. 从 OneFlow Hub 加载 YOLOv5</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/04_chapter/mosaic.html">8. 数据增强</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/rectangular_reasoning.html">9. 矩形推理</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/iou_in-depth_analysis.html">10. IOU深入解析</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/map_analysis.html">11. 模型精确度评估</a></li>
-<li><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/06_chapter/export_onnx_tflite_tensorrt.html">12. ONNX模型导出</a></li>
-</ul>
-<p>这一系列的文章我们将逐步开发，Review 以及发布并且会有相应的视频讲解，我们将这个系列的文章叫作：<strong>《YOLOv5全面解析教程》</strong> 🎉🎉🎉</p>
-<h1 id="0x2-coco">0x2. 在COCO上的精度表现</h1>
-<p>我们以 yolov5n 网络为例， <a href="https://oneflow-static.oss-cn-beijing.aliyuncs.com/one-yolo/YOLOv5n_results.csv">result.csv</a> 这个日志展示了我们基于 one-yolov5 在 COCO 上从零开始训练 YOLOv5n 网络的日志。下图展示了 <code>box_loss</code> , <code>obj_loss</code>, <code>cls_loss</code> ，<code>map_0.5</code>, <code>map_0.5:0.95</code> 等指标在训练过程中的变化情况：</p>
-<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/197911473-ec1b246f-aa3d-4f25-bf35-534458804213.png" /></p>
-<p>最终在第 300 个 epoch 时，我们的 <code>map_0.5</code> 达到了 <strong>0.45174</strong> ，<code>map_0.5:0.95</code> 达到了 <strong>0.27726</strong> 。</p>
-<p>和 <a href="https://github.com/ultralytics/yolov5#pretrained-checkpoints">ultralytics/yolov5 给出的精度数据</a> 一致（注意官网给出的精度指定 <code>iou</code> 为 0.65 的精度，而上述 csv 文件中是在 <code>iou</code> 为 0.60 下的精度，使用我们训练的权重并把 <code>iou</code> 指定为 0.65 可以完全对齐官方给出的精度数据）。</p>
-<p>关于这一点，我们可以使用 ultralytics/yolov5 来验证一下：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">python</span> <span class="n">val</span><span class="o">.</span><span class="n">py</span>  <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5n</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">data</span> <span class="n">data</span><span class="o">/</span><span class="n">coco</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">img</span> <span class="mi">640</span> <span class="o">--</span><span class="n">iou</span> <span class="mf">0.60</span>
+                  <h1>3.2 分割和分类模型训练示例</h1>
+                
+                <h2 id="_1">实例分割</h2>
+<blockquote>
+<p>使用示例 🚀</p>
+</blockquote>
+<h3 id="train">Train</h3>
+<p>YOLOv5实例分割模型支持使用 <code>--data coco128-seg.yaml</code>  参数自动下载 <code>COCO128-seg</code> 测试数据集(<em>测试数据集表示能测试项目正常运行的小数据集</em>)， 以及使用 <code>bash data/scripts/get_coco.sh --train --val --segments</code>  或者使用  <code>python train.py --data coco.yaml</code>  下载 <code>COCO-segments</code> 数据集</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Single-GPU</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>python segment/train.py --model yolov5s-seg.of --data coco128-seg.yaml --epochs <span class="m">5</span> --img <span class="m">640</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Multi-GPU DDP</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>python -m oneflow.distributed.launch --nproc_per_node  <span class="m">4</span>  segment/train.py --model yolov5s-seg.of --data coco128-seg.yaml --epochs <span class="m">5</span> --img <span class="m">640</span> --device <span class="m">0</span>,1,2,3
 </code></pre></div>
-<p>输出：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>val: <span class="nv">data</span><span class="o">=</span>data/coco.yaml, <span class="nv">weights</span><span class="o">=[</span><span class="s1">&#39;yolov5n.pt&#39;</span><span class="o">]</span>, <span class="nv">batch_size</span><span class="o">=</span><span class="m">32</span>, <span class="nv">imgsz</span><span class="o">=</span><span class="m">640</span>, <span class="nv">conf_thres</span><span class="o">=</span><span class="m">0</span>.001, <span class="nv">iou_thres</span><span class="o">=</span><span class="m">0</span>.6, <span class="nv">max_det</span><span class="o">=</span><span class="m">300</span>, <span class="nv">task</span><span class="o">=</span>val, <span class="nv">device</span><span class="o">=</span>, <span class="nv">workers</span><span class="o">=</span><span class="m">8</span>, <span class="nv">single_cls</span><span class="o">=</span>False, <span class="nv">augment</span><span class="o">=</span>False, <span class="nv">verbose</span><span class="o">=</span>False, <span class="nv">save_txt</span><span class="o">=</span>False, <span class="nv">save_hybrid</span><span class="o">=</span>False, <span class="nv">save_conf</span><span class="o">=</span>False, <span class="nv">save_json</span><span class="o">=</span>True, <span class="nv">project</span><span class="o">=</span>runs/val, <span class="nv">name</span><span class="o">=</span>exp, <span class="nv">exist_ok</span><span class="o">=</span>False, <span class="nv">half</span><span class="o">=</span>False, <span class="nv">dnn</span><span class="o">=</span>False
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>YOLOv5 🚀 v6.1-384-g7fd9867 Python-3.8.13 torch-1.10.0+cu113 CUDA:0 <span class="o">(</span>NVIDIA GeForce RTX <span class="m">3080</span> Ti, 12054MiB<span class="o">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>cuda:0
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>Fusing layers... 
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>YOLOv5n summary: <span class="m">213</span> layers, <span class="m">1867405</span> parameters, <span class="m">0</span> gradients, <span class="m">4</span>.5 GFLOPs
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>val: Scanning <span class="s1">&#39;/data/dataset/fengwen/coco/val2017.cache&#39;</span> images and labels... <span class="m">4952</span> found, <span class="m">48</span> missing, <span class="m">0</span> empty, <span class="m">0</span> corrupt: <span class="m">100</span>%<span class="p">|</span>█████
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>                 Class     Images  Instances          P          R      mAP50   mAP50-95: <span class="m">100</span>%<span class="p">|</span>██████████<span class="p">|</span> <span class="m">157</span>/157 <span class="o">[</span><span class="m">00</span>:40&lt;<span class="m">00</span>:00,  <span class="m">3</span>.
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>                   all       <span class="m">5000</span>      <span class="m">36335</span>      <span class="m">0</span>.573      <span class="m">0</span>.432      <span class="m">0</span>.456      <span class="m">0</span>.277
+<p>注意 :
+- {<code>.of</code>: 代表OneFlow预训练权重 , <code>.pt</code>: 代表 PyTorch 预训练权重 }
+- <code>--model yolov5s-seg.of</code>  表示使用OneFlow预训练权重 , 也是支持使用 PyTorch 预训练权重 如 <code>--model yolov5s-seg.pt</code>
+- 模型权重将自动从 github 下载(<em>建议如果没有设置代理，可以提前将模型下载到电脑本地 使用 <code>--model 本地路径/yolov5s-seg.of</code></em>)</p>
+<h3 id="val">val</h3>
+<p>在ImageNet-1k数据集上验证YOLOv5m-seg 模型的精度</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash data/scripts/get_coco.sh --val --segments  <span class="c1"># download COCO val segments split (780MB, 5000 images)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>python segment/val.py --weights yolov5s-seg.of --data coco.yaml --img <span class="m">640</span>  <span class="c1"># validate</span>
 </code></pre></div>
-<p>上面的输出可以说明我们和 ultralytics/yolov5 的精度是完全对齐的。</p>
-<p>在 one-yolov5 从零开始训练 yolov5n 进行精度复现的命令为 (2卡DDP模式) ：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">python</span>  <span class="o">-</span><span class="n">m</span> <span class="n">oneflow</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">launch</span> <span class="o">--</span><span class="n">nproc_per_node</span> <span class="mi">2</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span>  <span class="n">data</span><span class="o">/</span><span class="n">coco</span><span class="o">.</span><span class="n">yaml</span>  <span class="o">--</span><span class="n">weights</span> <span class="s1">&#39; &#39;</span> <span class="o">--</span><span class="n">cfg</span> <span class="n">models</span><span class="o">/</span><span class="n">yolov5n</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">batch</span> <span class="mi">64</span>
+<h3 id="predict">Predict</h3>
+<p>使用预训练模型(YOLOv5m-seg) 预测 </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python segment/predict.py --weights yolov5m-seg.of --data data/images/
 </code></pre></div>
-<h1 id="0x3-coco">0x3. 在COCO上的性能表现</h1>
-<p>以下的性能结果都是直接将 PyTorch 切换为 OneFlow 之后测试的，<strong>并没有做针对性优化</strong>，后续会在此基础上继续提升 OneFlow 后端 YOLOv5 的训练速度。</p>
-<h2 id="3080ti">在 3080Ti 的性能测试结果</h2>
-<h3 id="_1">单卡测试结果</h3>
-<ul>
-<li>以下为GTX 3080ti(12GB) 的yolov5测试结果（oneflow后端 vs PyTorch后端）</li>
-<li>以下测试结果的数据配置均为coco.yaml，模型配置也完全一样，并记录训练完coco数据集1个epoch需要的时间</li>
-<li>由于oneflow eager目前amp的支持还不完善，所以我们提供的结果均为fp32模式下进行训练的性能结果</li>
-<li>PyTorch版本 yolov5 code base链接：https://github.com/ultralytics/yolov5</li>
-<li>OneFlow版本 yolov5 code base链接：https://github.com/Oneflow-Inc/one-yolov5</li>
-<li>cuda 版本 11.7, cudnn 版本为 8.5.0</li>
-<li>测试的命令为：<code>python train.py --batch 16 --cfg models/yolov5n.yaml --weights '' --data coco.yaml --img 640 --device 0</code> ，其中 batch 参数是动态变化的</li>
-</ul>
-<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/196843664-ceaabc3c-aae9-40dc-9972-60254f8b2549.png" /></p>
-<p>可以看到，在 batch 比较小的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 有 5%-10% 左右的性能优势，这可能得益于 OneFlow 的 Eager 运行时系统可以更快的做 CUDA Kernel Launch。而 batch 比较大的时候 OneFlow 后端的 YOLOv5 相比于 PyTorch 的性能差不多是持平，这可能是因为当 Batch 比较大的时候 CUDA Kernel Launch 的开销相比于计算的开销会比较小。</p>
-<h3 id="ddp">两卡DDP测试结果</h3>
-<ul>
-<li>配置和单卡均一致</li>
-<li>测试的命令为：<code>python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 16 --data coco.yaml --weights '' --device 0,1</code> ，其中 batch 参数是动态变化的</li>
-</ul>
-<p><img alt="图片" src="https://user-images.githubusercontent.com/35585791/196844299-3f6c169d-4606-4e94-9edb-95c1c8935234.png" /></p>
-<p>得益于单卡的性能优势，在 2 卡DDP模式下，OneFlow 后端的 YOLOv5 在小 batch 的训练时间也是稍微领先 PyTorch 后端的 YoloV5 ，而对于大 Batch 来说性能和 PyTorch 相比也是差不多持平。</p>
-<h1 id="0x4">0x4. 总结</h1>
-<p>我们基于 OneFlow 移植了 ultralytics 版的 YOLOv5 ，在精度训练达标的情况下还可以在 Batch 比较小时取得一些性能优势。此外，我们对 YOLOv5 中相关的教程进行了汉化，添加了一系列详细的代码解读，原理讲解以及部署教程，希望使得 YOLOv5 项目对用户更加透明化。相信对想深入了解 YOLOv5 的读者我们的 <strong>《YOLOv5全面解析教程》</strong> 也是一份不错的学习资料。</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/118866310/223043320-ba3599d9-a3a4-4590-af98-65da1e3f228c.png" /></p>
+<h3 id="export">Export</h3>
+<p>将 <code>yolov5s-seg</code> 模型导出为 ONNX 格式 示例
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python export.py --weights yolov5s-seg.of --include onnx  --img <span class="m">640</span> --device <span class="m">0</span>
+</code></pre></div></p>
+<h2 id="_2">分类</h2>
+<blockquote>
+<p>使用示例 🚀</p>
+</blockquote>
+<h3 id="train_1">Train</h3>
+<p>YOLOv5实例分类模型支持使用 <code>--data imagenette160</code>  参数自动下载 <code>imagenette160</code> 测试数据集(<em>测试数据集表示能测试项目正常运行的小数据集</em>)， 以及使用 <code>bash data/scripts/get_imagenet.sh</code>  或者使用  <code>python train.py --data imagenet</code>  下载 <code>imagenet</code> 数据集</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Single-GPU</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>python classify/train.py --model yolov5s-cls.of --data imagenette160 --epochs <span class="m">5</span>  
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Multi-GPU DDP</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>python -m oneflow.distributed.launch --nproc_per_node  <span class="m">4</span>  classify/train.py --model yolov5s-cls.of --data imagenette160 --epochs <span class="m">5</span>   --device <span class="m">0</span>,1,2,3
+</code></pre></div>
+<p>注意 :
+- {<code>.of</code>: 代表OneFlow预训练权重 , <code>.pt</code>: 代表 PyTorch 预训练权重 }
+- <code>--model yolov5s-cls.of</code>  表示使用OneFlow预训练权重 , 也是支持使用 PyTorch 预训练权重 如 <code>--model yolov5s-seg.pt</code>
+- 模型权重将自动从 github 下载(<em>建议如果没有设置代理，可以提前将模型下载到电脑本地 使用 <code>--model 本地路径/yolov5s-cls.of</code></em>)</p>
+<h3 id="val_1">val</h3>
+<p>在ImageNet 数据集上验证YOLOv5m-cls 模型的精度</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>bash data/scripts/get_imagenet.sh  <span class="c1"># Download ILSVRC2012 ImageNet dataset https://image-net.org</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>python classify/val.py --data ../datasets/imagenet --img <span class="m">224</span> --weights yolov5s-cls.of
+</code></pre></div>
+<h3 id="predict_1">Predict</h3>
+<p>使用预训练模型(YOLOv5m-cls) 预测 bus.jpg </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python classify/train.py --weights yolov5m-cls.of --data data/images/bus.jpg 
+</code></pre></div>
+<h3 id="export_1">Export</h3>
+<p>将 <code>yolov5s-cls</code> 模型导出为 ONNX 格式 示例
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python export.py --weights yolov5s-cls.of --include onnx    --device <span class="m">0</span>
+</code></pre></div></p>
                 
               
               
@@ -1150,7 +1326,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../../index.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 首页🏠" rel="prev">
+        <a href="quick_start.html" class="md-footer__link md-footer__link--prev" aria-label="上一页: 3.1 快速开始" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1159,20 +1335,20 @@
               <span class="md-footer__direction">
                 上一页
               </span>
-              首页🏠
+              3.1 快速开始
             </div>
           </div>
         </a>
       
       
         
-        <a href="optim_speed_version1.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时" rel="next">
+        <a href="loading_model_from_oneflowhub.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.3 从OneFlow Hub 加载YOLOv5" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              消费级显卡的春天，GTX 3090 YOLOv5s单卡完整训练COCO数据集缩短11.35个小时
+              3.3 从OneFlow Hub 加载YOLOv5
             </div>
           </div>
           <div class="md-footer__button md-icon">

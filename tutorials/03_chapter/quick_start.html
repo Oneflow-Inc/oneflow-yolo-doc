@@ -532,10 +532,10 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    训练 🚀
+    检测模型训练示例 🚀
   </a>
   
-    <nav class="md-nav" aria-label="训练 🚀">
+    <nav class="md-nav" aria-label="检测模型训练示例 🚀">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -706,8 +706,20 @@
   
   
     <li class="md-nav__item">
+      <a href="model_train.html" class="md-nav__link">
+        3.2 分割和分类模型训练示例
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="loading_model_from_oneflowhub.html" class="md-nav__link">
-        3.2 从OneFlow Hub 加载YOLOv5
+        3.3 从OneFlow Hub 加载YOLOv5
       </a>
     </li>
   
@@ -719,7 +731,7 @@
   
     <li class="md-nav__item">
       <a href="TTA.html" class="md-nav__link">
-        3.3 测试时增强 (TTA)
+        3.4 测试时增强 (TTA)
       </a>
     </li>
   
@@ -731,7 +743,7 @@
   
     <li class="md-nav__item">
       <a href="model_ensembling.html" class="md-nav__link">
-        3.4 模型融合 (Model Ensembling)
+        3.5 模型融合 (Model Ensembling)
       </a>
     </li>
   
@@ -743,7 +755,7 @@
   
     <li class="md-nav__item">
       <a href="intro_to_wandb.html" class="md-nav__link">
-        3.5 Weights & Biases
+        3.6 Weights & Biases
       </a>
     </li>
   
@@ -1239,10 +1251,10 @@
       
         <li class="md-nav__item">
   <a href="#_4" class="md-nav__link">
-    训练 🚀
+    检测模型训练示例 🚀
   </a>
   
-    <nav class="md-nav" aria-label="训练 🚀">
+    <nav class="md-nav" aria-label="检测模型训练示例 🚀">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1435,7 +1447,8 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span> one-yolov5
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>pip install -r requirements.txt  <span class="c1"># install</span>
 </code></pre></div>
-<h2 id="_4">训练 🚀</h2>
+<p><a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html">分割和分类模型训练示例</a></p>
+<h2 id="_4">检测模型训练示例 🚀</h2>
 <p>注意⚠️:</p>
 <ul>
 <li>
@@ -1451,17 +1464,17 @@
 <h3 id="_5">📌两种训练方式</h3>
 <ol>
 <li>带权重训练 🚀
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ python path/to/train.py --data coco.yaml --weights yolov5s --img 640
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$ python path/to/train.py --data coco.yaml --weights yolov5s.of --img 640
 </code></pre></div></li>
 <li>不带权重训练 🚀
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ python path/to/train.py --data coco.yaml --weights &#39;&#39; --cfg yolov5s.yaml --img 640
 </code></pre></div></li>
 </ol>
 <h3 id="gpu">📌单GPU训练</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ python train.py  --data coco.yaml --weights yolov5s --device <span class="m">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$ python train.py  --data coco.yaml --weights yolov5s.of --device <span class="m">0</span>
 </code></pre></div>
 <h3 id="gpu_1">📌多GPU训练</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --weights yolov5s --device 0,1
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --weights yolov5s.of --device 0,1
 </code></pre></div>
 注意⚠️：</p>
 <ul>
@@ -1504,7 +1517,7 @@
 <p>首先，下载一个训练好的模型权重文件，或选择你自己训练的模型；</p>
 <p>然后，
 通过 detect.py文件进行推理⚡。</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span> <span class="o">--</span><span class="n">source</span> <span class="mi">0</span>              <span class="c1"># webcam</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">python</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">detect</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">of</span> <span class="o">--</span><span class="n">source</span> <span class="mi">0</span>              <span class="c1"># webcam</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>                                                    <span class="n">img</span><span class="o">.</span><span class="n">jpg</span>        <span class="c1"># image</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>                                                    <span class="n">vid</span><span class="o">.</span><span class="n">mp4</span>        <span class="c1"># video</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>                                                    <span class="n">path</span><span class="o">/</span>          <span class="c1"># directory</span>
@@ -1513,8 +1526,8 @@
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>                                                    <span class="s1">&#39;rtsp://example.com/media.mp4&#39;</span>  <span class="c1"># RTSP, RTMP, HTTP stream</span>
 </code></pre></div>
 注意⚠️:
-- 检测单个图片 使用示例 <code>python path/to/detect.py --weights yolov5s --source path/to/imgs/hello.jpg</code> 
-- 想批量检测 <code>path/to/imgs/</code>路径下的图片, <strong>使用示例</strong> <code>python path/to/detect.py --weights yolov5s --source path/to/imgs/</code>，注意不要用<code>python path/to/detect.py --weights yolov5s --source path/to/imgs/*.jpg</code> 。</p>
+- 检测单个图片 使用示例 <code>python path/to/detect.py --weights yolov5s.of --source path/to/imgs/hello.jpg</code> 
+- 想批量检测 <code>path/to/imgs/</code>路径下的图片, <strong>使用示例</strong> <code>python path/to/detect.py --weights yolov5s.of --source path/to/imgs/</code>，注意不要用<code>python path/to/detect.py --weights yolov5s.of --source path/to/imgs/*.jpg</code> 。</p>
 <h2 id="_9">训练结果🌟</h2>
 <h3 id="_10">📌本地日志</h3>
 <p>默认情况下，所有结果都记录为runs/train，并为每个新训练创建一个新的训练结果目录，如runs/train/exp2、runs/train/exp3等。查看训练和测试JPG以查看 mosaics, labels, predictions and augmentation 效果。
@@ -1527,7 +1540,7 @@
 <img alt="img" src="https://user-images.githubusercontent.com/26833433/83667635-90641b80-a583-11ea-8075-606316cebb9c.jpeg" /></p>
 <p>训练训损失和性能的指标有记录到Tensorboard和自定义结果中<strong>results.csv日志文件</strong>，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5结果
 - 从零开始训练 (蓝色)。
-- 加载预训练权重 --weights yolov5s (橙色)。</p>
+- 加载预训练权重 --weights yolov5s.of (橙色)。</p>
 <p><img alt="img" src="https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png" /></p>
 <p>具体的指标分析详见文章<a href="https://start.oneflow.org/oneflow-yolo-doc/tutorials/05_chapter/map_analysis.html">《模型精确度评估》</a> </p>
 <h2 id="_11">训练技巧🔥</h2>
@@ -1541,7 +1554,7 @@
 <ul>
 <li>从预先训练的权重开始训练。建议用于中小型数据集（即<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml">VOC</a>、<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml">VisDrone</a>、<a href="https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml">GlobalWheat</a>）。将模型的名称传递给--weights参数。模型自动从<a href="https://github.com/Oneflow-Inc/one-yolov5/releases">latest YOLOv5 releasse</a> 下载 。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="n">custom</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span> 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">python</span> <span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">data</span> <span class="n">custom</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">weights</span> <span class="n">yolov5s</span><span class="o">.</span><span class="n">of</span> 
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>                                             <span class="n">yolov5m</span> 
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>                                             <span class="n">yolov5l</span> 
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>                                             <span class="n">yolov5x</span> 
@@ -1853,13 +1866,13 @@
       
       
         
-        <a href="loading_model_from_oneflowhub.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.2 从OneFlow Hub 加载YOLOv5" rel="next">
+        <a href="model_train.html" class="md-footer__link md-footer__link--next" aria-label="下一页: 3.2 分割和分类模型训练示例" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              3.2 从OneFlow Hub 加载YOLOv5
+              3.2 分割和分类模型训练示例
             </div>
           </div>
           <div class="md-footer__button md-icon">
