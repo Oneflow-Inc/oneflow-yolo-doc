@@ -18,7 +18,7 @@ python -m oneflow.distributed.launch --nproc_per_node  4  segment/train.py --mod
 
 ### val 
 
-在ImageNet-1k数据集上验证YOLOv5m-seg 模型的精度
+数据集上验证YOLOv5m-seg 模型的精度
 
 ```shell 
 bash data/scripts/get_coco.sh --val --segments  # download COCO val segments split (780MB, 5000 images)
