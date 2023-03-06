@@ -74,9 +74,9 @@ python classify/val.py --data ../datasets/imagenet --img 224 --weights yolov5s-c
 使用预训练模型(YOLOv5m-cls) 预测 bus.jpg 
 
 ```shell
-python classify/train.py --weights yolov5m-cls.of --data data/images/bus.jpg 
+python classify/predict.py --weights runs/yolov5s-cls.of --source data/images/bus.jpg 
 ```
-
+![image](https://user-images.githubusercontent.com/118866310/223079567-f9fadd7c-6e76-4f3d-ba2d-a1484e1e5d20.png)
 
 ### Export
 
