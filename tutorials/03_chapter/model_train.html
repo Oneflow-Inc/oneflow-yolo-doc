@@ -1244,7 +1244,7 @@
 - <code>--model yolov5s-seg.of</code>  表示使用OneFlow预训练权重 , 也是支持使用 PyTorch 预训练权重 如 <code>--model yolov5s-seg.pt</code>
 - 模型权重将自动从 github 下载(<em>建议如果没有设置代理，可以提前将模型下载到电脑本地 使用 <code>--model 本地路径/yolov5s-seg.of</code></em>)</p>
 <h3 id="val">val</h3>
-<p>在ImageNet-1k数据集上验证YOLOv5m-seg 模型的精度</p>
+<p>数据集上验证YOLOv5m-seg 模型的精度</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash data/scripts/get_coco.sh --val --segments  <span class="c1"># download COCO val segments split (780MB, 5000 images)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>python segment/val.py --weights yolov5s-seg.of --data coco.yaml --img <span class="m">640</span>  <span class="c1"># validate</span>
 </code></pre></div>
