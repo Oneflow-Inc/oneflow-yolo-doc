@@ -1280,8 +1280,9 @@
 </code></pre></div>
 <h3 id="predict_1">Predict</h3>
 <p>使用预训练模型(YOLOv5m-cls) 预测 bus.jpg </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python classify/train.py --weights yolov5m-cls.of --data data/images/bus.jpg 
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python classify/predict.py --weights runs/yolov5s-cls.of --source data/images/bus.jpg 
 </code></pre></div>
+<img alt="image" src="https://user-images.githubusercontent.com/118866310/223079567-f9fadd7c-6e76-4f3d-ba2d-a1484e1e5d20.png" /></p>
 <h3 id="export_1">Export</h3>
 <p>将 <code>yolov5s-cls</code> 模型导出为 ONNX 格式 示例
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python export.py --weights yolov5s-cls.of --include onnx    --device <span class="m">0</span>
