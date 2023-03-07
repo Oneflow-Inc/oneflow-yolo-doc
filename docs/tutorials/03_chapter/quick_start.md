@@ -19,7 +19,11 @@ git clone https://github.com/Oneflow-Inc/one-yolov5  # clone
 cd one-yolov5
 pip install -r requirements.txt  # install
 ```
-## 训练 🚀
+
+[分割和分类模型训练示例](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/model_train.html)
+
+
+## 检测模型训练示例 🚀
 
 注意⚠️:
 
@@ -33,7 +37,7 @@ pip install -r requirements.txt  # install
 ###  📌两种训练方式  
 1. 带权重训练 🚀
 ```
-$ python path/to/train.py --data coco.yaml --weights yolov5s --img 640
+$ python path/to/train.py --data coco.yaml --weights yolov5s.of --img 640
 ```
 2. 不带权重训练 🚀
 ```
@@ -43,12 +47,12 @@ $ python path/to/train.py --data coco.yaml --weights '' --cfg yolov5s.yaml --img
 
 ### 📌单GPU训练
 ```shell
-$ python train.py  --data coco.yaml --weights yolov5s --device 0
+$ python train.py  --data coco.yaml --weights yolov5s.of --device 0
 ```
 ### 📌多GPU训练
 
 ```
-$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --weights yolov5s --device 0,1
+$ python -m oneflow.distributed.launch --nproc_per_node 2 train.py --batch 64 --data coco.yaml --weights yolov5s.of --device 0,1
 ```
 注意⚠️：
 
@@ -107,7 +111,7 @@ $ python val.py --weights yolov5x --data coco.yaml --img 640
 通过 detect.py文件进行推理⚡。
 
 ```python
-python path/to/detect.py --weights yolov5s --source 0              # webcam
+python path/to/detect.py --weights yolov5s.of --source 0              # webcam
                                                     img.jpg        # image
                                                     vid.mp4        # video
                                                     path/          # directory
@@ -116,8 +120,8 @@ python path/to/detect.py --weights yolov5s --source 0              # webcam
                                                     'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
 ```
 注意⚠️:
-- 检测单个图片 使用示例 `python path/to/detect.py --weights yolov5s --source path/to/imgs/hello.jpg` 
-- 想批量检测 `path/to/imgs/`路径下的图片, **使用示例** `python path/to/detect.py --weights yolov5s --source path/to/imgs/`，注意不要用`python path/to/detect.py --weights yolov5s --source path/to/imgs/*.jpg` 。
+- 检测单个图片 使用示例 `python path/to/detect.py --weights yolov5s.of --source path/to/imgs/hello.jpg` 
+- 想批量检测 `path/to/imgs/`路径下的图片, **使用示例** `python path/to/detect.py --weights yolov5s.of --source path/to/imgs/`，注意不要用`python path/to/detect.py --weights yolov5s.of --source path/to/imgs/*.jpg` 。
 
 ## 训练结果🌟
 ### 📌本地日志
@@ -140,7 +144,7 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 
 训练训损失和性能的指标有记录到Tensorboard和自定义结果中**results.csv日志文件**，训练训完成后作为结果绘制 results.png如下。在这里，我们展示了在COCO128上训练的YOLOV5结果
 - 从零开始训练 (蓝色)。
-- 加载预训练权重 --weights yolov5s (橙色)。
+- 加载预训练权重 --weights yolov5s.of (橙色)。
 
 ![img](https://user-images.githubusercontent.com/26833433/97808309-8182b180-1c66-11eb-8461-bffe1a79511d.png)
 
@@ -167,7 +171,7 @@ val_batch0_pred.jpg 展示测试 batch 为 0 predictions(预测):
 - 从预先训练的权重开始训练。建议用于中小型数据集（即[VOC](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VOC.yaml)、[VisDrone](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/VisDrone.yaml)、[GlobalWheat](https://github.com/Oneflow-Inc/one-yolov5/blob/master/data/GlobalWheat2020.yaml)）。将模型的名称传递给--weights参数。模型自动从[latest YOLOv5 releasse](https://github.com/Oneflow-Inc/one-yolov5/releases) 下载 。
 
 ```python
-python train.py --data custom.yaml --weights yolov5s 
+python train.py --data custom.yaml --weights yolov5s.of 
                                              yolov5m 
                                              yolov5l 
                                              yolov5x 
