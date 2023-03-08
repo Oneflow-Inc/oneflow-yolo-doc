@@ -1637,15 +1637,16 @@
 <p>device选择这里因为CUDA_VISIBLE_DEVICES环境变量设置放在import oneflow之后会失败，导致device选择失败了，可以export CUDA_VISIBLE_DEVICES=1 这样子手动控制下。</p>
 </li>
 <li>
-<p>autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动指定下batch_size</p>
+<p>autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动指定下batch_size, 我们将在下个版本解决并且会直接支持导出batch维度为动态的模型。</p>
 </li>
 </ol>
 <h2 id="_2">下个版本的展望</h2>
 <ul>
-<li>[ ] 继续提升one-yolov5单卡模式的训练速度，</li>
-<li>[ ] cpu模式下也支持onnx模型的导出，解决显存比原始yolov5稍高的问题等等，</li>
+<li>[ ] 继续提升one-yolov5单卡模式的训练速度。</li>
+<li>[ ] 解决目前训练时显存比 ultralytics 偏大的问题。</li>
+<li>[ ] cpu模式下也支持onnx模型的导出。</li>
 <li>[ ] OneFlow 研发的amp train目前已经开发完成正在测试中，下个版本将合并进main分支。</li>
-<li>[ ] autobatch功能 </li>
+<li>[ ] autobatch功能 。</li>
 </ul>
 <h2 id="_3">附件</h2>
 <h2 id="_4">常用预训练模型下载列表</h2>
