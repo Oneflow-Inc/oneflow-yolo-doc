@@ -242,7 +242,7 @@ python segment/train.py \
 
 5. device选择这里因为CUDA_VISIBLE_DEVICES环境变量设置放在import oneflow之后会失败，导致device选择失败了，可以export CUDA_VISIBLE_DEVICES=1 这样子手动控制下。
 
-6. autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动执行下batch_size
+6. autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动指定下batch_size
 
 ## 下个版本的展望
 
