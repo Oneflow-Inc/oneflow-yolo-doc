@@ -238,7 +238,7 @@ python segment/train.py \
 
 3. 模型导出onnx时，出现 `/tmp/oneflow_model322` 类似报错。oneflow新老版本兼容性问题：因为这个是之前旧版本创建的文件但是没清理，删了就可以解决了。
 
-4. 可视化 我们只适配了[wandb](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/intro_to_wandb.html) 
+4. 训练过程loss，map，检测框等可视化 我们适配了[wandb](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/intro_to_wandb.html) 
 
 5. device选择这里可能有个bug，导致device选择失败了，可以先export CUDA_VISIBLE_DEVICES=1 这样子手动控制下
 
