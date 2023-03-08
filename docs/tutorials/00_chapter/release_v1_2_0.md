@@ -236,7 +236,7 @@ python segment/train.py \
 
 2. 这个应该是让batch维度可以动态 你加了dynamic参数？ 暂时不支持该参数 ， 可以自己编辑onnx模型教程 https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.2.0_/openmmlab.pptx 
 
-3. 模型导出中报错出现 `/tmp/oneflow_model322`   版本兼容性问题：因为这个是之前版本创建的文件但是没清理  删了就可以解决了。
+3. 模型导出onnx时，出现 `/tmp/oneflow_model322` 类似报错。oneflow新老版本兼容性问题：因为这个是之前旧版本创建的文件但是没清理，删了就可以解决了。
 
 4. 可视化 我们只适配了[wandb](https://start.oneflow.org/oneflow-yolo-doc/tutorials/03_chapter/intro_to_wandb.html) 
 
