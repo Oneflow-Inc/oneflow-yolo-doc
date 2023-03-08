@@ -231,7 +231,7 @@ python segment/train.py \
 ### 用户反馈的bug
 > 记录了一些用户反馈的常见问题
 
-1.  出现满屏的误检框， 可能到原因场景太单一，泛华不够 ，更多可见我们关于 [如何准备一个好的数据集介绍](https://start.oneflow.org/oneflow-yolo-doc/tutorials/02_chapter/how_to_prepare_yolov5_training_data.html#_5)
+1.  出现满屏的误检框， 可能到原因场景太单一，泛化不够 ，更多可见我们关于 [如何准备一个好的数据集介绍](https://start.oneflow.org/oneflow-yolo-doc/tutorials/02_chapter/how_to_prepare_yolov5_training_data.html#_5) 或者导出onnx模型进行部署时代码有错误。
 
 
 2. 这个应该是让batch维度可以动态 你加了dynamic参数？ 暂时不支持该参数 ， 可以自己编辑onnx模型教程 https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.2.0_/openmmlab.pptx 
