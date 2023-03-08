@@ -242,14 +242,15 @@ python segment/train.py \
 
 5. device选择这里因为CUDA_VISIBLE_DEVICES环境变量设置放在import oneflow之后会失败，导致device选择失败了，可以export CUDA_VISIBLE_DEVICES=1 这样子手动控制下。
 
-6. autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动指定下batch_size
+6. autobatch功能 oneflow这边缺少个memory_reserved api ，我们会尽快补齐这个api，现在还是先手动指定下batch_size, 我们将在下个版本解决并且会直接支持导出batch维度为动态的模型。
 
 ## 下个版本的展望
 
-- [ ] 继续提升one-yolov5单卡模式的训练速度，
-- [ ] cpu模式下也支持onnx模型的导出，解决显存比原始yolov5稍高的问题等等，
+- [ ] 继续提升one-yolov5单卡模式的训练速度。
+- [ ] 解决目前训练时显存比 ultralytics 偏大的问题。
+- [ ] cpu模式下也支持onnx模型的导出。
 - [ ] OneFlow 研发的amp train目前已经开发完成正在测试中，下个版本将合并进main分支。
-- [ ] autobatch功能 
+- [ ] autobatch功能 。
  
 
 ## 附件
