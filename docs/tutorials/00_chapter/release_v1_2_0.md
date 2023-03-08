@@ -234,7 +234,7 @@ python segment/train.py \
 1.  出现满屏的误检框， 可能到原因场景太单一，泛化不够 ，更多可见我们关于 [如何准备一个好的数据集介绍](https://start.oneflow.org/oneflow-yolo-doc/tutorials/02_chapter/how_to_prepare_yolov5_training_data.html#_5) 或者导出onnx模型进行部署时代码有错误。
 
 
-2. 这个应该是让batch维度可以动态 你加了dynamic参数？ 暂时不支持该参数 ， 可以自己编辑onnx模型教程 https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.2.0_/openmmlab.pptx 
+2. 这个应该是让batch维度可以动态 你加了dynamic参数？ 暂时不支持该参数，可以自己编辑onnx模型。相关教程请参考： https://github.com/Oneflow-Inc/one-yolov5/releases/download/v1.2.0_/openmmlab.pptx 
 
 3. 模型导出onnx时，出现 `/tmp/oneflow_model322` 类似报错。oneflow新老版本兼容性问题：因为这个是之前旧版本创建的文件但是没清理，删了就可以解决了。
 
