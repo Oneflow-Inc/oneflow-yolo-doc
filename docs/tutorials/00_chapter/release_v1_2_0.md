@@ -76,7 +76,7 @@ pip install -r requirements.txt  # 安装
 
 ###  yolov5s-default
 
-| 后端    | GPU | metrics/mAP_0.5, | metrics/mAP_0.5:0.95, | wandb                                                                                                        |
+| 后端    | GPU | metrics/mAP_0.5, | metrics/mAP_0.5:0.95, | wandb 日志                                                                                                       |
 | ------- | --- | ---------------- | --------------------- | ------------------------------------------------------------------------------------------------------------ |
 | OneFlow | 4   | 37.659           | 56.992                | [One-YOLOv5s-default](https://wandb.ai/wearmheart/YOLOv5/runs/tnd1d0t3?workspace=user-wearmheart)            |
 | PyTorch | 1   | 37.65            | 56.663                | [YOLOV5s-default](https://wandb.ai/glenn-jocher/YOLOv5_v70_official/runs/ahutyuwd?workspace=user-wearmheart) |
